@@ -11,8 +11,10 @@ import FullNote from "../pages/Note/FullNote/FullNote";
 import Contact from "../pages/Contact/Contact/Contact";
 import Login from "../pages/SharedPages/Login/Login";
 // import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
-import MyProfile from "../pages/MyDashboard/MyProfile/MyProfile";
 import DashboardLayout from "@/layout/DashboardLayout/DashboardLayout";
+import MyProfile from "@/pages/Dashboard/MyProfile/MyProfile";
+import EnrolledCourses from "@/pages/Dashboard/Student/Courses/EnrolledCourses/EnrolledCourses";
+import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -64,7 +66,14 @@ export const router = createBrowserRouter([
       // </ProtectedRoute>
     ),
     children: [
-      { path: "my-profile", element: <MyProfile /> },
+      {
+        path: "/dashboard/student/courses/enrolled-courses",
+        element: <EnrolledCourses />,
+      },
+      {
+        path: "/dashboard/student/courses/:courseId",
+        element: <CourseDetailsPage />,
+      },
       // Add more student-specific routes here
     ],
   },

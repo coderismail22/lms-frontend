@@ -42,7 +42,7 @@ const SidebarItem: React.FC<{ item: SidebarItem }> = ({ item }) => {
           <AccordionItem value={item.label}>
             <AccordionTrigger
               onClick={() => setIsOpen(!isOpen)}
-              className="flex items-center space-x-2 p-2 rounded hover:bg-gray-700"
+              className="flex items-center space-x-2 rounded hover:bg-gray-700"
             >
               {item.icon && <item.icon className="text-lg" />}
               <span>{item.label}</span>

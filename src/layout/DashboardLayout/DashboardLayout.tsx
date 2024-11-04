@@ -16,7 +16,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ role }) => {
   const menuItems = sidebarData[role];
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="min-h-screen flex flex-col md:flex-row ">
       {/* Mobile Sidebar Toggle */}
       <button
         onClick={() => setSidebarOpen(!isSidebarOpen)}
@@ -36,8 +36,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ role }) => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow p-6 ml-0 md:ml-64">
-        <header className="bg-white shadow-md p-4 rounded-md mb-6">
+      <main className="p-6 w-full">
+        <header className="bg-white shadow-md p-4 rounded-md mb-6 ">
           <h1 className="text-2xl font-semibold capitalize">
             {role} Dashboard
           </h1>

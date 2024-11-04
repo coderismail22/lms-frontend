@@ -1,6 +1,6 @@
 // utils/sidebarData.ts
 import {
-//   FaUser,
+  //   FaUser,
   FaChalkboardTeacher,
   FaUserGraduate,
   FaHome,
@@ -20,21 +20,67 @@ export const sidebarData = {
           children: [
             {
               label: "Create A Course",
-              path: "/dashboard/admin/course-management/create-course/web-development",
+              path: "/dashboard/admin/course-management/create-course",
             },
             {
-              label: "Create Data Science Course",
-              path: "/dashboard/admin/course-management/create-course/data-science",
+              label: "Link Subject To Course",
+              path: "/dashboard/admin/course-management/link-subject-to-course",
+            },
+            {
+              label: "All Courses",
+              path: "/dashboard/admin/course-management/create-course/all-courses",
             },
           ],
         },
         {
-          label: "Create Subject",
-          path: "/dashboard/admin/course-management/create-subject",
+          label: "Subject",
+          path: "/dashboard/admin/subject-management/create-subject",
+          children: [
+            {
+              label: "Create A Subject",
+              path: "/dashboard/admin/subject-management/create-subject",
+            },
+            {
+              label: "Link Topic To Subject",
+              path: "/dashboard/admin/subject-management/link-topic-to-subject",
+            },
+            {
+              label: "All Subjects",
+              path: "/dashboard/admin/subject-management/create-subject/all-subjects",
+            },
+          ],
         },
         {
-          label: "Create Topic",
-          path: "/dashboard/admin/course-management/create-topic",
+          label: "Topic",
+          path: "/dashboard/admin/topic-management/create-topic",
+          children: [
+            {
+              label: "Create A Topic",
+              path: "/dashboard/admin/topic-management/create-topic",
+            },
+            {
+              label: "Link Lesson To Topic",
+              path: "/dashboard/admin/topic-management/link-lesson-to-topic",
+            },
+            {
+              label: "All Topics",
+              path: "/dashboard/admin/topic-management/create-topic/all-topics",
+            },
+          ],
+        },
+        {
+          label: "Lesson",
+          path: "/dashboard/admin/lesson-management/create-lesson",
+          children: [
+            {
+              label: "Create A Lesson",
+              path: "/dashboard/admin/lesson-management/create-lesson",
+            },
+            {
+              label: "All Lessons",
+              path: "/dashboard/admin/lesson-management/create-lesson/all-lessons",
+            },
+          ],
         },
       ],
     },
@@ -81,7 +127,7 @@ export const sidebarData = {
       children: [
         {
           label: "Enrolled Courses",
-          path: "/dashboard/student/courses/enrolled",
+          path: "courses/enrolled-courses",
         },
       ],
     },
