@@ -19,14 +19,17 @@ export const sidebarData = {
           path: "/dashboard/admin/course-management/create-course",
           children: [
             {
+              icon: FaHome,
               label: "Create A Course",
               path: "/dashboard/admin/course-management/create-course",
             },
             {
+              icon: FaHome,
               label: "Link Subject To Course",
               path: "/dashboard/admin/course-management/link-subject-to-course",
             },
             {
+              icon: FaHome,
               label: "All Courses",
               path: "/dashboard/admin/course-management/create-course/all-courses",
             },

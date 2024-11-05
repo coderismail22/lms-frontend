@@ -1,12 +1,6 @@
-// components/SidebarMenu.tsx
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { IconType } from "react-icons";
 
 interface SidebarItem {
@@ -18,42 +12,71 @@ interface SidebarItem {
 
 interface SidebarMenuProps {
   menuItems: SidebarItem[];
+  isSidebarOpen: boolean;
 }
 
-const SidebarMenu: React.FC<SidebarMenuProps> = ({ menuItems }) => {
+const SidebarMenu: React.FC<SidebarMenuProps> = ({
+  menuItems,
+  isSidebarOpen,
+}) => {
   return (
     <nav>
       {menuItems.map((item) => (
-        <SidebarItem key={item.label} item={item} />
+        <SidebarItem
+          key={item.label}
+          item={item}
+          isSidebarOpen={isSidebarOpen}
+        />
       ))}
     </nav>
   );
 };
 
-// Recursive SidebarItem component
-const SidebarItem: React.FC<{ item: SidebarItem }> = ({ item }) => {
+const SidebarItem: React.FC<{ item: SidebarItem; isSidebarOpen: boolean }> = ({
+  item,
+  isSidebarOpen,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasChildren = !!item.children?.length;
+
+  const toggleOpen = () => {
+    if (hasChildren) {
+      setIsOpen(!isOpen);
+    }
+  };
 
   return (
     <div>
       {hasChildren ? (
-        <Accordion type="single" collapsible>
-          <AccordionItem value={item.label}>
-            <AccordionTrigger
-              onClick={() => setIsOpen(!isOpen)}
-              className="flex items-center space-x-2 rounded hover:bg-gray-700"
-            >
-              {item.icon && <item.icon className="text-lg" />}
-              <span>{item.label}</span>
-            </AccordionTrigger>
-            <AccordionContent>
+        <div>
+          {/* Main item with dropdown */}
+          <div
+            onClick={toggleOpen}
+            className="flex items-center space-x-2 p-2 rounded hover:bg-gray-700 cursor-pointer"
+          >
+            {item.icon && <item.icon className="text-lg" />}
+            {isSidebarOpen && <span>{item.label}</span>}
+            {/* Only show the up/down toggle icon on the right side */}
+            {isSidebarOpen && (
+              <span className="ml-auto">
+                {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+              </span>
+            )}
+          </div>
+
+          {/* Dropdown menu */}
+          {isOpen && (
+            <div className="ml-4 space-y-2">
               {item.children?.map((child) => (
-                <SidebarItem key={child.label} item={child} />
+                <SidebarItem
+                  key={child.label}
+                  item={child}
+                  isSidebarOpen={isSidebarOpen}
+                />
               ))}
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+            </div>
+          )}
+        </div>
       ) : (
         <NavLink
           to={item.path || "#"}
@@ -63,8 +86,8 @@ const SidebarItem: React.FC<{ item: SidebarItem }> = ({ item }) => {
             }`
           }
         >
-          {item.icon && <item.icon className="text-lg" />}{" "}
-          <span>{item.label}</span>
+          {item.icon && <item.icon className="text-lg" />}
+          {isSidebarOpen && <span>{item.label}</span>}
         </NavLink>
       )}
     </div>
