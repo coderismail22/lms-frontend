@@ -11,13 +11,23 @@ import FullNote from "../pages/Note/FullNote/FullNote";
 import Contact from "../pages/Contact/Contact/Contact";
 import Login from "../pages/SharedPages/Login/Login";
 // import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
-import DashboardLayout from "@/layout/DashboardLayout/DashboardLayout";
 import EnrolledCourses from "@/pages/Dashboard/Student/Courses/EnrolledCourses/EnrolledCourses";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import Dashboard from "@/pages/Dashboard/Dashboard/Dashboard";
 import AdminHome from "@/pages/Dashboard/Admin/AdminHome/AdminHome";
 import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
 import InstructorHome from "@/pages/Dashboard/Instructor/InstructorHome/InstructorHome";
+import CreateCourse from "@/pages/Dashboard/Admin/CourseManagement/Course/CreateCourse";
+import LinkSubjectToCourse from "@/pages/Dashboard/Admin/CourseManagement/Course/LinkSubjectToCourse";
+import AllCourses from "@/pages/Dashboard/Admin/CourseManagement/Course/AllCourses";
+import CreateSubject from "@/pages/Dashboard/Admin/CourseManagement/Subject/CreateSubject";
+import LinkTopicToSubject from "@/pages/Dashboard/Admin/CourseManagement/Subject/LinkTopicToSubject";
+import AllSubjects from "@/pages/Dashboard/Admin/CourseManagement/Subject/AllSubjects";
+import CreateTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/CreateTopic";
+import LinkLessonToTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/LinkLessonToTopic";
+import AllTopics from "@/pages/Dashboard/Admin/CourseManagement/Topic/AllTopics";
+import CreateLesson from "@/pages/Dashboard/Admin/CourseManagement/Lesson/CreateLesson";
+import AllLessons from "@/pages/Dashboard/Admin/CourseManagement/Lesson/AllLessons";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +52,57 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
     children: [
+      // Admin
       { path: "/dashboard/admin/home", element: <AdminHome /> },
+      // Course Management
+      // Course
+      {
+        path: "/dashboard/admin/course-management/create-course",
+        element: <CreateCourse />,
+      },
+      {
+        path: "/dashboard/admin/course-management/link-subject-to-course",
+        element: <LinkSubjectToCourse />,
+      },
+      {
+        path: "/dashboard/admin/course-management/all-courses",
+        element: <AllCourses />,
+      },
+      // Subject
+      {
+        path: "/dashboard/admin/subject-management/create-subject",
+        element: <CreateSubject />,
+      },
+      {
+        path: "/dashboard/admin/subject-management/link-topic-to-subject",
+        element: <LinkTopicToSubject />,
+      },
+      {
+        path: "/dashboard/admin/subject-management/all-subjects",
+        element: <AllSubjects />,
+      },
+      // Topic
+      {
+        path: "/dashboard/admin/topic-management/create-topic",
+        element: <CreateTopic />,
+      },
+      {
+        path: "/dashboard/admin/topic-management/link-lesson-to-topic",
+        element: <LinkLessonToTopic />,
+      },
+      {
+        path: "/dashboard/admin/topic-management/all-topics",
+        element: <AllTopics />,
+      },
+      // Lesson
+      {
+        path: "/dashboard/admin/lesson-management/create-lesson",
+        element: <CreateLesson />,
+      },
+      {
+        path: "/dashboard/admin/lesson-management/all-lessons",
+        element: <AllLessons />,
+      },
       { path: "/dashboard/instructor/home", element: <InstructorHome /> },
       { path: "/dashboard/student/home", element: <StudentHome /> },
       // { path: "/dashboard/test", element: <EnrolledCourses /> },
@@ -50,41 +110,6 @@ export const router = createBrowserRouter([
         path: "/dashboard/courses/:courseId",
         element: <CourseDetailsPage />,
       },
-    ],
-  },
-  {
-    path: "/dashboard/admin",
-    element: (
-      // <ProtectedRoute>
-      <DashboardLayout role="admin" />
-      // </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/dashboard/instructor",
-    element: (
-      // <ProtectedRoute>
-      <DashboardLayout role="instructor" />
-      // </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/dashboard/student",
-    element: (
-      // <ProtectedRoute>
-      <DashboardLayout role="student" />
-      // </ProtectedRoute>
-    ),
-    children: [
-      {
-        path: "/dashboard/student/courses/enrolled-courses",
-        element: <EnrolledCourses />,
-      },
-      // {
-      //   path: "/dashboard/student/courses/:courseId",
-      //   element: <CourseDetailsPage />,
-      // },
-      // Add more student-specific routes here
     ],
   },
   {

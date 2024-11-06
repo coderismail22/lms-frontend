@@ -7,7 +7,6 @@ import {
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
@@ -35,9 +34,6 @@ const AppDashboard = () => {
                 <CustomBreadcrumbLink to={`/dashboard/${role}/home`}>
                   Dashboard
                 </CustomBreadcrumbLink>
-                {/* <BreadcrumbLink href={`/dashboard/${role}/home`}>
-                  Dashboard
-                </BreadcrumbLink> */}
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>

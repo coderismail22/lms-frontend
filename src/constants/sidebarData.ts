@@ -2,8 +2,11 @@ import {
   FaBook,
   FaChalkboardTeacher,
   FaHome,
+  FaLink,
+  FaRegListAlt,
   FaUserGraduate,
 } from "react-icons/fa";
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 export const sidebarData = {
   admin: [
@@ -17,19 +20,19 @@ export const sidebarData = {
           path: "/dashboard/admin/course-management/create-course",
           children: [
             {
-              icon: FaHome,
-              label: "Create A Course",
+              icon: IoMdAddCircleOutline,
+              label: "Create Course",
               path: "/dashboard/admin/course-management/create-course",
             },
             {
-              icon: FaHome,
+              icon: FaLink,
               label: "Link Subject To Course",
               path: "/dashboard/admin/course-management/link-subject-to-course",
             },
             {
-              icon: FaHome,
+              icon: FaRegListAlt,
               label: "All Courses",
-              path: "/dashboard/admin/course-management/create-course/all-courses",
+              path: "/dashboard/admin/course-management/all-courses",
             },
           ],
         },
@@ -38,16 +41,19 @@ export const sidebarData = {
           path: "/dashboard/admin/subject-management/create-subject",
           children: [
             {
-              label: "Create A Subject",
+              icon: IoMdAddCircleOutline,
+              label: "Create Subject",
               path: "/dashboard/admin/subject-management/create-subject",
             },
             {
+              icon: FaLink,
               label: "Link Topic To Subject",
               path: "/dashboard/admin/subject-management/link-topic-to-subject",
             },
             {
+              icon: FaRegListAlt,
               label: "All Subjects",
-              path: "/dashboard/admin/subject-management/create-subject/all-subjects",
+              path: "/dashboard/admin/subject-management/all-subjects",
             },
           ],
         },
@@ -56,16 +62,19 @@ export const sidebarData = {
           path: "/dashboard/admin/topic-management/create-topic",
           children: [
             {
+              icon: IoMdAddCircleOutline,
               label: "Create A Topic",
               path: "/dashboard/admin/topic-management/create-topic",
             },
             {
+              icon: FaLink,
               label: "Link Lesson To Topic",
               path: "/dashboard/admin/topic-management/link-lesson-to-topic",
             },
             {
+              icon: FaRegListAlt,
               label: "All Topics",
-              path: "/dashboard/admin/topic-management/create-topic/all-topics",
+              path: "/dashboard/admin/topic-management/all-topics",
             },
           ],
         },
@@ -74,12 +83,14 @@ export const sidebarData = {
           path: "/dashboard/admin/lesson-management/create-lesson",
           children: [
             {
+              icon: IoMdAddCircleOutline,
               label: "Create A Lesson",
               path: "/dashboard/admin/lesson-management/create-lesson",
             },
             {
+              icon: FaRegListAlt,
               label: "All Lessons",
-              path: "/dashboard/admin/lesson-management/create-lesson/all-lessons",
+              path: "/dashboard/admin/lesson-management/all-lessons",
             },
           ],
         },
