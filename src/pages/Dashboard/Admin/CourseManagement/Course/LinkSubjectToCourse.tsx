@@ -1,8 +1,5 @@
-
 const LinkSubjectToCourse = () => {
-  return (
-    <div>LinkSubjectToCourse</div>
-  )
-}
+  return <div>LinkSubjectToCourse</div>;
+};
 
-export default LinkSubjectToCourse
+export default LinkSubjectToCourse;

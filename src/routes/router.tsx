@@ -11,7 +11,6 @@ import FullNote from "../pages/Note/FullNote/FullNote";
 import Contact from "../pages/Contact/Contact/Contact";
 import Login from "../pages/SharedPages/Login/Login";
 // import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
-import EnrolledCourses from "@/pages/Dashboard/Student/Courses/EnrolledCourses/EnrolledCourses";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import Dashboard from "@/pages/Dashboard/Dashboard/Dashboard";
 import AdminHome from "@/pages/Dashboard/Admin/AdminHome/AdminHome";
@@ -28,6 +27,9 @@ import LinkLessonToTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/Li
 import AllTopics from "@/pages/Dashboard/Admin/CourseManagement/Topic/AllTopics";
 import CreateLesson from "@/pages/Dashboard/Admin/CourseManagement/Lesson/CreateLesson";
 import AllLessons from "@/pages/Dashboard/Admin/CourseManagement/Lesson/AllLessons";
+import RunningCourses from "@/pages/Dashboard/Instructor/CourseManagement/RunningCourses/RunningCourses";
+import UpcomingCourses from "@/pages/Dashboard/Instructor/CourseManagement/UpcomingCourses/UpcomingCourses";
+import CompletedCourses from "@/pages/Dashboard/Instructor/CourseManagement/CompletedCourses/CompletedCourses";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +49,6 @@ export const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
-
   {
     path: "/dashboard",
     element: <Dashboard />,
@@ -103,7 +104,21 @@ export const router = createBrowserRouter([
         path: "/dashboard/admin/lesson-management/all-lessons",
         element: <AllLessons />,
       },
+      // Role: Instructor
       { path: "/dashboard/instructor/home", element: <InstructorHome /> },
+      // Course Management
+      {
+        path: "/dashboard/instructor/course-management/running",
+        element: <RunningCourses />,
+      },
+      {
+        path: "/dashboard/instructor/course-management/upcoming",
+        element: <UpcomingCourses />,
+      },
+      {
+        path: "/dashboard/instructor/course-management/completed",
+        element: <CompletedCourses />,
+      },
       { path: "/dashboard/student/home", element: <StudentHome /> },
       // { path: "/dashboard/test", element: <EnrolledCourses /> },
       {

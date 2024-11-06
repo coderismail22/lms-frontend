@@ -6,7 +6,14 @@ import {
   FaRegListAlt,
   FaUserGraduate,
 } from "react-icons/fa";
+import { CiBoxList } from "react-icons/ci";
+import { GiProgression } from "react-icons/gi";
+import { IoCheckmarkDoneSharp } from "react-icons/io5";
+
+
+
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { MdOutlineDownloading } from "react-icons/md";
 
 export const sidebarData = {
   admin: [
@@ -16,6 +23,7 @@ export const sidebarData = {
       icon: FaBook,
       children: [
         {
+          icon: CiBoxList,
           label: "Course",
           path: "/dashboard/admin/course-management/create-course",
           children: [
@@ -37,6 +45,7 @@ export const sidebarData = {
           ],
         },
         {
+          icon: CiBoxList,
           label: "Subject",
           path: "/dashboard/admin/subject-management/create-subject",
           children: [
@@ -59,6 +68,7 @@ export const sidebarData = {
         },
         {
           label: "Topic",
+          icon: CiBoxList,
           path: "/dashboard/admin/topic-management/create-topic",
           children: [
             {
@@ -79,6 +89,7 @@ export const sidebarData = {
           ],
         },
         {
+          icon: CiBoxList,
           label: "Lesson",
           path: "/dashboard/admin/lesson-management/create-lesson",
           children: [
@@ -104,14 +115,17 @@ export const sidebarData = {
       icon: FaChalkboardTeacher,
       children: [
         {
+          icon:GiProgression,
           label: "Running Courses",
           path: "/dashboard/instructor/course-management/running",
         },
         {
+          icon:MdOutlineDownloading,
           label: "Upcoming Courses",
           path: "/dashboard/instructor/course-management/upcoming",
         },
         {
+          icon:IoCheckmarkDoneSharp,
           label: "Completed Courses",
           path: "/dashboard/instructor/course-management/completed",
         },

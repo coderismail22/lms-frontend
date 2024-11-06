@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { ChevronRight } from "lucide-react";
+import { IoChevronDown } from "react-icons/io5";
 
 type SidebarItem = {
   label: string;
@@ -22,8 +22,9 @@ import {
 import { Link } from "react-router-dom";
 
 const AppTree = ({ item }: { item: SidebarItem }) => {
-  const Icon = item.icon || ChevronRight;
+  const Icon = item.icon || IoChevronDown;
 
+  // If there are no children
   if (!item.children) {
     return (
       <SidebarMenuItem>
@@ -37,14 +38,15 @@ const AppTree = ({ item }: { item: SidebarItem }) => {
     );
   }
 
+  // If there are children
   return (
     <SidebarMenuItem>
-      <Collapsible className="w-full">
-        <CollapsibleTrigger asChild>
+      <Collapsible>
+        <CollapsibleTrigger className="group/collapsible" asChild>
           <SidebarMenuButton className="w-full">
             <Icon className="mr-2 h-4 w-4" />
             {item.label}
-            <ChevronRight className="ml-auto h-4 w-4 transition-transform" />
+            <IoChevronDown className="ml-auto h-4 w-4 transition-transform duration-500 group-data-[state=open]/collapsible:rotate-180" />
           </SidebarMenuButton>
         </CollapsibleTrigger>
         <CollapsibleContent>
