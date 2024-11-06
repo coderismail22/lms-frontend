@@ -1,6 +1,6 @@
+import { useRole } from "@/hooks/useRole";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 interface CourseCardProps {
   course: {
     _id: string;
@@ -11,10 +11,11 @@ interface CourseCardProps {
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   const navigate = useNavigate();
+  const role = useRole();
 
   return (
     <div
-      onClick={() => navigate(`/dashboard/test/courses/${course._id}`)}
+      onClick={() => navigate(`/dashboard/${role}/courses/${course._id}`)}
       className="cursor-pointer p-4 border rounded-lg shadow hover:shadow-lg hover:border hover:border-blue-50 transition"
     >
       <h2 className="font-bold text-lg">{course.name}</h2>

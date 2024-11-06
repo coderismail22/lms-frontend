@@ -30,6 +30,7 @@ import AllLessons from "@/pages/Dashboard/Admin/CourseManagement/Lesson/AllLesso
 import RunningCourses from "@/pages/Dashboard/Instructor/CourseManagement/RunningCourses/RunningCourses";
 import UpcomingCourses from "@/pages/Dashboard/Instructor/CourseManagement/UpcomingCourses/UpcomingCourses";
 import CompletedCourses from "@/pages/Dashboard/Instructor/CourseManagement/CompletedCourses/CompletedCourses";
+import EnrolledCourses from "@/pages/Dashboard/Student/Courses/EnrolledCourses/EnrolledCourses";
 
 export const router = createBrowserRouter([
   {
@@ -53,7 +54,7 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
     children: [
-      // Admin
+      // Role: Admin
       { path: "/dashboard/admin/home", element: <AdminHome /> },
       // Course Management
       // Course
@@ -119,10 +120,14 @@ export const router = createBrowserRouter([
         path: "/dashboard/instructor/course-management/completed",
         element: <CompletedCourses />,
       },
+      // Role: Student
       { path: "/dashboard/student/home", element: <StudentHome /> },
-      // { path: "/dashboard/test", element: <EnrolledCourses /> },
       {
-        path: "/dashboard/courses/:courseId",
+        path: "/dashboard/student/courses/enrolled-courses",
+        element: <EnrolledCourses />,
+      },
+      {
+        path: "/dashboard/student/courses/:courseId",
         element: <CourseDetailsPage />,
       },
     ],

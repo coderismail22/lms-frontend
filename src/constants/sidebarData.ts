@@ -10,10 +10,8 @@ import { CiBoxList } from "react-icons/ci";
 import { GiProgression } from "react-icons/gi";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
-
-
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { MdOutlineDownloading } from "react-icons/md";
+import { MdOutlineDownloading, MdOutlinePlayLesson } from "react-icons/md";
 
 export const sidebarData = {
   admin: [
@@ -115,17 +113,17 @@ export const sidebarData = {
       icon: FaChalkboardTeacher,
       children: [
         {
-          icon:GiProgression,
+          icon: GiProgression,
           label: "Running Courses",
           path: "/dashboard/instructor/course-management/running",
         },
         {
-          icon:MdOutlineDownloading,
+          icon: MdOutlineDownloading,
           label: "Upcoming Courses",
           path: "/dashboard/instructor/course-management/upcoming",
         },
         {
-          icon:IoCheckmarkDoneSharp,
+          icon: IoCheckmarkDoneSharp,
           label: "Completed Courses",
           path: "/dashboard/instructor/course-management/completed",
         },
@@ -133,14 +131,15 @@ export const sidebarData = {
     },
   ],
   student: [
-    { label: "Home", path: "/dashboard/student", icon: FaHome },
+    { label: "Home", path: "/dashboard/student/home", icon: FaHome },
     {
       label: "Courses",
       icon: FaUserGraduate,
       children: [
         {
+          icon:MdOutlinePlayLesson,
           label: "Enrolled Courses",
-          path: "courses/enrolled-courses",
+          path: "/dashboard/student/courses/enrolled-courses",
         },
       ],
     },
