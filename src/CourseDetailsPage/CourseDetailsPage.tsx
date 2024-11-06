@@ -13,13 +13,30 @@ const CourseDetailsPage = () => {
 
   if (!course) return <p>Course not found.</p>;
 
+  const lessons = course.subjects.flatMap((subject) =>
+    subject.topics.flatMap((topic) => topic.lessons)
+  );
+
+  const selectedIndex = lessons.findIndex(
+    (lesson) => lesson._id === selectedLesson?._id
+  );
+
   return (
-    <div className="flex flex-col md:flex-row gap-4 p-4 w-[800px] ">
+    <div className="p-4 bg-white shadow-md grid grid-cols-1 md:grid-cols-5 items-center justify-center gap-4 w-[100%] border border-red-500 ">
       {/* Content Viewer Section */}
-      <ContentViewer lesson={selectedLesson} />
+      <div className="col-span-1 md:col-span-3 border border-red-500 min-h-[400px] w-full">
+        <ContentViewer
+          lesson={selectedLesson}
+          lessons={lessons}
+          selectedIndex={selectedIndex}
+          setSelectedLesson={setSelectedLesson}
+        />
+      </div>
 
       {/* Content Details Section */}
-      <ContentDetails course={course} onSelectLesson={setSelectedLesson} />
+      <div className="col-span-1 bg-gray-200 shadow-md md:col-span-2 border border-red-500 min-h-[400px] w-full overflow-y-scroll">
+        <ContentDetails course={course} onSelectLesson={setSelectedLesson} />
+      </div>
     </div>
   );
 };

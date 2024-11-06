@@ -14,7 +14,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
   return (
     <div
-      onClick={() => navigate(`/dashboard/student/courses/${course._id}`)}
+      onClick={() => navigate(`/dashboard/test/courses/${course._id}`)}
       className="cursor-pointer p-4 border rounded-lg shadow hover:shadow-lg hover:border hover:border-blue-50 transition"
     >
       <h2 className="font-bold text-lg">{course.name}</h2>

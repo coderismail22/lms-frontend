@@ -1,6 +1,6 @@
 // src/components/ContentDetails/ContentDetails.tsx
 import React, { useState } from "react";
-import { Course, Subject, Topic, Lesson } from "@/types/course.type";
+import { Course,  Lesson } from "@/types/course.type";
 
 interface ContentDetailsProps {
   course: Course;
@@ -33,7 +33,7 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
   };
 
   return (
-    <div className="bg-white shadow-md py-4 px-3 rounded-md w-[30%] overflow-y-scroll">
+    <div className=" shadow-md py-4 px-3 rounded-md w-full">
       {/* Course Overview */}
       <h2 className="text-2xl font-semibold ">{course.name}</h2>
       <p className="text-gray-600">
@@ -51,7 +51,7 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
 
       {/* Subjects */}
       {course.subjects.map((subject) => (
-        <div key={subject._id} className="mt-4">
+        <div key={subject._id} className="mt-5 bg-violet-500">
           <div
             onClick={() => toggleSubject(subject._id)}
             className="flex justify-between items-center cursor-pointer p-2 border-b border-gray-300"

@@ -1,7 +1,9 @@
 // import { useContext } from "react";
 
+import { Role } from "@/components/DashboardAndSidebar/dashboard.type";
+
 export const useRole = () => {
-  //   const { role } = useContext(AuthContext); // Replace with actual role context logic
-  const role = "instructor";
-  return role; // default to "admin" if no role is found
+  // TODO: Make the role dynamic based on authentication and authorization
+  const role: Role = "admin";
+  return role;
 };

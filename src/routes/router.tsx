@@ -12,9 +12,12 @@ import Contact from "../pages/Contact/Contact/Contact";
 import Login from "../pages/SharedPages/Login/Login";
 // import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import DashboardLayout from "@/layout/DashboardLayout/DashboardLayout";
-import MyProfile from "@/pages/Dashboard/MyProfile/MyProfile";
 import EnrolledCourses from "@/pages/Dashboard/Student/Courses/EnrolledCourses/EnrolledCourses";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
+import Dashboard from "@/pages/Dashboard/Dashboard/Dashboard";
+import AdminHome from "@/pages/Dashboard/Admin/AdminHome/AdminHome";
+import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
+import InstructorHome from "@/pages/Dashboard/Instructor/InstructorHome/InstructorHome";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +37,21 @@ export const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      { path: "/dashboard/admin/home", element: <AdminHome /> },
+      { path: "/dashboard/instructor/home", element: <InstructorHome /> },
+      { path: "/dashboard/student/home", element: <StudentHome /> },
+      // { path: "/dashboard/test", element: <EnrolledCourses /> },
+      {
+        path: "/dashboard/courses/:courseId",
+        element: <CourseDetailsPage />,
+      },
+    ],
+  },
   {
     path: "/dashboard/admin",
     element: (
@@ -41,10 +59,6 @@ export const router = createBrowserRouter([
       <DashboardLayout role="admin" />
       // </ProtectedRoute>
     ),
-    children: [
-      { path: "my-profile", element: <MyProfile /> },
-      // Add more admin-specific routes here
-    ],
   },
   {
     path: "/dashboard/instructor",
@@ -53,10 +67,6 @@ export const router = createBrowserRouter([
       <DashboardLayout role="instructor" />
       // </ProtectedRoute>
     ),
-    children: [
-      { path: "my-profile", element: <MyProfile /> },
-      // Add more instructor-specific routes here
-    ],
   },
   {
     path: "/dashboard/student",
@@ -70,10 +80,10 @@ export const router = createBrowserRouter([
         path: "/dashboard/student/courses/enrolled-courses",
         element: <EnrolledCourses />,
       },
-      {
-        path: "/dashboard/student/courses/:courseId",
-        element: <CourseDetailsPage />,
-      },
+      // {
+      //   path: "/dashboard/student/courses/:courseId",
+      //   element: <CourseDetailsPage />,
+      // },
       // Add more student-specific routes here
     ],
   },
