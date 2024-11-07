@@ -1,6 +1,5 @@
-// src/components/ContentDetails/ContentDetails.tsx
 import React, { useState } from "react";
-import { Course,  Lesson } from "@/types/course.type";
+import { Course, Lesson } from "@/types/course.type";
 
 interface ContentDetailsProps {
   course: Course;

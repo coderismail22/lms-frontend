@@ -107,7 +107,7 @@ export const sidebarData = {
     },
   ],
   instructor: [
-    { label: "Home", path: "/dashboard/instructor", icon: FaHome },
+    { label: "Home", path: "/dashboard/instructor/home", icon: FaHome },
     {
       label: "Course Management",
       icon: FaChalkboardTeacher,
