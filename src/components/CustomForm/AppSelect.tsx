@@ -1,7 +1,12 @@
 // AppSearchableSelect.tsx
 import { Controller, useFormContext } from "react-hook-form";
 import Select from "react-select";
-import { FormControl, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  FormControl,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 interface Option {
   value: string;
@@ -15,7 +20,12 @@ interface AppSearchableSelectProps {
   placeholder?: string;
 }
 
-const AppSearchableSelect = ({ name, label, options, placeholder }: AppSearchableSelectProps) => {
+const AppSelect = ({
+  name,
+  label,
+  options,
+  placeholder,
+}: AppSearchableSelectProps) => {
   const { control } = useFormContext();
 
   return (
@@ -31,7 +41,9 @@ const AppSearchableSelect = ({ name, label, options, placeholder }: AppSearchabl
               options={options}
               placeholder={placeholder || "Select an option"}
               onChange={(option) => field.onChange(option?.value)}
-              value={options.find(option => option.value === field.value) || null}
+              value={
+                options.find((option) => option.value === field.value) || null
+              }
               isClearable
               isSearchable
               classNamePrefix="react-select" // for easier styling
@@ -44,4 +56,4 @@ const AppSearchableSelect = ({ name, label, options, placeholder }: AppSearchabl
   );
 };
 
-export default AppSearchableSelect;
+export default AppSelect;

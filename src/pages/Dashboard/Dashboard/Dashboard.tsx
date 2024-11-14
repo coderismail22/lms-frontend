@@ -2,7 +2,7 @@ import AppDashboard from "@/components/DashboardAndSidebar/AppDashboard";
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className="h-100vh overflow-auto">
       <AppDashboard />
     </div>
   );

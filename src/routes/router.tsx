@@ -125,7 +125,7 @@ export const router = createBrowserRouter([
         element: <EnrolledCourses />,
       },
       {
-        path: "/dashboard/student/courses/:courseId",
+        path: "/dashboard/student/:studentId/courses/:courseId",
         element: <CourseDetailsPage />,
       },
     ],

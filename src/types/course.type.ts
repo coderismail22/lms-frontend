@@ -1,9 +1,12 @@
-// src/assets/data/types.ts
+// src/types.ts
 export interface Lesson {
   _id: string;
   name: string;
   content: string;
   type: string;
+  isAccessible: boolean;
+  isCompleted: boolean;
+  completedAt: string | null;
 }
 
 export interface Topic {
@@ -25,4 +28,25 @@ export interface Course {
   name: string;
   description: string;
   subjects: Subject[];
+}
+
+export interface IPopulatedStudentCourse {
+  courseId: {
+    _id: string;
+    name: string;
+    description: string;
+    subjects: string[]; // Adjust if `subjects` has more complex structure
+  };
+  subjects: Array<{
+    subjectId: string;
+    topics: Array<{
+      topicId: string;
+      lessons: Array<{
+        lessonId: string;
+        isCompleted: boolean;
+        completedAt: string | null;
+      }>;
+    }>;
+  }>;
+  _id: string;
 }

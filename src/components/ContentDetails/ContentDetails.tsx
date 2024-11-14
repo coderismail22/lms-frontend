@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Course, Lesson } from "@/types/course.type";
+import { LockOpenIcon } from "lucide-react";
+import { LockClosedIcon } from "@radix-ui/react-icons";
+import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 
 interface ContentDetailsProps {
   course: Course;
@@ -13,7 +16,6 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
   const [expandedSubjects, setExpandedSubjects] = useState<string[]>([]);
   const [expandedTopics, setExpandedTopics] = useState<string[]>([]);
 
-  // Toggle subject expansion
   const toggleSubject = (subjectId: string) => {
     setExpandedSubjects((prev) =>
       prev.includes(subjectId)
@@ -22,7 +24,6 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
     );
   };
 
-  // Toggle topic expansion
   const toggleTopic = (topicId: string) => {
     setExpandedTopics((prev) =>
       prev.includes(topicId)
@@ -32,9 +33,8 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
   };
 
   return (
-    <div className=" shadow-md py-4 px-3 rounded-md w-full">
-      {/* Course Overview */}
-      <h2 className="text-2xl font-semibold ">{course.name}</h2>
+    <div className="shadow-md py-4 px-3 rounded-md w-full">
+      <h2 className="text-2xl font-semibold">{course.name}</h2>
       <p className="text-gray-600">
         Total Lessons:{" "}
         {course.subjects.reduce(
@@ -48,37 +48,51 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
         )}
       </p>
 
-      {/* Subjects */}
       {course.subjects.map((subject) => (
-        <div key={subject._id} className="mt-5 bg-violet-500">
+        <div key={subject._id} className="mt-5">
           <div
             onClick={() => toggleSubject(subject._id)}
-            className="flex justify-between items-center cursor-pointer p-2 border-b border-gray-300"
+            className="cursor-pointer p-2 flex justify-between items-center"
           >
             <h3 className="text-lg font-medium">{subject.name}</h3>
-            <span>{expandedSubjects.includes(subject._id) ? "-" : "+"}</span>
+            {expandedSubjects.includes(subject._id) ? (
+              <CiSquareMinus className="h-5 w-5 text-gray-600" />
+            ) : (
+              <CiSquarePlus className="h-5 w-5 text-gray-600" />
+            )}
           </div>
-
-          {/* Topics under each subject */}
           {expandedSubjects.includes(subject._id) &&
             subject.topics.map((topic) => (
               <div key={topic._id} className="ml-4 mt-2">
                 <div
                   onClick={() => toggleTopic(topic._id)}
-                  className="flex justify-between items-center cursor-pointer p-2 border-b border-gray-300"
+                  className="cursor-pointer p-2 flex justify-between items-center"
                 >
                   <h4 className="text-md font-medium">{topic.name}</h4>
-                  <span>{expandedTopics.includes(topic._id) ? "↑" : "↓"}</span>
+                  {expandedTopics.includes(topic._id) ? (
+                    <CiSquareMinus className="h-5 w-5 text-gray-600" />
+                  ) : (
+                    <CiSquarePlus className="h-5 w-5 text-gray-600" />
+                  )}
                 </div>
-
-                {/* Lessons under each topic */}
                 {expandedTopics.includes(topic._id) &&
                   topic.lessons.map((lesson) => (
                     <div
                       key={lesson._id}
-                      onClick={() => onSelectLesson(lesson)}
-                      className="ml-6 mt-1 cursor-pointer text-gray-800 hover:text-blue-500"
+                      onClick={() =>
+                        lesson.isAccessible && onSelectLesson(lesson)
+                      }
+                      className={`ml-6 mt-1 cursor-pointer flex items-center ${
+                        lesson.isAccessible
+                          ? "text-gray-800"
+                          : "text-gray-400 cursor-not-allowed"
+                      }`}
                     >
+                      {lesson.isAccessible ? (
+                        <LockOpenIcon className="h-5 w-5 text-green-500 mr-2" />
+                      ) : (
+                        <LockClosedIcon className="h-5 w-5 text-red-500 mr-2" />
+                      )}
                       <p>{lesson.name}</p>
                     </div>
                   ))}
