@@ -1,227 +1,244 @@
-import Select from "react-select";
 import AppForm from "@/components/CustomForm/AppForm";
 import AppInput from "@/components/CustomForm/AppInput";
 import AppSelect from "@/components/CustomForm/AppSelect";
 import { useState } from "react";
 import { z } from "zod";
-import { Input } from "@/components/ui/input";
-import { FaPlus } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
-
-const schema = z.object({
+import DynamicSelectField from "@/components/CustomForm/DynamicSelect";
+const createCourseSchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().min(1, "Description is required"),
   category: z.string().min(1, "Category is required"),
+  language: z.string().min(1, "Language is required"),
+  batch: z.string().min(1, "Batch is required"),
+  courseType: z.string().min(1, "Course type is required"),
+  coursePrice: z.coerce.number().min(1, "Price must be greater than 0"), // Automatically coerces to number
+  courseLength: z.string().min(1, "Course length is required"),
+  skillLevel: z.string().min(1, "Skill level is required"),
+  careerOpportunities: z.array(z.string()),
+  curriculum: z.array(z.string()),
+  jobPositions: z.array(z.string()),
+  softwareList: z.array(z.string()),
 });
 
 // Infer the type of the schema
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<typeof createCourseSchema>;
 
 const CreateCourse = () => {
-  const [options, setOptions] = useState<{ value: string; label: string }[]>(
-    []
-  );
-  const [inputValue, setInputValue] = useState("");
-  const [selectedOpportunities, setSelectedOpportunities] = useState<string[]>(
-    []
-  );
-
-  const handleAddOption = () => {
-    if (inputValue.trim() !== "") {
-      setOptions((prevOptions) => [
-        ...prevOptions,
-        { value: inputValue, label: inputValue },
-      ]);
-      setInputValue(""); // Clear input after adding
-    }
-  };
+  const [careerOpportunities, setCareerOpportunities] = useState<string[]>([]);
+  const [curriculum, setCurriculum] = useState<string[]>([]);
+  const [jobPositions, setJobPositions] = useState<string[]>([]);
+  const [softwareList, setSoftwareList] = useState<string[]>([]);
 
   const onSubmit = (data: FormData) => {
-    console.log("Form Data:", data);
+    const finalData = {
+      ...data,
+      careerOpportunities,
+      curriculum,
+      jobPositions,
+      softwareList,
+    };
+
+    console.log("Form Data:", finalData);
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="max-w-4xl mx-auto p-6">
       <AppForm
-        schema={schema}
+        schema={createCourseSchema}
         onSubmit={onSubmit}
         submitButtonStyles="w-[150px]"
         buttonText="Create Course"
         alignButton="center"
         defaultValues={{
-          name: "Video Editing",
-          description: "By Ismail",
+          name: "",
+          description: "",
+          category: "",
+          language: "",
+          batch: "",
+          courseType: "",
+          coursePrice: 0, // Set a default value to ensure it's controlled from the start
+          courseLength: "",
+          skillLevel: "",
+          careerOpportunities: [], // Default as empty arrays for dynamic select fields
+          curriculum: [],
+          jobPositions: [],
+          softwareList: [],
         }}
       >
-        {/* Name */}
-        <AppInput
-          className="w-full md:w-[350px]"
-          name="name"
-          label="Course Name"
-          placeholder="Enter course name"
-        />
-        {/* Description */}
-        <AppInput
-          className="w-full md:w-[350px]"
-          name="description"
-          label="Description"
-          placeholder="Enter description"
-        />
-        {/* Language */}
-        <AppSelect
-          name="language"
-          label="Language"
-          placeholder="Select a language"
-          options={[
-            {
-              value: "Bangla",
-              label: "Bangla",
-            },
-            {
-              value: "English",
-              label: "English",
-            },
-            {
-              value: "Hindi",
-              label: "Hindi",
-            },
-            {
-              value: "Arabic",
-              label: "Arabic",
-            },
-          ]}
-        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {/* Name */}
+          <AppInput
+            className="w-full "
+            name="name"
+            label="Course Name"
+            placeholder="Enter course name"
+          />
+          {/* Description */}
+          <AppInput
+            className="w-full "
+            name="description"
+            label="Description"
+            placeholder="Enter description"
+          />
+          {/* Language */}
+          <AppSelect
+            name="language"
+            label="Language"
+            placeholder="Select a language"
+            options={[
+              {
+                value: "Bangla",
+                label: "Bangla",
+              },
+              {
+                value: "English",
+                label: "English",
+              },
+              {
+                value: "Hindi",
+                label: "Hindi",
+              },
+              {
+                value: "Arabic",
+                label: "Arabic",
+              },
+            ]}
+          />
 
-        {/* Batch No */}
-        <AppSelect
-          name="batch"
-          label="Batch"
-          placeholder="Select a batch"
-          options={[
-            {
-              value: "01",
-              label: "01",
-            },
-            {
-              value: "02",
-              label: "02",
-            },
-          ]}
-        />
+          {/* Batch No */}
+          <AppSelect
+            name="batch"
+            label="Batch"
+            placeholder="Select a batch"
+            options={[
+              {
+                value: "01",
+                label: "01",
+              },
+              {
+                value: "02",
+                label: "02",
+              },
+            ]}
+          />
 
-        {/* Category */}
-        <AppSelect
-          name="category"
-          label="Category"
-          placeholder="Select a course category"
-          options={[
-            {
-              value: "Video Editing",
-              label: "Video Editing",
-            },
-            {
-              value: "Web Design",
-              label: "Web Design",
-            },
-            {
-              value: "Web Development",
-              label: "Web Development",
-            },
-          ]}
-        />
-        {/* TODO:  */}
-        {/* Start Date */}
+          {/* Category */}
+          <AppSelect
+            name="category"
+            label="Category"
+            placeholder="Select a course category"
+            options={[
+              {
+                value: "Video Editing",
+                label: "Video Editing",
+              },
+              {
+                value: "Web Design",
+                label: "Web Design",
+              },
+              {
+                value: "Web Development",
+                label: "Web Development",
+              },
+            ]}
+          />
+          {/* TODO (In Batch Not While Creating a New Course):  */}
+          {/* Start Date Picker */}
+          {/* Start Date Picker */}
 
-        {/* Course Price */}
-        <AppInput
-          className="w-full md:w-[350px]"
-          name="coursePrice"
-          label="Price"
-          placeholder="Enter a price"
-        />
-        {/* Course Time Length */}
-        <AppInput
-          className="w-full md:w-[350px]"
-          name="courseLength"
-          label="Course Duration"
-          placeholder="Enter course duration"
-        />
-        {/* Skill Level */}
-        <AppSelect
-          name="skillLevel"
-          label="Skill Level"
-          placeholder="Select a skill level"
-          options={[
-            {
-              value: "Beginner to Intermediate",
-              label: "Beginner to Intermediate",
-            },
-            {
-              value: "Intermediate to Advanced",
-              label: "Intermediate to Advanced",
-            },
-            {
-              value: "Beginner to Advanced",
-              label: "Beginner to Advanced",
-            },
-          ]}
-        />
+          {/* Course Price */}
+          <AppInput
+            className="w-full "
+            name="coursePrice"
+            label="Price"
+            placeholder="Enter a price"
+          />
+          {/* Course Time Length */}
+          <AppInput
+            className="w-full "
+            name="courseLength"
+            label="Course Duration"
+            placeholder="Enter course duration"
+          />
+          {/* Skill Level */}
+          <AppSelect
+            name="skillLevel"
+            label="Skill Level"
+            placeholder="Select a skill level"
+            options={[
+              {
+                value: "Beginner to Intermediate",
+                label: "Beginner to Intermediate",
+              },
+              {
+                value: "Intermediate to Advanced",
+                label: "Intermediate to Advanced",
+              },
+              {
+                value: "Beginner to Advanced",
+                label: "Beginner to Advanced",
+              },
+            ]}
+          />
 
-        {/* Course Type */}
-        <AppSelect
-          name="category"
-          label="Course Category"
-          placeholder="Select a course category"
-          options={[
-            {
-              value: "Video Editing",
-              label: "Video Editing",
-            },
-            {
-              value: "Web Design",
-              label: "Web Design",
-            },
-            {
-              value: "Web Development",
-              label: "Web Development",
-            },
-          ]}
-        />
-
-        {/* Hey chatgpt make these dynamic selectable. I mean there will be delete and add option. You can use react-select for this. */}
-        {/* Career Opportunity */}
-        {/* Enter Curriculum */}
-        {/* Enter job positions */}
-        {/* Enter software list */}
-
-        <div className="w-full  my-10">
-          <label>Career Opportunities</label>
-          <div className="flex gap-2 mb-2 ">
-            <Input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Add new opportunity"
-              className="border p-2 flex-1"
-            />
-            <Button
-              onClick={handleAddOption}
-              type="button"
-              className="flex items-center justify-center gap-2 bg-white hover:bg-slate-200 p-2 border rounded-sm hover:spin-once"
-            >
-              <p className="text-black">New</p>
-              <FaPlus className="text-green-700" />
-            </Button>
-          </div>
-          <Select
-            options={options}
-            isMulti
-            onChange={(selectedOptions) =>
-              setSelectedOpportunities(
-                selectedOptions.map((option) => option.value)
-              )
-            }
+          {/* Course Type */}
+          <AppSelect
+            name="courseType"
+            label="Course Type"
+            placeholder="Select a course category"
+            options={[
+              {
+                value: "Online",
+                label: "Online",
+              },
+              {
+                value: "Offline",
+                label: "Offline",
+              },
+              {
+                value: "Hybrid",
+                label: "Hybrid",
+              },
+            ]}
+          />
+        </div>
+        <div className="grid grid-cols-1  mt-5 md:grid-cols-2 md:gap-6 lg:grid-cols-2">
+          {/* Career Opportunities*/}
+          <DynamicSelectField
+            label="Career Opportunities"
             placeholder="Select or add opportunities"
+            options={careerOpportunities.map((opportunity) => ({
+              value: opportunity,
+              label: opportunity,
+            }))}
+            onChange={setCareerOpportunities}
+          />
+          {/* Curriculum */}
+          <DynamicSelectField
+            label="Curriculum"
+            placeholder="Select or add curriculum"
+            options={curriculum.map((item) => ({ value: item, label: item }))}
+            onChange={setCurriculum}
+          />
+          {/* Job Positions */}
+          <DynamicSelectField
+            label="Job Positions"
+            placeholder="Select or add job positions"
+            options={jobPositions.map((position) => ({
+              value: position,
+              label: position,
+            }))}
+            onChange={setJobPositions}
+          />
+          {/* Software List */}
+          <DynamicSelectField
+            label="Software List"
+            placeholder="Select or add software"
+            options={softwareList.map((software) => ({
+              value: software,
+              label: software,
+            }))}
+            onChange={setSoftwareList}
           />
         </div>
       </AppForm>
