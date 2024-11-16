@@ -37,7 +37,7 @@ const DynamicSelectField = ({
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder={`Add new ${label.toLowerCase()}`}
-          className="border p-2 flex-1"
+          className="bg-blue-50 border p-2 flex-1"
         />
         <Button
           onClick={handleAddOption}

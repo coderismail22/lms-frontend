@@ -33,7 +33,7 @@ const AppInput = ({ name, label, placeholder, className }: AppInputProps) => {
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <Input
-              className={`${className}`}
+              className={`bg-blue-50 ${className}`}
               {...field}
               placeholder={placeholder}
             />

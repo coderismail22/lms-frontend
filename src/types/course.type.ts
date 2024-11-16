@@ -1,3 +1,6 @@
+import { createCourseSchema } from "@/schemas/course.schema";
+import { z } from "zod";
+
 // src/types.ts
 export interface Lesson {
   _id: string;
@@ -50,3 +53,6 @@ export interface IPopulatedStudentCourse {
   }>;
   _id: string;
 }
+
+// Infer the type of the schema
+export type TCourseForm = z.infer<typeof createCourseSchema>;

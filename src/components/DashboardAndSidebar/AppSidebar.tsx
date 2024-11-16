@@ -29,6 +29,7 @@ export const AppSidebar = ({
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
       <SidebarRail />
     </Sidebar>
   );

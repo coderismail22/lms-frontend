@@ -2,26 +2,9 @@ import AppForm from "@/components/CustomForm/AppForm";
 import AppInput from "@/components/CustomForm/AppInput";
 import AppSelect from "@/components/CustomForm/AppSelect";
 import { useState } from "react";
-import { z } from "zod";
 import DynamicSelectField from "@/components/CustomForm/DynamicSelect";
-const createCourseSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  description: z.string().min(1, "Description is required"),
-  category: z.string().min(1, "Category is required"),
-  language: z.string().min(1, "Language is required"),
-  batch: z.string().min(1, "Batch is required"),
-  courseType: z.string().min(1, "Course type is required"),
-  coursePrice: z.coerce.number().min(1, "Price must be greater than 0"), // Automatically coerces to number
-  courseLength: z.string().min(1, "Course length is required"),
-  skillLevel: z.string().min(1, "Skill level is required"),
-  careerOpportunities: z.array(z.string()),
-  curriculum: z.array(z.string()),
-  jobPositions: z.array(z.string()),
-  softwareList: z.array(z.string()),
-});
-
-// Infer the type of the schema
-type FormData = z.infer<typeof createCourseSchema>;
+import { TCourseForm } from "@/types/course.type";
+import { createCourseSchema } from "@/schemas/course.schema";
 
 const CreateCourse = () => {
   const [careerOpportunities, setCareerOpportunities] = useState<string[]>([]);
@@ -29,7 +12,7 @@ const CreateCourse = () => {
   const [jobPositions, setJobPositions] = useState<string[]>([]);
   const [softwareList, setSoftwareList] = useState<string[]>([]);
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: TCourseForm) => {
     const finalData = {
       ...data,
       careerOpportunities,

@@ -36,18 +36,20 @@ const AppSelect = ({
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Select
-              {...field}
-              options={options}
-              placeholder={placeholder || "Select an option"}
-              onChange={(option) => field.onChange(option?.value)}
-              value={
-                options.find((option) => option.value === field.value) || null
-              }
-              isClearable
-              isSearchable
-              classNamePrefix="react-select" // for easier styling
-            />
+            <div className="bg-blue-50">
+              <Select
+                {...field}
+                options={options}
+                placeholder={placeholder || "Select an option"}
+                onChange={(option) => field.onChange(option?.value)}
+                value={
+                  options.find((option) => option.value === field.value) || null
+                }
+                isClearable
+                isSearchable
+                classNamePrefix="react-select"
+              />
+            </div>
           </FormControl>
           {error && <FormMessage>{error.message}</FormMessage>}
         </FormItem>

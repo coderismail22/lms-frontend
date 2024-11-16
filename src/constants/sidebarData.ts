@@ -16,6 +16,9 @@ import { MdOutlineDownloading, MdOutlinePlayLesson } from "react-icons/md";
 export const sidebarData = {
   admin: [
     { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
+    { label: "Add Category", path: "/dashboard/admin/home", icon: FaHome },
+    { label: "Add Batch", path: "/dashboard/admin/home", icon: FaHome },
+    { label: "Add Route/Outline", path: "/dashboard/admin/home", icon: FaHome },
     {
       label: "Course Management",
       icon: FaBook,
@@ -137,7 +140,7 @@ export const sidebarData = {
       icon: FaUserGraduate,
       children: [
         {
-          icon:MdOutlinePlayLesson,
+          icon: MdOutlinePlayLesson,
           label: "Enrolled Courses",
           path: "/dashboard/student/courses/enrolled-courses",
         },
