@@ -45,13 +45,13 @@ export const categoryColumns = (
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => handleUpdateClick(category)}>
-              <FaRegEdit />
-              Edit
+              <FaRegEdit className="text-green-700" />
+              <p className="text-[12px]">Edit</p>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => handleDelete(category._id)}>
-              <FaTrash />
-              Delete
+              <FaTrash className="text-red-500" />
+              <p className="text-[12px]">Delete</p>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -6,6 +6,7 @@ import {
   FaRegListAlt,
   FaUserGraduate,
 } from "react-icons/fa";
+import { BiCategory } from "react-icons/bi";
 import { CiBoxList } from "react-icons/ci";
 import { GiProgression } from "react-icons/gi";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
@@ -19,7 +20,7 @@ export const sidebarData = {
     {
       label: "Add Category",
       path: "/dashboard/admin/categories",
-      icon: FaHome,
+      icon: BiCategory,
     },
     { label: "Add Batch", path: "/dashboard/admin/home", icon: FaHome },
     { label: "Add Route/Outline", path: "/dashboard/admin/home", icon: FaHome },
