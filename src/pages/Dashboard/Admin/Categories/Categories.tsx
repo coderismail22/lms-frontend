@@ -17,6 +17,7 @@ export default function Categories() {
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Update Category
   const handleUpdateClick = (category: TCategory) => {
     setSelectedCategory(category); // Pass the selected category to the modal
     setIsEditModalOpen(true);
@@ -47,6 +48,33 @@ export default function Categories() {
     }
   };
 
+  // Delete Category
+  const handleDelete = async (categoryId: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosInstance.delete(`/categories/${categoryId}`);
+          setCategories((prev) =>
+            prev.filter((category) => category._id !== categoryId)
+          );
+          Swal.fire("Deleted!", "The category has been deleted.", "success");
+        } catch (err) {
+          console.error("Error deleting category:", err);
+          Swal.fire("Error!", "Failed to delete category.", "error");
+        }
+      }
+    });
+  };
+
+  // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
       setLoading(true);
@@ -72,11 +100,6 @@ export default function Categories() {
   if (error) {
     return <div>Something went wrong...</div>;
   }
-
-  const handleDelete = (categoryId: string) => {
-    console.log("Deleting category with ID:", categoryId);
-    // Add logic to delete the category (e.g., API call).
-  };
 
   return (
     <div className="container mx-auto py-10">
