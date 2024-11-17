@@ -35,26 +35,30 @@ export const categoryColumns = (
     cell: ({ row }) => {
       const category = row.original; // Access the full row data.
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-5 w-5">
-              <BiDotsVertical className="h-10 w-10" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleUpdateClick(category)}>
-              <FaRegEdit className="text-green-700" />
-              <p className="text-[12px]">Edit</p>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleDelete(category._id)}>
-              <FaTrash className="text-red-500" />
-              <p className="text-[12px]">Delete</p>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="w-3">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-5 w-5">
+                <BiDotsVertical className="h-10 w-10" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel className="text-[12px]">
+                Actions
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleUpdateClick(category)}>
+                <FaRegEdit className="text-green-700" />
+                <p className="text-[12px]">Edit</p>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleDelete(category._id)}>
+                <FaTrash className="text-red-500" />
+                <p className="text-[12px]">Delete</p>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       );
     },
   },

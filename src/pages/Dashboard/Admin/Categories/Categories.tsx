@@ -4,18 +4,39 @@ import axiosInstance from "@/api/axiosInstance";
 import CategoryTable from "./CategoryTable";
 import EditCategoryModal from "@/components/EditCategoryModal/EditCategoryModal";
 import Swal from "sweetalert2";
+import CreateCategoryModal from "@/components/CreateCategoryModal/CreateCategoryModal";
 
 export default function Categories() {
+  // Fetching states
   const [categories, setCategories] = useState<TCategory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   // Modal states
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<TCategory | null>(
     null
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Create Category
+  const handleCreate = async (categoryName: string) => {
+    setIsSubmitting(true);
+    try {
+      const response = await axiosInstance.post("/categories/create-category", {
+        name: categoryName,
+      });
+      setCategories((prev) => [...prev, response.data.data]); // Add the new category
+      Swal.fire("Created!", "The category has been created.", "success");
+      setIsCreateModalOpen(false);
+    } catch (err) {
+      console.error("Error creating category:", err);
+      Swal.fire("Error!", "Failed to create category.", "error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Update Category
   const handleUpdateClick = (category: TCategory) => {
@@ -102,13 +123,30 @@ export default function Categories() {
   }
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-2">
+      <div className="my-4 flex justify-end">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          onClick={() => setIsCreateModalOpen(true)}
+        >
+          Create Category
+        </button>
+      </div>
+
       {categories && (
         <CategoryTable
           columns={categoryColumns(handleUpdateClick, handleDelete)}
           data={categories}
         />
       )}
+
+      {/* Create Modal */}
+      <CreateCategoryModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onSubmit={handleCreate}
+        isLoading={isSubmitting}
+      />
       {/* Edit Modal */}
       <EditCategoryModal
         isOpen={isEditModalOpen}
