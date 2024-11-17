@@ -5,6 +5,7 @@ import CategoryTable from "./CategoryTable";
 import EditCategoryModal from "@/components/EditCategoryModal/EditCategoryModal";
 import Swal from "sweetalert2";
 import CreateCategoryModal from "@/components/CreateCategoryModal/CreateCategoryModal";
+import { Button } from "@/components/ui/button";
 
 export default function Categories() {
   // Fetching states
@@ -125,14 +126,11 @@ export default function Categories() {
   return (
     <div className="container mx-auto py-2">
       <div className="my-4 flex justify-end">
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          onClick={() => setIsCreateModalOpen(true)}
-        >
+        <Button onClick={() => setIsCreateModalOpen(true)}>
           Create Category
-        </button>
+        </Button>
       </div>
-
+      {/* TODO: Add Pagination */}
       {categories && (
         <CategoryTable
           columns={categoryColumns(handleUpdateClick, handleDelete)}

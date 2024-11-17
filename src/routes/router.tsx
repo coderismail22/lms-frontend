@@ -31,6 +31,8 @@ import UpcomingCourses from "@/pages/Dashboard/Instructor/CourseManagement/Upcom
 import CompletedCourses from "@/pages/Dashboard/Instructor/CourseManagement/CompletedCourses/CompletedCourses";
 import EnrolledCourses from "@/pages/Dashboard/Student/Courses/EnrolledCourses/EnrolledCourses";
 import Categories from "@/pages/Dashboard/Admin/Categories/Categories";
+import Batch from "@/pages/Dashboard/Admin/Batch/Batch";
+import AddBatch from "@/components/AddBatch/AddBatch";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +58,8 @@ export const router = createBrowserRouter([
       // Role: Admin
       { path: "/dashboard/admin/home", element: <AdminHome /> },
       { path: "/dashboard/admin/categories", element: <Categories /> },
+      { path: "/dashboard/admin/batch", element: <Batch /> },
+      { path: "/dashboard/admin/batch/add-batch", element: <AddBatch /> },
       // Course Management
       // Course
       {

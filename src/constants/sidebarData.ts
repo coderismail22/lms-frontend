@@ -1,5 +1,6 @@
 import {
   FaBook,
+  FaBookReader,
   FaChalkboardTeacher,
   FaHome,
   FaLink,
@@ -22,7 +23,7 @@ export const sidebarData = {
       path: "/dashboard/admin/categories",
       icon: BiCategory,
     },
-    { label: "Add Batch", path: "/dashboard/admin/home", icon: FaHome },
+    { label: "Add Batch", path: "/dashboard/admin/batch", icon: FaBookReader },
     { label: "Add Route/Outline", path: "/dashboard/admin/home", icon: FaHome },
     {
       label: "Course Management",
