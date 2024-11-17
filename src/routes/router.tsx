@@ -30,6 +30,7 @@ import RunningCourses from "@/pages/Dashboard/Instructor/CourseManagement/Runnin
 import UpcomingCourses from "@/pages/Dashboard/Instructor/CourseManagement/UpcomingCourses/UpcomingCourses";
 import CompletedCourses from "@/pages/Dashboard/Instructor/CourseManagement/CompletedCourses/CompletedCourses";
 import EnrolledCourses from "@/pages/Dashboard/Student/Courses/EnrolledCourses/EnrolledCourses";
+import Categories from "@/pages/Dashboard/Admin/Categories/Categories";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,7 @@ export const router = createBrowserRouter([
     children: [
       // Role: Admin
       { path: "/dashboard/admin/home", element: <AdminHome /> },
+      { path: "/dashboard/admin/categories", element: <Categories /> },
       // Course Management
       // Course
       {
