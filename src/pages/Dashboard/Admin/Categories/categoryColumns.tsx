@@ -10,9 +10,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { BiDotsVertical } from "react-icons/bi";
 import { FaRegEdit, FaTrash } from "react-icons/fa";
-import { MdDeleteForever, MdDeleteOutline } from "react-icons/md";
-import { AiTwotoneDelete } from "react-icons/ai";
-
 // You can use a Zod schema here if you want.
 export type TCategory = {
   name: string;
@@ -20,7 +17,7 @@ export type TCategory = {
 };
 
 export const categoryColumns = (
-  handleUpdate: (category: TCategory) => void,
+  handleUpdateClick: (category: TCategory) => void,
   handleDelete: (categoryId: string) => void
 ): ColumnDef<TCategory>[] => [
   {
@@ -40,19 +37,19 @@ export const categoryColumns = (
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <BiDotsVertical className="h-4 w-4" />
+            <Button variant="ghost" className="h-5 w-5">
+              <BiDotsVertical className="h-10 w-10" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => console.log("edit clicked")}>
+            <DropdownMenuItem onClick={() => handleUpdateClick(category)}>
               <FaRegEdit />
               Edit
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => console.log("delete clicked")}>
+            <DropdownMenuItem onClick={() => handleDelete(category._id)}>
               <FaTrash />
               Delete
             </DropdownMenuItem>
