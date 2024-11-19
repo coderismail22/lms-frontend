@@ -47,7 +47,7 @@ const AddBatch = () => {
       // Show success message
       Swal.fire("Created!", data.message, "success");
       // Refetch the batch list after successful creation
-      queryClient.invalidateQueries(["batches"]);
+      queryClient.invalidateQueries({ queryKey: ["batches"] });
     },
     onError: (error: any) => {
       // Handle errors gracefully

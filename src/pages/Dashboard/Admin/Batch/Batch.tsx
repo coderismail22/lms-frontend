@@ -1,14 +1,25 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
+import BatchCard from "@/components/BatchCard/BatchCard";
+import Swal from "sweetalert2";
 
+// Fetch batches
 const fetchBatches = async () => {
   const response = await axiosInstance.get("/batches");
   return response.data;
 };
 
+// Delete batch function
+const deleteBatch = async (batchId: string): Promise<void> => {
+  await axiosInstance.delete(`/batches/${batchId}`);
+};
+
 const Batch = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   // Fetch batches using React Query
   const {
     data: batches,
@@ -20,6 +31,34 @@ const Batch = () => {
     queryFn: fetchBatches, // Fetch function
     staleTime: 5 * 60 * 1000, // Cache data for 5 minutes
   });
+
+  // Mutation for deleting a batch
+  const deleteMutation = useMutation({
+    mutationFn: deleteBatch,
+    onSuccess: () => {
+      Swal.fire("Deleted!", "Batch has been deleted.", "success");
+      queryClient.invalidateQueries({ queryKey: ["batches"] }); // Refetch batches
+    },
+    onError: (error: any) => {
+      console.error("Error deleting batch:", error);
+      Swal.fire("Error!", "Failed to delete batch.", "error");
+    },
+  });
+
+  // Function to handle batch deletion
+  const handleDelete = (batchId: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteMutation.mutate(batchId);
+      }
+    });
+  };
 
   return (
     <div>
@@ -45,36 +84,18 @@ const Batch = () => {
         {/* Batches Display */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {batches?.data?.map((batch: any) => (
-            <div
+            <BatchCard
               key={batch._id}
-              className="border rounded-lg shadow p-4 flex flex-col"
-            >
-              <h2 className="text-xl font-semibold mb-2">{batch.batchName}</h2>
-              <p className="text-sm mb-2">
-                <strong>Course:</strong> {batch.courseName}
-              </p>
-              <p className="text-sm mb-2">
-                <strong>Trainers:</strong> {batch.trainers.join(", ")}
-              </p>
-              <p className="text-sm mb-2">
-                <strong>Max Students:</strong> {batch.maxStudentNumber}
-              </p>
-              <p className="text-sm mb-2">
-                <strong>Start Date:</strong> {batch.startDate}
-              </p>
-              <p className="text-sm mb-2">
-                <strong>End Date:</strong> {batch.endDate}
-              </p>
-              <Button
-                onClick={() => {
-                  console.log(`Batch ID: ${batch._id}`);
-                  refetch();
-                }}
-                variant="outline"
-              >
-                View Details
-              </Button>
-            </div>
+              image={batch.batchImg || "https://via.placeholder.com/150"} // Fallback if no image
+              courseName={batch.courseName}
+              batch={batch.batchName}
+              batchID={batch._id}
+              onEdit={() => console.log(`Edit batch ID: ${batch._id}`)}
+              onDelete={() => handleDelete(batch._id)}
+              onViewStudents={() =>
+                console.log(`View students in batch ID: ${batch._id}`)
+              }
+            />
           ))}
         </div>
       </div>
