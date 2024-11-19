@@ -12,9 +12,16 @@ interface AppInputProps {
   label: string;
   placeholder?: string;
   className?: string;
+  isDisabled?: boolean;
 }
 
-const AppInput = ({ name, label, placeholder, className }: AppInputProps) => {
+const AppInput = ({
+  name,
+  label,
+  isDisabled = false,
+  placeholder,
+  className,
+}: AppInputProps) => {
   const { control } = useFormContext();
 
   if (!control) {
@@ -33,6 +40,7 @@ const AppInput = ({ name, label, placeholder, className }: AppInputProps) => {
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <Input
+              disabled={isDisabled}
               className={`bg-blue-50 ${className}`}
               {...field}
               placeholder={placeholder}

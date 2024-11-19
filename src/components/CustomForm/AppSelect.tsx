@@ -18,6 +18,7 @@ interface AppSearchableSelectProps {
   label: string;
   options: Option[];
   placeholder?: string;
+  isMulti?: boolean;
 }
 
 const AppSelect = ({
@@ -25,6 +26,7 @@ const AppSelect = ({
   label,
   options,
   placeholder,
+  isMulti = false,
 }: AppSearchableSelectProps) => {
   const { control } = useFormContext();
 
@@ -41,12 +43,24 @@ const AppSelect = ({
                 {...field}
                 options={options}
                 placeholder={placeholder || "Select an option"}
-                onChange={(option) => field.onChange(option?.value)}
+                // onChange={(option) => field.onChange(option?.value)}
+                onChange={(option) =>
+                  field.onChange(
+                    isMulti
+                      ? (option as Option[]).map((opt) => opt.value) // Map array of selected options
+                      : (option as Option)?.value // Single value
+                  )
+                }
                 value={
-                  options.find((option) => option.value === field.value) || null
+                  isMulti
+                    ? options.filter((opt) =>
+                        (field.value || []).includes(opt.value)
+                      ) // Handle array for multi-select
+                    : options.find((opt) => opt.value === field.value) || null
                 }
                 isClearable
                 isSearchable
+                isMulti={isMulti} // Multi-select support
                 classNamePrefix="react-select"
               />
             </div>
