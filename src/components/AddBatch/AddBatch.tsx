@@ -7,18 +7,74 @@ import "react-datepicker/dist/react-datepicker.css";
 import AppDatePicker from "../CustomForm/AppDatePicker";
 import { useState } from "react";
 import ImageUpload from "../ImageUpload/ImageUpload";
+import axiosInstance from "@/api/axiosInstance";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+
+// Define the response structure for creating a batch
+interface CreateBatchResponse {
+  success: boolean;
+  message: string;
+  data: {
+    batchName: string;
+    courseName: string;
+    couponCode: string | null;
+    discountPrice: number;
+    maxStudentNumber: number;
+    batchImg: string;
+    trainers: string[];
+    startDate: string;
+    endDate: string;
+    _id: string;
+    __v: number;
+  };
+}
+
+// Mutation function to create a batch
+const createBatch = async (batch: TBatchForm): Promise<CreateBatchResponse> => {
+  const response = await axiosInstance.post("/batches/create-batch", batch);
+  return response.data;
+};
 
 const AddBatch = () => {
-  const [batchImg, setBatchImg] = useState<string>("");
+  const [batchImg, setBatchImg] = useState<string>(""); // Handle batch image
+  const queryClient = useQueryClient(); // React Query's query client for invalidation
+
+  // Mutation hook to create a batch
+  const mutation = useMutation({
+    mutationFn: createBatch, // Specify the mutation function
+    onSuccess: (data) => {
+      // Show success message
+      Swal.fire("Created!", data.message, "success");
+      // Refetch the batch list after successful creation
+      queryClient.invalidateQueries(["batches"]);
+    },
+    onError: (error: any) => {
+      // Handle errors gracefully
+      console.error("Error creating batch:", error);
+      Swal.fire(
+        "Error!",
+        error.response?.data?.message || "Failed to create batch.",
+        "error"
+      );
+    },
+  });
+
+  // Form submission handler
   const onSubmit = (data: TBatchForm) => {
-    console.log("clicked", data);
-    // console.log("clicked", ...data, date);
     const finalData = {
       ...data,
       batchImg,
     };
 
-    console.log("Form Data:", finalData);
+    // Ensure batch image is uploaded
+    if (!batchImg) {
+      Swal.fire("Error!", "Please upload a batch cover image.", "error");
+      return;
+    }
+
+    // Trigger mutation to create a batch
+    mutation.mutate(finalData);
   };
 
   return (
@@ -27,10 +83,10 @@ const AddBatch = () => {
         schema={createBatchSchema}
         onSubmit={onSubmit}
         submitButtonStyles="w-[150px]"
-        buttonText="Add Batch"
+        buttonText={mutation.isLoading ? "Adding..." : "Add Batch"}
         alignButton="center"
         defaultValues={{
-          batchName: "a",
+          batchName: "",
           courseName: "",
           couponCode: "NA",
           discountPrice: 0,
@@ -49,7 +105,7 @@ const AddBatch = () => {
             placeholder="Enter batch name"
           />
           {/* Image Upload Section */}
-          <div>
+          <div className="text-sm truncate">
             <label className="block font-medium text-white">
               Upload Cover Image
             </label>
@@ -77,7 +133,6 @@ const AddBatch = () => {
             name="couponCode"
             label="Coupon Code"
             placeholder="Enter coupon code (optional)"
-            isDisabled
           />
 
           {/* Discount Price */}
@@ -110,7 +165,7 @@ const AddBatch = () => {
             placeholder="Select end date"
           />
 
-          {/* Trainers*/}
+          {/* Trainers */}
           <AppSelect
             name="trainers"
             label="Trainers"
