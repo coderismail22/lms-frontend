@@ -67,6 +67,7 @@ const EditBatch = () => {
       queryClient.invalidateQueries({ queryKey: ["batches"] }); // Invalidate the batches list
       navigate("/dashboard/admin/batch"); // Redirect back to batch list
     },
+    // TODO: Make a type for error
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       console.error("Error updating batch:", error);

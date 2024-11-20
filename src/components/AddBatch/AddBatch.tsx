@@ -49,6 +49,8 @@ const AddBatch = () => {
       // Refetch the batch list after successful creation
       queryClient.invalidateQueries({ queryKey: ["batches"] });
     },
+    // TODO: Make a type for error
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       // Handle errors gracefully
       console.error("Error creating batch:", error);
@@ -62,6 +64,7 @@ const AddBatch = () => {
 
   // Form submission handler
   const onSubmit = (data: TBatchForm) => {
+    console.log('clicked')
     const finalData = {
       ...data,
       batchImg,
@@ -83,7 +86,7 @@ const AddBatch = () => {
         schema={createBatchSchema}
         onSubmit={onSubmit}
         submitButtonStyles="w-[150px]"
-        buttonText={mutation.isLoading ? "Adding..." : "Add Batch"}
+        buttonText={mutation?.isPending ? "Adding..." : "Add Batch"}
         alignButton="center"
         defaultValues={{
           batchName: "",

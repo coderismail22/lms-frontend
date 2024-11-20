@@ -8,7 +8,7 @@ export const createBatchSchema = z.object({
   maxStudentNumber: z.coerce
     .number()
     .min(1, "Max student number must be greater than 0"), // Automatically coerces to number
-  batchImg: z.string().url("Image must be a valid URL"),
+  batchImg: z.string().url("Image must be a valid URL").optional(),
   trainers: z
     .array(z.string().min(1, "Trainer name must not be empty"))
     .min(1, "At least one trainer is required"), // Array of non-empty strings

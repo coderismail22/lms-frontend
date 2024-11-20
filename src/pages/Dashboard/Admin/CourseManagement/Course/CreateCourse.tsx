@@ -5,12 +5,64 @@ import { useState } from "react";
 import DynamicSelectField from "@/components/CustomForm/DynamicSelect";
 import { TCourseForm } from "@/types/course.type";
 import { createCourseSchema } from "@/schemas/course.schema";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axiosInstance from "@/api/axiosInstance";
+import Swal from "sweetalert2";
+
+// const fetchBatches = async () => {
+//   const response = await axiosInstance.get("/batches");
+//   return response?.data?.data; // Assuming response contains an array of batches
+// };
+
+const fetchCategories = async () => {
+  const response = await axiosInstance.get("/categories");
+  return response?.data?.data; // Assuming response contains an array of batches
+};
+
+// Create course function
+const createCourse = async (courseData: TCourseForm) => {
+  const response = await axiosInstance.post(
+    "/courses/create-course",
+    courseData
+  );
+  return response.data;
+};
 
 const CreateCourse = () => {
+  const queryClient = useQueryClient();
   const [careerOpportunities, setCareerOpportunities] = useState<string[]>([]);
   const [curriculum, setCurriculum] = useState<string[]>([]);
   const [jobPositions, setJobPositions] = useState<string[]>([]);
   const [softwareList, setSoftwareList] = useState<string[]>([]);
+
+  // Fetch batches and categories
+  // const {
+  //   data: batches,
+  //   isLoading: isLoadingBatches,
+  //   error: batchError,
+  // } = useQuery({ queryKey: ["batches"], queryFn: fetchBatches });
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    error: categoryError,
+  } = useQuery({ queryKey: ["categories"], queryFn: fetchCategories });
+
+  // Mutation for creating a course
+  const mutation = useMutation({
+    mutationFn: createCourse,
+    onSuccess: () => {
+      Swal.fire("Success!", "Course created successfully!", "success");
+      queryClient.invalidateQueries({ queryKey: ["courses"] }); // Invalidate courses list
+    },
+    onError: (error: any) => {
+      console.error("Error creating course:", error);
+      Swal.fire(
+        "Error!",
+        "Failed to create the course. Please try again.",
+        "error"
+      );
+    },
+  });
 
   const onSubmit = (data: TCourseForm) => {
     const finalData = {
@@ -22,7 +74,11 @@ const CreateCourse = () => {
     };
 
     console.log("Form Data:", finalData);
+    mutation.mutate(finalData); // Trigger the mutation
   };
+
+  if (isLoadingCategories) return <p>Loading data...</p>;
+  if (categoryError) return <p>Error loading data. Please try again.</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -37,12 +93,12 @@ const CreateCourse = () => {
           description: "",
           category: "",
           language: "",
-          batch: "",
           courseType: "",
-          coursePrice: 0, // Set a default value to ensure it's controlled from the start
+          coursePrice: 0,
           courseLength: "",
           skillLevel: "",
-          careerOpportunities: [], // Default as empty arrays for dynamic select fields
+          subjects: [],
+          careerOpportunities: [],
           curriculum: [],
           jobPositions: [],
           softwareList: [],
@@ -69,39 +125,10 @@ const CreateCourse = () => {
             label="Language"
             placeholder="Select a language"
             options={[
-              {
-                value: "Bangla",
-                label: "Bangla",
-              },
-              {
-                value: "English",
-                label: "English",
-              },
-              {
-                value: "Hindi",
-                label: "Hindi",
-              },
-              {
-                value: "Arabic",
-                label: "Arabic",
-              },
-            ]}
-          />
-
-          {/* Batch No */}
-          <AppSelect
-            name="batch"
-            label="Batch"
-            placeholder="Select a batch"
-            options={[
-              {
-                value: "01",
-                label: "01",
-              },
-              {
-                value: "02",
-                label: "02",
-              },
+              { value: "Bangla", label: "Bangla" },
+              { value: "English", label: "English" },
+              { value: "Hindi", label: "Hindi" },
+              { value: "Arabic", label: "Arabic" },
             ]}
           />
 
@@ -109,25 +136,14 @@ const CreateCourse = () => {
           <AppSelect
             name="category"
             label="Category"
-            placeholder="Select a course category"
-            options={[
-              {
-                value: "Video Editing",
-                label: "Video Editing",
-              },
-              {
-                value: "Web Design",
-                label: "Web Design",
-              },
-              {
-                value: "Web Development",
-                label: "Web Development",
-              },
-            ]}
+            placeholder="Select a category"
+            options={categories.map(
+              (category: { _id: string; name: string }) => ({
+                value: category._id,
+                label: category.name,
+              })
+            )}
           />
-          {/* TODO (In Batch Not While Creating a New Course):  */}
-          {/* Start Date Picker */}
-          {/* Start Date Picker */}
 
           {/* Course Price */}
           <AppInput
@@ -157,10 +173,7 @@ const CreateCourse = () => {
                 value: "Intermediate to Advanced",
                 label: "Intermediate to Advanced",
               },
-              {
-                value: "Beginner to Advanced",
-                label: "Beginner to Advanced",
-              },
+              { value: "Beginner to Advanced", label: "Beginner to Advanced" },
             ]}
           />
 
@@ -168,25 +181,25 @@ const CreateCourse = () => {
           <AppSelect
             name="courseType"
             label="Course Type"
-            placeholder="Select a course category"
+            placeholder="Select course type"
             options={[
-              {
-                value: "Online",
-                label: "Online",
-              },
-              {
-                value: "Offline",
-                label: "Offline",
-              },
-              {
-                value: "Hybrid",
-                label: "Hybrid",
-              },
+              { value: "Online", label: "Online" },
+              { value: "Offline", label: "Offline" },
+              { value: "Hybrid", label: "Hybrid" },
             ]}
+          />
+
+          {/* Subjects */}
+          <AppSelect
+            name="subjects"
+            label="Subjects"
+            placeholder="Select subjects"
+            isMulti={true}
+            options={[{ value: "67272e215a79bcfccd9bc9ef", label: "React" }]}
           />
         </div>
         <div className="grid grid-cols-1  mt-5 md:grid-cols-2 md:gap-6 lg:grid-cols-2">
-          {/* Career Opportunities*/}
+          {/* Career Opportunities */}
           <DynamicSelectField
             label="Career Opportunities"
             placeholder="Select or add opportunities"
@@ -228,5 +241,6 @@ const CreateCourse = () => {
     </div>
   );
 };
+/******  4edec1c4-86fd-4011-aaba-599699c92bb5  *******/
 
 export default CreateCourse;
