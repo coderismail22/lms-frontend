@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,10 @@ const DynamicSelectField = ({
 }: DynamicSelectFieldProps) => {
   const [inputValue, setInputValue] = useState("");
   const [customOptions, setCustomOptions] = useState(options);
+
+  useEffect(() => {
+    setCustomOptions(options);
+  }, [options]);
 
   const handleAddOption = () => {
     if (inputValue.trim() !== "") {

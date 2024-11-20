@@ -34,6 +34,7 @@ import Categories from "@/pages/Dashboard/Admin/Categories/Categories";
 import Batch from "@/pages/Dashboard/Admin/Batch/Batch";
 import AddBatch from "@/components/AddBatch/AddBatch";
 import EditBatch from "@/components/EditBatch/EditBatch";
+import EditCourse from "@/pages/Dashboard/Admin/CourseManagement/Course/EditCourse";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/admin/course-management/all-courses",
         element: <AllCourses />,
+      },
+      {
+        path: "/dashboard/admin/courses/edit/:courseId",
+        element: <EditCourse />,
       },
       // Subject
       {

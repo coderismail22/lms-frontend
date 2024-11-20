@@ -15,3 +15,25 @@ export const createCourseSchema = z.object({
   jobPositions: z.array(z.string()).optional(),
   softwareList: z.array(z.string()).optional(),
 });
+
+export const updateCourseSchema = z.object({
+  name: z.string().min(1, "Name is required").optional(),
+  description: z.string().min(1, "Description is required").optional(),
+  category: z.string().min(1, "Category is required").optional(),
+  language: z.string().min(1, "Language is required").optional(),
+  courseType: z.string().min(1, "Course type is required").optional(),
+  coursePrice: z.coerce
+    .number()
+    .min(1, "Price must be greater than 0")
+    .optional(),
+  courseLength: z.string().min(1, "Course length is required").optional(),
+  skillLevel: z.string().min(1, "Skill level is required").optional(),
+  subjects: z
+    .array(z.string())
+    .min(1, "At least one subject is required")
+    .optional(),
+  careerOpportunities: z.array(z.string()).optional(),
+  curriculum: z.array(z.string()).optional(),
+  jobPositions: z.array(z.string()).optional(),
+  softwareList: z.array(z.string()).optional(),
+});

@@ -8,11 +8,13 @@ import { createCourseSchema } from "@/schemas/course.schema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-// const fetchBatches = async () => {
-//   const response = await axiosInstance.get("/batches");
-//   return response?.data?.data; // Assuming response contains an array of batches
-// };
+// Fetch subjects from the database
+const fetchSubjects = async () => {
+  const response = await axiosInstance.get("/subjects/get-all-subjects");
+  return response?.data?.data; // Assuming the API response contains a data array
+};
 
 const fetchCategories = async () => {
   const response = await axiosInstance.get("/categories");
@@ -30,17 +32,19 @@ const createCourse = async (courseData: TCourseForm) => {
 
 const CreateCourse = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [careerOpportunities, setCareerOpportunities] = useState<string[]>([]);
   const [curriculum, setCurriculum] = useState<string[]>([]);
   const [jobPositions, setJobPositions] = useState<string[]>([]);
   const [softwareList, setSoftwareList] = useState<string[]>([]);
 
-  // Fetch batches and categories
-  // const {
-  //   data: batches,
-  //   isLoading: isLoadingBatches,
-  //   error: batchError,
-  // } = useQuery({ queryKey: ["batches"], queryFn: fetchBatches });
+  // Fetch subjects
+  const {
+    data: subjects,
+    isLoading: isLoadingSubjects,
+    error: subjectError,
+  } = useQuery({ queryKey: ["subjects"], queryFn: fetchSubjects });
+
   const {
     data: categories,
     isLoading: isLoadingCategories,
@@ -53,7 +57,9 @@ const CreateCourse = () => {
     onSuccess: () => {
       Swal.fire("Success!", "Course created successfully!", "success");
       queryClient.invalidateQueries({ queryKey: ["courses"] }); // Invalidate courses list
+      navigate("/dashboard/admin/course-management/all-courses");
     },
+    // TODO: Define error type
     onError: (error: any) => {
       console.error("Error creating course:", error);
       Swal.fire(
@@ -77,8 +83,9 @@ const CreateCourse = () => {
     mutation.mutate(finalData); // Trigger the mutation
   };
 
-  if (isLoadingCategories) return <p>Loading data...</p>;
-  if (categoryError) return <p>Error loading data. Please try again.</p>;
+  if (isLoadingCategories || isLoadingSubjects) return <p>Loading data...</p>;
+  if (categoryError || subjectError)
+    return <p>Error loading data. Please try again.</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -139,7 +146,7 @@ const CreateCourse = () => {
             placeholder="Select a category"
             options={categories.map(
               (category: { _id: string; name: string }) => ({
-                value: category._id,
+                value: category.name,
                 label: category.name,
               })
             )}
@@ -195,7 +202,10 @@ const CreateCourse = () => {
             label="Subjects"
             placeholder="Select subjects"
             isMulti={true}
-            options={[{ value: "67272e215a79bcfccd9bc9ef", label: "React" }]}
+            options={subjects.map((subject: { _id: string; name: string }) => ({
+              value: subject._id,
+              label: subject.name,
+            }))}
           />
         </div>
         <div className="grid grid-cols-1  mt-5 md:grid-cols-2 md:gap-6 lg:grid-cols-2">
@@ -241,6 +251,5 @@ const CreateCourse = () => {
     </div>
   );
 };
-/******  4edec1c4-86fd-4011-aaba-599699c92bb5  *******/
 
 export default CreateCourse;
