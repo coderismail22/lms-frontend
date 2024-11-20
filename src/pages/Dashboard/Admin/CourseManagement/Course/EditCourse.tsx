@@ -12,7 +12,6 @@ import {
   updateCourseSchema,
 } from "@/schemas/course.schema";
 import axiosInstance from "@/api/axiosInstance";
-import { ZodType } from "zod";
 
 // Fetch course details by ID
 const fetchCourseById = async (courseId: string): Promise<TCourseForm> => {
@@ -22,14 +21,20 @@ const fetchCourseById = async (courseId: string): Promise<TCourseForm> => {
   return response.data.data;
 };
 
+// Fetch subjects from the subjects collection
+const fetchSubjects = async (): Promise<{ value: string; label: string }[]> => {
+  const response = await axiosInstance.get("/subjects/get-all-subjects");
+  return response.data.data.map((subject: { _id: string; name: string }) => ({
+    value: subject._id,
+    label: subject.name,
+  }));
+};
+
 // Update course
-const updateCourse = async ({
-  courseId,
-  data,
-}: {
-  courseId: string;
-  data: TCourseForm;
-}): Promise<void> => {
+const updateCourse = async (
+  courseId: string,
+  data: TCourseForm
+): Promise<void> => {
   await axiosInstance.patch(`/courses/update-course/${courseId}`, data);
 };
 
@@ -42,19 +47,26 @@ const EditCourse = () => {
   const [curriculum, setCurriculum] = useState<string[]>([]);
   const [jobPositions, setJobPositions] = useState<string[]>([]);
   const [softwareList, setSoftwareList] = useState<string[]>([]);
-  const [subjects, setSubjects] = useState<{ value: string; label: string }[]>(
-    []
-  );
 
   // Fetch course details
   const {
     data: course,
-    isLoading,
-    error,
+    isLoading: isLoadingCourse,
+    error: courseError,
   } = useQuery({
     queryKey: ["course", courseId],
     queryFn: () => fetchCourseById(courseId!),
     enabled: !!courseId, // Only fetch if courseId exists
+  });
+
+  // Fetch subjects
+  const {
+    data: subjects,
+    isLoading: isLoadingSubjects,
+    error: subjectsError,
+  } = useQuery({
+    queryKey: ["subjects"],
+    queryFn: fetchSubjects,
   });
 
   // Update dynamic fields when data is available
@@ -64,27 +76,17 @@ const EditCourse = () => {
       setCurriculum(course?.curriculum || []);
       setJobPositions(course?.jobPositions || []);
       setSoftwareList(course?.softwareList || []);
-
-      // Transform subjects for AppSelect
-      setSubjects(
-        course?.subjects.map((subject) => ({
-          value: subject._id,
-          label: subject.name,
-        })) || []
-      );
     }
   }, [course]);
 
   // Mutation for updating the course
   const mutation = useMutation({
-    mutationFn: ({ courseId, data }: { courseId: string; data: TCourseForm }) =>
-      updateCourse({ courseId, data }),
+    mutationFn: (data: TCourseForm) => updateCourse(courseId!, data),
     onSuccess: () => {
       Swal.fire("Updated!", "Course has been updated successfully.", "success");
       queryClient.invalidateQueries({ queryKey: ["courses"] }); // Invalidate the courses list
       navigate("/dashboard/admin/course-management/all-courses"); // Redirect to course list
     },
-    // TODO: Define error type
     onError: (error: any) => {
       console.error("Error updating course:", error?.response?.data);
       Swal.fire("Error!", "Failed to update course.", "error");
@@ -93,32 +95,29 @@ const EditCourse = () => {
 
   // Handle form submission
   const onSubmit = (data: TCourseForm) => {
-    console.log("data", data);
     const finalData = {
       ...data,
       careerOpportunities,
       curriculum,
       jobPositions,
       softwareList,
-      subjects: subjects.map((subject) => subject.value),
     };
-    console.log("fdata", finalData);
-    mutation.mutate({ courseId: courseId!, data: finalData });
+    mutation.mutate(finalData);
   };
 
-  if (isLoading) return <p>Loading course details...</p>;
-  if (error) return <p>Error loading course details. Please try again.</p>;
+  if (isLoadingCourse || isLoadingSubjects) return <p>Loading...</p>;
+  if (courseError || subjectsError)
+    return <p>Error loading data. Please try again later.</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Edit Course</h1>
       <AppForm
         schema={updateCourseSchema}
-        // schema={updateCourseSchema as ZodType<TCourseForm>}
         onSubmit={onSubmit}
         defaultValues={course} // Pre-fill form with fetched data
         submitButtonStyles="w-[150px]"
-        buttonText={isLoading ? "Saving..." : "Save Changes"}
+        buttonText="Save Changes"
       >
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Name */}
@@ -194,7 +193,7 @@ const EditCourse = () => {
             label="Subjects"
             placeholder="Select subjects"
             isMulti={true}
-            options={subjects}
+            options={subjects || []} // Populate with fetched subjects
           />
         </div>
 

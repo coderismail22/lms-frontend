@@ -8,7 +8,7 @@ import AppDatePicker from "../CustomForm/AppDatePicker";
 import { useState } from "react";
 import ImageUpload from "../ImageUpload/ImageUpload";
 import axiosInstance from "@/api/axiosInstance";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
 // Define the response structure for creating a batch
@@ -34,6 +34,20 @@ interface CreateBatchResponse {
 const createBatch = async (batch: TBatchForm): Promise<CreateBatchResponse> => {
   const response = await axiosInstance.post("/batches/create-batch", batch);
   return response.data;
+};
+
+// Fetch subjects from the database
+// const fetchSubjects = async () => {
+//   const response = await axiosInstance.get("/subjects/get-all-subjects");
+//   return response?.data?.data; // Assuming the API response contains a data array
+// };
+const fetchTeachers = async () => {
+  const response = await axiosInstance.get("/teachers/");
+  return response?.data?.data;
+};
+const fetchCourses = async () => {
+  const response = await axiosInstance.get("/courses/get-all-courses");
+  return response?.data?.data;
 };
 
 const AddBatch = () => {
@@ -62,9 +76,28 @@ const AddBatch = () => {
     },
   });
 
+  // Fetch Courses
+  const {
+    data: courses,
+    isLoading: isLoadingCourses,
+    error: coursesError,
+  } = useQuery({
+    queryKey: ["courses"],
+    queryFn: fetchCourses,
+  });
+  // Fetch Teachers
+  const {
+    data: teachers,
+    isLoading: isLoadingTeachers,
+    error: teachersError,
+  } = useQuery({
+    queryKey: ["teachers"],
+    queryFn: fetchTeachers,
+  });
+
   // Form submission handler
   const onSubmit = (data: TBatchForm) => {
-    console.log('clicked')
+    console.log("clicked");
     const finalData = {
       ...data,
       batchImg,
@@ -79,6 +112,10 @@ const AddBatch = () => {
     // Trigger mutation to create a batch
     mutation.mutate(finalData);
   };
+
+  if (isLoadingTeachers || isLoadingCourses) return <p>Loading data...</p>;
+  if (teachersError || coursesError)
+    return <p>Error loading data. Please try again.</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -123,11 +160,15 @@ const AddBatch = () => {
             name="courseName"
             label="Course Name"
             placeholder="Select a course"
-            options={[
-              { value: "Web Development", label: "Web Development" },
-              { value: "Graphic Design", label: "Graphic Design" },
-              { value: "Video Editing", label: "Video Editing" },
-            ]}
+            // options={[
+            //   { value: "Web Development", label: "Web Development" },
+            //   { value: "Graphic Design", label: "Graphic Design" },
+            //   { value: "Video Editing", label: "Video Editing" },
+            // ]}
+            options={courses?.map((course: { _id: string; name: string }) => ({
+              value: course._id,
+              label: course.name,
+            }))}
           />
 
           {/* Coupon Code */}
@@ -174,11 +215,12 @@ const AddBatch = () => {
             label="Trainers"
             placeholder="Select trainers"
             isMulti={true}
-            options={[
-              { value: "John Doe", label: "John Doe" },
-              { value: "Jane Smith", label: "Jane Smith" },
-              { value: "Alice Johnson", label: "Alice Johnson" },
-            ]}
+            options={teachers.map(
+              (teacher: { _id: string; teacherName: string }) => ({
+                value: teacher._id,
+                label: teacher.teacherName,
+              })
+            )}
           />
         </div>
       </AppForm>

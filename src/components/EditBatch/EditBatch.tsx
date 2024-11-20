@@ -49,7 +49,6 @@ const EditBatch = () => {
     queryKey: ["batch", batchId],
     queryFn: () => fetchBatchById(batchId!),
     enabled: !!batchId, // Only fetch if batchId exists
-    
   });
 
   console.log("batch data", batch);

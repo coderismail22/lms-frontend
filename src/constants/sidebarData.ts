@@ -39,11 +39,11 @@ export const sidebarData = {
               label: "Create Course",
               path: "/dashboard/admin/course-management/create-course",
             },
-            {
-              icon: FaLink,
-              label: "Link Subject To Course",
-              path: "/dashboard/admin/course-management/link-subject-to-course",
-            },
+            // {
+            //   icon: FaLink,
+            //   label: "Link Subject To Course",
+            //   path: "/dashboard/admin/course-management/link-subject-to-course",
+            // },
             {
               icon: FaRegListAlt,
               label: "All Courses",

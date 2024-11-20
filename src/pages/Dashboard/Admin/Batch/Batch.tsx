@@ -42,6 +42,7 @@ const Batch = () => {
       Swal.fire("Deleted!", "Batch has been deleted.", "success");
       queryClient.invalidateQueries({ queryKey: ["batches"] }); // Refetch batches
     },
+    // TODO: Define error type
     onError: (error: any) => {
       console.error("Error deleting batch:", error);
       Swal.fire("Error!", "Failed to delete batch.", "error");

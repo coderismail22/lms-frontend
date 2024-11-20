@@ -38,18 +38,19 @@ const CreateCourse = () => {
   const [jobPositions, setJobPositions] = useState<string[]>([]);
   const [softwareList, setSoftwareList] = useState<string[]>([]);
 
-  // Fetch subjects
-  const {
-    data: subjects,
-    isLoading: isLoadingSubjects,
-    error: subjectError,
-  } = useQuery({ queryKey: ["subjects"], queryFn: fetchSubjects });
-
+  // Fetch categories
   const {
     data: categories,
     isLoading: isLoadingCategories,
     error: categoryError,
   } = useQuery({ queryKey: ["categories"], queryFn: fetchCategories });
+
+  // Fetch subjects
+  const {
+    data: subjects,
+    isLoading: isLoadingSubjects,
+    error: subjectsError,
+  } = useQuery({ queryKey: ["subjects"], queryFn: fetchSubjects });
 
   // Mutation for creating a course
   const mutation = useMutation({
@@ -84,11 +85,13 @@ const CreateCourse = () => {
   };
 
   if (isLoadingCategories || isLoadingSubjects) return <p>Loading data...</p>;
-  if (categoryError || subjectError)
+  if (categoryError || subjectsError)
     return <p>Error loading data. Please try again.</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">Create Course</h1>
+
       <AppForm
         schema={createCourseSchema}
         onSubmit={onSubmit}
