@@ -19,6 +19,9 @@ const deleteBatch = async (batchId: string): Promise<void> => {
 const Batch = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const handleEdit = (batchId: string) => {
+    navigate(`/dashboard/admin/batch/edit/${batchId}`);
+  };
 
   // Fetch batches using React Query
   const {
@@ -90,7 +93,7 @@ const Batch = () => {
               courseName={batch.courseName}
               batch={batch.batchName}
               batchID={batch._id}
-              onEdit={() => console.log(`Edit batch ID: ${batch._id}`)}
+              onEdit={() => handleEdit(batch._id)}
               onDelete={() => handleDelete(batch._id)}
               onViewStudents={() =>
                 console.log(`View students in batch ID: ${batch._id}`)

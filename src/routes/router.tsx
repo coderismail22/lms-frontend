@@ -33,6 +33,7 @@ import EnrolledCourses from "@/pages/Dashboard/Student/Courses/EnrolledCourses/E
 import Categories from "@/pages/Dashboard/Admin/Categories/Categories";
 import Batch from "@/pages/Dashboard/Admin/Batch/Batch";
 import AddBatch from "@/components/AddBatch/AddBatch";
+import EditBatch from "@/components/EditBatch/EditBatch";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,7 @@ export const router = createBrowserRouter([
       { path: "/dashboard/admin/home", element: <AdminHome /> },
       { path: "/dashboard/admin/categories", element: <Categories /> },
       { path: "/dashboard/admin/batch", element: <Batch /> },
+      { path: "/dashboard/admin/batch/edit/:batchId", element: <EditBatch /> },
       { path: "/dashboard/admin/batch/add-batch", element: <AddBatch /> },
       // Course Management
       // Course
