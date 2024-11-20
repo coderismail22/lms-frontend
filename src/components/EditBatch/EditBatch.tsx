@@ -23,6 +23,18 @@ const fetchBatchById = async (batchId: string): Promise<FetchBatchResponse> => {
   return response.data;
 };
 
+// Fetch Teachers
+const fetchTeachers = async () => {
+  const response = await axiosInstance.get("/teachers/");
+  return response?.data?.data;
+};
+
+// Fetch Courses
+const fetchCourses = async () => {
+  const response = await axiosInstance.get("/courses/get-all-courses");
+  return response?.data?.data;
+};
+
 // Update batch function
 const updateBatch = async ({
   batchId,
@@ -43,15 +55,33 @@ const EditBatch = () => {
   // Fetch the batch details
   const {
     data: batch,
-    isLoading,
-    error,
+    isLoading: isLoadingBatch,
+    error: batchError,
   } = useQuery({
     queryKey: ["batch", batchId],
     queryFn: () => fetchBatchById(batchId!),
     enabled: !!batchId, // Only fetch if batchId exists
   });
 
-  console.log("batch data", batch);
+  // Fetch Teachers
+  const {
+    data: teachers,
+    isLoading: isLoadingTeachers,
+    error: teacherError,
+  } = useQuery({
+    queryKey: ["teachers"],
+    queryFn: fetchTeachers,
+  });
+
+  // Fetch Courses
+  const {
+    data: courses,
+    isLoading: isLoadingCourses,
+    error: courseError,
+  } = useQuery({
+    queryKey: ["courses"],
+    queryFn: fetchCourses,
+  });
 
   // Mutation for updating the batch
   const mutation = useMutation({
@@ -78,11 +108,14 @@ const EditBatch = () => {
   // Handle form submission
   const onSubmit = (data: Partial<TBatchForm>) => {
     const finalData = { ...data, batchImg: batchImg || batch?.data?.batchImg };
+    console.log("hey", finalData);
     mutation.mutate({ batchId: batchId!, data: finalData });
   };
 
-  if (isLoading) return <p>Loading batch details...</p>;
-  if (error) return <p>Error loading batch details. Please try again.</p>;
+  if (isLoadingBatch || isLoadingTeachers || isLoadingCourses)
+    return <p>Loading batch details...</p>;
+  if (batchError || teacherError || courseError)
+    return <p>Error loading batch details. Please try again.</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -93,7 +126,7 @@ const EditBatch = () => {
           onSubmit={onSubmit}
           defaultValues={batch?.data} // Pass fetched data as default values
           submitButtonStyles="w-[150px]"
-          buttonText={isLoading ? "Saving..." : "Save Changes"}
+          buttonText={mutation?.isPending ? "Saving..." : "Save Changes"}
         >
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {/* Batch Name */}
@@ -109,11 +142,12 @@ const EditBatch = () => {
             <AppSelect
               name="courseName"
               label="Course Name"
-              options={[
-                { value: "Web Development", label: "Web Development" },
-                { value: "Graphic Design", label: "Graphic Design" },
-                { value: "Video Editing", label: "Video Editing" },
-              ]}
+              options={courses?.map(
+                (course: { _id: string; name: string }) => ({
+                  value: course._id,
+                  label: course.name,
+                })
+              )}
             />
             {/* Coupon Code */}
             <AppInput name="couponCode" label="Coupon Code" />
@@ -129,12 +163,13 @@ const EditBatch = () => {
             <AppSelect
               name="trainers"
               label="Trainers"
-              isMulti
-              options={[
-                { value: "John Doe", label: "John Doe" },
-                { value: "Jane Smith", label: "Jane Smith" },
-                { value: "Alice Johnson", label: "Alice Johnson" },
-              ]}
+              isMulti={true}
+              options={teachers.map(
+                (teacher: { _id: string; teacherName: string }) => ({
+                  value: teacher._id,
+                  label: teacher.teacherName,
+                })
+              )}
             />
           </div>
         </AppForm>

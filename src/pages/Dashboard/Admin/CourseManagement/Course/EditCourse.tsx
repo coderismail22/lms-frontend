@@ -7,10 +7,7 @@ import DynamicSelectField from "@/components/CustomForm/DynamicSelect";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { TCourseForm } from "@/types/course.type";
-import {
-  createCourseSchema,
-  updateCourseSchema,
-} from "@/schemas/course.schema";
+import { updateCourseSchema } from "@/schemas/course.schema";
 import axiosInstance from "@/api/axiosInstance";
 
 // Fetch course details by ID
@@ -22,6 +19,7 @@ const fetchCourseById = async (courseId: string): Promise<TCourseForm> => {
 };
 
 // Fetch subjects from the subjects collection
+// TODO: Previous subjects are not being selected automatically
 const fetchSubjects = async (): Promise<{ value: string; label: string }[]> => {
   const response = await axiosInstance.get("/subjects/get-all-subjects");
   return response.data.data.map((subject: { _id: string; name: string }) => ({

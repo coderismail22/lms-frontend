@@ -36,11 +36,6 @@ const createBatch = async (batch: TBatchForm): Promise<CreateBatchResponse> => {
   return response.data;
 };
 
-// Fetch subjects from the database
-// const fetchSubjects = async () => {
-//   const response = await axiosInstance.get("/subjects/get-all-subjects");
-//   return response?.data?.data; // Assuming the API response contains a data array
-// };
 const fetchTeachers = async () => {
   const response = await axiosInstance.get("/teachers/");
   return response?.data?.data;
@@ -85,6 +80,7 @@ const AddBatch = () => {
     queryKey: ["courses"],
     queryFn: fetchCourses,
   });
+
   // Fetch Teachers
   const {
     data: teachers,
@@ -160,11 +156,6 @@ const AddBatch = () => {
             name="courseName"
             label="Course Name"
             placeholder="Select a course"
-            // options={[
-            //   { value: "Web Development", label: "Web Development" },
-            //   { value: "Graphic Design", label: "Graphic Design" },
-            //   { value: "Video Editing", label: "Video Editing" },
-            // ]}
             options={courses?.map((course: { _id: string; name: string }) => ({
               value: course._id,
               label: course.name,
