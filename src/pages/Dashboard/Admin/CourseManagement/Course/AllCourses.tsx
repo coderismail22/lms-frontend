@@ -74,7 +74,9 @@ const AllCourses = () => {
 
   return (
     <div className="container mx-auto py-2">
-      <h1 className="text-2xl font-bold mb-6 text-center underline">All Courses</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline">
+        All Courses
+      </h1>
 
       <div className="my-4 flex justify-end">
         <Button

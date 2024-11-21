@@ -10,6 +10,7 @@ import ImageUpload from "../ImageUpload/ImageUpload";
 import axiosInstance from "@/api/axiosInstance";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 // Define the response structure for creating a batch
 interface CreateBatchResponse {
@@ -46,6 +47,7 @@ const fetchCourses = async () => {
 };
 
 const AddBatch = () => {
+  const navigate = useNavigate();
   const [batchImg, setBatchImg] = useState<string>(""); // Handle batch image
   const queryClient = useQueryClient(); // React Query's query client for invalidation
 
@@ -57,6 +59,7 @@ const AddBatch = () => {
       Swal.fire("Created!", data.message, "success");
       // Refetch the batch list after successful creation
       queryClient.invalidateQueries({ queryKey: ["batches"] });
+      navigate("/dashboard/admin/batch");
     },
     // TODO: Make a type for error
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -105,8 +108,8 @@ const AddBatch = () => {
       return;
     }
 
-    // Trigger mutation to create a batch
-    mutation.mutate(finalData);
+    console.log(finalData);
+    // mutation.mutate(finalData);
   };
 
   if (isLoadingTeachers || isLoadingCourses) return <p>Loading data...</p>;

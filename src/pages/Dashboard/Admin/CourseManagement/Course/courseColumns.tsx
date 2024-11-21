@@ -11,6 +11,7 @@ import { FaRegEdit, FaTrash } from "react-icons/fa";
 
 export type TCourse = {
   name: string;
+  // TODO: Populate and show the category name
   category: string;
   language: string;
   coursePrice: number;
@@ -33,25 +34,22 @@ export const courseColumns = (
     header: "Name",
   },
   {
-    accessorKey: "category",
-    header: "Category",
-  },
-  {
     accessorKey: "language",
     header: "Language",
   },
   {
-    accessorKey: "coursePrice",
-    header: "Price",
+    accessorKey: "courseType",
+    header: "Type",
   },
   {
     accessorKey: "courseLength",
     header: "Duration",
   },
   {
-    accessorKey: "skillLevel",
-    header: "Skill Level",
+    accessorKey: "coursePrice",
+    header: "Price",
   },
+
   {
     id: "actions",
     header: "Actions",

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Select from "react-select";
+import Select, { MultiValue } from "react-select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
@@ -9,6 +9,7 @@ interface DynamicSelectFieldProps {
   placeholder: string;
   options: { value: string; label: string }[];
   onChange: (selectedValues: string[]) => void;
+  defaultValue: string[]; // For prefilled values
 }
 
 const DynamicSelectField = ({
@@ -16,10 +17,24 @@ const DynamicSelectField = ({
   placeholder,
   options,
   onChange,
+  defaultValue,
 }: DynamicSelectFieldProps) => {
   const [inputValue, setInputValue] = useState("");
   const [customOptions, setCustomOptions] = useState(options);
+  const [selectedOptions, setSelectedOptions] = useState<
+    { value: string; label: string }[]
+  >([]);
 
+  // Sync default values to selected options on mount
+  useEffect(() => {
+    const prefilledOptions = defaultValue.map((val) => ({
+      value: val,
+      label: val,
+    }));
+    setSelectedOptions(prefilledOptions);
+  }, [defaultValue]);
+
+  // Sync options from parent
   useEffect(() => {
     setCustomOptions(options);
   }, [options]);
@@ -30,6 +45,14 @@ const DynamicSelectField = ({
       setCustomOptions((prevOptions) => [...prevOptions, newOption]);
       setInputValue("");
     }
+  };
+
+  const handleChange = (
+    newValue: MultiValue<{ value: string; label: string }>
+  ) => {
+    const selectedValues = newValue.map((option) => option.value); // Extract values
+    setSelectedOptions([...newValue]); // Update local state
+    onChange(selectedValues); // Notify parent
   };
 
   return (
@@ -55,11 +78,8 @@ const DynamicSelectField = ({
       <Select
         options={customOptions}
         isMulti
-        onChange={(selectedOptions) =>
-          onChange(
-            selectedOptions ? selectedOptions.map((option) => option.value) : []
-          )
-        }
+        value={selectedOptions} // Bind selected options
+        onChange={handleChange} // Use corrected handleChange
         placeholder={placeholder}
       />
     </div>

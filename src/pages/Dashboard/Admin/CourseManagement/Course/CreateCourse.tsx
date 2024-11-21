@@ -149,7 +149,7 @@ const CreateCourse = () => {
             placeholder="Select a category"
             options={categories.map(
               (category: { _id: string; name: string }) => ({
-                value: category.name,
+                value: category._id,
                 label: category.name,
               })
             )}
@@ -211,7 +211,7 @@ const CreateCourse = () => {
             }))}
           />
         </div>
-        <div className="grid grid-cols-1  mt-5 md:grid-cols-2 md:gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 mt-5 md:grid-cols-2 md:gap-6 lg:grid-cols-2">
           {/* Career Opportunities */}
           <DynamicSelectField
             label="Career Opportunities"
@@ -220,6 +220,7 @@ const CreateCourse = () => {
               value: opportunity,
               label: opportunity,
             }))}
+            defaultValue={careerOpportunities} // Pass defaultValue for prefilled data
             onChange={setCareerOpportunities}
           />
           {/* Curriculum */}
@@ -227,6 +228,7 @@ const CreateCourse = () => {
             label="Curriculum"
             placeholder="Select or add curriculum"
             options={curriculum.map((item) => ({ value: item, label: item }))}
+            defaultValue={curriculum} // Pass defaultValue for prefilled data
             onChange={setCurriculum}
           />
           {/* Job Positions */}
@@ -237,6 +239,7 @@ const CreateCourse = () => {
               value: position,
               label: position,
             }))}
+            defaultValue={jobPositions} // Pass defaultValue for prefilled data
             onChange={setJobPositions}
           />
           {/* Software List */}
@@ -247,6 +250,7 @@ const CreateCourse = () => {
               value: software,
               label: software,
             }))}
+            defaultValue={softwareList} // Pass defaultValue for prefilled data
             onChange={setSoftwareList}
           />
         </div>

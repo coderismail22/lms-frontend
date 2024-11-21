@@ -69,10 +69,10 @@ export const router = createBrowserRouter([
         path: "/dashboard/admin/course-management/create-course",
         element: <CreateCourse />,
       },
-      {
-        path: "/dashboard/admin/course-management/link-subject-to-course",
-        element: <LinkSubjectToCourse />,
-      },
+      // {
+      //   path: "/dashboard/admin/course-management/link-subject-to-course",
+      //   element: <LinkSubjectToCourse />,
+      // },
       {
         path: "/dashboard/admin/course-management/all-courses",
         element: <AllCourses />,

@@ -61,11 +61,11 @@ export const sidebarData = {
               label: "Create Subject",
               path: "/dashboard/admin/subject-management/create-subject",
             },
-            {
-              icon: FaLink,
-              label: "Link Topic To Subject",
-              path: "/dashboard/admin/subject-management/link-topic-to-subject",
-            },
+            // {
+            //   icon: FaLink,
+            //   label: "Link Topic To Subject",
+            //   path: "/dashboard/admin/subject-management/link-topic-to-subject",
+            // },
             {
               icon: FaRegListAlt,
               label: "All Subjects",

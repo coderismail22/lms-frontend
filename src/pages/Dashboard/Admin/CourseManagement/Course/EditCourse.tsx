@@ -10,22 +10,34 @@ import { TCourseForm } from "@/types/course.type";
 import { updateCourseSchema } from "@/schemas/course.schema";
 import axiosInstance from "@/api/axiosInstance";
 
+type FetchCourseResponse = {
+  success: boolean;
+  message: string;
+  data: TCourseForm; // The `data` field contains the batch details
+};
+
 // Fetch course details by ID
-const fetchCourseById = async (courseId: string): Promise<TCourseForm> => {
+const fetchCourseById = async (
+  courseId: string
+): Promise<FetchCourseResponse> => {
   const response = await axiosInstance.get(
     `/courses/get-single-course/${courseId}`
   );
-  return response.data.data;
+  return response?.data;
+};
+
+// Fetch categories
+const fetchCategories = async () => {
+  const response = await axiosInstance.get("/categories");
+  return response?.data?.data; // Assuming response contains an array of batches
 };
 
 // Fetch subjects from the subjects collection
 // TODO: Previous subjects are not being selected automatically
-const fetchSubjects = async (): Promise<{ value: string; label: string }[]> => {
+const fetchSubjects = async () => {
   const response = await axiosInstance.get("/subjects/get-all-subjects");
-  return response.data.data.map((subject: { _id: string; name: string }) => ({
-    value: subject._id,
-    label: subject.name,
-  }));
+  console.log("look subjects here", response?.data?.data);
+  return response?.data?.data;
 };
 
 // Update course
@@ -57,6 +69,13 @@ const EditCourse = () => {
     enabled: !!courseId, // Only fetch if courseId exists
   });
 
+  // Fetch categories
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    error: categoryError,
+  } = useQuery({ queryKey: ["categories"], queryFn: fetchCategories });
+
   // Fetch subjects
   const {
     data: subjects,
@@ -70,10 +89,11 @@ const EditCourse = () => {
   // Update dynamic fields when data is available
   useEffect(() => {
     if (course) {
-      setCareerOpportunities(course?.careerOpportunities || []);
-      setCurriculum(course?.curriculum || []);
-      setJobPositions(course?.jobPositions || []);
-      setSoftwareList(course?.softwareList || []);
+      console.log("hey course is like this ", course);
+      setCareerOpportunities(course?.data?.careerOpportunities || []);
+      setCurriculum(course?.data?.curriculum || []);
+      setJobPositions(course?.data?.jobPositions || []);
+      setSoftwareList(course?.data?.softwareList || []);
     }
   }, [course]);
 
@@ -100,11 +120,13 @@ const EditCourse = () => {
       jobPositions,
       softwareList,
     };
+    console.log(finalData);
     mutation.mutate(finalData);
   };
 
-  if (isLoadingCourse || isLoadingSubjects) return <p>Loading...</p>;
-  if (courseError || subjectsError)
+  if (isLoadingCourse || isLoadingSubjects || isLoadingCategories)
+    return <p>Loading...</p>;
+  if (courseError || subjectsError || categoryError)
     return <p>Error loading data. Please try again later.</p>;
 
   return (
@@ -113,7 +135,14 @@ const EditCourse = () => {
       <AppForm
         schema={updateCourseSchema}
         onSubmit={onSubmit}
-        defaultValues={course} // Pre-fill form with fetched data
+        defaultValues={{
+          ...course?.data,
+          // Keep `subjects` as string[] for default values
+          subjects: course?.data?.subjects.map(
+            (subject: string | { _id: string }) =>
+              typeof subject === "string" ? subject : subject._id
+          ),
+        }}
         submitButtonStyles="w-[150px]"
         buttonText="Save Changes"
       >
@@ -145,7 +174,12 @@ const EditCourse = () => {
           <AppSelect
             name="category"
             label="Category"
-            options={[{ value: "Web Development", label: "Web Development" }]} // Update as needed
+            options={categories?.map(
+              (category: { _id: string; name: string }) => ({
+                value: category._id,
+                label: category.name,
+              })
+            )}
           />
           {/* Price */}
           <AppInput
@@ -191,10 +225,14 @@ const EditCourse = () => {
             label="Subjects"
             placeholder="Select subjects"
             isMulti={true}
-            options={subjects || []} // Populate with fetched subjects
+            options={subjects?.map(
+              (subject: { _id: string; name: string }) => ({
+                value: subject._id,
+                label: subject.name,
+              })
+            )}
           />
         </div>
-
         <div className="grid grid-cols-1 mt-5 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {/* Career Opportunities */}
           <DynamicSelectField
@@ -204,28 +242,43 @@ const EditCourse = () => {
               value: item,
               label: item,
             }))}
-            onChange={setCareerOpportunities}
+            defaultValue={careerOpportunities} // Pre-filled values
+            onChange={(selectedValues) =>
+              setCareerOpportunities(selectedValues)
+            }
           />
+
           {/* Curriculum */}
           <DynamicSelectField
             label="Curriculum"
             placeholder="Select curriculum"
             options={curriculum.map((item) => ({ value: item, label: item }))}
-            onChange={setCurriculum}
+            defaultValue={curriculum} // Pre-filled values
+            onChange={(selectedValues) => setCurriculum(selectedValues)}
           />
+
           {/* Job Positions */}
           <DynamicSelectField
             label="Job Positions"
             placeholder="Select job positions"
-            options={jobPositions.map((item) => ({ value: item, label: item }))}
-            onChange={setJobPositions}
+            options={jobPositions.map((item) => ({
+              value: item,
+              label: item,
+            }))}
+            defaultValue={jobPositions} // Pre-filled values
+            onChange={(selectedValues) => setJobPositions(selectedValues)}
           />
+
           {/* Software List */}
           <DynamicSelectField
             label="Software List"
             placeholder="Select software list"
-            options={softwareList.map((item) => ({ value: item, label: item }))}
-            onChange={setSoftwareList}
+            options={softwareList.map((item) => ({
+              value: item,
+              label: item,
+            }))}
+            defaultValue={softwareList} // Pre-filled values
+            onChange={(selectedValues) => setSoftwareList(selectedValues)}
           />
         </div>
       </AppForm>

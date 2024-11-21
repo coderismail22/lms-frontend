@@ -20,12 +20,13 @@ type FetchBatchResponse = {
 // Fetch a batch by ID
 const fetchBatchById = async (batchId: string): Promise<FetchBatchResponse> => {
   const response = await axiosInstance.get(`/batches/${batchId}`);
-  return response.data;
+  return response?.data;
 };
 
 // Fetch Teachers
 const fetchTeachers = async () => {
   const response = await axiosInstance.get("/teachers/");
+  console.log("look teachers here", response?.data?.data);
   return response?.data?.data;
 };
 
@@ -106,6 +107,7 @@ const EditBatch = () => {
   });
 
   // Handle form submission
+  console.log("hey batch is like this",batch?.data);
   const onSubmit = (data: Partial<TBatchForm>) => {
     const finalData = { ...data, batchImg: batchImg || batch?.data?.batchImg };
     console.log("hey", finalData);
