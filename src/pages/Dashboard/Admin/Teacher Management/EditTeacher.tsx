@@ -4,126 +4,106 @@ import AppForm from "@/components/CustomForm/AppForm";
 import AppInput from "@/components/CustomForm/AppInput";
 import Swal from "sweetalert2";
 import axiosInstance from "@/api/axiosInstance";
-import AppSelect from "@/components/CustomForm/AppSelect";
+import ImageUpload from "@/components/ImageUpload/ImageUpload";
+import { useState } from "react";
 
-// Fetch topic by ID
-const fetchTopicById = async (topicId: string) => {
-  const response = await axiosInstance.get(`/topics/${topicId}`);
+// Fetch teacher by ID
+const fetchTeacherById = async (teacherId: string) => {
+  const response = await axiosInstance.get(`/teachers/${teacherId}`);
   return response?.data;
 };
 
-// Fetch lessons
-const fetchLessons = async () => {
-  const response = await axiosInstance.get("/lessons");
-  return response?.data?.data;
-};
-
-// Update topic function
-const updateTopic = async (
-  topicId: string,
-  data: { name: string; description: string; lessons: string[] }
+// Update teacher function
+const updateTeacher = async (
+  teacherId: string,
+  data: { name: string; salary: number }
 ) => {
   const response = await axiosInstance.patch(
-    `/topics/update-topic/${topicId}`,
+    `/teachers/update-teacher/${teacherId}`,
     data
   );
   return response?.data;
 };
 
-const EditTopic = () => {
-  const { topicId } = useParams<{ topicId: string }>();
+const EditTeacher = () => {
+  const [profileImg, setProfileImg] = useState<string>("");
+
+  const { teacherId } = useParams<{ teacherId: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  // Fetch lessons
+  // Fetch teacher details
   const {
-    data: lessons,
-    isLoading: isLoadingLessons,
-    error: lessonsError,
+    data: teacher,
+    isLoading: isLoadingTeacher,
+    error: teacherError,
   } = useQuery({
-    queryKey: ["lessons"],
-    queryFn: fetchLessons,
-  });
-
-  // Fetch topic details
-  const {
-    data: topic,
-    isLoading: isLoadingTopic,
-    error: topicError,
-  } = useQuery({
-    queryKey: ["topic", topicId],
-    queryFn: () => fetchTopicById(topicId!),
-    enabled: !!topicId,
+    queryKey: ["teacher", teacherId],
+    queryFn: () => fetchTeacherById(teacherId!),
+    enabled: !!teacherId,
   });
 
   const mutation = useMutation({
-    mutationFn: (data: {
-      name: string;
-      description: string;
-      lessons: string[];
-    }) => updateTopic(topicId!, data),
+    mutationFn: (data: { name: string; salary: number }) =>
+      updateTeacher(teacherId!, data),
     onSuccess: () => {
-      Swal.fire("Updated!", "Topic updated successfully!", "success");
-      queryClient.invalidateQueries({ queryKey: ["topics"] });
-      navigate("/dashboard/admin/topic-management/all-topics");
+      Swal.fire("Updated!", "Teacher updated successfully!", "success");
+      queryClient.invalidateQueries({ queryKey: ["teachers"] });
+      navigate("/dashboard/admin/teacher-management/all-teachers");
     },
-    onError: () => {
-      Swal.fire("Error!", "Failed to update topic.", "error");
+    onError: (error) => {
+      console.log(error)
+      Swal.fire("Error!", "Failed to update teacher.", "error");
     },
   });
 
-  const onSubmit = (data: {
-    name: string;
-    description: string;
-    lessons: string[];
-  }) => {
-    mutation.mutate(data);
+  const onSubmit = (data: { name: string; salary: number }) => {
+    const finalData = {
+      ...data,
+      profileImg: profileImg || teacher?.data?.profileImg,
+    };
+    console.log(finalData);
+    mutation.mutate(finalData);
   };
 
-  if (isLoadingTopic || isLoadingLessons) return <p>Loading...</p>;
-  if (topicError || lessonsError) return <p>Something went wrong...</p>;
+  if (isLoadingTeacher) return <p>Loading...</p>;
+  if (teacherError) return <p>Something went wrong...</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Edit Topic</h1>
+      <h1 className="text-2xl font-bold mb-6">Edit Teacher</h1>
       <AppForm
-        // Add schema validation for updating topics
         onSubmit={onSubmit}
         defaultValues={{
-          ...topic?.data,
-          lessons: topic?.data?.lessons.map(
-            (lesson: string | { _id: string }) =>
-              typeof lesson === "string" ? lesson : lesson._id
-          ),
+          ...teacher?.data,
         }}
-        buttonText="Update Topic"
+        buttonText="Update Teacher"
       >
         {/* Name */}
         <AppInput
-          name="name"
-          label="Topic Name"
-          placeholder="Enter topic name"
+          name="teacherName"
+          label="Teacher Name"
+          placeholder="Enter teacher name"
         />
-        {/* Description */}
-        <AppInput
-          name="description"
-          label="Description"
-          placeholder="Enter description"
-        />
-        {/* Lessons */}
-        <AppSelect
-          name="lessons"
-          label="Lessons"
-          placeholder="Select lessons"
-          isMulti={true}
-          options={lessons?.map((lesson: { _id: string; name: string }) => ({
-            value: lesson._id,
-            label: lesson.name,
-          }))}
-        />
+        {/* ProfileImg */}
+        {/* Upload Cover Image */}
+        <div>
+          <label className="block font-medium text-gray-700">
+            Upload Cover Image
+          </label>
+          <ImageUpload setUploadedImageUrl={setProfileImg} />
+        </div>
+
+        {/* Email */}
+        <AppInput name="email" label="Email" placeholder="Enter email" />
+        {/* Phone */}
+        <AppInput name="phone" label="Phone" placeholder="Enter phone number" />
+
+        {/* Salary */}
+        <AppInput name="salary" label="Salary" placeholder="Enter salary" />
       </AppForm>
     </div>
   );
 };
 
-export default EditTopic;
+export default EditTeacher;

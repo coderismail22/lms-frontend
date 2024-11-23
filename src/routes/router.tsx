@@ -36,6 +36,8 @@ import AllTopics from "@/pages/Dashboard/Admin/CourseManagement/Topic/AllTopics"
 import EditTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/EditTopic";
 import EditLesson from "@/pages/Dashboard/Admin/CourseManagement/Lesson/EditLesson";
 import AddTeacher from "@/pages/Dashboard/Admin/Teacher Management/AddTeacher";
+import EditTeacher from "@/pages/Dashboard/Admin/Teacher Management/EditTeacher";
+import AllTeachers from "@/pages/Dashboard/Admin/Teacher Management/AllTeachers";
 
 export const router = createBrowserRouter([
   {
@@ -71,11 +73,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin/teacher-management/edit-teacher/:teacherId",
-        element: <CreateLesson />,
+        element: <EditTeacher />,
       },
       {
         path: "/dashboard/admin/teacher-management/all-teachers",
-        element: <CreateLesson />,
+        element: <AllTeachers />,
       },
       // Course Management
       // Course
