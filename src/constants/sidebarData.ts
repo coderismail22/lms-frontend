@@ -18,10 +18,22 @@ import { MdOutlineDownloading, MdOutlinePlayLesson } from "react-icons/md";
 export const sidebarData = {
   admin: [
     { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
+    { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
     {
-      label: "Add Category",
-      path: "/dashboard/admin/categories",
-      icon: BiCategory,
+      icon: FaChalkboardTeacher,
+      label: "Teacher Management",
+      children: [
+        {
+          icon: IoMdAddCircleOutline,
+          label: "Add Teacher",
+          path: "/dashboard/admin/teacher-management/create-teacher",
+        },
+        {
+          icon: FaRegListAlt,
+          label: "All Teachers",
+          path: "/dashboard/admin/teacher-management/all-teachers",
+        },
+      ],
     },
     { label: "Add Batch", path: "/dashboard/admin/batch", icon: FaBookReader },
     { label: "Add Route/Outline", path: "/dashboard/admin/home", icon: FaHome },

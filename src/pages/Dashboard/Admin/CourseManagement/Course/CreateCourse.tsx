@@ -60,8 +60,7 @@ const CreateCourse = () => {
       queryClient.invalidateQueries({ queryKey: ["courses"] }); // Invalidate courses list
       navigate("/dashboard/admin/course-management/all-courses");
     },
-    // TODO: Define error type
-    onError: (error: any) => {
+    onError: (error) => {
       console.error("Error creating course:", error);
       Swal.fire(
         "Error!",

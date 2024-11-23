@@ -35,6 +35,7 @@ import CreateTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/CreateTo
 import AllTopics from "@/pages/Dashboard/Admin/CourseManagement/Topic/AllTopics";
 import EditTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/EditTopic";
 import EditLesson from "@/pages/Dashboard/Admin/CourseManagement/Lesson/EditLesson";
+import AddTeacher from "@/pages/Dashboard/Admin/Teacher Management/AddTeacher";
 
 export const router = createBrowserRouter([
   {
@@ -63,16 +64,25 @@ export const router = createBrowserRouter([
       { path: "/dashboard/admin/batch", element: <Batch /> },
       { path: "/dashboard/admin/batch/edit/:batchId", element: <EditBatch /> },
       { path: "/dashboard/admin/batch/add-batch", element: <AddBatch /> },
+      // Teacher Management
+      {
+        path: "/dashboard/admin/teacher-management/create-teacher",
+        element: <AddTeacher />,
+      },
+      {
+        path: "/dashboard/admin/teacher-management/edit-teacher/:teacherId",
+        element: <CreateLesson />,
+      },
+      {
+        path: "/dashboard/admin/teacher-management/all-teachers",
+        element: <CreateLesson />,
+      },
       // Course Management
       // Course
       {
         path: "/dashboard/admin/course-management/create-course",
         element: <CreateCourse />,
       },
-      // {
-      //   path: "/dashboard/admin/course-management/link-subject-to-course",
-      //   element: <LinkSubjectToCourse />,
-      // },
       {
         path: "/dashboard/admin/course-management/all-courses",
         element: <AllCourses />,

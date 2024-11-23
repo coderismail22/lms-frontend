@@ -36,6 +36,7 @@ const AllCourses = () => {
       queryClient.invalidateQueries({ queryKey: ["courses"] }); // Refetch courses after deletion
       Swal.fire("Deleted!", "The course has been deleted.", "success");
     },
+    // TODO: Define an error type
     onError: (error: any) => {
       console.error("Error deleting course:", error);
       Swal.fire("Error!", "Failed to delete course.", "error");

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import AppSelect from "@/components/CustomForm/AppSelect";
 import { useNavigate } from "react-router-dom";
 import { contentTypes } from "./lesson.constant";
+import { createLessonSchema } from "@/schemas/lesson.schema";
 
 // Create lesson function
 const createLesson = async (lessonData: {
@@ -57,8 +58,7 @@ const CreateLesson = () => {
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Create Lesson</h1>
       <AppForm
-        // TODO: Add schema validation for lesson form
-        // schema={createLessonSchema}
+        schema={createLessonSchema}
         onSubmit={onSubmit}
         defaultValues={{ name: "", description: "", type: "", content: "" }}
         buttonText="Create Lesson"

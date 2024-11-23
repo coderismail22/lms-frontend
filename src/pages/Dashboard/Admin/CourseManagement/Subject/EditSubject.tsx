@@ -5,6 +5,7 @@ import AppInput from "@/components/CustomForm/AppInput";
 import Swal from "sweetalert2";
 import axiosInstance from "@/api/axiosInstance";
 import AppSelect from "@/components/CustomForm/AppSelect";
+import { updateSubjectSchema } from "@/schemas/subject.schema";
 
 const fetchSubjectById = async (subjectId: string) => {
   const response = await axiosInstance.get(`subjects/get-subject/${subjectId}`);
@@ -21,7 +22,10 @@ const updateSubject = async (
   subjectId: string,
   data: { name: string; description: string; topics: string[] }
 ) => {
-  const response = await axiosInstance.patch(`/subjects/${subjectId}`, data);
+  const response = await axiosInstance.patch(
+    `subjects/update-subject/${subjectId}`,
+    data
+  );
   return response?.data;
 };
 
@@ -60,9 +64,10 @@ const EditSubject = () => {
     onSuccess: () => {
       Swal.fire("Updated!", "Subject updated successfully!", "success");
       queryClient.invalidateQueries({ queryKey: ["subjects"] });
-      navigate("/dashboard/admin/subjects");
+      navigate("/dashboard/admin/subject-management/all-subjects");
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error);
       Swal.fire("Error!", "Failed to update subject.", "error");
     },
   });
@@ -72,6 +77,7 @@ const EditSubject = () => {
     description: string;
     topics: string[];
   }) => {
+    console.log(data);
     mutation.mutate(data);
   };
 
@@ -82,7 +88,7 @@ const EditSubject = () => {
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Edit Subject</h1>
       <AppForm
-        //TODO: provide schema
+        schema={updateSubjectSchema}
         onSubmit={onSubmit}
         defaultValues={{
           ...subject?.data,

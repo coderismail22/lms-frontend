@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 interface AppFormProps<TFormValues extends FieldValues> {
   onSubmit: SubmitHandler<TFormValues>;
   children: ReactNode;
-  schema?: z.ZodType<TFormValues>; // Flexible type for schema
+  schema?: z.ZodType<TFormValues> | Partial<TFormValues>; // Flexible type for schema
   defaultValues?: DefaultValues<TFormValues>;
   buttonText?: string; // Default button text
   submitButtonStyles?: string;
@@ -32,7 +32,7 @@ const AppForm = <TFormValues extends FieldValues>({
   alignButton = "center", // Default alignment
 }: AppFormProps<TFormValues>) => {
   const methods = useForm<TFormValues>({
-    resolver: schema ? zodResolver(schema) : undefined,
+    resolver: schema instanceof z.ZodType ? zodResolver(schema) : undefined,
     defaultValues,
   });
 
