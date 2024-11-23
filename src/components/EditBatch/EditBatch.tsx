@@ -33,6 +33,7 @@ const fetchTeachers = async () => {
 // Fetch Courses
 const fetchCourses = async () => {
   const response = await axiosInstance.get("/courses/get-all-courses");
+  console.log("check course name yeah", response?.data?.data);
   return response?.data?.data;
 };
 
@@ -107,7 +108,7 @@ const EditBatch = () => {
   });
 
   // Handle form submission
-  console.log("hey batch is like this",batch?.data);
+  console.log("hey batch is like this", batch?.data);
   const onSubmit = (data: Partial<TBatchForm>) => {
     const finalData = { ...data, batchImg: batchImg || batch?.data?.batchImg };
     console.log("hey", finalData);

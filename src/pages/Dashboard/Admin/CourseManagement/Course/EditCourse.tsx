@@ -66,7 +66,7 @@ const EditCourse = () => {
   } = useQuery({
     queryKey: ["course", courseId],
     queryFn: () => fetchCourseById(courseId!),
-    enabled: !!courseId, // Only fetch if courseId exists
+    enabled: !!courseId,
   });
 
   // Fetch categories

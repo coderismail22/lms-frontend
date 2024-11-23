@@ -16,10 +16,8 @@ import AdminHome from "@/pages/Dashboard/Admin/AdminHome/AdminHome";
 import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
 import InstructorHome from "@/pages/Dashboard/Instructor/InstructorHome/InstructorHome";
 import CreateCourse from "@/pages/Dashboard/Admin/CourseManagement/Course/CreateCourse";
-import LinkSubjectToCourse from "@/pages/Dashboard/Admin/CourseManagement/Course/LinkSubjectToCourse";
 import AllCourses from "@/pages/Dashboard/Admin/CourseManagement/Course/AllCourses";
 import CreateSubject from "@/pages/Dashboard/Admin/CourseManagement/Subject/CreateSubject";
-import LinkTopicToSubject from "@/pages/Dashboard/Admin/CourseManagement/Subject/LinkTopicToSubject";
 import AllSubjects from "@/pages/Dashboard/Admin/CourseManagement/Subject/AllSubjects";
 import CreateTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/CreateTopic";
 import LinkLessonToTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/LinkLessonToTopic";
@@ -35,6 +33,7 @@ import Batch from "@/pages/Dashboard/Admin/Batch/Batch";
 import AddBatch from "@/components/AddBatch/AddBatch";
 import EditBatch from "@/components/EditBatch/EditBatch";
 import EditCourse from "@/pages/Dashboard/Admin/CourseManagement/Course/EditCourse";
+import EditSubject from "@/pages/Dashboard/Admin/CourseManagement/Subject/EditSubject";
 
 export const router = createBrowserRouter([
   {
@@ -87,12 +86,12 @@ export const router = createBrowserRouter([
         element: <CreateSubject />,
       },
       {
-        path: "/dashboard/admin/subject-management/link-topic-to-subject",
-        element: <LinkTopicToSubject />,
-      },
-      {
         path: "/dashboard/admin/subject-management/all-subjects",
         element: <AllSubjects />,
+      },
+      {
+        path: "/dashboard/admin/subjects/edit/:subjectId",
+        element: <EditSubject />,
       },
       // Topic
       {

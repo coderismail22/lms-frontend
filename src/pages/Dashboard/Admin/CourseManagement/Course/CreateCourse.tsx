@@ -82,6 +82,7 @@ const CreateCourse = () => {
 
     console.log("Form Data:", finalData);
     mutation.mutate(finalData); // Trigger the mutation
+    navigate("/dashboard/admin/course-management/all-courses");
   };
 
   if (isLoadingCategories || isLoadingSubjects) return <p>Loading data...</p>;
