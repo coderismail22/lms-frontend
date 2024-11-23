@@ -3,21 +3,36 @@ import {
   FaBookReader,
   FaChalkboardTeacher,
   FaHome,
-  FaLink,
   FaRegListAlt,
   FaUserGraduate,
 } from "react-icons/fa";
-import { BiCategory } from "react-icons/bi";
 import { CiBoxList } from "react-icons/ci";
 import { GiProgression } from "react-icons/gi";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { MdOutlineDownloading, MdOutlinePlayLesson } from "react-icons/md";
+import {
+  MdDocumentScanner,
+  MdOutlineDownloading,
+  MdOutlinePlayLesson,
+} from "react-icons/md";
+import { BiCategory } from "react-icons/bi";
 
 export const sidebarData = {
   admin: [
-    { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
+    // { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
+    { label: "Add Batch", path: "/dashboard/admin/batch", icon: FaBookReader },
+    // TODO: Add Route/Outline like PH
+    // {
+    //   label: "Add Route/Outline",
+    //   path: "/dashboard/admin/home",
+    //   icon: MdDocumentScanner,
+    // },
+    {
+      label: "Add Category",
+      path: "/dashboard/admin/categories",
+      icon: BiCategory,
+    },
     {
       icon: FaChalkboardTeacher,
       label: "Teacher Management",
@@ -34,8 +49,6 @@ export const sidebarData = {
         },
       ],
     },
-    { label: "Add Batch", path: "/dashboard/admin/batch", icon: FaBookReader },
-    { label: "Add Route/Outline", path: "/dashboard/admin/home", icon: FaHome },
     {
       label: "Course Management",
       icon: FaBook,

@@ -8,7 +8,13 @@ import ImageUpload from "@/components/ImageUpload/ImageUpload";
 import { useState } from "react";
 
 // Create teacher function
-const createTeacher = async (teacherData: { name: string; salary: number }) => {
+const createTeacher = async (teacherData: {
+  teacherName: string;
+  profileImg: string;
+  email: string;
+  phone: string;
+  salary: number;
+}) => {
   const response = await axiosInstance.post(
     "/teachers/create-teacher",
     teacherData
@@ -36,7 +42,13 @@ const AddTeacher = () => {
     },
   });
 
-  const onSubmit = (data: { teacherName: string; salary: number }) => {
+  const onSubmit = (data: {
+    teacherName: string;
+    profileImg: string;
+    email: string;
+    phone: string;
+    salary: number;
+  }) => {
     const finalData = {
       ...data,
       profileImg,
