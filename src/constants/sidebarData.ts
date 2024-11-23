@@ -61,11 +61,6 @@ export const sidebarData = {
               label: "Create Subject",
               path: "/dashboard/admin/subject-management/create-subject",
             },
-            // {
-            //   icon: FaLink,
-            //   label: "Link Topic To Subject",
-            //   path: "/dashboard/admin/subject-management/link-topic-to-subject",
-            // },
             {
               icon: FaRegListAlt,
               label: "All Subjects",
@@ -80,13 +75,8 @@ export const sidebarData = {
           children: [
             {
               icon: IoMdAddCircleOutline,
-              label: "Create A Topic",
+              label: "Create Topic",
               path: "/dashboard/admin/topic-management/create-topic",
-            },
-            {
-              icon: FaLink,
-              label: "Link Lesson To Topic",
-              path: "/dashboard/admin/topic-management/link-lesson-to-topic",
             },
             {
               icon: FaRegListAlt,

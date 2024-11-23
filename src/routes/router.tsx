@@ -19,9 +19,6 @@ import CreateCourse from "@/pages/Dashboard/Admin/CourseManagement/Course/Create
 import AllCourses from "@/pages/Dashboard/Admin/CourseManagement/Course/AllCourses";
 import CreateSubject from "@/pages/Dashboard/Admin/CourseManagement/Subject/CreateSubject";
 import AllSubjects from "@/pages/Dashboard/Admin/CourseManagement/Subject/AllSubjects";
-import CreateTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/CreateTopic";
-import LinkLessonToTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/LinkLessonToTopic";
-import AllTopics from "@/pages/Dashboard/Admin/CourseManagement/Topic/AllTopics";
 import CreateLesson from "@/pages/Dashboard/Admin/CourseManagement/Lesson/CreateLesson";
 import AllLessons from "@/pages/Dashboard/Admin/CourseManagement/Lesson/AllLessons";
 import RunningCourses from "@/pages/Dashboard/Instructor/CourseManagement/RunningCourses/RunningCourses";
@@ -34,6 +31,9 @@ import AddBatch from "@/components/AddBatch/AddBatch";
 import EditBatch from "@/components/EditBatch/EditBatch";
 import EditCourse from "@/pages/Dashboard/Admin/CourseManagement/Course/EditCourse";
 import EditSubject from "@/pages/Dashboard/Admin/CourseManagement/Subject/EditSubject";
+import CreateTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/CreateTopic";
+import AllTopics from "@/pages/Dashboard/Admin/CourseManagement/Topic/AllTopics";
+import EditTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/EditTopic";
 
 export const router = createBrowserRouter([
   {
@@ -99,8 +99,8 @@ export const router = createBrowserRouter([
         element: <CreateTopic />,
       },
       {
-        path: "/dashboard/admin/topic-management/link-lesson-to-topic",
-        element: <LinkLessonToTopic />,
+        path: "/dashboard/admin/topics/edit/:topicId",
+        element: <EditTopic />,
       },
       {
         path: "/dashboard/admin/topic-management/all-topics",

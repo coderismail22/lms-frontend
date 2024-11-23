@@ -52,8 +52,11 @@ const EditSubject = () => {
   });
 
   const mutation = useMutation({
-    mutationFn: (data: { name: string; description: string }) =>
-      updateSubject(subjectId!, data),
+    mutationFn: (data: {
+      name: string;
+      description: string;
+      topics: string[];
+    }) => updateSubject(subjectId!, data),
     onSuccess: () => {
       Swal.fire("Updated!", "Subject updated successfully!", "success");
       queryClient.invalidateQueries({ queryKey: ["subjects"] });
@@ -69,8 +72,7 @@ const EditSubject = () => {
     description: string;
     topics: string[];
   }) => {
-    console.log("uppate course data", data);
-    // mutation.mutate(data);
+    mutation.mutate(data);
   };
 
   if (isLoadingSubject || isLoadingTopics) return <p>Loading...</p>;
