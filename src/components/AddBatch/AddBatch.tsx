@@ -109,7 +109,7 @@ const AddBatch = () => {
     }
 
     console.log(finalData);
-    // mutation.mutate(finalData);
+    mutation.mutate(finalData);
   };
 
   if (isLoadingTeachers || isLoadingCourses) return <p>Loading data...</p>;
@@ -160,7 +160,7 @@ const AddBatch = () => {
             label="Course Name"
             placeholder="Select a course"
             options={courses?.map((course: { _id: string; name: string }) => ({
-              value: course._id,
+              value: course.name,
               label: course.name,
             }))}
           />

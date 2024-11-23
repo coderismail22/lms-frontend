@@ -18,7 +18,6 @@ import { MdOutlineDownloading, MdOutlinePlayLesson } from "react-icons/md";
 export const sidebarData = {
   admin: [
     { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
-    { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
     {
       icon: FaChalkboardTeacher,
       label: "Teacher Management",

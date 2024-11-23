@@ -108,7 +108,6 @@ const EditBatch = () => {
   });
 
   // Handle form submission
-  console.log("hey batch is like this", batch?.data);
   const onSubmit = (data: Partial<TBatchForm>) => {
     const finalData = { ...data, batchImg: batchImg || batch?.data?.batchImg };
     console.log("hey", finalData);
@@ -142,16 +141,19 @@ const EditBatch = () => {
               <ImageUpload setUploadedImageUrl={setBatchImg} />
             </div>
             {/* Course Name */}
-            <AppSelect
-              name="courseName"
-              label="Course Name"
-              options={courses?.map(
-                (course: { _id: string; name: string }) => ({
-                  value: course._id,
-                  label: course.name,
-                })
-              )}
-            />
+            <div className="pointer-events-none text-red-500">
+              <AppSelect
+                name="courseName"
+                label="Course Name *"
+                placeholder="Not Changeable"
+                options={courses?.map(
+                  (course: { _id: string; name: string }) => ({
+                    value: course._id,
+                    label: course.name,
+                  })
+                )}
+              />
+            </div>
             {/* Coupon Code */}
             <AppInput name="couponCode" label="Coupon Code" />
             {/* Discount Price */}
