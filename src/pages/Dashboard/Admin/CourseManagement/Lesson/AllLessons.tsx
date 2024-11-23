@@ -1,5 +1,86 @@
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import LessonTable from "./LessonTable"; // Table component for lessons
+import Swal from "sweetalert2";
+import axiosInstance from "@/api/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import { lessonColumns } from "./lessonColumns"; // Columns for lesson table
+
+// Fetch lessons from the API
+const fetchLessons = async () => {
+  const response = await axiosInstance.get("/lessons");
+  return response.data.data; // Assuming `data` contains the lessons array
+};
+
+// Delete a lesson by ID
+const deleteLesson = async (lessonId: string) => {
+  await axiosInstance.delete(`/lessons/delete-lesson/${lessonId}`);
+};
+
 const AllLessons = () => {
-  return <div>AllLessons</div>;
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  // Fetch all lessons
+  const { data: lessons, isLoading } = useQuery({
+    queryKey: ["lessons"],
+    queryFn: fetchLessons,
+  });
+
+  // Delete lesson mutation
+  const mutation = useMutation({
+    mutationFn: deleteLesson,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["lessons"] });
+      Swal.fire("Deleted!", "Lesson deleted successfully!", "success");
+    },
+    onError: () => {
+      Swal.fire("Error!", "Failed to delete lesson.", "error");
+    },
+  });
+
+  // Handle lesson deletion
+  const handleDelete = (lessonId: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        mutation.mutate(lessonId);
+      }
+    });
+  };
+
+  // Handle lesson editing
+  const handleEdit = (lessonId: string) => {
+    navigate(`/dashboard/admin/lesson-management/lessons/edit/${lessonId}`);
+  };
+
+  if (isLoading) return <p>Loading...</p>;
+
+  return (
+    <div className="container mx-auto py-2">
+      <h1 className="text-2xl font-bold mb-6">All Lessons</h1>
+      <div className="my-4 flex justify-end">
+        <Button
+          onClick={() =>
+            navigate("/dashboard/admin/lesson-management/create-lesson")
+          }
+        >
+          Create Lesson
+        </Button>
+      </div>
+      {lessons && (
+        <LessonTable
+          data={lessons}
+          columns={lessonColumns(handleEdit, handleDelete)}
+        />
+      )}
+    </div>
+  );
 };
 
 export default AllLessons;

@@ -92,7 +92,7 @@ export const sidebarData = {
           children: [
             {
               icon: IoMdAddCircleOutline,
-              label: "Create A Lesson",
+              label: "Create Lesson",
               path: "/dashboard/admin/lesson-management/create-lesson",
             },
             {

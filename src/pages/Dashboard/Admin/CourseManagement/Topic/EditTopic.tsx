@@ -8,14 +8,13 @@ import AppSelect from "@/components/CustomForm/AppSelect";
 
 // Fetch topic by ID
 const fetchTopicById = async (topicId: string) => {
-  const response = await axiosInstance.get(`/topics/get-topic/${topicId}`);
+  const response = await axiosInstance.get(`/topics/${topicId}`);
   return response?.data;
 };
 
 // Fetch lessons
 const fetchLessons = async () => {
-  const response = await axiosInstance.get("/lessons/get-all-lessons");
-  console.log("Fetched lessons:", response?.data?.data);
+  const response = await axiosInstance.get("/lessons");
   return response?.data?.data;
 };
 
@@ -78,7 +77,6 @@ const EditTopic = () => {
     description: string;
     lessons: string[];
   }) => {
-    console.log("Update topic data:", data);
     mutation.mutate(data);
   };
 
@@ -118,9 +116,9 @@ const EditTopic = () => {
           label="Lessons"
           placeholder="Select lessons"
           isMulti={true}
-          options={lessons?.map((lesson: { _id: string; title: string }) => ({
+          options={lessons?.map((lesson: { _id: string; name: string }) => ({
             value: lesson._id,
-            label: lesson.title,
+            label: lesson.name,
           }))}
         />
       </AppForm>

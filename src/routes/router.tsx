@@ -34,6 +34,7 @@ import EditSubject from "@/pages/Dashboard/Admin/CourseManagement/Subject/EditSu
 import CreateTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/CreateTopic";
 import AllTopics from "@/pages/Dashboard/Admin/CourseManagement/Topic/AllTopics";
 import EditTopic from "@/pages/Dashboard/Admin/CourseManagement/Topic/EditTopic";
+import EditLesson from "@/pages/Dashboard/Admin/CourseManagement/Lesson/EditLesson";
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/admin/lesson-management/create-lesson",
         element: <CreateLesson />,
+      },
+      {
+        path: "/dashboard/admin/lesson-management/lessons/edit/:lessonId",
+        element: <EditLesson />,
       },
       {
         path: "/dashboard/admin/lesson-management/all-lessons",
