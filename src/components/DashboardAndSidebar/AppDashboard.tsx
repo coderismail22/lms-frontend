@@ -18,6 +18,7 @@ import { capitalizeFirstLetter } from "./dashboard.util";
 import { useRole } from "@/hooks/useRole";
 import { Role } from "./dashboard.type";
 import CustomBreadcrumbLink from "../CustomBreadcrumbLink/CustomBreadcrumbLink";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const AppDashboard = () => {
   const role: Role = useRole();
@@ -38,6 +39,7 @@ const AppDashboard = () => {
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
                 <BreadcrumbPage>{capitalizeFirstLetter(role)}</BreadcrumbPage>
+                <LogoutButton />
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
