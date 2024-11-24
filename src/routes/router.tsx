@@ -8,7 +8,6 @@ import BlogPostDetail from "../pages/Blog/BlogPostDetails/BlogPostDetails";
 import Notes from "../pages/Note/Notes/Notes";
 import FullNote from "../pages/Note/FullNote/FullNote";
 import Contact from "../pages/Contact/Contact/Contact";
-import Login from "../pages/SharedPages/Login/Login";
 // import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import Dashboard from "@/pages/Dashboard/Dashboard/Dashboard";
@@ -38,6 +37,10 @@ import EditLesson from "@/pages/Dashboard/Admin/CourseManagement/Lesson/EditLess
 import AddTeacher from "@/pages/Dashboard/Admin/Teacher Management/AddTeacher";
 import EditTeacher from "@/pages/Dashboard/Admin/Teacher Management/EditTeacher";
 import AllTeachers from "@/pages/Dashboard/Admin/Teacher Management/AllTeachers";
+import Login from "@/pages/Auth/Login/Login";
+import Register from "@/pages/Auth/Register/Register";
+import ResetPassword from "@/pages/Auth/ResetPassword/ResetPassword";
+import SetNewPasswordForm from "@/pages/Auth/SetNewPasswordForm/SetNewPasswordForm";
 
 export const router = createBrowserRouter([
   {
@@ -52,10 +55,23 @@ export const router = createBrowserRouter([
       { path: "/contact", element: <Contact /> },
     ],
   },
+  // Auth
   {
-    path: "/login",
+    path: "auth/login",
     element: <Login />,
   },
+  {
+    path: "auth/signup",
+    element: <Register />,
+  },
+  // {
+  //   path: "/reset-password",
+  //   element: <ResetPassword />,
+  // },
+  // {
+  //   path: "/set-new-password-form",
+  //   element: <SetNewPasswordForm />,
+  // },
   {
     path: "/dashboard",
     element: <Dashboard />,
