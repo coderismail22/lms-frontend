@@ -1,4 +1,5 @@
 import AppCourseCard from "@/components/AppCourseCard/AppCourseCard";
+import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 
@@ -35,6 +36,14 @@ const Courses = () => {
         <title>EJobsIT | Courses</title>
       </Helmet> */}
       {/* <TopTite /> */}
+      <div className="max-w-xl mx-auto">
+        <SectionTitle
+          title="আমাদের কোর্স সমূহ"
+          titleStyles="text-blue-400"
+          subtitle="প্রফেশনাল ভিডিও এডিটিং এবং মোশন গ্রাফিক্স ফ্রি লাইভ মাস্টার ক্লাস করুন বাংলাদেশের সব থেকে জনপ্রিয় মোশন গ্রাফিক্স ইউটিউবার আহসানুল্লাহ শাওন স্যারের সাথে । আমাদের কোর্সে লাইভ ক্লাসের সাথে থাকছে প্রতিদিন দুইবেলা করে গুগল মিটে স্ক্রিন শেয়ারের মাধ্যমে লাইভ সাপোর্ট, রেকর্ডেড ভিডিও, ফ্রিল্যান্সিং এবং জব প্লেসমেন্ট সাপোর্ট ।"
+          subTitleStyles="text-slate-500"
+        />
+      </div>
 
       <div className="w-10/12 mx-auto">
         <Tabs defaultValue="all" className="my-12">
