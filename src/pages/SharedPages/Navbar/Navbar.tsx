@@ -9,11 +9,6 @@ const navitems = [
   { title: "Home", path: "/", isScroll: false },
   { title: "Courses", path: "/courses", isScroll: false },
   { title: "Login", path: "/login", isScroll: false },
-  // { title: "Services", path: "services", isScroll: true },
-  // { title: "FAQ", path: "faq", isScroll: true },
-  // { title: "Blog", path: "/blog", isScroll: false },
-  // { title: "Notes", path: "/notes", isScroll: false },
-  // { title: "Contact", path: "contact", isScroll: true },
 ];
 
 const Navbar = () => {
