@@ -8,8 +8,10 @@ const SectionTitle = ({
   return (
     <div>
       <div className="mb-4">
-        <h1 className="text-5xl font-bold mb-4 text-center text-slate-400">{title} </h1>
-        <p className="text-center text-xl mt-2">{subtitle}</p>
+        <h1 className="text-5xl font-bold mb-4 text-center text-slate-400">
+          {title}{" "}
+        </h1>
+        <p className="text-center text-xl mt-2 text-white">{subtitle}</p>
       </div>
     </div>
   );

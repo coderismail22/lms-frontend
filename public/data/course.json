@@ -1,0 +1,47 @@
+[
+  {
+    "courseId": "1",
+    "category_id": "1",
+    "courseName": "অ্যাডভান্সড মোশন গ্রাফিক্স",
+    "start_course_name": "motionGraphics",
+    "categoryName": "Online Live Course",
+    "courseLength": "৩",
+    "courseClass": "৩০",
+    "courseProject": "১০",
+    "trainerName": "আহসানউল্লাহ শাওন",
+    "trainerImageUrl": "https://i.ibb.co/DrqQBFc/240814641-673719677356207-115697542586076674-n.jpg",
+    "totalClasses": "৩০",
+    "price": "৩৫০০",
+    "thumbnail_url": "https://i.ibb.co/ZSZZkMd/course-1662552115.jpg"
+  },
+  {
+    "courseId": "2",
+    "category_id": "1",
+    "courseName": "প্রফেশনাল ভিডিও এডিটিং",
+    "start_course_name": "videoEditing",
+    "categoryName": "Pre Recorded Course",
+    "courseLength": "৩",
+    "courseClass": "৩০",
+    "courseProject": "১০",
+    "trainerName": "আহসানউল্লাহ শাওন",
+    "trainerImageUrl": "https://i.ibb.co/DrqQBFc/240814641-673719677356207-115697542586076674-n.jpg",
+    "totalClasses": "২৫",
+    "price": "২৫০০",
+    "thumbnail_url": "https://i.ibb.co/4dDxX5t/course-1668488066.jpg"
+  },
+  {
+    "courseId": "3",
+    "category_id": "1",
+    "courseName": "প্রফেশনাল ওয়েব ডিজাইন",
+    "start_course_name": "webDesign",
+    "categoryName": "Pre Recorded Course",
+    "courseLength": "৩",
+    "courseClass": "৩০",
+    "courseProject": "১০",
+    "trainerName": "শেখ সাকিব হোসেন",
+    "trainerImageUrl": "https://i.ibb.co/YDvT68t/heo-photo.gif",
+    "totalClasses": "৩২",
+    "price": "২৫০০",
+    "thumbnail_url": "https://i.ibb.co/mFPstB0/course-1674371266.jpg"
+  }
+]
