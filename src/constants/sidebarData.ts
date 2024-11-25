@@ -11,14 +11,120 @@ import { GiProgression } from "react-icons/gi";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 import { IoMdAddCircleOutline } from "react-icons/io";
-import {
-  MdDocumentScanner,
-  MdOutlineDownloading,
-  MdOutlinePlayLesson,
-} from "react-icons/md";
+import { MdOutlineDownloading, MdOutlinePlayLesson } from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
 
 export const sidebarData = {
+  superAdmin: [
+    // { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
+    { label: "Add Batch", path: "/dashboard/admin/batch", icon: FaBookReader },
+    // TODO: Add Route/Outline like PH
+    // {
+    //   label: "Add Route/Outline",
+    //   path: "/dashboard/admin/home",
+    //   icon: MdDocumentScanner,
+    // },
+    {
+      label: "Add Category",
+      path: "/dashboard/admin/categories",
+      icon: BiCategory,
+    },
+    {
+      icon: FaChalkboardTeacher,
+      label: "Teacher Management",
+      children: [
+        {
+          icon: IoMdAddCircleOutline,
+          label: "Add Teacher",
+          path: "/dashboard/admin/teacher-management/create-teacher",
+        },
+        {
+          icon: FaRegListAlt,
+          label: "All Teachers",
+          path: "/dashboard/admin/teacher-management/all-teachers",
+        },
+      ],
+    },
+    {
+      label: "Course Management",
+      icon: FaBook,
+      children: [
+        {
+          icon: CiBoxList,
+          label: "Course",
+          path: "/dashboard/admin/course-management/create-course",
+          children: [
+            {
+              icon: IoMdAddCircleOutline,
+              label: "Create Course",
+              path: "/dashboard/admin/course-management/create-course",
+            },
+            // {
+            //   icon: FaLink,
+            //   label: "Link Subject To Course",
+            //   path: "/dashboard/admin/course-management/link-subject-to-course",
+            // },
+            {
+              icon: FaRegListAlt,
+              label: "All Courses",
+              path: "/dashboard/admin/course-management/all-courses",
+            },
+          ],
+        },
+        {
+          icon: CiBoxList,
+          label: "Subject",
+          path: "/dashboard/admin/subject-management/create-subject",
+          children: [
+            {
+              icon: IoMdAddCircleOutline,
+              label: "Create Subject",
+              path: "/dashboard/admin/subject-management/create-subject",
+            },
+            {
+              icon: FaRegListAlt,
+              label: "All Subjects",
+              path: "/dashboard/admin/subject-management/all-subjects",
+            },
+          ],
+        },
+        {
+          label: "Topic",
+          icon: CiBoxList,
+          path: "/dashboard/admin/topic-management/create-topic",
+          children: [
+            {
+              icon: IoMdAddCircleOutline,
+              label: "Create Topic",
+              path: "/dashboard/admin/topic-management/create-topic",
+            },
+            {
+              icon: FaRegListAlt,
+              label: "All Topics",
+              path: "/dashboard/admin/topic-management/all-topics",
+            },
+          ],
+        },
+        {
+          icon: CiBoxList,
+          label: "Lesson",
+          path: "/dashboard/admin/lesson-management/create-lesson",
+          children: [
+            {
+              icon: IoMdAddCircleOutline,
+              label: "Create Lesson",
+              path: "/dashboard/admin/lesson-management/create-lesson",
+            },
+            {
+              icon: FaRegListAlt,
+              label: "All Lessons",
+              path: "/dashboard/admin/lesson-management/all-lessons",
+            },
+          ],
+        },
+      ],
+    },
+  ],
   admin: [
     // { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
     { label: "Add Batch", path: "/dashboard/admin/batch", icon: FaBookReader },

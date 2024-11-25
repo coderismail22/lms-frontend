@@ -187,7 +187,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/student/courses/enrolled-courses",
-        element: <EnrolledCourses />,
+        element: (
+          <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
+            <EnrolledCourses />
+          </RoleWrapper>
+        ),
       },
       {
         path: "/dashboard/student/:studentId/courses/:courseId",
