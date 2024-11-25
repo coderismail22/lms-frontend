@@ -19,9 +19,18 @@ import { useRole } from "@/hooks/useRole";
 import { Role } from "./dashboard.type";
 import CustomBreadcrumbLink from "../CustomBreadcrumbLink/CustomBreadcrumbLink";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import { useQueryClient } from "@tanstack/react-query";
+import { authKey } from "@/api/authKey";
 
 const AppDashboard = () => {
-  const role: Role = useRole();
+  const queryClient = useQueryClient();
+  const authData = queryClient.getQueryData(authKey);
+  const role = useRole();
+
+  if (!authData) {
+    return <p>Loading...</p>; // Wait until authKey is set
+  }
+
   return (
     <SidebarProvider>
       <AppSidebar role={role} />

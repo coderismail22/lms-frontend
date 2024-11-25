@@ -6,7 +6,7 @@ import AppInputPassword from "@/components/CustomForm/AppInputPassword";
 import { loginSchema } from "@/schemas/login.schema";
 // import axiosInstance from "@/api/axiosInstance";
 import { TLoginForm } from "@/types/login.type";
-import { useLogin } from "@/api/useLogin";
+import { useLogin } from "@/hooks/useLogin";
 
 const Login = () => {
   // Define the mutation using TanStack Query
