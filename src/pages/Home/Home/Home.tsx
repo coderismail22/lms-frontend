@@ -2,6 +2,7 @@ import Category from "@/components/Category/Category";
 import Hero from "@/components/Hero/Hero";
 import Numbers from "@/components/Numbers/Numbers";
 import PopularCourses from "@/components/PopularCourses/PopularCourses";
+import Testimonial from "@/components/Testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <Category />
       <Numbers />
       <PopularCourses />
+      <Testimonial />
     </div>
   );
 };
