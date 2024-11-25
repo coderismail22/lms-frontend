@@ -148,7 +148,7 @@ const AppCourseCard = ({ course }) => {
       <div className="flex justify-between m-1">
         <div className="w-full ">
           <Link to={`course/${start_course_name}`}>
-            <Button className="text-white bg-gradient-to-r w-full font-semibold text-[16px] from-cyan-500 to-blue-500 hover:text-red-600">
+            <Button className="text-white bg-gradient-to-r w-full font-semibold text-[16px] from-cyan-500 to-blue-500 hover:from-blue-600 hover:to-blue-600">
               <p className="text-xl">
                 <BiCategoryAlt />
               </p>{" "}
