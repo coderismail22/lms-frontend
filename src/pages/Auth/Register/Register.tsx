@@ -7,9 +7,12 @@ import { TRegisterForm } from "@/types/register.type";
 import axiosInstance from "@/api/axiosInstance";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useLogin } from "@/hooks/useLogin";
 
 const Register = () => {
-  const mutation = useMutation({
+  const loginMutation = useLogin();
+
+  const registerMutation = useMutation({
     mutationFn: async (formData: Partial<TRegisterForm>) => {
       const response = await axiosInstance.post(
         "/users/create-student",
@@ -17,31 +20,45 @@ const Register = () => {
       );
       return response.data;
     },
-    onSuccess: (data) => {
-      Swal.fire({
-        icon: "success",
-        title: "Registration Successful",
-        text: "Your account has been created successfully!",
-      });
-      console.log("Registration successful:", data);
+    onSuccess: (data, variables) => {
+      // Automatically log in after registration
+      loginMutation.mutate(
+        {
+          email: variables.email as string,
+          password: variables.password as string,
+        },
+        {
+          onSuccess: () => {
+            Swal.fire({
+              icon: "success",
+              title: "Registration Successful",
+              text: "Welcome!",
+            });
+          },
+          onError: () => {
+            Swal.fire({
+              icon: "error",
+              title: "Auto Login Failed",
+              text: "Please log in manually.",
+            });
+          },
+        }
+      );
     },
     onError: (error) => {
-      console.log(error);
+      console.error("Registration failed:", error);
       Swal.fire({
         icon: "error",
         title: "Registration Failed",
         text: "Something went wrong. Please try again.",
       });
-      console.error("Registration failed:", error);
     },
   });
 
   const onSubmit = (data: TRegisterForm) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...restFormData } = data;
-
-    console.log(restFormData);
-    mutation.mutate(restFormData);
+    registerMutation.mutate(restFormData);
   };
 
   return (

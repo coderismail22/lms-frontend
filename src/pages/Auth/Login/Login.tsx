@@ -10,33 +10,6 @@ import { useLogin } from "@/hooks/useLogin";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  // Define the mutation using TanStack Query
-  // const mutation = useMutation({
-  //   mutationFn: async (formData: TLoginForm) => {
-  //     // Replace `/login` with your actual endpoint
-  //     const response = await axiosInstance.post("/auth/login", formData);
-  //     return response.data;
-  //   },
-  //   onSuccess: (data) => {
-  //     // Handle successful login with SweetAlert2
-  //     Swal.fire({
-  //       icon: "success",
-  //       title: "Login Successful",
-  //       text: "You have logged in successfully!",
-  //     });
-  //     console.log("Login successful:", data);
-  //   },
-  //   onError: (error) => {
-  //     // Handle login errors with SweetAlert2
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Login Failed",
-  //       text: "Invalid credentials. Please try again.",
-  //     });
-  //     console.error("Login failed:", error);
-  //   },
-  // });
-
   const loginMutation = useLogin();
 
   const onSubmit = (data: TLoginForm) => {
