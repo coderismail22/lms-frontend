@@ -46,6 +46,7 @@ import Unauthorized from "@/components/Auth/Unauthorized/Unauthorized";
 import StudentRouteWrapper from "@/components/Auth/StudentRouteWrapper/StudentRouteWrapper";
 import RoleWrapper from "@/components/Auth/RoleWrapper/RoleWrapper";
 import { ROLE, Role } from "@/constants/role";
+import Courses from "@/pages/Courses/Courses";
 
 export const router = createBrowserRouter([
   {
@@ -57,7 +58,7 @@ export const router = createBrowserRouter([
       { path: "/blog/:id", element: <BlogPostDetail /> },
       { path: "/notes", element: <Notes /> },
       { path: "/note/:id", element: <FullNote /> },
-      { path: "/contact", element: <Contact /> },
+      { path: "/courses", element: <Courses /> },
     ],
   },
   // Auth
