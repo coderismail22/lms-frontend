@@ -8,7 +8,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 const Category = () => {
   return (
     <div className="">
-      <div className="flex lg:flex-row flex-col justify-center gap-8 mx-auto my-12 -mt-16 ">
+      <div className="flex lg:flex-row flex-col justify-center gap-8 mx-auto my-12 -mt-16 font-siliguri">
         <div className="mt-20 ">
           <Button className="h-5 w-5 p-5 rounded-full border  border-blue-500 bg-black ">
             <FaArrowLeft />
