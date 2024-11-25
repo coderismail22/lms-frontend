@@ -42,6 +42,10 @@ import Register from "@/pages/Auth/Register/Register";
 import ResetPassword from "@/pages/Auth/ResetPassword/ResetPassword";
 import SetNewPasswordForm from "@/pages/Auth/SetNewPasswordForm/SetNewPasswordForm";
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
+import Unauthorized from "@/components/Auth/Unauthorized/Unauthorized";
+import StudentRouteWrapper from "@/components/Auth/StudentRouteWrapper/StudentRouteWrapper";
+import RoleWrapper from "@/components/Auth/RoleWrapper/RoleWrapper";
+import { ROLE, Role } from "@/constants/role";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +68,10 @@ export const router = createBrowserRouter([
   {
     path: "auth/signup",
     element: <Register />,
+  },
+  {
+    path: "/unauthorized",
+    element: <Unauthorized />, // Fallback for unauthorized access
   },
   // {
   //   path: "/reset-password",
@@ -169,7 +177,14 @@ export const router = createBrowserRouter([
         element: <CompletedCourses />,
       },
       // Role: Student
-      { path: "/dashboard/student/home", element: <StudentHome /> },
+      {
+        path: "/dashboard/student/home",
+        element: (
+          <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
+            <StudentHome />
+          </RoleWrapper>
+        ),
+      },
       {
         path: "/dashboard/student/courses/enrolled-courses",
         element: <EnrolledCourses />,
