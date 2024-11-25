@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         montserrat: ["Montserrat", "serif"],
+        siliguri: ["Hind Siliguri", "Montserrat", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
