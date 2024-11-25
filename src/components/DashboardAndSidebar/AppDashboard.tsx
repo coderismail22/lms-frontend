@@ -12,7 +12,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import AppSidebar from "@/components/DashboardAndSidebar/AppSidebar";
 import { capitalizeFirstLetter } from "./dashboard.util";
 import { useRole } from "@/hooks/useRole";
@@ -23,10 +23,15 @@ import { useQueryClient } from "@tanstack/react-query";
 import { authKey } from "@/api/authKey";
 
 const AppDashboard = () => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const authData = queryClient.getQueryData(authKey);
   const role = useRole();
-
+  // While redirecting, role will be undefined, so render nothing
+  if (!role) {
+    navigate("/auth/login");
+    return null; // Prevent further rendering while redirecting
+  }
   if (!authData) {
     return <p>Loading...</p>; // Wait until authKey is set
   }

@@ -4,10 +4,13 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const queryClient = useQueryClient();
-  const authData = queryClient.getQueryData<{ accessToken: string }>(authKey);
+  const authData = queryClient.getQueryData<{
+    accessToken: string;
+    role: string;
+  }>(authKey);
 
   // Redirect to login if accessToken doesn't exist
-  if (!authData?.accessToken) {
+  if (!authData?.accessToken || !authData?.role) {
     return <Navigate to="/auth/login" />;
   }
 

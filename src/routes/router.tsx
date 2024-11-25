@@ -41,6 +41,7 @@ import Login from "@/pages/Auth/Login/Login";
 import Register from "@/pages/Auth/Register/Register";
 import ResetPassword from "@/pages/Auth/ResetPassword/ResetPassword";
 import SetNewPasswordForm from "@/pages/Auth/SetNewPasswordForm/SetNewPasswordForm";
+import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -74,7 +75,11 @@ export const router = createBrowserRouter([
   // },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
     children: [
       // Role: Admin
       { path: "/dashboard/admin/home", element: <AdminHome /> },
