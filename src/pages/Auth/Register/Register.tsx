@@ -6,6 +6,7 @@ import { registerSchema } from "@/schemas/register.schema";
 import { TRegisterForm } from "@/types/register.type";
 import axiosInstance from "@/api/axiosInstance";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const mutation = useMutation({
@@ -94,6 +95,12 @@ const Register = () => {
             placeholder="Confirm your password"
           />
         </AppForm>
+        <div className="text-[11px] flex gap-1 mt-2 items-center justify-center">
+          <h1>Already have an account?</h1>
+          <Link to="/auth/login">
+            <span className="underline">Sign in</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { loginSchema } from "@/schemas/login.schema";
 // import axiosInstance from "@/api/axiosInstance";
 import { TLoginForm } from "@/types/login.type";
 import { useLogin } from "@/hooks/useLogin";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   // Define the mutation using TanStack Query
@@ -75,6 +76,12 @@ const Login = () => {
             placeholder="Enter your password"
           />
         </AppForm>
+        <div className="text-[11px] flex gap-1 mt-2 items-center justify-center">
+          <h1>Don't have an account?</h1>
+          <Link to="/auth/signup">
+            <span className="underline">Sign up</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
