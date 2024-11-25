@@ -7,8 +7,6 @@ import Blog from "../pages/Blog/Blog/Blog";
 import BlogPostDetail from "../pages/Blog/BlogPostDetails/BlogPostDetails";
 import Notes from "../pages/Note/Notes/Notes";
 import FullNote from "../pages/Note/FullNote/FullNote";
-import Contact from "../pages/Contact/Contact/Contact";
-// import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import Dashboard from "@/pages/Dashboard/Dashboard/Dashboard";
 import AdminHome from "@/pages/Dashboard/Admin/AdminHome/AdminHome";
@@ -39,13 +37,10 @@ import EditTeacher from "@/pages/Dashboard/Admin/Teacher Management/EditTeacher"
 import AllTeachers from "@/pages/Dashboard/Admin/Teacher Management/AllTeachers";
 import Login from "@/pages/Auth/Login/Login";
 import Register from "@/pages/Auth/Register/Register";
-import ResetPassword from "@/pages/Auth/ResetPassword/ResetPassword";
-import SetNewPasswordForm from "@/pages/Auth/SetNewPasswordForm/SetNewPasswordForm";
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 import Unauthorized from "@/components/Auth/Unauthorized/Unauthorized";
-import StudentRouteWrapper from "@/components/Auth/StudentRouteWrapper/StudentRouteWrapper";
 import RoleWrapper from "@/components/Auth/RoleWrapper/RoleWrapper";
-import { ROLE, Role } from "@/constants/role";
+import { ROLE } from "@/constants/role";
 import Courses from "@/pages/Courses/Courses";
 
 export const router = createBrowserRouter([

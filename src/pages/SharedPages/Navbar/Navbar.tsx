@@ -8,7 +8,7 @@ import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 const navitems = [
   { title: "Home", path: "/", isScroll: false },
   { title: "Courses", path: "/courses", isScroll: false },
-  { title: "Login", path: "/login", isScroll: false },
+  { title: "Login", path: "/auth/login", isScroll: false },
 ];
 
 const Navbar = () => {
