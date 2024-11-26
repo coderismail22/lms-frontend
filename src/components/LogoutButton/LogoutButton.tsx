@@ -11,7 +11,7 @@ const LogoutButton = () => {
 
   return (
     <Button onClick={handleLogout} disabled={logoutMutation.isPending}>
-      <LogOut/>
+      <LogOut />
       {logoutMutation.isPending ? "Logging out..." : "Logout"}
     </Button>
   );

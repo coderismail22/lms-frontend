@@ -7,6 +7,7 @@ import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 import { queryClient } from "@/queryClientSetup";
 import { authKey } from "@/api/authKey";
 import { useQueryClient } from "@tanstack/react-query";
+import LogoutButton from "@/components/LogoutButton/LogoutButton";
 
 const Navbar = () => {
   const queryClient = useQueryClient();
@@ -23,6 +24,7 @@ const Navbar = () => {
       console.log("No auth data found.");
       setIsLoggedIn(false); // User is not logged in
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // No need to include queryClient in dependencies
 
   // Show loading state until login status is determined
@@ -40,8 +42,7 @@ const Navbar = () => {
   if (isLoggedIn) {
     navitems.push(
       { title: "Cart", path: "/dashboard/student/cart", isScroll: false },
-      { title: "Dashboard", path: "/dashboard", isScroll: false },
-      { title: "Logout", path: "/dashboard", isScroll: false }
+      { title: "Dashboard", path: "/dashboard", isScroll: false }
     );
   } else {
     navitems.push({ title: "Login", path: "/auth/login", isScroll: false });
@@ -132,6 +133,7 @@ const Navbar = () => {
               </Link>
             )
           )}
+          {isLoggedIn && <LogoutButton />}
         </section>
 
         {/* Mobile Sidebar */}
