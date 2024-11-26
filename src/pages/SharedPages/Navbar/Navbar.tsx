@@ -1,17 +1,52 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll"; // Add scroller from react-scroll
 import { FaBars } from "react-icons/fa";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
-
-const navitems = [
-  { title: "Home", path: "/", isScroll: false },
-  { title: "Courses", path: "/courses", isScroll: false },
-  { title: "Login", path: "/auth/login", isScroll: false },
-];
+import { queryClient } from "@/queryClientSetup";
+import { authKey } from "@/api/authKey";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Navbar = () => {
+  const queryClient = useQueryClient();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  useEffect(() => {
+    // Check login status using auth data from query client
+    const authData = queryClient.getQueryData(authKey);
+
+    if (authData) {
+      console.log("Auth data retrieved:", authData);
+      setIsLoggedIn(true); // User is logged in
+    } else {
+      console.log("No auth data found.");
+      setIsLoggedIn(false); // User is not logged in
+    }
+  }, []); // No need to include queryClient in dependencies
+
+  // Show loading state until login status is determined
+  // if (isLoggedIn === null) {
+  //   return <p>Loading...</p>;
+  // }
+
+  // Define nav items
+  const navitems = [
+    { title: "Home", path: "/", isScroll: false },
+    { title: "Courses", path: "/courses", isScroll: false },
+  ];
+
+  // Add conditional items based on login state
+  if (isLoggedIn) {
+    navitems.push(
+      { title: "Cart", path: "/dashboard/student/cart", isScroll: false },
+      { title: "Dashboard", path: "/dashboard", isScroll: false },
+      { title: "Logout", path: "/dashboard", isScroll: false }
+    );
+  } else {
+    navitems.push({ title: "Login", path: "/auth/login", isScroll: false });
+  }
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -50,22 +85,22 @@ const Navbar = () => {
   };
 
   return (
-    <main className="mx-auto h-[50px] flex flex-col justify-between z-[9999] px-5 py-1 text-white bg-[#26283b] ">
-      <nav className="flex justify-between items-center px-5">
-        <div className="flex items-center justify-between lg:justify-center w-full">
-          <div>
+    <main className="mx-auto h-[50px] flex flex-col justify-between md:justify-center z-[9999] px-10 py-1 text-white bg-[#26283b] ">
+      <nav className="flex justify-between items-center px-5 ">
+        <div className="flex items-center justify-between lg:justify-center w-full  ">
+          <div className="">
             <Link to="/">
               {/* LOGO */}
               <img
-                src="/logo.svg"
+                src="/ejobsit-logo.svg"
                 // width={"120px"}
-                className="w-[80px]"
+                className="w-[30%]"
                 alt="lms-logo"
               />
             </Link>
           </div>
 
-          <section className="w-[50px]">
+          <section className="w-[50px] ">
             {/* MENU for Mobile */}
             <h1
               className="text-3xl cursor-pointer lg:hidden"
@@ -76,14 +111,14 @@ const Navbar = () => {
           </section>
         </div>
 
-        <section className="flex items-center justify-center gap-10 xl:gap-16 2xl:gap-20 text-center">
+        <section className="flex items-center justify-center gap-10 xl:gap-16 2xl:gap-20 text-center ">
           {/* Navbar For Larger Displays */}
           {navitems.map((item, index) =>
             item.isScroll ? (
               <button
                 key={index}
                 onClick={() => handleScrollNavigation(item.path)} // Handle scroll navigation
-                className="hover:text-blue-500 hover:cursor-pointer hidden lg:inline-block font-montserrat font-bold text-center text-sm md:text-base w-[50px]"
+                className="hover:text-blue-500 hover:cursor-pointer hidden lg:inline-block font-montserrat font-bold text-center text-sm md:text-base "
               >
                 {item.title}
               </button>
@@ -91,7 +126,7 @@ const Navbar = () => {
               <Link
                 key={index}
                 to={item.path}
-                className="hover:text-blue-500 hover:cursor-pointer hidden lg:inline-block font-montserrat font-bold text-center text-sm md:text-base w-[50px]"
+                className="hover:text-blue-500 hover:cursor-pointer hidden lg:inline-block font-montserrat font-bold text-center text-sm md:text-base "
               >
                 {item.title}
               </Link>
@@ -102,7 +137,7 @@ const Navbar = () => {
         {/* Mobile Sidebar */}
         <div
           className={clsx(
-            "fixed inset-0 z-[10000] lg:hidden bg-black/50 backdrop-blur-sm transition-all",
+            "fixed inset-0 z-[10000] lg:hidden bg-black/50 backdrop-blur-sm transition-all ",
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           )}
           onClick={toggleSidebar} // Close sidebar when background is clicked

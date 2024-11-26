@@ -257,7 +257,7 @@ export const sidebarData = {
   ],
   student: [
     { label: "Home", path: "/dashboard/student/home", icon: FaHome },
-    { label: "Cart", path: "/dashboard/student/home", icon: FaCartArrowDown },
+    { label: "Cart", path: "/dashboard/student/cart", icon: FaCartArrowDown },
     {
       label: "Courses",
       icon: FaUserGraduate,

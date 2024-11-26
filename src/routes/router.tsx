@@ -186,7 +186,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/student/cart",
         element: (
           <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
-            <StudentHome />
+            <Cart />
           </RoleWrapper>
         ),
       },
