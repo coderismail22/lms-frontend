@@ -64,6 +64,11 @@ const Register = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-400">
       <div className="w-full max-w-md p-6 bg-blue-400 shadow-md rounded-lg">
+        <div className="flex flex-col items-center justify-center">
+          <Link to="/">
+            <img className="w-[100px] " src="/ejobsit-logo.svg" />
+          </Link>
+        </div>
         <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
           Create Your Account
         </h2>

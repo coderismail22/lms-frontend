@@ -2,7 +2,6 @@
 import axios from "axios";
 import { authKey } from "./authKey";
 import { queryClient } from "@/queryClientSetup";
-import { Navigate, replace } from "react-router-dom";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:5000/api/v1", // Set the base URL for your API
