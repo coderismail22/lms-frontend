@@ -10,7 +10,6 @@ import FullNote from "../pages/Note/FullNote/FullNote";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import Dashboard from "@/pages/Dashboard/Dashboard/Dashboard";
 import AdminHome from "@/pages/Dashboard/Admin/AdminHome/AdminHome";
-import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
 import InstructorHome from "@/pages/Dashboard/Instructor/InstructorHome/InstructorHome";
 import CreateCourse from "@/pages/Dashboard/Admin/CourseManagement/Course/CreateCourse";
 import AllCourses from "@/pages/Dashboard/Admin/CourseManagement/Course/AllCourses";

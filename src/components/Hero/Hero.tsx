@@ -50,7 +50,7 @@ const Hero = () => {
         <div className="mx-auto py-12 z-30 ">
           <iframe
             className="rounded-xl w-[400px] h-[200px]"
-            src="https://www.youtube.com/embed/CuZWHuug1U4?si=JiiKVhABycJP4rzJ"
+            src="https://www.youtube.com/embed/7m0UFh7Ut4A"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen

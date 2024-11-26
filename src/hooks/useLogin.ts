@@ -14,7 +14,7 @@ type DecodedToken = {
   role: Role;
 };
 
-type AuthState = {
+export type AuthState = {
   accessToken: string;
   role: Role;
 };

@@ -5,31 +5,38 @@ import { scroller } from "react-scroll"; // Add scroller from react-scroll
 import { FaBars } from "react-icons/fa";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 import { authKey } from "@/api/authKey";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import LogoutButton from "@/components/LogoutButton/LogoutButton";
+import { AuthState } from "@/hooks/useLogin";
 
 const Navbar = () => {
   const queryClient = useQueryClient();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    // Check login status using auth data from query client
-    const authData = queryClient.getQueryData(authKey);
+  // Use useQuery to subscribe to authKey changes
+  const { data: authData } = useQuery<AuthState>({
+    queryKey: authKey,
+    // Automatically refresh auth state whenever authKey changes
+    initialData: queryClient.getQueryData<AuthState>(authKey),
+  });
 
-    if (authData) {
-      console.log("Auth data retrieved:", authData);
-      setIsLoggedIn(true); // User is logged in
-    } else {
-      console.log("No auth data found.");
-      setIsLoggedIn(false); // User is not logged in
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // No need to include queryClient in dependencies
+  const isLoggedIn = !!authData; // Check if authData exists (truthy value)
+  console.log(isLoggedIn);
+  console.log(authData);
 
-  // Show loading state until login status is determined
-  // if (isLoggedIn === null) {
-  //   return <p>Loading...</p>;
-  // }
+  // useEffect(() => {
+  //   // Check login status using auth data from query client
+  //   const authData = queryClient.getQueryData(authKey);
+
+  //   if (authData) {
+  //     console.log("Auth data retrieved:", authData);
+  //     setIsLoggedIn(true); // User is logged in
+  //   } else {
+  //     console.log("No auth data found.");
+  //     setIsLoggedIn(false); // User is not logged in
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []); // No need to include queryClient in dependencies
 
   // Define nav items
   const navitems = [
@@ -38,11 +45,17 @@ const Navbar = () => {
   ];
 
   // Add conditional items based on login state
-  if (isLoggedIn) {
+  if (authData?.role == "student") {
     navitems.push(
-      { title: "Cart", path: "/dashboard/student/cart", isScroll: false },
+      {
+        title: "Cart",
+        path: "/dashboard/student/cart",
+        isScroll: false,
+      },
       { title: "Dashboard", path: "/dashboard", isScroll: false }
     );
+  } else if (authData?.role == "admin" || authData?.role == "instructor") {
+    navitems.push({ title: "Dashboard", path: "/dashboard", isScroll: false });
   } else {
     navitems.push({ title: "Login", path: "/auth/login", isScroll: false });
   }
@@ -94,7 +107,7 @@ const Navbar = () => {
               <img
                 src="/ejobsit-logo.svg"
                 // width={"120px"}
-                className="w-[30%]"
+                className="w-[40%]"
                 alt="lms-logo"
               />
             </Link>
@@ -132,7 +145,9 @@ const Navbar = () => {
               </Link>
             )
           )}
-          {isLoggedIn && <LogoutButton />}
+          <div className="hidden lg:inline-block">
+            {isLoggedIn && <LogoutButton />}
+          </div>
         </section>
 
         {/* Mobile Sidebar */}
@@ -174,6 +189,7 @@ const Navbar = () => {
                 </Link>
               )
             )}
+            {isLoggedIn && <LogoutButton />}
           </section>
         </div>
       </nav>
