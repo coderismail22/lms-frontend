@@ -1,6 +1,7 @@
 import {
   FaBook,
   FaBookReader,
+  FaCartArrowDown,
   FaChalkboardTeacher,
   FaHome,
   FaRegListAlt,
@@ -169,11 +170,6 @@ export const sidebarData = {
               label: "Create Course",
               path: "/dashboard/admin/course-management/create-course",
             },
-            // {
-            //   icon: FaLink,
-            //   label: "Link Subject To Course",
-            //   path: "/dashboard/admin/course-management/link-subject-to-course",
-            // },
             {
               icon: FaRegListAlt,
               label: "All Courses",
@@ -261,6 +257,7 @@ export const sidebarData = {
   ],
   student: [
     { label: "Home", path: "/dashboard/student/home", icon: FaHome },
+    { label: "Cart", path: "/dashboard/student/home", icon: FaCartArrowDown },
     {
       label: "Courses",
       icon: FaUserGraduate,

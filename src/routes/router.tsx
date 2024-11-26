@@ -42,6 +42,7 @@ import Unauthorized from "@/components/Auth/Unauthorized/Unauthorized";
 import RoleWrapper from "@/components/Auth/RoleWrapper/RoleWrapper";
 import { ROLE } from "@/constants/role";
 import Courses from "@/pages/Courses/Courses";
+import Cart from "@/pages/Dashboard/Student/Cart/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -175,6 +176,14 @@ export const router = createBrowserRouter([
       // Role: Student
       {
         path: "/dashboard/student/home",
+        element: (
+          <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
+            <Cart />
+          </RoleWrapper>
+        ),
+      },
+      {
+        path: "/dashboard/student/cart",
         element: (
           <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
             <StudentHome />

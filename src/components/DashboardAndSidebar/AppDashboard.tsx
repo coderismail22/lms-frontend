@@ -12,12 +12,13 @@ import {
 
 import { Outlet, useNavigate } from "react-router-dom";
 import AppSidebar from "@/components/DashboardAndSidebar/AppSidebar";
-import { capitalizeFirstLetter } from "./dashboard.util";
 import { useRole } from "@/hooks/useRole";
 import CustomBreadcrumbLink from "../CustomBreadcrumbLink/CustomBreadcrumbLink";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import { useQueryClient } from "@tanstack/react-query";
 import { authKey } from "@/api/authKey";
+import {  BiLeftArrowCircle } from "react-icons/bi";
+import { FaArrowLeft } from "react-icons/fa";
 
 const AppDashboard = () => {
   const navigate = useNavigate();
@@ -44,8 +45,12 @@ const AppDashboard = () => {
           <Breadcrumb className=" w-full">
             <BreadcrumbList className=" flex justify-between items-center">
               <BreadcrumbItem className="hidden md:block">
-                <CustomBreadcrumbLink to={`/dashboard/${role}/home`}>
-                  {capitalizeFirstLetter(role)} Home
+                <CustomBreadcrumbLink to={`/`}>
+                  <p className="flex gap-2 items-center justify-center">
+                  <FaArrowLeft />
+
+                    Go to Homepage
+                  </p>
                 </CustomBreadcrumbLink>
               </BreadcrumbItem>
               {/* <BreadcrumbSeparator className="hidden md:block" /> */}
