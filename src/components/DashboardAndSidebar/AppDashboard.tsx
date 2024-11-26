@@ -43,16 +43,15 @@ const AppDashboard = () => {
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
-          <Breadcrumb>
-            <BreadcrumbList>
+          <Breadcrumb className=" w-full">
+            <BreadcrumbList className=" flex justify-between items-center">
               <BreadcrumbItem className="hidden md:block">
                 <CustomBreadcrumbLink to={`/dashboard/${role}/home`}>
-                  Dashboard
+                  {capitalizeFirstLetter(role)} Home
                 </CustomBreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
+              {/* <BreadcrumbSeparator className="hidden md:block" /> */}
               <BreadcrumbItem>
-                <BreadcrumbPage>{capitalizeFirstLetter(role)}</BreadcrumbPage>
                 <LogoutButton />
               </BreadcrumbItem>
             </BreadcrumbList>

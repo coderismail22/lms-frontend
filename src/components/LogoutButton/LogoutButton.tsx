@@ -1,4 +1,6 @@
 import { useLogout } from "@/hooks/useLogout";
+import { Button } from "../ui/button";
+import { LogOut } from "lucide-react";
 
 const LogoutButton = () => {
   const logoutMutation = useLogout();
@@ -8,9 +10,10 @@ const LogoutButton = () => {
   };
 
   return (
-    <button onClick={handleLogout} disabled={logoutMutation.isPending}>
+    <Button onClick={handleLogout} disabled={logoutMutation.isPending}>
+      <LogOut/>
       {logoutMutation.isPending ? "Logging out..." : "Logout"}
-    </button>
+    </Button>
   );
 };
 

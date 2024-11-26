@@ -2,8 +2,7 @@
 import axios from "axios";
 import { authKey } from "./authKey";
 import { queryClient } from "@/queryClientSetup";
-
-// const queryClient = new QueryClient();
+import { Navigate, replace } from "react-router-dom";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:5000/api/v1", // Set the base URL for your API
@@ -39,17 +38,43 @@ axiosInstance.interceptors.response.use(
       try {
         // Call refresh token endpoint
         const { data } = await axiosInstance.post("/auth/refresh-token");
-        queryClient.setQueryData(authKey, { accessToken: data.accessToken }); // Save new token
+
+        // Save new token
+        queryClient.setQueryData(authKey, { accessToken: data.accessToken });
+
+        // Update the authorization header for the original request
         originalRequest.headers.Authorization = `${data.accessToken}`;
-        return axiosInstance(originalRequest); // Retry original request
+
+        // Retry the original request with the new token
+        return axiosInstance(originalRequest);
       } catch (refreshError) {
         console.error("Token refresh failed:", refreshError);
-        queryClient.setQueryData(authKey, null); // Clear token
-        window.location.href = "/login"; // Redirect to login
+
+        // Clear the token and redirect to login
+        queryClient.setQueryData(authKey, null);
+        // Redirect to login
+        window.location.href = "/auth/login";
         return Promise.reject(refreshError);
       }
     }
 
+    // Handle 403 Forbidden (Access Denied)
+    if (error.response?.status === 403) {
+      console.warn("Access denied: insufficient permissions.");
+      window.location.href = "/unauthorized"; // Redirect to login
+      return Promise.reject(error); // Stop further processing
+    }
+
+    // Handle other status codes
+    if (error.response?.status === 404) {
+      console.error("Resource not found:", error.config.url);
+      // Optionally redirect or show a toast/message
+    } else if (error.response?.status === 500) {
+      console.error("Server error:", error.response.data);
+      // Show a generic error message
+    }
+
+    // Reject for all other cases
     return Promise.reject(error);
   }
 );

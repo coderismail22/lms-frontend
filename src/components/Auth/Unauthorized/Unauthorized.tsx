@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Unauthorized = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-black">
@@ -5,6 +7,7 @@ const Unauthorized = () => {
       <p className="mt-2  text-red-500">
         You do not have permission to access this page.
       </p>
+      <Link className="text-[14px] underline mt-10" to="/"> Go to Home</Link>
     </div>
   );
 };
