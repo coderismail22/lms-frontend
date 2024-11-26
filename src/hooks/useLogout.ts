@@ -20,7 +20,7 @@ export const useLogout = () => {
       queryClient.setQueryData(authKey, null); // Clear accessToken or any auth state
 
       // Redirect the user
-      navigate("/auth/login");
+      navigate("/");
     },
     onError: (error) => {
       console.error("Logout failed:", error);

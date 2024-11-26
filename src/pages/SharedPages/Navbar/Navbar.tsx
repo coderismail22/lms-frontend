@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll"; // Add scroller from react-scroll
 import { FaBars } from "react-icons/fa";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
-import { queryClient } from "@/queryClientSetup";
 import { authKey } from "@/api/authKey";
 import { useQueryClient } from "@tanstack/react-query";
 import LogoutButton from "@/components/LogoutButton/LogoutButton";
