@@ -8,15 +8,12 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
 import { Outlet, useNavigate } from "react-router-dom";
 import AppSidebar from "@/components/DashboardAndSidebar/AppSidebar";
 import { capitalizeFirstLetter } from "./dashboard.util";
 import { useRole } from "@/hooks/useRole";
-import { Role } from "./dashboard.type";
 import CustomBreadcrumbLink from "../CustomBreadcrumbLink/CustomBreadcrumbLink";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import { useQueryClient } from "@tanstack/react-query";
@@ -26,6 +23,7 @@ const AppDashboard = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const authData = queryClient.getQueryData(authKey);
+  // TODO: Add static role type instead of current void
   const role = useRole();
   // While redirecting, role will be undefined, so render nothing
   if (!role) {
