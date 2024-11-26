@@ -1,4 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+// import { useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
 import Swal from "sweetalert2";
 import { authKey } from "../api/authKey";
@@ -7,6 +8,7 @@ import { AxiosError } from "axios";
 import { jwtDecode } from "jwt-decode";
 import { Role } from "@/components/DashboardAndSidebar/dashboard.type";
 import { useNavigate } from "react-router-dom";
+import { queryClient } from "@/queryClientSetup";
 
 type DecodedToken = {
   role: Role;
@@ -27,7 +29,6 @@ export type TLoginResponse = {
 };
 
 export const useLogin = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   return useMutation<TLoginResponse, AxiosError, TLoginForm>({
     // Explicitly define mutation function with mutationFn
@@ -44,7 +45,7 @@ export const useLogin = () => {
       console.log("success data", data?.data);
 
       // Decode the role from the token
-      const decodedToken: DecodedToken = jwtDecode(data.data?.accessToken);
+      const decodedToken: DecodedToken = jwtDecode(data?.data?.accessToken);
       console.log(decodedToken);
       console.log(decodedToken?.role);
 
