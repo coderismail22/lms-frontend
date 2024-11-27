@@ -8,6 +8,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Separator } from "@radix-ui/react-separator";
 import { TbCoinTaka } from "react-icons/tb";
+import { Subject } from "@/types/course.type";
 // import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 // import useAuth from "../../../Hooks/useAuth";
 // import useCart from "../../../Hooks/useCart";
@@ -18,13 +19,19 @@ const AppCourseCard = ({ course }) => {
     name,
     courseType, //showing _id only of the category
     coursePrice,
-    totalClasses,
+    subjects,
     courseLength,
-    trainerImageUrl,
-    trainerName,
-    price,
     img,
   } = course;
+
+  // Calculate the total number of topics (classes)
+  const totalTopics = subjects
+    ? subjects?.reduce(
+        (sum: number, subject: Subject) => sum + (subject.topics?.length || 0),
+        0
+      )
+    : 0;
+  console.log("tt", totalTopics);
   console.log({ ...course });
   // console.log(name);
   // console.log(category);
@@ -123,30 +130,25 @@ const AppCourseCard = ({ course }) => {
 
       {/* Card Content */}
       <div className="">
-        <div className="flex items-center gap-2 bg-slate-100 p-1 mt-2 rounded-md">
+        {/* <div className="flex items-center gap-2 bg-slate-100 p-1 mt-2 rounded-md border " >
           <div className="p1 border-r-2 border-gray-400 pr-4">
             <img className="w-6" src={trainerImageUrl} alt="" />
           </div>
-          <Link to="#">
-            <p className="text-[#3a67ae] font-semibold text-[16px]">
-              {trainerName}
-            </p>
-          </Link>
-        </div>
+        </div> */}
         <div className="mt-1">
           <div className="flex  items-center justify-center gap-2 w-full text-[15px]">
             <p className=" text-white">
               <IoBookOutline />
             </p>
-            <p className="font-semibold text-zinc-400">ক্লাস সংখ্যা 30 +</p>
+            <p className="font-semibold text-zinc-400">
+              ক্লাস সংখ্যা {totalTopics}
+            </p>
           </div>
           <div className="flex  items-center justify-center gap-2 w-full text-[15px]">
             <p className=" text-white">
               <IoBookOutline />
             </p>
-            <p className="font-semibold text-zinc-400">
-              সময়কাল {courseLength} মাস +
-            </p>
+            <p className="font-semibold text-zinc-400">সময়কাল {courseLength}</p>
           </div>
           <Separator />
           <div className="flex justify-center items-center  gap-2  w-full text-[15px]">
