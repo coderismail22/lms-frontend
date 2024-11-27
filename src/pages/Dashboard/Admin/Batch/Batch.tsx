@@ -28,7 +28,7 @@ const Batch = () => {
     data: batches,
     isLoading,
     error,
-    refetch,
+    // refetch,
   } = useQuery({
     queryKey: ["batches"], // Unique query key
     queryFn: fetchBatches, // Fetch function

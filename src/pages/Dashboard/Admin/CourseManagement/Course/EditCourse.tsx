@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { TCourseForm } from "@/types/course.type";
 import { updateCourseSchema } from "@/schemas/course.schema";
 import axiosInstance from "@/api/axiosInstance";
+import ImageUpload from "@/components/ImageUpload/ImageUpload";
 
 type FetchCourseResponse = {
   success: boolean;
@@ -53,6 +54,7 @@ const EditCourse = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  const [img, setImg] = useState<string>(""); // Handle batch image
   const [careerOpportunities, setCareerOpportunities] = useState<string[]>([]);
   const [curriculum, setCurriculum] = useState<string[]>([]);
   const [jobPositions, setJobPositions] = useState<string[]>([]);
@@ -90,6 +92,7 @@ const EditCourse = () => {
   useEffect(() => {
     if (course) {
       console.log("hey course is like this ", course);
+      setImg(course?.data?.img || "");
       setCareerOpportunities(course?.data?.careerOpportunities || []);
       setCurriculum(course?.data?.curriculum || []);
       setJobPositions(course?.data?.jobPositions || []);
@@ -115,6 +118,7 @@ const EditCourse = () => {
   const onSubmit = (data: TCourseForm) => {
     const finalData = {
       ...data,
+      img,
       careerOpportunities,
       curriculum,
       jobPositions,
@@ -159,6 +163,16 @@ const EditCourse = () => {
             label="Description"
             placeholder="Enter description"
           />
+          {/* Image Upload Section */}
+          <div className="text-sm truncate">
+            <label className="block font-medium text-white">
+              Upload Cover Image
+            </label>
+            <ImageUpload setUploadedImageUrl={setImg} />
+            {img === "" && (
+              <p className="text-red-500 text-sm">Image is required</p>
+            )}
+          </div>
           {/* Language */}
           <AppSelect
             name="language"

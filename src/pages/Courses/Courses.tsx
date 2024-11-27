@@ -1,39 +1,67 @@
+import axiosInstance from "@/api/axiosInstance";
 import AppCourseCard from "@/components/AppCourseCard/AppCourseCard";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
+import { TCourse } from "../Dashboard/Admin/CourseManagement/Course/courseColumns";
+import { useQuery } from "@tanstack/react-query";
 
+const fetchCourses = async (): Promise<TCourse[]> => {
+  const response = await axiosInstance.get("/courses/get-all-courses");
+  return response.data.data; // Assuming `data` contains the course array
+};
 const Courses = () => {
   // State to track the active tab
   // TODO: Fix the stupid active status issue with tabs
   const [activeTab, setActiveTab] = useState("all");
-  console.log("active", activeTab);
+  // console.log("active", activeTab);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const [courses, getCourse] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [courses, getCourse] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("https://motion-boss-single-page-server.vercel.app/course")
-      .then((res) => res.json())
-      .then((data) => {
-        getCourse(data);
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetch("https://motion-boss-single-page-server.vercel.app/course")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       getCourse(data);
+  //       setLoading(false);
+  //     });
+  // }, []);
 
-  const onlineCourse = courses.filter(
-    (course) => course?.categoryName === "Online Live Course"
+  // const onlineCourse = courses.filter(
+  //   (course) => course?.categoryName === "Online Live Course"
+  // );
+  // const recordedCourse = courses.filter(
+  //   (course) => course?.categoryName === "Pre Recorded Course"
+  // );
+
+  // if (loading) return <p>Loading...</p>;
+  // if (isLoading) return <p>Loading...</p>;
+  // if (error) return <p>Something went wrong...</p>;
+
+  // Fetch courses using TanStack Query
+  const {
+    data: courses,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["courses"],
+    queryFn: fetchCourses,
+  });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Something went wrong...</p>;
+
+  const onlineCourses = courses?.filter(
+    (course) => course?.courseType === "Online"
   );
-  const recordedCourse = courses.filter(
-    (course) => course?.categoryName === "Pre Recorded Course"
+  const offlineCourses = courses?.filter(
+    (course) => course?.courseType === "Offline"
   );
-
-  if (loading) return <p>Loading...</p>;
-
   return (
     <div className="py-8 bg-gradient-to-l from-slate-500 to-slate-600 pb-32 font-siliguri">
       {/* <Helmet>
@@ -78,38 +106,52 @@ const Courses = () => {
               Online Courses
             </TabsTrigger>
             <TabsTrigger
-              value="recorded"
+              value="offline"
               className={`${
-                activeTab === "online"
+                activeTab === "offline"
                   ? "bg-gray-700 text-white" // Slightly darker for active tab
                   : "bg-gray-800 text-white" // Dark background for inactive tabs
               } px-4 py-2 rounded-md font-semibold transition`}
             >
-              Pre-Recorded Courses
+              Offline Courses
             </TabsTrigger>
           </TabsList>
 
           {/* Tabs Content */}
           <TabsContent value="all">
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {courses.map((course) => (
-                <AppCourseCard key={course.id} course={course} />
-              ))}
-            </div>
+            {courses?.length > 0 ? (
+              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {courses?.map((course) => (
+                  <AppCourseCard key={course.id} course={course} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-white">No courses found.</p>
+            )}
           </TabsContent>
           <TabsContent value="online">
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {onlineCourse.map((course) => (
-                <AppCourseCard key={course.id} course={course} />
-              ))}
-            </div>
+            {onlineCourses?.length > 0 ? (
+              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {onlineCourses?.map((course) => (
+                  <AppCourseCard key={course.id} course={course} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-white">No online courses found.</p>
+            )}
           </TabsContent>
-          <TabsContent value="recorded">
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {recordedCourse.map((course) => (
-                <AppCourseCard key={course.id} course={course} />
-              ))}
-            </div>
+          <TabsContent value="offline">
+            {offlineCourses?.length > 0 ? (
+              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {offlineCourses?.map((course) => (
+                  <AppCourseCard key={course.id} course={course} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-white">
+                No offline courses found.
+              </p>
+            )}
           </TabsContent>
         </Tabs>
         {/* Log Active Tab for Debugging */}

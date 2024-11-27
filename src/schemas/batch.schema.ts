@@ -3,6 +3,7 @@ import { z } from "zod";
 export const createBatchSchema = z.object({
   batchName: z.string().min(1, "Batch name is required"),
   courseName: z.string().min(1, "Course name is required"),
+  isActive: z.boolean().optional(),
   couponCode: z.string().min(1, "Coupon code is required").optional(), // Optional but must be valid if provided
   discountPrice: z.coerce.number().optional(), // Automatically coerces to number
   maxStudentNumber: z.coerce
