@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { queryClient } from "@/queryClientSetup";
 import { authKey } from "../api/authKey";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 
 // Define the custom hook
 export const useLogout = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   return useMutation({

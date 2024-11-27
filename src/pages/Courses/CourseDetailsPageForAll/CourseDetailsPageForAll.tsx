@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
 import {
   Card,
@@ -12,10 +12,16 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FaCartArrowDown } from "react-icons/fa";
+import { queryClient } from "@/queryClientSetup";
+import Swal from "sweetalert2";
 
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(`/courses/${courseId}/batches`);
   return data;
+};
+const handleAddToCart = async (batchId: string) => {
+  const response = await axiosInstance.post(`/carts`, { batchId });
+  return response;
 };
 
 const CourseDetailsPageForAll = () => {
@@ -26,6 +32,20 @@ const CourseDetailsPageForAll = () => {
     queryKey: ["courseDetails", courseId],
     queryFn: () => fetchCourseDetails(courseId as string),
     enabled: !!courseId, // Only fetch if courseId is defined
+  });
+
+  // Delete course mutation
+  const addToCartMutation = useMutation({
+    mutationFn: handleAddToCart,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cartItems"] }); // Refetch courses after deletion
+      Swal.fire("Added!", "The item has been added.", "success");
+    },
+    // TODO: Define an error type
+    onError: (error: any) => {
+      console.error("Error adding item:", error);
+      Swal.fire("Error!", "Failed to add course.", "error");
+    },
   });
 
   if (isLoading) {
@@ -126,7 +146,11 @@ const CourseDetailsPageForAll = () => {
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button className="w-full bg-blue-500" variant="default">
+                    <Button
+                      onClick={() => addToCartMutation.mutate(batch._id)}
+                      className="w-full bg-blue-500"
+                      variant="default"
+                    >
                       <FaCartArrowDown className="text-white" />
                       Add to Cart
                     </Button>

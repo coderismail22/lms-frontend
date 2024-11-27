@@ -24,7 +24,7 @@ const CourseDetailsPage = () => {
         const response = await axiosInstance.get(
           `/students/${studentId}/courses/${courseId}`
         );
-        const fetchedData = response.data.data;
+        const fetchedData = response?.data?.data;
 
         // Transform the data to structure it with appropriate types
         const transformedCourseData: Course = {
@@ -76,7 +76,7 @@ const CourseDetailsPage = () => {
           }
         );
 
-        const lastCompletedLessonId = lastCompletedLessonResponse.data.data;
+        const lastCompletedLessonId = lastCompletedLessonResponse?.data?.data;
 
         // Find the last completed lesson or the first accessible lesson
         const firstAccessibleLesson = allLessons.find(

@@ -56,6 +56,7 @@ export const router = createBrowserRouter([
       { path: "/note/:id", element: <FullNote /> },
       { path: "/courses", element: <Courses /> },
       { path: "/courses/:courseId", element: <CourseDetailsPageForAll /> },
+      { path: "/cart", element: <Cart /> },
     ],
   },
   // Auth
