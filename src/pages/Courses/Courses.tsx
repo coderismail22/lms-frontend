@@ -120,7 +120,7 @@ const Courses = () => {
           {/* Tabs Content */}
           <TabsContent value="all">
             {courses?.length > 0 ? (
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {courses?.map((course) => (
                   <AppCourseCard key={course.id} course={course} />
                 ))}
@@ -131,7 +131,7 @@ const Courses = () => {
           </TabsContent>
           <TabsContent value="online">
             {onlineCourses?.length > 0 ? (
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {onlineCourses?.map((course) => (
                   <AppCourseCard key={course.id} course={course} />
                 ))}
@@ -142,7 +142,7 @@ const Courses = () => {
           </TabsContent>
           <TabsContent value="offline">
             {offlineCourses?.length > 0 ? (
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {offlineCourses?.map((course) => (
                   <AppCourseCard key={course.id} course={course} />
                 ))}
@@ -154,10 +154,6 @@ const Courses = () => {
             )}
           </TabsContent>
         </Tabs>
-        {/* Log Active Tab for Debugging */}
-        <div className="mt-4 text-center text-white">
-          Active Tab: {activeTab}
-        </div>
       </div>
     </div>
   );
