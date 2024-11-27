@@ -14,6 +14,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { FaCartArrowDown } from "react-icons/fa";
 import { queryClient } from "@/queryClientSetup";
 import Swal from "sweetalert2";
+import { AxiosError } from "axios";
+import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
 
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(`/courses/${courseId}/batches`);
@@ -42,9 +44,9 @@ const CourseDetailsPageForAll = () => {
       Swal.fire("Added!", "The item has been added.", "success");
     },
     // TODO: Define an error type
-    onError: (error: any) => {
+    onError: (error: AxiosError<BackendErrorResponse>) => {
       console.error("Error adding item:", error);
-      Swal.fire("Error!", "Failed to add course.", "error");
+      Swal.fire("Error!", `${error?.response?.data?.message}`, "error");
     },
   });
 

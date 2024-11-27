@@ -14,6 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import Swal from "sweetalert2";
 import { queryClient } from "@/queryClientSetup";
+import { AxiosError } from "axios";
 
 // Mock fetchCartItems function
 const fetchCartItems = async () => {
