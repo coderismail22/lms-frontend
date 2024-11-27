@@ -1,3 +1,4 @@
+import * as Switch from "@radix-ui/react-switch";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { TBatchForm } from "@/types/batch.type";
@@ -8,7 +9,7 @@ import AppSelect from "../CustomForm/AppSelect";
 import AppDatePicker from "../CustomForm/AppDatePicker";
 import ImageUpload from "../ImageUpload/ImageUpload";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updateBatchSchema } from "@/schemas/batch.schema";
 
 // Fetch Response Type
@@ -53,6 +54,7 @@ const EditBatch = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [batchImg, setBatchImg] = useState<string>("");
+  const [isActive, setIsActive] = useState<boolean>(true); // Handle isActive toggle
 
   // Fetch the batch details
   const {
@@ -85,6 +87,13 @@ const EditBatch = () => {
     queryFn: fetchCourses,
   });
 
+  // Update `isActive` state when `batch` data changes
+  useEffect(() => {
+    if (batch?.data?.isActive !== undefined) {
+      setIsActive(batch.data.isActive);
+    }
+  }, [batch]);
+
   // Mutation for updating the batch
   const mutation = useMutation({
     mutationFn: ({
@@ -109,7 +118,11 @@ const EditBatch = () => {
 
   // Handle form submission
   const onSubmit = (data: Partial<TBatchForm>) => {
-    const finalData = { ...data, batchImg: batchImg || batch?.data?.batchImg };
+    const finalData = {
+      ...data,
+      batchImg: batchImg || batch?.data?.batchImg,
+      isActive,
+    };
     console.log("hey", finalData);
     mutation.mutate({ batchId: batchId!, data: finalData });
   };
@@ -176,6 +189,31 @@ const EditBatch = () => {
                 })
               )}
             />
+            {/* isActive Toggle */}
+            <div className="col-span-1">
+              <div className="flex items-center gap-3">
+                <Switch.Root
+                  checked={isActive}
+                  onCheckedChange={setIsActive}
+                  className={`w-12 h-6 rounded-full relative flex items-center ${
+                    isActive ? "bg-green-500" : "bg-red-500"
+                  } transition-all duration-300`}
+                >
+                  <Switch.Thumb
+                    className={`w-4 h-4 bg-white rounded-full shadow-md transition-transform duration-300 transform ${
+                      isActive ? "translate-x-[1.5rem]" : "translate-x-0"
+                    }`}
+                  />
+                </Switch.Root>
+                <span
+                  className={`font-medium ${
+                    isActive ? "text-green-700" : "text-red-700"
+                  }`}
+                >
+                  {isActive ? "Running" : "Ended"}
+                </span>
+              </div>
+            </div>
           </div>
         </AppForm>
       )}

@@ -5,7 +5,7 @@ import AppInput from "../CustomForm/AppInput";
 import AppSelect from "../CustomForm/AppSelect";
 import "react-datepicker/dist/react-datepicker.css";
 import AppDatePicker from "../CustomForm/AppDatePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ImageUpload from "../ImageUpload/ImageUpload";
 import axiosInstance from "@/api/axiosInstance";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -48,6 +48,8 @@ const fetchCourses = async () => {
 
 const AddBatch = () => {
   const navigate = useNavigate();
+  // Mapping for course names to IDs
+  const [courseMap, setCourseMap] = useState<Record<string, string>>({});
   const [batchImg, setBatchImg] = useState<string>(""); // Handle batch image
   const queryClient = useQueryClient(); // React Query's query client for invalidation
 
@@ -84,6 +86,23 @@ const AddBatch = () => {
     queryFn: fetchCourses,
   });
 
+  // Update courseMap when courses data is fetched
+  useEffect(() => {
+    if (courses) {
+      const mapping = courses.reduce(
+        (
+          map: Record<string, string>,
+          course: { _id: string; name: string }
+        ) => {
+          map[course.name] = course._id;
+          return map;
+        },
+        {}
+      );
+      setCourseMap(mapping); // Store the mapping for later use
+    }
+  }, [courses]);
+
   // Fetch Teachers
   const {
     data: teachers,
@@ -99,6 +118,7 @@ const AddBatch = () => {
     console.log("clicked");
     const finalData = {
       ...data,
+      courseId: courseMap[data.courseName],
       batchImg,
     };
 
