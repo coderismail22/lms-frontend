@@ -42,6 +42,7 @@ import RoleWrapper from "@/components/Auth/RoleWrapper/RoleWrapper";
 import { ROLE } from "@/constants/role";
 import Courses from "@/pages/Courses/Courses";
 import Cart from "@/pages/Dashboard/Student/Cart/Cart";
+import CourseDetailsPageForAll from "@/pages/Courses/CourseDetailsPageForAll/CourseDetailsPageForAll";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,7 @@ export const router = createBrowserRouter([
       { path: "/notes", element: <Notes /> },
       { path: "/note/:id", element: <FullNote /> },
       { path: "/courses", element: <Courses /> },
+      { path: "/courses/:courseId", element: <CourseDetailsPageForAll /> },
     ],
   },
   // Auth

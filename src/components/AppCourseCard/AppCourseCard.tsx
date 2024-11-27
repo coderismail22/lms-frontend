@@ -31,14 +31,7 @@ const AppCourseCard = ({ course }) => {
         0
       )
     : 0;
-  console.log("tt", totalTopics);
-  console.log({ ...course });
-  // console.log(name);
-  // console.log(category);
-  // console.log(subjects); //TODO: Calculate class number(module/topic)
-  console.log(coursePrice);
-  console.log(courseId);
-  console.log(img);
+
   // const navigate = useNavigate();
   // const location = useLocation();
   //   const axiosPublic = useAxiosSecure();
@@ -163,11 +156,10 @@ const AppCourseCard = ({ course }) => {
       </div>
 
       {/* Card Footer */}
+      {console.log(course._id)}
       <div className="flex justify-between m-1">
         <div className="w-full ">
-          <Link
-          // to={`course/${start_course_name}`}
-          >
+          <Link to={`/courses/${course._id}`}>
             <Button className="text-white bg-gradient-to-r w-full font-semibold text-[16px] from-cyan-500 to-blue-500 hover:from-blue-600 hover:to-blue-600">
               <p className="text-xl">
                 <BiCategoryAlt />
