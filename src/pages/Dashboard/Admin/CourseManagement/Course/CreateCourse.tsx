@@ -9,6 +9,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import ImageUpload from "@/components/ImageUpload/ImageUpload";
 
 // Fetch subjects from the database
 const fetchSubjects = async () => {
@@ -31,6 +32,7 @@ const createCourse = async (courseData: TCourseForm) => {
 };
 
 const CreateCourse = () => {
+  const [img, setImg] = useState<string>(""); // Handle batch image
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [careerOpportunities, setCareerOpportunities] = useState<string[]>([]);
@@ -73,6 +75,7 @@ const CreateCourse = () => {
   const onSubmit = (data: TCourseForm) => {
     const finalData = {
       ...data,
+      img,
       careerOpportunities,
       curriculum,
       jobPositions,
@@ -101,6 +104,7 @@ const CreateCourse = () => {
         defaultValues={{
           name: "",
           description: "",
+          img: "",
           category: "",
           language: "",
           courseType: "",
@@ -129,6 +133,16 @@ const CreateCourse = () => {
             label="Description"
             placeholder="Enter description"
           />
+          {/* Image Upload Section */}
+          <div className="text-sm truncate">
+            <label className="block font-medium text-white">
+              Upload Cover Image
+            </label>
+            <ImageUpload setUploadedImageUrl={setImg} />
+            {img === "" && (
+              <p className="text-red-500 text-sm">Image is required</p>
+            )}
+          </div>
           {/* Language */}
           <AppSelect
             name="language"

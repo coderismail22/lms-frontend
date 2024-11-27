@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll"; // Add scroller from react-scroll
 import { FaBars } from "react-icons/fa";
@@ -21,22 +21,6 @@ const Navbar = () => {
   });
 
   const isLoggedIn = !!authData; // Check if authData exists (truthy value)
-  console.log(isLoggedIn);
-  console.log(authData);
-
-  // useEffect(() => {
-  //   // Check login status using auth data from query client
-  //   const authData = queryClient.getQueryData(authKey);
-
-  //   if (authData) {
-  //     console.log("Auth data retrieved:", authData);
-  //     setIsLoggedIn(true); // User is logged in
-  //   } else {
-  //     console.log("No auth data found.");
-  //     setIsLoggedIn(false); // User is not logged in
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []); // No need to include queryClient in dependencies
 
   // Define nav items
   const navitems = [

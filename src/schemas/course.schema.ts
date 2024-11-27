@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const createCourseSchema = z.object({
   name: z.string().min(1, "Name is required"),
+  img: z.string(),
   description: z.string().min(1, "Description is required"),
   category: z.string().min(1, "Category is required"),
   language: z.string().min(1, "Language is required"),
@@ -19,6 +20,7 @@ export const createCourseSchema = z.object({
 export const updateCourseSchema = z.object({
   name: z.string().min(1, "Name is required").optional(),
   description: z.string().min(1, "Description is required").optional(),
+  img: z.string().optional(),
   category: z.string().min(1, "Category is required").optional(),
   language: z.string().min(1, "Language is required").optional(),
   courseType: z.string().min(1, "Course type is required").optional(),

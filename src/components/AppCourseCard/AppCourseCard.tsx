@@ -16,7 +16,8 @@ const AppCourseCard = ({ course }) => {
   const {
     courseId,
     courseName,
-    categoryName,
+    categoryName, //showing _id only of the category
+    coursePrice,
     start_course_name,
     totalClasses,
     trainerImageUrl,
@@ -24,6 +25,12 @@ const AppCourseCard = ({ course }) => {
     price,
     thumbnail_url,
   } = course;
+  // console.log(name);
+  // console.log(category);
+  // console.log(subjects); //TODO: Calculate class number(module/topic)
+  console.log(coursePrice);
+  console.log(courseId);
+  console.log(courseId);
   const navigate = useNavigate();
   const location = useLocation();
   //   const axiosPublic = useAxiosSecure();
@@ -130,16 +137,16 @@ const AppCourseCard = ({ course }) => {
             <p className=" text-white">
               <IoBookOutline />
             </p>
-            <p className="font-semibold text-zinc-400">
-              ক্লাস সংখ্যা {totalClasses}
-            </p>
+            <p className="font-semibold text-zinc-400">ক্লাস সংখ্যা 30 +</p>
           </div>
           <Separator />
           <div className="flex justify-center items-center  gap-2  w-full text-[15px]">
             <p className=" text-white">
               <TbCoinTaka />
             </p>
-            <p className="font-semibold text-zinc-400">কোর্স ফি {price} টাকা</p>
+            <p className="font-semibold text-zinc-400">
+              কোর্স ফি {coursePrice} টাকা
+            </p>
           </div>
         </div>
       </div>
