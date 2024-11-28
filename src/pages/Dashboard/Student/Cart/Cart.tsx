@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/api/axiosInstance";
 import {
   Card,
   CardContent,
@@ -13,56 +14,21 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import Swal from "sweetalert2";
-import { queryClient } from "@/queryClientSetup";
 import { AxiosError } from "axios";
 
-// Mock fetchCartItems function
+// Fetch cart items from backend
 const fetchCartItems = async () => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve({
-        data: [
-          {
-            _id: "1",
-            batchId: {
-              _id: "batch1",
-              batchName: "Batch 1",
-              batchImg: "https://via.placeholder.com/150",
-            },
-            courseId: {
-              _id: "course1",
-              name: "Course 1",
-            },
-            price: 2000,
-            quantity: 1,
-          },
-          {
-            _id: "2",
-            batchId: {
-              _id: "batch2",
-              batchName: "Batch 2",
-              batchImg: "https://via.placeholder.com/150",
-            },
-            courseId: {
-              _id: "course2",
-              name: "Course 2",
-            },
-            price: 3500,
-            quantity: 2,
-          },
-        ],
-      });
-    }, 500)
-  );
+  const { data } = await axiosInstance.get("/carts"); // Backend GET /carts
+  console.log(data);
+  return data;
 };
 
-// Mock removeCartItem function
+// Remove a cart item
 const removeCartItem = async (cartItemId: string) => {
-  console.log(`Mock remove cart item: ${cartItemId}`);
-  return Promise.resolve();
+  await axiosInstance.delete(`/carts/${cartItemId}`); // Backend DELETE /carts/:cartItemId
 };
 
-// Mock updateCartItemQuantity function
+// Update cart item quantity
 const updateCartItemQuantity = async ({
   cartItemId,
   quantity,
@@ -70,39 +36,47 @@ const updateCartItemQuantity = async ({
   cartItemId: string;
   quantity: number;
 }) => {
-  console.log(`Mock update quantity: ${cartItemId} to ${quantity}`);
-  return Promise.resolve();
+  await axiosInstance.patch(`/carts/${cartItemId}`, { quantity }); // Backend PATCH /carts/:cartItemId
 };
 
 const Cart = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
+  // Fetch cart items
   const { data, isLoading, isError } = useQuery({
     queryKey: ["cartItems"],
     queryFn: fetchCartItems,
   });
 
+  // Mutation to remove an item
   const removeMutation = useMutation({
     mutationFn: removeCartItem,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cartItems"] });
       Swal.fire("Removed!", "Item removed from cart.", "success");
     },
-    onError: () => {
-      Swal.fire("Error", "Failed to remove item.", "error");
+    onError: (error: AxiosError) => {
+      const errorMessage =
+        error?.response?.data?.message || "Failed to remove item.";
+      Swal.fire("Error", errorMessage, "error");
     },
   });
 
+  // Mutation to update quantity
   const updateQuantityMutation = useMutation({
     mutationFn: updateCartItemQuantity,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cartItems"] });
     },
-    onError: () => {
-      Swal.fire("Error", "Failed to update quantity.", "error");
+    onError: (error: AxiosError) => {
+      const errorMessage =
+        error?.response?.data?.message || "Failed to update quantity.";
+      Swal.fire("Error", errorMessage, "error");
     },
   });
 
+  // Loading state
   if (isLoading) {
     return (
       <div className="p-6">
@@ -113,6 +87,7 @@ const Cart = () => {
     );
   }
 
+  // Error state
   if (isError) {
     return <div className="p-6 text-red-500">Failed to load cart items.</div>;
   }
@@ -123,10 +98,12 @@ const Cart = () => {
     0
   );
 
+  // Handle remove action
   const handleRemove = (cartItemId: string) => {
     removeMutation.mutate(cartItemId);
   };
 
+  // Handle quantity change action
   const handleQuantityChange = (cartItemId: string, quantity: number) => {
     if (quantity < 1) {
       Swal.fire("Error", "Quantity must be at least 1.", "error");
@@ -135,6 +112,7 @@ const Cart = () => {
     updateQuantityMutation.mutate({ cartItemId, quantity });
   };
 
+  // Handle checkout action
   const handleCheckout = () => {
     if (cartItems.length === 0) {
       Swal.fire("Error", "Your cart is empty.", "error");
@@ -165,11 +143,9 @@ const Cart = () => {
               <div className="flex items-center gap-2 mt-4">
                 <Badge>Quantity</Badge>
                 <Input
+                  disabled
                   type="number"
                   value={item.quantity}
-                  onChange={(e) =>
-                    handleQuantityChange(item._id, parseInt(e.target.value))
-                  }
                   className="w-16"
                 />
               </div>

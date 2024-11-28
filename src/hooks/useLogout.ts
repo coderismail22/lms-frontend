@@ -17,6 +17,7 @@ export const useLogout = () => {
     },
     onSuccess: () => {
       // Clear authentication state
+      console.log("Logging out user");
       queryClient.setQueryData(authKey, null); // Clear accessToken or any auth state
 
       // Redirect the user
