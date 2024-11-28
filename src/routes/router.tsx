@@ -43,6 +43,7 @@ import { ROLE } from "@/constants/role";
 import Courses from "@/pages/Courses/Courses";
 import Cart from "@/pages/Dashboard/Student/Cart/Cart";
 import CourseDetailsPageForAll from "@/pages/Courses/CourseDetailsPageForAll/CourseDetailsPageForAll";
+import Payment from "@/pages/Dashboard/Student/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,7 @@ export const router = createBrowserRouter([
       { path: "/courses", element: <Courses /> },
       { path: "/courses/:courseId", element: <CourseDetailsPageForAll /> },
       { path: "/cart", element: <Cart /> },
+      { path: "/paymentpage", element: <Payment /> },
     ],
   },
   // Auth
