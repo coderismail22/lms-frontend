@@ -58,7 +58,6 @@ export const router = createBrowserRouter([
       { path: "/courses", element: <Courses /> },
       { path: "/courses/:courseId", element: <CourseDetailsPageForAll /> },
       { path: "/cart", element: <Cart /> },
-      { path: "/paymentpage", element: <Payment /> },
     ],
   },
   // Auth
@@ -191,6 +190,14 @@ export const router = createBrowserRouter([
         element: (
           <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
             <Cart />
+          </RoleWrapper>
+        ),
+      },
+      {
+        path: "/dashboard/student/paymentpage",
+        element: (
+          <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
+            <Payment />
           </RoleWrapper>
         ),
       },

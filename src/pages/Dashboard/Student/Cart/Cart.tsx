@@ -118,7 +118,7 @@ const Cart = () => {
       Swal.fire("Error", "Your cart is empty.", "error");
       return;
     }
-    navigate("/paymentpage");
+    navigate("/dashboard/student/paymentpage");
   };
 
   return (
