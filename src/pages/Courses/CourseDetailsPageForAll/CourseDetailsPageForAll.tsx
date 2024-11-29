@@ -21,8 +21,10 @@ const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(`/courses/${courseId}/batches`);
   return data;
 };
-const handleAddToCart = async (batchId: string) => {
-  const response = await axiosInstance.post(`/carts`, { batchId });
+const enrollToTheBatchHandler = async (batchId: string) => {
+  const response = await axiosInstance.post(`/payments/${batchId}`, {
+    batchId,
+  });
   return response;
 };
 
@@ -36,11 +38,10 @@ const CourseDetailsPageForAll = () => {
     enabled: !!courseId, // Only fetch if courseId is defined
   });
 
-  // Delete course mutation
-  const addToCartMutation = useMutation({
-    mutationFn: handleAddToCart,
+  const enrollToTheBatch = useMutation({
+    mutationFn: enrollToTheBatchHandler,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cartItems"] }); // Refetch courses after deletion
+      queryClient.invalidateQueries({ queryKey: [""] });
       Swal.fire("Added!", "The item has been added.", "success");
     },
     // TODO: Define an error type
@@ -149,12 +150,12 @@ const CourseDetailsPageForAll = () => {
                   </CardContent>
                   <CardFooter>
                     <Button
-                      onClick={() => addToCartMutation.mutate(batch._id)}
+                      onClick={() => enrollToTheBatch.mutate(batch._id)}
                       className="w-full bg-blue-500"
                       variant="default"
                     >
                       <FaCartArrowDown className="text-white" />
-                      Add to Cart
+                      Enroll
                     </Button>
                   </CardFooter>
                 </Card>

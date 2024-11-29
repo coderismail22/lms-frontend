@@ -1,14 +1,8 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "@/api/axiosInstance";
 import AppForm from "../CustomForm/AppForm";
 import AppInput from "../CustomForm/AppInput";
-import { Button } from "@/components/ui/button";
-import Swal from "sweetalert2";
-import { useState } from "react";
-import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
 import AppSelect from "../CustomForm/AppSelect";
 import AppDatePicker from "../CustomForm/AppDatePicker";
+import { paymentSchema } from "@/schemas/payment.schema";
 
 const PaymentForm = () => {
   // Form submission handler
@@ -20,7 +14,7 @@ const PaymentForm = () => {
     <div>
       <h1 className="text-center mb-4">Proceed to Payment</h1>
       <AppForm
-        // schema={null} // Add your schema validation here if necessary
+        schema={paymentSchema}
         buttonText="Complete Payment"
         onSubmit={handlePaymentSubmit}
         defaultValues={{

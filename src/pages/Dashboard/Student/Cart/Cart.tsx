@@ -28,17 +28,6 @@ const removeCartItem = async (cartItemId: string) => {
   await axiosInstance.delete(`/carts/${cartItemId}`); // Backend DELETE /carts/:cartItemId
 };
 
-// Update cart item quantity
-const updateCartItemQuantity = async ({
-  cartItemId,
-  quantity,
-}: {
-  cartItemId: string;
-  quantity: number;
-}) => {
-  await axiosInstance.patch(`/carts/${cartItemId}`, { quantity }); // Backend PATCH /carts/:cartItemId
-};
-
 const Cart = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -59,19 +48,6 @@ const Cart = () => {
     onError: (error: AxiosError) => {
       const errorMessage =
         error?.response?.data?.message || "Failed to remove item.";
-      Swal.fire("Error", errorMessage, "error");
-    },
-  });
-
-  // Mutation to update quantity
-  const updateQuantityMutation = useMutation({
-    mutationFn: updateCartItemQuantity,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cartItems"] });
-    },
-    onError: (error: AxiosError) => {
-      const errorMessage =
-        error?.response?.data?.message || "Failed to update quantity.";
       Swal.fire("Error", errorMessage, "error");
     },
   });
@@ -103,27 +79,24 @@ const Cart = () => {
     removeMutation.mutate(cartItemId);
   };
 
-  // Handle quantity change action
-  const handleQuantityChange = (cartItemId: string, quantity: number) => {
-    if (quantity < 1) {
-      Swal.fire("Error", "Quantity must be at least 1.", "error");
-      return;
-    }
-    updateQuantityMutation.mutate({ cartItemId, quantity });
-  };
-
   // Handle checkout action
   const handleCheckout = () => {
     if (cartItems.length === 0) {
       Swal.fire("Error", "Your cart is empty.", "error");
       return;
     }
+    console.log("cartItems", cartItems);
     navigate("/dashboard/student/paymentpage");
   };
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Your Cart</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-2">
+        Your Cart (Item)
+      </h1>
+      <h1 className="text-xl font-bold text-red-500 mb-6">
+        Please don&apos;t add more than one item at a time *
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cartItems.map((item: any) => (
           <Card key={item._id} className="shadow-lg border">
