@@ -12,11 +12,13 @@ import { queryClient } from "@/queryClientSetup";
 
 type DecodedToken = {
   role: Role;
+  email:string;
 };
 
 export type AuthState = {
   accessToken: string;
   role: Role;
+  email: string;
 };
 
 export type TLoginResponse = {
@@ -52,6 +54,7 @@ export const useLogin = () => {
       // Save the accessToken and role in TanStack Query state
       const authState: AuthState = {
         accessToken: data.data.accessToken,
+        email: decodedToken.email,
         role: decodedToken.role,
       };
 

@@ -20,6 +20,8 @@ const CourseDetailsPage = () => {
   // Fetch and transform the course data for frontend needs
   useEffect(() => {
     const fetchCourseData = async () => {
+      console.log(studentId)
+      console.log(courseId)
       try {
         const response = await axiosInstance.get(
           `/students/${studentId}/courses/${courseId}`
