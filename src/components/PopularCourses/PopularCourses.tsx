@@ -7,16 +7,10 @@ import { TCourse } from "@/pages/Dashboard/Admin/CourseManagement/Course/courseC
 
 const fetchCourses = async (): Promise<TCourse[]> => {
   const response = await axiosInstance.get("/courses/get-all-courses");
+  console.log("course response", response);
   return response.data.data; // Assuming `data` contains the course array
 };
 const PopularCourses = () => {
-  // useEffect(() => {
-  //   fetch("/data/course.json")
-  //     .then((res) => res.json())
-  //     .then((data) => getCourse(data));
-  // }, []);
-  // console.log("home courses", courses);
-
   // Fetch courses using TanStack Query
   const {
     data: courses,
@@ -46,9 +40,13 @@ const PopularCourses = () => {
       ></SectionTitle>
 
       <div className="grid gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-3 w-[90%] mx-auto">
-        {courses?.map((course, index) => (
-          <AppCourseCard key={index} course={course}></AppCourseCard>
-        ))}
+        {Array.isArray(courses) ? (
+          courses.map((course: TCourse) => (
+            <AppCourseCard key={course._id} course={course} />
+          ))
+        ) : (
+          <p>No courses available.</p>
+        )}
       </div>
     </div>
   );
