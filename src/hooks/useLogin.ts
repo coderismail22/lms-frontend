@@ -12,7 +12,7 @@ import { queryClient } from "@/queryClientSetup";
 
 type DecodedToken = {
   role: Role;
-  email:string;
+  email: string;
 };
 
 export type AuthState = {

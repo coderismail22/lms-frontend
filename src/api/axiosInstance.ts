@@ -19,6 +19,7 @@ axiosInstance.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `${token}`;
   } else {
+    // TOOD: fix the issue of being undefined
     console.warn("No token found, proceeding without authorization.");
   }
 

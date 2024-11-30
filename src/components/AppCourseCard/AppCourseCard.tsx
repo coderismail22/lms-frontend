@@ -156,7 +156,6 @@ const AppCourseCard = ({ course }) => {
       </div>
 
       {/* Card Footer */}
-      {console.log(course._id)}
       <div className="flex justify-between m-1">
         <div className="w-full ">
           <Link to={`/courses/${course._id}`}>

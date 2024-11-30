@@ -12,12 +12,17 @@ import { GiProgression } from "react-icons/gi";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { MdOutlineDownloading, MdOutlinePlayLesson } from "react-icons/md";
+
+import {
+  MdOutlineDownloading,
+  MdOutlinePlayLesson,
+} from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
+import { FaCircleArrowLeft } from "react-icons/fa6";
 
 export const sidebarData = {
   superAdmin: [
-    // { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
+    // { label: "Home", path: "/", icon: FaHome },
     { label: "Add Batch", path: "/dashboard/admin/batch", icon: FaBookReader },
     // TODO: Add Route/Outline like PH
     // {
@@ -125,6 +130,7 @@ export const sidebarData = {
         },
       ],
     },
+    { label: "Go to Homepage", path: "/", icon: FaCircleArrowLeft  },
   ],
   admin: [
     // { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
@@ -230,6 +236,7 @@ export const sidebarData = {
         },
       ],
     },
+    { label: "Go to Homepage", path: "/", icon: FaCircleArrowLeft  },
   ],
   instructor: [
     { label: "Home", path: "/dashboard/instructor/home", icon: FaHome },
@@ -254,6 +261,7 @@ export const sidebarData = {
         },
       ],
     },
+    { label: "Go to Homepage", path: "/", icon: FaCircleArrowLeft  },
   ],
   student: [
     { label: "Home", path: "/dashboard/student/home", icon: FaHome },
@@ -269,5 +277,6 @@ export const sidebarData = {
         },
       ],
     },
+    { label: "Go to Homepage", path: "/", icon: FaCircleArrowLeft  },
   ],
 };
