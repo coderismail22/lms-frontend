@@ -20,8 +20,8 @@ const CourseDetailsPage = () => {
   // Fetch and transform the course data for frontend needs
   useEffect(() => {
     const fetchCourseData = async () => {
-      console.log(studentId)
-      console.log(courseId)
+      console.log(studentId);
+      console.log(courseId);
       try {
         const response = await axiosInstance.get(
           `/students/${studentId}/courses/${courseId}`
@@ -73,8 +73,8 @@ const CourseDetailsPage = () => {
         const lastCompletedLessonResponse = await axiosInstance.post(
           `/students/get-last-completed-lesson`,
           {
-            studentId: "6731baa1f0897a87c9ca2e76",
-            courseId: "67270d2a8481df2630cb2bd1",
+            studentId: studentId,
+            courseId: courseId,
           }
         );
 

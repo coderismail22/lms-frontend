@@ -11,7 +11,7 @@ const CourseCard = ({
   course: FullPopulatedCourse;
   studentId: string;
 }) => {
-  const { courseId, subjects } = course;
+  const { courseId } = course;
   {
     console.log("course card", console.log(course));
     console.log("course card", console.log("studentId", studentId));
