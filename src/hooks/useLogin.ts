@@ -53,8 +53,8 @@ export const useLogin = () => {
 
       // Decode the role from the token
       const decodedToken: DecodedToken = jwtDecode(data?.data?.accessToken);
-      console.log(decodedToken);
-      console.log(decodedToken?.role);
+      // console.log(decodedToken);
+      // console.log(decodedToken?.role);
 
       // Save the accessToken and role in TanStack Query state
       const authState: AuthState = {

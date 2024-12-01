@@ -45,12 +45,10 @@ const CourseDetailsPageForAll = () => {
   });
 
   // enroll Handler
-  const handleEnroll = (batch, actualCoursePrice) => {
+  const handleEnroll = (batch: TBatchForm, actualCoursePrice: number) => {
     // Redirect to the payment page with batch info and price
-
-    navigate("/dashboard/student/paymentpage", {
-      state: { batch: batch, actualCoursePrice: actualCoursePrice }, // Passing both course and user data via React Router state
-    });
+    queryClient.setQueryData(["paymentData"], { batch, actualCoursePrice });
+    navigate("/dashboard/student/paymentpage");
   };
 
   // const enrollToTheBatch = useMutation({
@@ -163,7 +161,9 @@ const CourseDetailsPageForAll = () => {
                   </CardContent>
                   <CardFooter>
                     <Button
-                      onClick={() => handleEnroll(batch, courseData?.price)}
+                      onClick={() =>
+                        handleEnroll(batch, courseData?.coursePrice as string)
+                      }
                       className="w-full bg-blue-500"
                       variant="default"
                     >

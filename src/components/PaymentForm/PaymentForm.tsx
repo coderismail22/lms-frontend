@@ -6,6 +6,7 @@ import { paymentSchema } from "@/schemas/payment.schema";
 
 const PaymentForm = () => {
   // Form submission handler
+  
   const handlePaymentSubmit = (paymentData: any) => {
     console.log("payment data", paymentData);
   };
