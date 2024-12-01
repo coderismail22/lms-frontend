@@ -19,7 +19,8 @@ const PaymentForm = () => {
         onSubmit={handlePaymentSubmit}
         defaultValues={{
           name: "Ismail",
-          phoneNumber: "01756434489",
+          payerNumber: "01756434489",
+          payeeNumber: "01730481212",
           paymentMethod: "",
           amount: 10,
           tnxId: "123456789",
@@ -34,12 +35,29 @@ const PaymentForm = () => {
             placeholder="Enter your full name"
           />
         </div>
-        {/* Phone Number */}
+        {/* Email */}
+        {/* <div className="mb-4">
+          <AppInput
+            label="Email"
+            name="email"
+            placeholder="Enter your full name"
+          />
+        </div> */}
+        {/* Payer Number */}
         <div className="mb-4">
           <AppInput
-            label="Phone Number"
-            name="phoneNumber"
+            label="Your Phone Number"
+            name="payerNumber"
             placeholder="Enter your phone number"
+          />
+        </div>
+        {/* Payee Number */}
+        <div className="mb-4">
+          <AppInput
+            label="Payee Phone Number"
+            name="payeeNumber"
+            placeholder="Enter your phone number"
+            isDisabled
           />
         </div>
         {/* Payment Method */}
@@ -48,7 +66,7 @@ const PaymentForm = () => {
             label="Payment Method"
             name="paymentMethod"
             options={[
-              { value: "Bkash", label: "bKash" },
+              { value: "bkash", label: "bKash" },
               { value: "rocket", label: "Rocket" },
               { value: "nagad", label: "Nagad" },
             ]}

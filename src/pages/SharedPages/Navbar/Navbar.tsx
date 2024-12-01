@@ -30,14 +30,7 @@ const Navbar = () => {
 
   // Add conditional items based on login state
   if (authData?.role == "student") {
-    navitems.push(
-      {
-        title: "Cart",
-        path: "/dashboard/student/cart",
-        isScroll: false,
-      },
-      { title: "Dashboard", path: "/dashboard", isScroll: false }
-    );
+    navitems.push({ title: "Dashboard", path: "/dashboard", isScroll: false });
   } else if (authData?.role == "admin" || authData?.role == "instructor") {
     navitems.push({ title: "Dashboard", path: "/dashboard", isScroll: false });
   } else {

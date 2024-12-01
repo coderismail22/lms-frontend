@@ -1,6 +1,10 @@
 import PaymentForm from "@/components/PaymentForm/PaymentForm";
+import { useLocation } from "react-router-dom";
 
 const Payment = () => {
+  const location = useLocation();
+  const {batch,actualCoursePrice} = location.state || {};
+  console.log(batch,actualCoursePrice);
   return (
     <div className="h-[100%]">
       <div>

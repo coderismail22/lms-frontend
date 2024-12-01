@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const createBatchSchema = z.object({
+  _id: z.string().optional(), // for type inference at other places
   batchName: z.string().min(1, "Batch name is required"),
   courseName: z.string().min(1, "Course name is required"),
   isActive: z.boolean().optional(),

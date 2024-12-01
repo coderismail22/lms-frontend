@@ -1,7 +1,7 @@
 import {
   FaBook,
   FaBookReader,
-  FaCartArrowDown,
+  // FaCartArrowDown,
   FaChalkboardTeacher,
   FaHome,
   FaRegListAlt,

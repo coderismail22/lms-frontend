@@ -7,7 +7,7 @@ import { TLoginForm } from "@/types/login.type";
 import { AxiosError } from "axios";
 import { jwtDecode } from "jwt-decode";
 import { Role } from "@/components/DashboardAndSidebar/dashboard.type";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { queryClient } from "@/queryClientSetup";
 
 type DecodedToken = {
@@ -32,6 +32,11 @@ export type TLoginResponse = {
 
 export const useLogin = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Save the route the user was trying to access
+  const from = location.state?.from || "/dashboard";
+
   return useMutation<TLoginResponse, AxiosError, TLoginForm>({
     // Explicitly define mutation function with mutationFn
     mutationFn: async (formData: TLoginForm): Promise<TLoginResponse> => {
@@ -67,7 +72,7 @@ export const useLogin = () => {
         title: "Login Successful",
         text: "You are now logged in!",
       }).then(() => {
-        navigate("/dashboard"); // Redirect after login
+        navigate(from, { replace: true }); // Redirect to the intended route
       });
     },
     onError: (error: AxiosError) => {

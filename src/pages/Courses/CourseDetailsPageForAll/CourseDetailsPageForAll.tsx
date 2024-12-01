@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
 import {
@@ -16,40 +16,55 @@ import { queryClient } from "@/queryClientSetup";
 import Swal from "sweetalert2";
 import { AxiosError } from "axios";
 import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
+import { TBatchForm } from "@/types/batch.type";
 
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(`/courses/${courseId}/batches`);
-  return data;
+  return data?.data;
 };
-const enrollToTheBatchHandler = async (batchId: string) => {
-  const response = await axiosInstance.post(`/payments/${batchId}`, {
-    batchId,
-  });
-  return response;
-};
+// const enrollToTheBatchHandler = async (batchId: string) => {
+//   const response = await axiosInstance.post(`/payments/${batchId}`, {
+//     batchId,
+//   });
+//   return response;
+// };
 
 const CourseDetailsPageForAll = () => {
   const { courseId } = useParams();
-
+  const navigate = useNavigate();
   // Fetch course details using React Query
-  const { data, error, isLoading, isError } = useQuery({
+  const {
+    data: courseData,
+    error,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["courseDetails", courseId],
     queryFn: () => fetchCourseDetails(courseId as string),
     enabled: !!courseId, // Only fetch if courseId is defined
   });
 
-  const enrollToTheBatch = useMutation({
-    mutationFn: enrollToTheBatchHandler,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [""] });
-      Swal.fire("Added!", "The item has been added.", "success");
-    },
-    // TODO: Define an error type
-    onError: (error: AxiosError<BackendErrorResponse>) => {
-      console.error("Error adding item:", error);
-      Swal.fire("Error!", `${error?.response?.data?.message}`, "error");
-    },
-  });
+  // enroll Handler
+  const handleEnroll = (batch, actualCoursePrice) => {
+    // Redirect to the payment page with batch info and price
+
+    navigate("/dashboard/student/paymentpage", {
+      state: { batch: batch, actualCoursePrice: actualCoursePrice }, // Passing both course and user data via React Router state
+    });
+  };
+
+  // const enrollToTheBatch = useMutation({
+  //   mutationFn: enrollToTheBatchHandler,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({ queryKey: [""] });
+  //     Swal.fire("Added!", "The item has been added.", "success");
+  //   },
+  //   // TODO: Define an error type
+  //   onError: (error: AxiosError<BackendErrorResponse>) => {
+  //     console.error("Error adding item:", error);
+  //     Swal.fire("Error!", `${error?.response?.data?.message}`, "error");
+  //   },
+  // });
 
   if (isLoading) {
     return (
@@ -70,8 +85,6 @@ const CourseDetailsPageForAll = () => {
       </div>
     );
   }
-
-  const courseData = data?.data;
 
   return (
     <div className="container mx-auto p-6 h-[100%] ">
@@ -129,7 +142,7 @@ const CourseDetailsPageForAll = () => {
               Available Batches:
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {courseData.batches.map((batch: any) => (
+              {courseData.batches.map((batch: TBatchForm) => (
                 <Card key={batch._id} className="shadow-lg border bg-slate-500">
                   <CardHeader>
                     <CardTitle className="text-lg font-medium text-white">
@@ -150,7 +163,7 @@ const CourseDetailsPageForAll = () => {
                   </CardContent>
                   <CardFooter>
                     <Button
-                      onClick={() => enrollToTheBatch.mutate(batch._id)}
+                      onClick={() => handleEnroll(batch, courseData?.price)}
                       className="w-full bg-blue-500"
                       variant="default"
                     >
