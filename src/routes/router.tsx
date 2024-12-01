@@ -46,6 +46,7 @@ import CourseDetailsPageForAll from "@/pages/Courses/CourseDetailsPageForAll/Cou
 import Payment from "@/pages/Dashboard/Student/Payment/Payment";
 import AllPayments from "@/pages/Dashboard/Admin/Payments/AllPayments";
 import AllOrders from "@/pages/Dashboard/Admin/Orders/AllOrders";
+import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
 
 export const router = createBrowserRouter([
   {
@@ -185,7 +186,8 @@ export const router = createBrowserRouter([
         path: "/dashboard/student/home",
         element: (
           <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
-            <Cart />
+            {/* <Cart /> */}
+            <StudentHome />
           </RoleWrapper>
         ),
       },
