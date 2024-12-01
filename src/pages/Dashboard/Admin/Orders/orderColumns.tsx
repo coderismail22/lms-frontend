@@ -21,20 +21,20 @@ export const orderColumns = (
     header: "SL",
     cell: ({ row }) => row.index + 1,
   },
-  // {
-  //   accessorKey: "name",
-  //   header: ({ column }) => {
-  //     return (
-  //       <Button
-  //         variant="ghost"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //       >
-  //         Name
-  //         <ArrowUpDown className="ml-2 h-4 w-4" />
-  //       </Button>
-  //     );
-  //   },
-  // },
+  {
+    accessorKey: "userId.name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
   {
     header: "Order ID",
     accessorKey: "_id", // Accessor key for order ID
