@@ -11,7 +11,7 @@ interface BatchCardProps {
   image: string;
   courseName: string;
   batch: number;
-  batchID: string;
+  batchId: string;
   onEdit: () => void;
   onDelete: () => void;
   onViewStudents: () => void;
@@ -21,7 +21,7 @@ const BatchCard: React.FC<BatchCardProps> = ({
   image,
   courseName,
   batch,
-  batchID,
+  batchId,
   onEdit,
   onDelete,
   onViewStudents,
@@ -41,7 +41,7 @@ const BatchCard: React.FC<BatchCardProps> = ({
           <strong>Batch:</strong> {batch}
         </p>
         <p className="text-sm text-gray-600">
-          <strong>Batch ID:</strong> {batchID}
+          <strong>Batch ID:</strong> {batchId}
         </p>
       </CardContent>
       <CardFooter className="flex items-center justify-between p-4">

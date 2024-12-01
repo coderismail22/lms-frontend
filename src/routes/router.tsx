@@ -48,6 +48,7 @@ import AllPayments from "@/pages/Dashboard/Admin/Payments/AllPayments";
 import AllOrders from "@/pages/Dashboard/Admin/Orders/AllOrders";
 import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
 import PendingCourses from "@/pages/Dashboard/Student/Courses/PendingCourses/PendingCourses";
+import AllBatchStudents from "@/pages/Dashboard/Admin/Batch/AllBatchStudents";
 
 export const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ export const router = createBrowserRouter([
       { path: "/dashboard/admin/categories", element: <Categories /> },
       { path: "/dashboard/admin/batch", element: <Batch /> },
       { path: "/dashboard/admin/batch/edit/:batchId", element: <EditBatch /> },
+      {
+        path: "/dashboard/admin/batch/all-batch-students/:batchId",
+        element: <AllBatchStudents />,
+      },
       { path: "/dashboard/admin/batch/add-batch", element: <AddBatch /> },
       // Teacher Management
       {

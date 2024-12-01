@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
 import BatchCard from "@/components/BatchCard/BatchCard";
 import Swal from "sweetalert2";
+import { AxiosError } from "axios";
+import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
 
 // Fetch batches
 const fetchBatches = async () => {
@@ -19,6 +22,9 @@ const deleteBatch = async (batchId: string): Promise<void> => {
 const Batch = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const handleAllStudent = (batchId: string) => {
+    navigate(`/dashboard/admin/batch/all-batch-students/${batchId}`);
+  };
   const handleEdit = (batchId: string) => {
     navigate(`/dashboard/admin/batch/edit/${batchId}`);
   };
@@ -43,7 +49,7 @@ const Batch = () => {
       queryClient.invalidateQueries({ queryKey: ["batches"] }); // Refetch batches
     },
     // TODO: Define error type
-    onError: (error: any) => {
+    onError: (error: AxiosError<BackendErrorResponse>) => {
       console.error("Error deleting batch:", error);
       Swal.fire("Error!", "Failed to delete batch.", "error");
     },
@@ -94,12 +100,10 @@ const Batch = () => {
               image={batch.batchImg || "https://via.placeholder.com/150"} // Fallback if no image
               courseName={batch.courseName}
               batch={batch.batchName}
-              batchID={batch._id}
+              batchId={batch._id}
               onEdit={() => handleEdit(batch._id)}
               onDelete={() => handleDelete(batch._id)}
-              onViewStudents={() =>
-                console.log(`View students in batch ID: ${batch._id}`)
-              }
+              onViewStudents={() => handleAllStudent(batch._id)}
             />
           ))}
         </div>

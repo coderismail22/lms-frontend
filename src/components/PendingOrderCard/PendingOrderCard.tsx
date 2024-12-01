@@ -20,7 +20,6 @@ interface PendingOrderCardProps {
 }
 
 const PendingOrderCard: React.FC<PendingOrderCardProps> = ({
-  orderId,
   batch,
   payment,
   orderStatus,
