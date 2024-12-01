@@ -17,8 +17,7 @@ export const paymentSchema = z.object({
   transactionId: z.string(),
   paymentDate: z
     .string()
-    .refine((val) => !isNaN(Date.parse(val)), {
-      message: "Invalid date format",
-    })
-    .transform((val) => new Date(val)),
+    .refine((dateString) => !isNaN(Date.parse(dateString)), {
+      message: "Start date must be a valid date (e.g., YYYY-MM-DD)",
+    }),
 });

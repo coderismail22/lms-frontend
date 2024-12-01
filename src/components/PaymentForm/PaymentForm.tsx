@@ -3,11 +3,64 @@ import AppInput from "../CustomForm/AppInput";
 import AppSelect from "../CustomForm/AppSelect";
 import AppDatePicker from "../CustomForm/AppDatePicker";
 import { paymentSchema } from "@/schemas/payment.schema";
+import axiosInstance from "@/api/axiosInstance";
+import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "@/queryClientSetup";
+import Swal from "sweetalert2";
+import { AxiosError } from "axios";
+import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
+import { TPaymentForm } from "@/types/payment.type";
+import { useNavigate } from "react-router-dom";
+type TMakePaymentResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    _id: string;
+    __v: number;
+  };
+};
 
-const PaymentForm = ({ finalPrice }: { finalPrice: number }) => {
-  // Form submission handler
-  const handlePaymentSubmit = (paymentData: any) => {
-    console.log("payment data", paymentData);
+// Payment Handler
+const submitPayment = async ({
+  batchId,
+  paymentData,
+}: {
+  batchId: string;
+  paymentData: TPaymentForm;
+}): Promise<TMakePaymentResponse> => {
+  const response = await axiosInstance.post(
+    `/payments/${batchId}`,
+    paymentData
+  );
+  return response?.data;
+};
+
+const PaymentForm = ({
+  finalPrice,
+  batchId,
+}: {
+  finalPrice: number;
+  batchId: string;
+}) => {
+  const navigate = useNavigate();
+  const makePayment = useMutation({
+    mutationFn: submitPayment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [""] });
+      Swal.fire("Successful!", "Payment placed successfully.", "success");
+      navigate("/dashboard/student/courses/enrolled-courses"); // Or redirect wherever after success
+    },
+    onError: (error: AxiosError<BackendErrorResponse>) => {
+      console.error("Error adding item:", error);
+      Swal.fire("Error!", `${error?.response?.data?.message}`, "error");
+    },
+  });
+
+  // Handle form submission
+  const onSubmit = (data: TPaymentForm) => {
+    console.log(data);
+    console.log(batchId);
+    makePayment.mutate({ paymentData: data, batchId: batchId });
   };
 
   return (
@@ -18,7 +71,7 @@ const PaymentForm = ({ finalPrice }: { finalPrice: number }) => {
       <AppForm
         schema={paymentSchema}
         buttonText="Complete Payment"
-        onSubmit={handlePaymentSubmit}
+        onSubmit={onSubmit}
         defaultValues={{
           name: "Ismail",
           payerNumber: "01756434489",
@@ -26,7 +79,7 @@ const PaymentForm = ({ finalPrice }: { finalPrice: number }) => {
           paymentMethod: "",
           amount: finalPrice,
           transactionId: "123456789",
-          paymentDate: "2024-12-28",
+          paymentDate: "",
         }}
       >
         {/* Name */}

@@ -12,19 +12,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FaCartArrowDown } from "react-icons/fa";
-import { queryClient } from "@/queryClientSetup";
 import { TBatchForm } from "@/types/batch.type";
+import { queryClient } from "@/queryClientSetup";
+
 
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(`/courses/${courseId}/batches`);
   return data?.data;
 };
-// const enrollToTheBatchHandler = async (batchId: string) => {
-//   const response = await axiosInstance.post(`/payments/${batchId}`, {
-//     batchId,
-//   });
-//   return response;
-// };
+
 
 const CourseDetailsPageForAll = () => {
   const { courseId } = useParams();
@@ -48,18 +44,7 @@ const CourseDetailsPageForAll = () => {
     navigate("/dashboard/student/paymentpage");
   };
 
-  // const enrollToTheBatch = useMutation({
-  //   mutationFn: enrollToTheBatchHandler,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: [""] });
-  //     Swal.fire("Added!", "The item has been added.", "success");
-  //   },
-  //   // TODO: Define an error type
-  //   onError: (error: AxiosError<BackendErrorResponse>) => {
-  //     console.error("Error adding item:", error);
-  //     Swal.fire("Error!", `${error?.response?.data?.message}`, "error");
-  //   },
-  // });
+
 
   if (isLoading) {
     return (
