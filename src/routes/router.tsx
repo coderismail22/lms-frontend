@@ -47,6 +47,7 @@ import Payment from "@/pages/Dashboard/Student/Payment/Payment";
 import AllPayments from "@/pages/Dashboard/Admin/Payments/AllPayments";
 import AllOrders from "@/pages/Dashboard/Admin/Orders/AllOrders";
 import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
+import PendingCourses from "@/pages/Dashboard/Student/Courses/PendingCourses/PendingCourses";
 
 export const router = createBrowserRouter([
   {
@@ -212,6 +213,14 @@ export const router = createBrowserRouter([
         element: (
           <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
             <EnrolledCourses />
+          </RoleWrapper>
+        ),
+      },
+      {
+        path: "/dashboard/student/courses/pending-courses",
+        element: (
+          <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
+            <PendingCourses />
           </RoleWrapper>
         ),
       },

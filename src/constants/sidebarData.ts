@@ -285,6 +285,11 @@ export const sidebarData = {
           label: "Enrolled Courses",
           path: "/dashboard/student/courses/enrolled-courses",
         },
+        {
+          icon: MdOutlinePlayLesson,
+          label: "Pending Courses",
+          path: "/dashboard/student/courses/pending-courses",
+        },
       ],
     },
     { label: "Go to Homepage", path: "/", icon: FaCircleArrowLeft },

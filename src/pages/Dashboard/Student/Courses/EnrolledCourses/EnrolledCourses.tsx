@@ -2,7 +2,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
 import CourseCard from "@/components/CourseCard/CourseCard";
-import { Course } from "@/types/course.type";
 import { FullPopulatedCourse } from "@/types/fullCourseAndStudent.type";
 
 const fetchCourses = async () => {
@@ -12,6 +11,7 @@ const fetchCourses = async () => {
 };
 
 const EnrolledCourses = () => {
+  // Fetch enrolled courses
   const {
     data,
     isLoading: isCourseLoading,
