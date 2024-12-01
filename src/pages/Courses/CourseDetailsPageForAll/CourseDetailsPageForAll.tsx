@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
 import {
   Card,
@@ -13,9 +13,6 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FaCartArrowDown } from "react-icons/fa";
 import { queryClient } from "@/queryClientSetup";
-import Swal from "sweetalert2";
-import { AxiosError } from "axios";
-import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
 import { TBatchForm } from "@/types/batch.type";
 
 const fetchCourseDetails = async (courseId: string) => {
@@ -162,7 +159,7 @@ const CourseDetailsPageForAll = () => {
                   <CardFooter>
                     <Button
                       onClick={() =>
-                        handleEnroll(batch, courseData?.coursePrice as string)
+                        handleEnroll(batch, courseData?.coursePrice as number)
                       }
                       className="w-full bg-blue-500"
                       variant="default"

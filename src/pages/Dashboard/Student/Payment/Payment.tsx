@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 type TBatch = {
   discountPrice: number;
-  
+  batchName: string;
 };
 const Payment = () => {
   const queryClient = useQueryClient();
@@ -26,10 +26,19 @@ const Payment = () => {
   return (
     <div className="h-[100%]">
       <div>
-        <h1>Payment Page</h1>
+        <h1 className="text-center text-xl mb-5 overline">
+          Proceed to Payment
+        </h1>
+        <h1 className="text-center mb-1">
+          Item:{" "}
+          <span className="font-bold">{paymentData?.batch?.batchName}</span>
+        </h1>
+        <h1 className="text-center mb-4">
+          Price: <span className="font-bold">{finalPrice} BDT</span>
+        </h1>
       </div>
       <div className="max-w-xl mx-auto my-5">
-        <PaymentForm />
+        <PaymentForm finalPrice={finalPrice} />
       </div>
     </div>
   );

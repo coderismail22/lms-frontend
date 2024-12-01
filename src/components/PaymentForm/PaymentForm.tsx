@@ -4,16 +4,17 @@ import AppSelect from "../CustomForm/AppSelect";
 import AppDatePicker from "../CustomForm/AppDatePicker";
 import { paymentSchema } from "@/schemas/payment.schema";
 
-const PaymentForm = () => {
+const PaymentForm = ({ finalPrice }: { finalPrice: number }) => {
   // Form submission handler
-  
   const handlePaymentSubmit = (paymentData: any) => {
     console.log("payment data", paymentData);
   };
 
   return (
     <div>
-      <h1 className="text-center mb-4">Proceed to Payment</h1>
+      <h1 className="text-red-500 font-bold text-sm text-right">
+        Please fill up the form carefully.*
+      </h1>
       <AppForm
         schema={paymentSchema}
         buttonText="Complete Payment"
@@ -23,8 +24,8 @@ const PaymentForm = () => {
           payerNumber: "01756434489",
           payeeNumber: "01730481212",
           paymentMethod: "",
-          amount: 10,
-          tnxId: "123456789",
+          amount: finalPrice,
+          transactionId: "123456789",
           paymentDate: "2024-12-28",
         }}
       >
@@ -79,13 +80,14 @@ const PaymentForm = () => {
             label="Amount"
             name="amount"
             placeholder="Enter the amount"
+            isDisabled
           />
         </div>
         {/* Transaction ID */}
         <div className="mb-4">
           <AppInput
             label="Transaction ID"
-            name="tnxId"
+            name="transactionId"
             placeholder="Enter your transaction ID"
           />
         </div>
