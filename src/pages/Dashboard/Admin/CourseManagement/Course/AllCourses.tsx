@@ -1,10 +1,13 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { Button } from "@/components/ui/button";
 import { TCourse, courseColumns } from "./courseColumns";
 import CourseTable from "./CourseTable";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "@/api/axiosInstance";
+import { AxiosError } from "axios";
+import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
+import { queryClient } from "@/queryClientSetup";
 
 const fetchCourses = async (): Promise<TCourse[]> => {
   const response = await axiosInstance.get("/courses/get-all-courses");
@@ -17,7 +20,6 @@ const deleteCourse = async (courseId: string): Promise<void> => {
 
 const AllCourses = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   // Fetch courses using TanStack Query
   const {
@@ -36,8 +38,7 @@ const AllCourses = () => {
       queryClient.invalidateQueries({ queryKey: ["courses"] }); // Refetch courses after deletion
       Swal.fire("Deleted!", "The course has been deleted.", "success");
     },
-    // TODO: Define an error type
-    onError: (error: any) => {
+    onError: (error: AxiosError<BackendErrorResponse>) => {
       console.error("Error deleting course:", error);
       Swal.fire("Error!", "Failed to delete course.", "error");
     },

@@ -45,7 +45,7 @@ import Cart from "@/pages/Dashboard/Student/Cart/Cart";
 import CourseDetailsPageForAll from "@/pages/Courses/CourseDetailsPageForAll/CourseDetailsPageForAll";
 import Payment from "@/pages/Dashboard/Student/Payment/Payment";
 import Orders from "@/pages/Dashboard/Admin/Orders/Orders";
-import Payments from "@/pages/Dashboard/Admin/Payments/Payments";
+import AllPayments from "@/pages/Dashboard/Admin/Payments/AllPayments";
 
 export const router = createBrowserRouter([
   {
@@ -94,7 +94,7 @@ export const router = createBrowserRouter([
       // Role: Admin
       { path: "/dashboard/admin/home", element: <AdminHome /> },
       { path: "/dashboard/admin/orders", element: <Orders /> },
-      { path: "/dashboard/admin/payments", element: <Payments /> },
+      { path: "/dashboard/admin/payments", element: <AllPayments /> },
       { path: "/dashboard/admin/categories", element: <Categories /> },
       { path: "/dashboard/admin/batch", element: <Batch /> },
       { path: "/dashboard/admin/batch/edit/:batchId", element: <EditBatch /> },
