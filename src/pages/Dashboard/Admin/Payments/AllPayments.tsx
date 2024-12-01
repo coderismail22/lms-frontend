@@ -7,7 +7,6 @@ import { queryClient } from "@/queryClientSetup";
 import PaymentTable from "./PaymentTable";
 import { paymentColumns } from "./paymentColumns";
 import { TPayment } from "./payment.type";
-import { useState } from "react";
 
 const fetchPayments = async (): Promise<TPayment[]> => {
   const response = await axiosInstance.get("/payments/get-all-payments");
@@ -20,8 +19,6 @@ const deletePayment = async (paymentId: string): Promise<void> => {
 
 const AllPayments = () => {
   const navigate = useNavigate();
-
-  const [globalFilter, setGlobalFilter] = useState(""); // For global filtering
 
   // Fetch payments
   const {
