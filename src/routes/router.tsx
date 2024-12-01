@@ -44,7 +44,6 @@ import Courses from "@/pages/Courses/Courses";
 import Cart from "@/pages/Dashboard/Student/Cart/Cart";
 import CourseDetailsPageForAll from "@/pages/Courses/CourseDetailsPageForAll/CourseDetailsPageForAll";
 import Payment from "@/pages/Dashboard/Student/Payment/Payment";
-import Orders from "@/pages/Dashboard/Admin/Orders/Orders";
 import AllPayments from "@/pages/Dashboard/Admin/Payments/AllPayments";
 import AllOrders from "@/pages/Dashboard/Admin/Orders/AllOrders";
 

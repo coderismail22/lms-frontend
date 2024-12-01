@@ -32,22 +32,17 @@ const AllOrders = () => {
     queryFn: fetchOrders,
   });
 
-  // Handle deleting an order
-  const handleDelete = async (orderId: string) => {
-    try {
-      await deleteOrder(orderId);
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
-      Swal.fire("Success", "Order deleted successfully", "success");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-    } catch (error: any) {
-      Swal.fire("Error", "Failed to delete order", "error");
-    }
+  // Handle order status
+  const handleApprove = (orderId: string) => {
+    console.log(orderId);
+  };
+  const handleDecline = (orderId: string) => {
+    console.log(orderId);
+  };
+  const handleDelete = async () => {
+    Swal.fire("Failed", "Currently Delete Isn't Available", "error");
   };
 
-  // Handle editing an order
-  const handleEdit = (orderId: string) => {
-    navigate(`/orders/edit/${orderId}`); // Redirect to order edit page (example route)
-  };
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
   return (
@@ -56,7 +51,7 @@ const AllOrders = () => {
       {orders && (
         <OrderTable
           data={orders}
-          columns={orderColumns(handleEdit, handleDelete)} // Pass handleEdit and handleDelete to OrderTable
+          columns={orderColumns(handleApprove, handleDecline, handleDelete)} // Pass handleEdit and handleDelete to OrderTable
         />
       )}
     </div>

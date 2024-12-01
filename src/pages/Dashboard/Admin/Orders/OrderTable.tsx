@@ -81,7 +81,7 @@ const OrderTable = <TData, TValue>({
           }
           className="max-w-sm"
         />
-
+        {/* Show/Hide Columns */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -96,7 +96,7 @@ const OrderTable = <TData, TValue>({
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
-                    className="capitalize"
+                    className="uppercase"
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) =>
                       column.toggleVisibility(!!value)

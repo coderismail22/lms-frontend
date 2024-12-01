@@ -8,12 +8,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { BiDotsVertical } from "react-icons/bi";
-import { FaRegEdit, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { ArrowUpDown } from "lucide-react";
 import { TOrder } from "./order.type";
+import { RxCrossCircled } from "react-icons/rx";
+import { FaSquareArrowUpRight } from "react-icons/fa6";
+import moment from "moment"; // Import moment.js
 
 export const orderColumns = (
-  handleEdit: (paymentId: string) => void,
+  handleApprove: (paymentId: string) => void,
+  handleDecline: (paymentId: string) => void,
   handleDelete: (paymentId: string) => void
 ): ColumnDef<TOrder>[] => [
   {
@@ -56,6 +60,10 @@ export const orderColumns = (
   {
     header: "Order Time",
     accessorKey: "createdAt", // Assuming there's a createdAt field for order date
+    cell: ({ row }) => {
+      const createdAt = row.getValue("createdAt") as string; // Get the order creation time
+      return moment(createdAt).format("D-MM-YYYY, h:mm:ss a"); // Format the date using Moment.js
+    },
   },
   {
     header: "Order Status",
@@ -74,11 +82,14 @@ export const orderColumns = (
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => handleEdit(paymentId)}>
-              <FaRegEdit /> Edit
+            <DropdownMenuItem onClick={() => handleApprove(paymentId)}>
+              <FaSquareArrowUpRight className="text-green-700" /> Approve
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleDecline(paymentId)}>
+              <RxCrossCircled className="text-red-500" /> Decline
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleDelete(paymentId)}>
-              <FaTrash /> Delete
+              <FaTrash className="text-red-500" /> Delete
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
