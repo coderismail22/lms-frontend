@@ -105,7 +105,7 @@ const CourseDetailsPage = () => {
   );
 
   return (
-    <div className="p-4 bg-white shadow-md grid grid-cols-1 md:grid-cols-5 items-center justify-center gap-4 w-[100%] border border-red-500 rounded-md">
+    <div className="p-4  shadow-md grid grid-cols-1 md:grid-cols-5 items-center justify-center gap-4 w-[100%]  rounded-md">
       <div className="col-span-1 md:col-span-3  min-h-full w-full">
         <ContentViewer
           courseId={courseId || ""}
@@ -117,7 +117,7 @@ const CourseDetailsPage = () => {
           setLessons={setLessons}
         />
       </div>
-      <div className="col-span-1 bg-blue-200 shadow-md md:col-span-2  min-h-[400px] w-full overflow-y-scroll">
+      <div className="col-span-1 bg-blue-200 shadow-md md:col-span-2  min-h-full w-full">
         <ContentDetails
           course={courseData}
           onSelectLesson={setSelectedLesson}
