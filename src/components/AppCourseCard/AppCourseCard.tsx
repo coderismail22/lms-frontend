@@ -1,8 +1,6 @@
 import { BiCategoryAlt } from "react-icons/bi";
-import { FiShoppingCart } from "react-icons/fi";
 import { IoBookOutline } from "react-icons/io5";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
@@ -13,9 +11,10 @@ import { Subject } from "@/types/course.type";
 // import useAuth from "../../../Hooks/useAuth";
 // import useCart from "../../../Hooks/useCart";
 
-const AppCourseCard = ({ course }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const AppCourseCard = ({ course }: { course: any }) => {
   const {
-    courseId,
+    // courseId,
     name,
     courseType, //showing _id only of the category
     coursePrice,
@@ -32,83 +31,12 @@ const AppCourseCard = ({ course }) => {
       )
     : 0;
 
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  //   const axiosPublic = useAxiosSecure();
-  //   const { user } = useAuth();
-  //   const [, refetch] = useCart();
-
-  // const handleAddToCart = () => {
-  //   // Check if the courseId is '3'
-  //   if (courseId === "3") {
-  //     Swal.fire({
-  //       title: "Coming Soon!",
-  //       text: "This course will be launching very soon. Stay tuned!",
-  //       icon: "info",
-  //       confirmButtonText: "OK",
-  //     });
-  //   } else if (user && user.email) {
-  //     // For other courses, add to cart
-  //     const cartItem = {
-  //       menuId: courseId,
-  //       email: user.email,
-  //       courseName,
-  //       thumbnail_url,
-  //       price,
-  //       start_course_name,
-  //     };
-  //     axiosPublic
-  //       .post("/carts", cartItem)
-  //       .then((res) => {
-  //         if (res.data.insertedId) {
-  //           console.log("User added to the database");
-  //           Swal.fire({
-  //             title: "Cart successfully added",
-  //             text: "Buy now or view more courses!",
-  //             icon: "success",
-  //             showCancelButton: true,
-  //             confirmButtonColor: "#3085d6",
-  //             cancelButtonColor: "#d33",
-  //             confirmButtonText: "Pay Now!",
-  //           }).then((result) => {
-  //             if (result.isConfirmed) {
-  //               navigate("/profile/my-cart");
-  //             }
-  //           });
-  //           refetch();
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error while adding user to the database:", error);
-  //         Swal.fire({
-  //           title: "Error",
-  //           text: "Failed to add the course to the cart. Please try again.",
-  //           icon: "error",
-  //         });
-  //       });
-  //   } else {
-  //     Swal.fire({
-  //       title: "You are not Logged In",
-  //       text: "Please login to add to the cart",
-  //       icon: "warning",
-  //       showCancelButton: true,
-  //       confirmButtonColor: "#3085d6",
-  //       cancelButtonColor: "#d33",
-  //       confirmButtonText: "Yes, login!",
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         navigate("/login", { state: { from: location } });
-  //       }
-  //     });
-  //   }
-  // };
-
   return (
     <Card className="bg-base-100 shadow-xl overflow-hidden flex flex-col justify-between h-full border-none">
       {/* Card Header */}
       <div className="flex-grow">
         <figure>
-          <img src={img} alt="course" />
+          <img className="w-full h-full" src={img} alt="course" />
         </figure>
         <div className="flex flex-col items-center justify-center m-2">
           <Badge variant="destructive" className="text-white ">

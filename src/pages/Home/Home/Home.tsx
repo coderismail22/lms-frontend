@@ -1,16 +1,16 @@
-// import Category from "@/components/Category/Category";
-// import Hero from "@/components/Hero/Hero";
+import Category from "@/components/Category/Category";
+import Hero from "@/components/Hero/Hero";
 import Numbers from "@/components/Numbers/Numbers";
-// import PopularCourses from "@/components/PopularCourses/PopularCourses";
+import PopularCourses from "@/components/PopularCourses/PopularCourses";
 import Testimonial from "@/components/Testimonial/Testimonial";
 
 const Home = () => {
   return (
     <div>
-      {/* <Hero /> */}
-      {/* <Category /> */}
+      <Hero />
+      <Category />
       <Numbers />
-      {/* <PopularCourses /> */}
+      <PopularCourses />
       <Testimonial />
     </div>
   );

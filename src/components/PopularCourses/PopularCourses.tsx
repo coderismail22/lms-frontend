@@ -1,4 +1,3 @@
-import { useState } from "react";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import AppCourseCard from "../AppCourseCard/AppCourseCard";
 import { useQuery } from "@tanstack/react-query";
