@@ -35,7 +35,6 @@ export const useLogin = () => {
   const location = useLocation();
 
   // Save the route the user was trying to access
-  const from = location.state?.from || "/dashboard";
 
   return useMutation<TLoginResponse, AxiosError, TLoginForm>({
     // Explicitly define mutation function with mutationFn
@@ -76,7 +75,10 @@ export const useLogin = () => {
         title: "Login Successful",
         text: "You are now logged in!",
       }).then(() => {
-        navigate(from, { replace: true }); // Redirect to the intended route
+        const from =
+          location.state?.from || `/dashboard/${authState?.role}/home`;
+        navigate(from, { replace: true });
+        // Redirect to the intended route
       });
     },
     onError: (error: AxiosError) => {
