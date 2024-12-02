@@ -26,6 +26,10 @@ export const studentColumns = (
     cell: ({ row }) => row.index + 1,
   },
   {
+    accessorKey: "_id",
+    header: "Student ID",
+  },
+  {
     accessorKey: "name",
     header: "Name",
   },

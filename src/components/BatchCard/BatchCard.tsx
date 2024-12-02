@@ -46,7 +46,7 @@ const BatchCard: React.FC<BatchCardProps> = ({
       </CardContent>
       <CardFooter className="flex items-center justify-between p-4">
         <Button variant="default" onClick={onViewStudents}>
-          All Students
+          Students
         </Button>
         <Button variant="secondary" onClick={onEdit}>
           Edit Batch
