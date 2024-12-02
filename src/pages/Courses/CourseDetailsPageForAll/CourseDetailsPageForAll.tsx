@@ -14,13 +14,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { FaCartArrowDown } from "react-icons/fa";
 import { TBatchForm } from "@/types/batch.type";
 import { queryClient } from "@/queryClientSetup";
-
+import { IoMdCheckboxOutline } from "react-icons/io";
 
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(`/courses/${courseId}/batches`);
   return data?.data;
 };
-
 
 const CourseDetailsPageForAll = () => {
   const { courseId } = useParams();
@@ -43,8 +42,6 @@ const CourseDetailsPageForAll = () => {
     queryClient.setQueryData(["paymentData"], { batch, actualCoursePrice });
     navigate("/dashboard/student/paymentpage");
   };
-
-
 
   if (isLoading) {
     return (
@@ -111,7 +108,7 @@ const CourseDetailsPageForAll = () => {
       </Card>
 
       {/* Available Batches */}
-      <div className="bg-slate-500 rounded-md p-5">
+      <div className="bg-slate-500 rounded-md p-2">
         {courseData?.batches?.length === 0 ? (
           <h3 className="text-xl font-bold text-white-500 ">
             Sorry, currently no batch is running for this course.
@@ -158,6 +155,104 @@ const CourseDetailsPageForAll = () => {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Course Curriculum Section Start*/}
+      <div className="my-10">
+        <h3 className="text-4xl font-semibold my-8 text-center text-white">
+          Course Curriculum
+        </h3>
+        {/* All 4 Items */}
+        <div className="w-full h-full grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* 1. Curriculum */}
+          <div className="border border-blue-500 bg-[#DBEBFE]  font-siliguri p-2 rounded-md">
+            <h1
+              className="text-center font-bold text-blue-600 tracking-wider my-1 text-sm underline hover: underline-offset-4 hover:underline-offset-8 transition-all duration-300
+  "
+            >
+              Curriculum
+            </h1>
+            <div className="w-full  rounded-md p-2">
+              <ul className="flex flex-col gap-1 ">
+                {courseData?.curriculum.map((software: string) => (
+                  <li className="flex gap-1 items-center font-semibold text-[#605F62]">
+                    <IoMdCheckboxOutline className="text-blue-700" />
+                    {software}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          {/* 2.Softwares */}
+          <div className="border border-blue-500 bg-[#DBEBFE]  font-siliguri p-2 rounded-md">
+            <h1
+              className="text-center font-bold text-blue-600 tracking-wider my-1 text-sm underline hover: underline-offset-4 hover:underline-offset-8 transition-all duration-300
+  "
+            >
+              Softwares
+            </h1>
+            <div className="w-full  rounded-md p-2">
+              <ul className="flex flex-col gap-1 ">
+                {courseData?.softwareList.map((software: string) => (
+                  <li className="flex gap-1 items-center font-semibold text-[#605F62]">
+                    <IoMdCheckboxOutline className="text-blue-700" />
+                    {software}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          {/* 3. Career Opportunities */}
+          <div className="border border-blue-500 bg-[#DBEBFE]  font-siliguri p-2 rounded-md">
+            <h1
+              className="text-center font-bold text-blue-600 tracking-wider my-1 text-sm underline hover: underline-offset-4 hover:underline-offset-8 transition-all duration-300
+  "
+            >
+              Career Opportunities
+            </h1>
+            <div className="w-full  rounded-md p-2">
+              <ul className="flex flex-col gap-1 ">
+                {courseData?.careerOpportunities.map((software: string) => (
+                  <li className="flex gap-1 items-center font-semibold text-[#605F62]">
+                    <IoMdCheckboxOutline className="text-blue-700" />
+                    {software}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          {/* 4.Job Positions */}
+          <div className="border border-blue-500 bg-[#DBEBFE]  font-siliguri p-2 rounded-md">
+            <h1
+              className="text-center font-bold text-blue-600 tracking-wider my-1 text-sm underline hover: underline-offset-4 hover:underline-offset-8 transition-all duration-300
+  "
+            >
+              Job Positions
+            </h1>
+            <div className="w-full  rounded-md p-2">
+              <ul className="flex flex-col gap-1 ">
+                {courseData?.jobPositions.map((software: string) => (
+                  <li className="flex gap-1 items-center font-semibold text-[#605F62]">
+                    <IoMdCheckboxOutline className="text-blue-700" />
+                    {software}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Course Curriculum Section End*/}
+
+      {/* Course Overview */}
+      <div className="w-full mx-auto font-siliguri text-white">
+        <div className="border-2 p-12 mb-12 rounded-md  text-center mx-auto">
+          <h3 className="text-4xl font-semibold my-8 ">Course Overview</h3>
+          <p className="max-w-xl mx-auto text-justify">
+            {courseData?.description}
+          </p>
+        </div>
       </div>
     </div>
   );

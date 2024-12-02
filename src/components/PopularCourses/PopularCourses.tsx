@@ -30,7 +30,7 @@ const PopularCourses = () => {
   console.log("fetchedcourses", courses);
 
   return (
-    <div className="h-full font-siliguri bg-[#1D232A]" >
+    <div className="h-full font-siliguri bg-[#1D232A] my-7" >
       <SectionTitle
         title={"জনপ্রিয় কোর্স সমূহ"}
         subtitle={
