@@ -51,7 +51,7 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
       {course.subjects.map((subject) => (
         <div
           key={subject._id}
-          className="mt-5 p-4 border border-gray-300 rounded-lg shadow-lg bg-gradient-to-r from-[#abf4de] via-[#c5e5f5] to-[#abf4de]"
+          className="mt-5 p-4 border border-gray-300 rounded-lg  shadow-lg bg-gradient-to-r from-[#cef3f5] via-[#bddff0] to-[#c7f1e4]"
         >
           {/* Subject Card */}
           <div

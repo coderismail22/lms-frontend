@@ -14,7 +14,11 @@ import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 import { IoMdAddCircleOutline } from "react-icons/io";
 
-import { MdOutlineDownloading, MdOutlinePlayLesson } from "react-icons/md";
+import {
+  MdDownloading,
+  MdOutlineDownloading,
+  MdOutlinePlayLesson,
+} from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
 import { FaCircleArrowLeft, FaMoneyCheckDollar } from "react-icons/fa6";
 
@@ -286,7 +290,7 @@ export const sidebarData = {
           path: "/dashboard/student/courses/enrolled-courses",
         },
         {
-          icon: MdOutlinePlayLesson,
+          icon: MdDownloading,
           label: "Pending Courses",
           path: "/dashboard/student/courses/pending-courses",
         },

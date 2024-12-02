@@ -31,9 +31,13 @@ const PendingOrders = () => {
   );
   return (
     <div>
-      <h1>Pending Orders</h1>
+      <h1 className="font-bold text-center tracking-wider mb-5 underline underline-offset-8 decoration-blue-500">
+        Pending Courses
+      </h1>
+      {pendingOrders?.length === 0 && (
+        <p className="text-center uppercase text-red-500 font-bold">No pending courses</p>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {pendingOrders?.length === 0 && <p>No pending courses</p>}
         {pendingOrders?.map((order: TFullPopulatedOrder) => (
           <PendingOrderCard
             key={order._id}

@@ -43,11 +43,11 @@ const ImageUpload = ({ setUploadedImageUrl }: any) => {
     setIsLoading(true); // Start loading state
     const formData = new FormData();
     formData.append("file", selectedFile);
-    formData.append("upload_preset", "fsdg-blog-image-upload"); // Add your preset name
+    formData.append("upload_preset", "ejobsit"); // Add your preset name
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dqjpyxkfe/image/upload",
+        "https://api.cloudinary.com/v1_1/dywbfmjkf/image/upload",
         formData
       );
 
