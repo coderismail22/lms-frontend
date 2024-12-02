@@ -18,32 +18,6 @@ const Courses = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // const [courses, getCourse] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   fetch("https://motion-boss-single-page-server.vercel.app/course")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       getCourse(data);
-  //       setLoading(false);
-  //     });
-  // }, []);
-
-  // const onlineCourse = courses.filter(
-  //   (course) => course?.categoryName === "Online Live Course"
-  // );
-  // const recordedCourse = courses.filter(
-  //   (course) => course?.categoryName === "Pre Recorded Course"
-  // );
-
-  // if (loading) return <p>Loading...</p>;
-  // if (isLoading) return <p>Loading...</p>;
-  // if (error) return <p>Something went wrong...</p>;
-
-  // Fetch courses using TanStack Query
   const {
     data: courses,
     isLoading,
@@ -52,6 +26,8 @@ const Courses = () => {
     queryKey: ["courses"],
     queryFn: fetchCourses,
   });
+
+  // Add a type annotation to courses
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong...</p>;
@@ -119,10 +95,10 @@ const Courses = () => {
 
           {/* Tabs Content */}
           <TabsContent value="all">
-            {courses?.length > 0 ? (
+            {courses?.length !== undefined && courses?.length > 0 ? (
               <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {courses?.map((course) => (
-                  <AppCourseCard key={course.id} course={course} />
+                  <AppCourseCard key={course._id} course={course} />
                 ))}
               </div>
             ) : (
@@ -130,10 +106,11 @@ const Courses = () => {
             )}
           </TabsContent>
           <TabsContent value="online">
-            {onlineCourses?.length > 0 ? (
+            {onlineCourses?.length !== undefined &&
+            onlineCourses?.length > 0 ? (
               <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {onlineCourses?.map((course) => (
-                  <AppCourseCard key={course.id} course={course} />
+                  <AppCourseCard key={course._id} course={course} />
                 ))}
               </div>
             ) : (
@@ -141,10 +118,11 @@ const Courses = () => {
             )}
           </TabsContent>
           <TabsContent value="offline">
-            {offlineCourses?.length > 0 ? (
+            {offlineCourses?.length !== undefined &&
+            offlineCourses?.length > 0 ? (
               <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {offlineCourses?.map((course) => (
-                  <AppCourseCard key={course.id} course={course} />
+                  <AppCourseCard key={course._id} course={course} />
                 ))}
               </div>
             ) : (

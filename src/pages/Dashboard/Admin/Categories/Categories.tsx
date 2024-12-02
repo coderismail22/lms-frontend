@@ -103,7 +103,6 @@ export default function Categories() {
       try {
         const response = await axiosInstance.get("/categories");
         const allCategories = response.data.data;
-        console.log(allCategories);
         setCategories(allCategories);
       } catch (err) {
         console.error("API Request Error:", err);

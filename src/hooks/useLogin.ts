@@ -62,8 +62,12 @@ export const useLogin = () => {
         email: decodedToken.email,
         role: decodedToken.role,
       };
-
+      // Tanstack cache
       queryClient.setQueryData(authKey, authState);
+
+      // Fallback: Set the token in localStorage for persistence across sessions
+
+      localStorage.setItem("accessToken", data?.data?.accessToken);
       console.log("Auth State Set:", authState);
       console.log("Query Cache After Set:", queryClient.getQueryData(authKey));
 

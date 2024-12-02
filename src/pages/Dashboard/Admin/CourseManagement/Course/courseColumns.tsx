@@ -17,6 +17,7 @@ export type TCourse = {
   coursePrice: number;
   courseLength: string;
   skillLevel: string;
+  courseType: string;
   _id: string;
 };
 

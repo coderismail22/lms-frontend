@@ -14,7 +14,9 @@ const axiosInstance = axios.create({
 // Attach accessToken to every request
 axiosInstance.interceptors.request.use((config) => {
   const authData = queryClient.getQueryData<{ accessToken: string }>(authKey);
-  const token = authData?.accessToken;
+  // TODO: sudden logout issue has to be fixed
+  // const token = authData?.accessToken;
+  const token = authData?.accessToken || localStorage.getItem("accessToken");
 
   if (token) {
     config.headers.Authorization = `${token}`;
@@ -36,6 +38,7 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
+        console.log("trying to refresh token");
         // Call refresh token endpoint
         const { data } = await axiosInstance.post("/auth/refresh-token");
 
