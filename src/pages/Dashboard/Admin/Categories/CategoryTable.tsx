@@ -37,7 +37,7 @@ const CategoryTable = <TData, TValue>({
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="text-white bg-blue-400">
                     {header.isPlaceholder
                       ? null
                       : flexRender(

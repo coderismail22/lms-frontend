@@ -84,7 +84,7 @@ const OrderTable = <TData, TValue>({
         {/* Show/Hide Columns */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="default" className="ml-auto">
               Columns
             </Button>
           </DropdownMenuTrigger>
@@ -109,13 +109,13 @@ const OrderTable = <TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border border-slate- overflow-auto">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="text-white bg-blue-400">
                     {header.isPlaceholder
                       ? null
                       : flexRender(

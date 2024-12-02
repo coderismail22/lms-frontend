@@ -84,7 +84,7 @@ const PaymentTable = <TData, TValue>({
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="default" className="ml-auto">
               Columns
             </Button>
           </DropdownMenuTrigger>
@@ -115,7 +115,7 @@ const PaymentTable = <TData, TValue>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="text-white bg-blue-400">
                     {header.isPlaceholder
                       ? null
                       : flexRender(
