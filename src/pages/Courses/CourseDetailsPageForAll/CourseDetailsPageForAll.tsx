@@ -111,19 +111,18 @@ const CourseDetailsPageForAll = () => {
         <div className="p-1 border-2 py-2 text-center rounded-md">
           <p>
             <span className="text-2xl font-semibold ">
-              {courseData?.courseLength}+
-            </span>{" "}
-            সময়সীমা
+             ইন্ডাস্ট্রি             </span>{" "}
+             স্ট্যান্ডার্ড কোর্স
           </p>{" "}
         </div>
         <div className="p-1 border-2 py-2 text-center rounded-md">
           <p>
-            <span className="text-2xl font-semibold">৩০+ </span> ক্লাস{" "}
+            <span className="text-2xl font-semibold">পর্যাপ্ত</span> ক্লাস{" "}
           </p>{" "}
         </div>
         <div className="p-1 border-2 py-2 text-center rounded-md">
           <p>
-            <span className="text-2xl font-semibold">৫+</span> লাইভ প্রজেক্ট
+            <span className="text-2xl font-semibold">পর্যাপ্ত</span> লাইভ প্রজেক্ট
           </p>{" "}
         </div>
         <div className="p-1 border-2 py-2 px-3 text-center rounded-md">
@@ -225,8 +224,12 @@ const CourseDetailsPageForAll = () => {
       {/* Available Batches */}
       <div className=" rounded-md p-2 mt-5">
         {activeBatches?.length === 0 ? (
-          <Marquee speed={100} className="text-xl font-bold bg-red-500 p-5 rounded-md animate-marquee">
-            Sorry, currently no batch is running for this course. Stay tuned for the next batch !
+          <Marquee
+            speed={100}
+            className="text-xl font-bold bg-red-500 p-5 rounded-md animate-marquee"
+          >
+            Sorry, currently no batch is running for this course. Stay tuned for
+            the next batch !
           </Marquee>
         ) : (
           <div>
