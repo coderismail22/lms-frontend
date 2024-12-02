@@ -17,6 +17,7 @@ const Navbar = () => {
   const { data: authData } = useQuery<AuthState>({
     queryKey: authKey,
     // Automatically refresh auth state whenever authKey changes
+    // TODO: Check potential error here
     initialData: queryClient.getQueryData<AuthState>(authKey),
   });
 

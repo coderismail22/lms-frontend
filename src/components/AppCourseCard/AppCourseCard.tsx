@@ -36,7 +36,7 @@ const AppCourseCard = ({ course }: { course: any }) => {
       {/* Card Header */}
       <div className="flex-grow">
         <figure>
-          <img className="w-full h-full" src={img} alt="course" />
+          <img className="w-full h-full object-cover object-center" src={img} alt="course" />
         </figure>
         <div className="flex flex-col items-center justify-center m-2">
           <Badge variant="destructive" className="text-white ">
