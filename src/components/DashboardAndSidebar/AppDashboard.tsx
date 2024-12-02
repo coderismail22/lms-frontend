@@ -39,7 +39,7 @@ const AppDashboard = () => {
       <AppSidebar role={role} />
       <SidebarInset>
         {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 "> */}
-        <header className="flex items-center gap-2 px-4 py-4 bg-gradient-to-r from-blue-500 to-indigo-400 border-b shadow-lg">
+        <header className="flex items-center gap-2 px-4 py-4 bg-gradient-to-r from-blue-500 to-indigo-400 shadow-lg">
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
           <Breadcrumb className=" w-full">

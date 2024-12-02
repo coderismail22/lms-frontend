@@ -14,6 +14,7 @@ import { FaCartArrowDown } from "react-icons/fa";
 import { TBatchForm } from "@/types/batch.type";
 import { queryClient } from "@/queryClientSetup";
 import { IoMdCheckboxOutline } from "react-icons/io";
+import Marquee from "react-fast-marquee";
 
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(`/courses/${courseId}/batches`);
@@ -62,6 +63,10 @@ const CourseDetailsPageForAll = () => {
     );
   }
 
+  // Filter only batches that are active
+  const activeBatches = courseData?.batches?.filter(
+    (batch: TBatchForm) => batch.isActive === true
+  );
   return (
     <div className="container mx-auto p-6 h-[100%] font-siliguri">
       {/* Course Card */}
@@ -219,17 +224,17 @@ const CourseDetailsPageForAll = () => {
 
       {/* Available Batches */}
       <div className=" rounded-md p-2 mt-5">
-        {courseData?.batches?.length === 0 ? (
-          <h3 className="text-xl font-bold -500 ">
-            Sorry, currently no batch is running for this course.
-          </h3>
+        {activeBatches?.length === 0 ? (
+          <Marquee speed={100} className="text-xl font-bold bg-red-500 p-5 rounded-md animate-marquee">
+            Sorry, currently no batch is running for this course. Stay tuned for the next batch !
+          </Marquee>
         ) : (
           <div>
             <h3 className="text-xl font-medium mb-4 text-center  underline underline-offset-8 text-green-500 tracking-wider">
-              Available Batches ( {courseData?.batches?.length} )
+              Available Batches ( {activeBatches?.length} )
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-              {courseData.batches.map((batch: TBatchForm) => (
+              {activeBatches?.map((batch: TBatchForm) => (
                 <Card key={batch._id} className="shadow-lg border bg-[#DBEBFE]">
                   <CardHeader>
                     <div className="flex items-center justify-center mt-5">
