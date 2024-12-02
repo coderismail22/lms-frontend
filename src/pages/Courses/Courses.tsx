@@ -39,7 +39,7 @@ const Courses = () => {
     (course) => course?.courseType === "Offline"
   );
   return (
-    <div className="py-8 bg-gradient-to-l from-slate-500 to-slate-600 pb-32 font-siliguri">
+    <div className="py-8 pb-32 font-siliguri bg-[#DBEBFE]">
       {/* <Helmet>
         <title>EJobsIT | Courses</title>
       </Helmet> */}
@@ -49,7 +49,7 @@ const Courses = () => {
           title="আমাদের কোর্স সমূহ"
           titleStyles="text-blue-400"
           subtitle="প্রফেশনাল ভিডিও এডিটিং এবং মোশন গ্রাফিক্স ফ্রি লাইভ মাস্টার ক্লাস করুন বাংলাদেশের সব থেকে জনপ্রিয় মোশন গ্রাফিক্স ইউটিউবার আহসানুল্লাহ শাওন স্যারের সাথে । আমাদের কোর্সে লাইভ ক্লাসের সাথে থাকছে প্রতিদিন দুইবেলা করে গুগল মিটে স্ক্রিন শেয়ারের মাধ্যমে লাইভ সাপোর্ট, রেকর্ডেড ভিডিও, ফ্রিল্যান্সিং এবং জব প্লেসমেন্ট সাপোর্ট ।"
-          subTitleStyles="text-white"
+          subTitleStyles="text-black"
         />
       </div>
 

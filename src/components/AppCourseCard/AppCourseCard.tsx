@@ -32,11 +32,15 @@ const AppCourseCard = ({ course }: { course: any }) => {
     : 0;
 
   return (
-    <Card className="bg-base-100 shadow-xl overflow-hidden flex flex-col justify-between h-full border-none">
+    <Card className="bg-base-100 shadow-xl overflow-hidden flex flex-col justify-between h-full border-none bg-[#1D232A]">
       {/* Card Header */}
       <div className="flex-grow">
         <figure>
-          <img className="w-full h-full object-cover object-center" src={img} alt="course" />
+          <img
+            className="w-full h-[200px] object-cover object-center"
+            src={img}
+            alt="course"
+          />
         </figure>
         <div className="flex flex-col items-center justify-center m-2">
           <Badge variant="destructive" className="text-white ">

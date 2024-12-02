@@ -30,7 +30,7 @@ const PopularCourses = () => {
   console.log("fetchedcourses", courses);
 
   return (
-    <div className="mb-8 mt-24 font-siliguri">
+    <div className="h-full font-siliguri bg-[#1D232A]" >
       <SectionTitle
         title={"জনপ্রিয় কোর্স সমূহ"}
         subtitle={
@@ -38,7 +38,7 @@ const PopularCourses = () => {
         }
       ></SectionTitle>
 
-      <div className="grid gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-3 w-[90%] mx-auto">
+      <div className="grid gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-3 w-[90%] mx-auto ">
         {Array.isArray(courses) ? (
           courses.map((course: TCourse) => (
             <AppCourseCard key={course._id} course={course} />
