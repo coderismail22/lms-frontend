@@ -110,9 +110,8 @@ const CourseDetailsPageForAll = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 my-2 text-white">
         <div className="p-1 border-2 py-2 text-center rounded-md">
           <p>
-            <span className="text-2xl font-semibold ">
-             ইন্ডাস্ট্রি             </span>{" "}
-             স্ট্যান্ডার্ড কোর্স
+            <span className="text-2xl font-semibold ">ইন্ডাস্ট্রি </span>{" "}
+            স্ট্যান্ডার্ড কোর্স
           </p>{" "}
         </div>
         <div className="p-1 border-2 py-2 text-center rounded-md">
@@ -122,7 +121,8 @@ const CourseDetailsPageForAll = () => {
         </div>
         <div className="p-1 border-2 py-2 text-center rounded-md">
           <p>
-            <span className="text-2xl font-semibold">পর্যাপ্ত</span> লাইভ প্রজেক্ট
+            <span className="text-2xl font-semibold">পর্যাপ্ত</span> লাইভ
+            প্রজেক্ট
           </p>{" "}
         </div>
         <div className="p-1 border-2 py-2 px-3 text-center rounded-md">

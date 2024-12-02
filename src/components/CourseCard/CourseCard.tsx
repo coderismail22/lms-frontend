@@ -1,7 +1,9 @@
 import { useRole } from "@/hooks/useRole";
 import { FullPopulatedCourse } from "@/types/fullCourseAndStudent.type";
 import { useNavigate } from "react-router-dom";
-import { Card } from "../ui/card";
+import { Card, CardContent, CardHeader } from "../ui/card";
+import { FaPlay } from "react-icons/fa";
+import { Button } from "../ui/button";
 
 // const CourseCard = (course: FullPopulatedCourse, studentId: string) => {
 const CourseCard = ({
@@ -22,19 +24,35 @@ const CourseCard = ({
   const role = useRole();
 
   return (
-    <Card
-      onClick={() =>
-        navigate(
-          // TODO: make it fully dynamic (Role ok, get _id of the role)
-          // `/dashboard/${role}/6731baa1f0897a87c9ca2e76/courses/${course._id}`
-          `/dashboard/${role}/${studentId}/courses/${courseId._id}`
-        )
-      }
-      className="cursor-pointer p-4 border rounded-lg shadow hover:shadow-lg hover:border hover:border-blue-50 transition overflow-auto bg-slate-400"
-    >
-      <h2 className="font-bold text-lg">{courseId._id}</h2>
-      <h2 className="font-bold text-lg">{courseId?.name}</h2>
-      <p className="text-sm text-gray-600">{courseId?.description}</p>
+    <Card className="p-2 border border-blue-500 rounded-lg shadow hover:shadow-lg  transition w-full bg-[#DBEBFE] grid flex-col md:flex-row">
+      <CardHeader className="p-1">
+        <img className="rounded-md" src={courseId?.img} alt={courseId?.name} />
+      </CardHeader>
+      <CardContent className="p-1">
+        <h2 className="font-bold text-lg text-center">{courseId?.name}</h2>
+        <Button
+          variant="outline"
+          className="w-full flex items-center justify-center hover:bg-blue-200 cursor-pointer"
+          onClick={() =>
+            navigate(`/dashboard/${role}/${studentId}/courses/${courseId._id}`)
+          }
+        >
+          <FaPlay className="mr-2 text-blue-400" />
+          Continue Course
+        </Button>
+
+        {/* TODO: Make outline button */}
+        {/* <Button
+          variant="outline"
+          className="w-full flex items-center justify-center"
+        >
+          <FaBookOpen className="mr-2" />
+          Course Outline
+        </Button> */}
+
+        {/* TODO: Make progress bar functional */}
+        {/* <Progress value={50} className="mt-2" /> */}
+      </CardContent>
     </Card>
   );
 };
