@@ -117,7 +117,7 @@ const CourseDetailsPage = () => {
           setLessons={setLessons}
         />
       </div>
-      <div className="col-span-1 bg-blue-200 shadow-md md:col-span-2  min-h-full w-full">
+      <div className="col-span-1 bg-blue-200 shadow-md md:col-span-2  min-h-full w-full ">
         <ContentDetails
           course={courseData}
           onSelectLesson={setSelectedLesson}
