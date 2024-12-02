@@ -136,7 +136,6 @@ const AllStudents = ({ batchId }: { batchId: string }) => {
   if (error) return <p>Error: {error.message}</p>;
   return (
     <div>
-      <h1>All Orders</h1>
       {batch && (
         <StudentTable
           data={batch?.enrolledStudents}

@@ -16,10 +16,10 @@ export const AppSidebar = ({
   ...props
 }: { role: Role } & React.ComponentProps<typeof Sidebar>) => {
   return (
-    <Sidebar {...props} collapsible="icon">
-      <SidebarContent>
+    <Sidebar {...props} collapsible="icon" >
+      <SidebarContent className="bg-gradient-to-b from-blue-500 to-indigo-400 text-white">
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-white">Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {sidebarData[role].map((item, index) => (

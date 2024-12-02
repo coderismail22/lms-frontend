@@ -38,14 +38,15 @@ const AppDashboard = () => {
     <SidebarProvider>
       <AppSidebar role={role} />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+        {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 "> */}
+        <header className="flex items-center gap-2 px-4 py-4 bg-gradient-to-r from-blue-500 to-indigo-400 border-b shadow-lg">
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
           <Breadcrumb className=" w-full">
             <BreadcrumbList className=" flex justify-between items-center">
               <BreadcrumbItem className="hidden md:block">
                 <CustomBreadcrumbLink to={`/`}>
-                  <p className="flex gap-2 items-center justify-center">
+                  <p className="flex gap-2 items-center justify-center text-white ">
                     <FaArrowLeft />
                     Go to Homepage
                   </p>
@@ -58,7 +59,7 @@ const AppDashboard = () => {
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        <div className="p-4">
+        <div className="p-4 bg-[#EEFAFF] min-h-screen">
           <Outlet />
         </div>
       </SidebarInset>
