@@ -20,7 +20,7 @@ const Register = () => {
       );
       return response.data;
     },
-    onSuccess: (data, variables) => {
+    onSuccess: (_data, variables) => {
       // Automatically log in after registration
       loginMutation.mutate(
         {

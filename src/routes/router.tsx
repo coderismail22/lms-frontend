@@ -5,8 +5,6 @@ import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home/Home/Home";
 import Blog from "../pages/Blog/Blog/Blog";
 import BlogPostDetail from "../pages/Blog/BlogPostDetails/BlogPostDetails";
-import Notes from "../pages/Note/Notes/Notes";
-import FullNote from "../pages/Note/FullNote/FullNote";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import Dashboard from "@/pages/Dashboard/Dashboard/Dashboard";
 import AdminHome from "@/pages/Dashboard/Admin/AdminHome/AdminHome";
@@ -58,8 +56,6 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/blog", element: <Blog /> },
       { path: "/blog/:id", element: <BlogPostDetail /> },
-      { path: "/notes", element: <Notes /> },
-      { path: "/note/:id", element: <FullNote /> },
       { path: "/courses", element: <Courses /> },
       { path: "/courses/:courseId", element: <CourseDetailsPageForAll /> },
       { path: "/cart", element: <Cart /> },

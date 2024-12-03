@@ -189,6 +189,7 @@ export const sidebarData = {
               icon: IoMdAddCircleOutline,
               label: "Create Course",
               path: "/dashboard/admin/course-management/create-course",
+              
             },
             {
               icon: FaRegListAlt,

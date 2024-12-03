@@ -4,10 +4,7 @@ type RoleBasedWrapperProps = {
   allowedRoles: Role[]; // Roles allowed for this wrapper
   children: JSX.Element; // Component to render if checks pass
 };
-const StudentRouteWrapper = ({
-  allowedRoles,
-  children,
-}: RoleBasedWrapperProps) => {
+const StudentRouteWrapper = ({ children }: RoleBasedWrapperProps) => {
   return (
     <RoleProtectedRoute allowedRoles={["student"]}>
       {children}

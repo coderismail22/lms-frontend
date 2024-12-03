@@ -47,7 +47,7 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
           0
         )}
       </p>
-      {/* s */}
+
       {course.subjects.map((subject) => (
         <div
           key={subject._id}
@@ -132,7 +132,7 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
           </div>
         </div>
       ))}
-      {/* e */}
+
     </div>
   );
 };

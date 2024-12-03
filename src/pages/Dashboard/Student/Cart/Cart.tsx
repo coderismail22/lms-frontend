@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "@/api/axiosInstance";
@@ -15,6 +16,7 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import Swal from "sweetalert2";
 import { AxiosError } from "axios";
+import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
 
 // Fetch cart items from backend
 const fetchCartItems = async () => {
@@ -45,7 +47,7 @@ const Cart = () => {
       queryClient.invalidateQueries({ queryKey: ["cartItems"] });
       Swal.fire("Removed!", "Item removed from cart.", "success");
     },
-    onError: (error: AxiosError) => {
+    onError: (error: AxiosError<BackendErrorResponse>) => {
       const errorMessage =
         error?.response?.data?.message || "Failed to remove item.";
       Swal.fire("Error", errorMessage, "error");
@@ -70,6 +72,7 @@ const Cart = () => {
 
   const cartItems = data?.data || [];
   const totalCost = cartItems.reduce(
+    // TODO: Add a type here
     (sum: number, item: any) => sum + item.price * item.quantity,
     0
   );
@@ -98,6 +101,7 @@ const Cart = () => {
         Please don&apos;t add more than one item at a time *
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        // TODO: Add a type here
         {cartItems.map((item: any) => (
           <Card key={item._id} className="shadow-lg border">
             <CardHeader>

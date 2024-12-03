@@ -6,7 +6,6 @@ import { TCourse } from "@/pages/Dashboard/Admin/CourseManagement/Course/courseC
 
 const fetchCourses = async (): Promise<TCourse[]> => {
   const response = await axiosInstance.get("/courses/get-all-courses");
-  console.log("course response", response);
   return response.data.data; // Assuming `data` contains the course array
 };
 const PopularCourses = () => {
@@ -30,7 +29,7 @@ const PopularCourses = () => {
   console.log("fetchedcourses", courses);
 
   return (
-    <div className="h-full font-siliguri bg-[#1D232A] my-7" >
+    <div className="h-full font-siliguri bg-[#1D232A] my-7">
       <SectionTitle
         title={"জনপ্রিয় কোর্স সমূহ"}
         subtitle={
