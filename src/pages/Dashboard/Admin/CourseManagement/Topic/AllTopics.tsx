@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import axiosInstance from "@/api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { topicColumns } from "./topicColumns";
+import Loader from "@/components/Loader/Loader";
 
 // Fetch topics from the API
 const fetchTopics = async () => {
@@ -59,7 +60,9 @@ const AllTopics = () => {
     navigate(`/dashboard/admin/topics/edit/${topicId}`);
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    <Loader />;
+  }
 
   return (
     <div className="container mx-auto py-2">

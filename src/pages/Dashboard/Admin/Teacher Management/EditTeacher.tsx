@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import axiosInstance from "@/api/axiosInstance";
 import ImageUpload from "@/components/ImageUpload/ImageUpload";
 import { useState } from "react";
+import Loader from "@/components/Loader/Loader";
 
 // Fetch teacher by ID
 const fetchTeacherById = async (teacherId: string) => {
@@ -52,7 +53,7 @@ const EditTeacher = () => {
       navigate("/dashboard/admin/teacher-management/all-teachers");
     },
     onError: (error) => {
-      console.log(error)
+      console.log(error);
       Swal.fire("Error!", "Failed to update teacher.", "error");
     },
   });
@@ -66,7 +67,9 @@ const EditTeacher = () => {
     mutation.mutate(finalData);
   };
 
-  if (isLoadingTeacher) return <p>Loading...</p>;
+  if (isLoadingTeacher) {
+    <Loader />;
+  }
   if (teacherError) return <p>Something went wrong...</p>;
 
   return (

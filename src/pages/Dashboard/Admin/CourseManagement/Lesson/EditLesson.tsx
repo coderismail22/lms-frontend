@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import axiosInstance from "@/api/axiosInstance";
 import AppSelect from "@/components/CustomForm/AppSelect";
 import { contentTypes } from "./lesson.constant";
+import Loader from "@/components/Loader/Loader";
 
 // Fetch lesson by ID
 const fetchLessonById = async (lessonId: string) => {
@@ -67,7 +68,9 @@ const EditLesson = () => {
     mutation.mutate(data);
   };
 
-  if (isLoadingLesson) return <p>Loading...</p>;
+  if (isLoadingLesson) {
+    <Loader />;
+  }
   if (lessonError) return <p>Something went wrong...</p>;
 
   return (

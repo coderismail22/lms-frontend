@@ -11,6 +11,7 @@ import ImageUpload from "../ImageUpload/ImageUpload";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { updateBatchSchema } from "@/schemas/batch.schema";
+import Loader from "../Loader/Loader";
 
 // Fetch Response Type
 type FetchBatchResponse = {
@@ -128,7 +129,7 @@ const EditBatch = () => {
   };
 
   if (isLoadingBatch || isLoadingTeachers || isLoadingCourses)
-    return <p>Loading batch details...</p>;
+    return <Loader />;
   if (batchError || teacherError || courseError)
     return <p>Error loading batch details. Please try again.</p>;
 

@@ -7,6 +7,7 @@ import BatchCard from "@/components/BatchCard/BatchCard";
 import Swal from "sweetalert2";
 import { AxiosError } from "axios";
 import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
+import Loader from "@/components/Loader/Loader";
 
 // Fetch batches
 const fetchBatches = async () => {
@@ -23,7 +24,7 @@ const Batch = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const handleAllStudent = (batchId: string) => {
-    console.log('clicked')
+    console.log("clicked");
     navigate(`/dashboard/admin/batch/all-batch-students/${batchId}`);
   };
   const handleEdit = (batchId: string) => {
@@ -83,7 +84,7 @@ const Batch = () => {
         <h1 className="text-2xl font-bold mb-4">Batch Cards</h1>
 
         {/* Loading State */}
-        {isLoading && <p>Loading batches...</p>}
+        {isLoading && <Loader />}
 
         {/* Error State */}
         {error && (

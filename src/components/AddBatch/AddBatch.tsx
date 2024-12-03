@@ -11,6 +11,7 @@ import axiosInstance from "@/api/axiosInstance";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 // Define the response structure for creating a batch
 interface CreateBatchResponse {
@@ -132,7 +133,9 @@ const AddBatch = () => {
     mutation.mutate(finalData);
   };
 
-  if (isLoadingTeachers || isLoadingCourses) return <p>Loading data...</p>;
+  if (isLoadingTeachers || isLoadingCourses) {
+    return <Loader />;
+  }
   if (teachersError || coursesError)
     return <p>Error loading data. Please try again.</p>;
 
@@ -169,9 +172,7 @@ const AddBatch = () => {
               Upload Cover Image
             </label>
             <ImageUpload setUploadedImageUrl={setBatchImg} />
-            {batchImg === "" && (
-              <p className="text-red-500 text-sm">Image is required</p>
-            )}
+
           </div>
 
           {/* Course Name */}

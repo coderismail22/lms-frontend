@@ -5,6 +5,7 @@ import axiosInstance from "@/api/axiosInstance";
 import Swal from "sweetalert2";
 import AppSelect from "@/components/CustomForm/AppSelect";
 import { useNavigate } from "react-router-dom";
+import Loader from "@/components/Loader/Loader";
 
 // Fetch lessons instead of topics
 const fetchLessons = async () => {
@@ -60,7 +61,10 @@ const CreateTopic = () => {
     mutation.mutate({ ...data });
   };
 
-  if (isLoadingLessons) return <p>Loading...</p>;
+  if (isLoadingLessons) {
+    <Loader />;
+  }
+
   if (lessonsError) return <p>Something went wrong...</p>;
 
   return (

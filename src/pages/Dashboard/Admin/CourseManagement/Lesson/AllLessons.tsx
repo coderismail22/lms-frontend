@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import axiosInstance from "@/api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { lessonColumns } from "./lessonColumns"; // Columns for lesson table
+import Loader from "@/components/Loader/Loader";
 
 // Fetch lessons from the API
 const fetchLessons = async () => {
@@ -59,7 +60,9 @@ const AllLessons = () => {
     navigate(`/dashboard/admin/lesson-management/lessons/edit/${lessonId}`);
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    <Loader />;
+  }
 
   return (
     <div className="container mx-auto py-2">

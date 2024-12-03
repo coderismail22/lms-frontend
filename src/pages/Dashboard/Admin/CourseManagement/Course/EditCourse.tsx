@@ -10,6 +10,7 @@ import { TCourseForm } from "@/types/course.type";
 import { updateCourseSchema } from "@/schemas/course.schema";
 import axiosInstance from "@/api/axiosInstance";
 import ImageUpload from "@/components/ImageUpload/ImageUpload";
+import Loader from "@/components/Loader/Loader";
 
 type FetchCourseResponse = {
   success: boolean;
@@ -91,7 +92,6 @@ const EditCourse = () => {
   // Update dynamic fields when data is available
   useEffect(() => {
     if (course) {
-      console.log("hey course is like this ", course);
       setImg(course?.data?.img || "");
       setCareerOpportunities(course?.data?.careerOpportunities || []);
       setCurriculum(course?.data?.curriculum || []);
@@ -108,6 +108,8 @@ const EditCourse = () => {
       queryClient.invalidateQueries({ queryKey: ["courses"] }); // Invalidate the courses list
       navigate("/dashboard/admin/course-management/all-courses"); // Redirect to course list
     },
+    // TODO: Add a type
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       console.error("Error updating course:", error?.response?.data);
       Swal.fire("Error!", "Failed to update course.", "error");
@@ -128,8 +130,9 @@ const EditCourse = () => {
     mutation.mutate(finalData);
   };
 
-  if (isLoadingCourse || isLoadingSubjects || isLoadingCategories)
-    return <p>Loading...</p>;
+  if (isLoadingCourse || isLoadingSubjects || isLoadingCategories) {
+    <Loader />;
+  }
   if (courseError || subjectsError || categoryError)
     return <p>Error loading data. Please try again later.</p>;
 

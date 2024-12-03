@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import { TCourse } from "../Dashboard/Admin/CourseManagement/Course/courseColumns";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "@/components/Loader/Loader";
 
 const fetchCourses = async (): Promise<TCourse[]> => {
   const response = await axiosInstance.get("/courses/get-all-courses");
@@ -27,9 +28,9 @@ const Courses = () => {
     queryFn: fetchCourses,
   });
 
-  // Add a type annotation to courses
-
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return <Loader />;
+  }
   if (error) return <p>Something went wrong...</p>;
 
   const onlineCourses = courses?.filter(

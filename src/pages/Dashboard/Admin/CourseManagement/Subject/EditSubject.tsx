@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import axiosInstance from "@/api/axiosInstance";
 import AppSelect from "@/components/CustomForm/AppSelect";
 import { updateSubjectSchema } from "@/schemas/subject.schema";
+import Loader from "@/components/Loader/Loader";
 
 const fetchSubjectById = async (subjectId: string) => {
   const response = await axiosInstance.get(`subjects/get-subject/${subjectId}`);
@@ -81,7 +82,9 @@ const EditSubject = () => {
     mutation.mutate(data);
   };
 
-  if (isLoadingSubject || isLoadingTopics) return <p>Loading...</p>;
+  if (isLoadingSubject || isLoadingTopics) {
+    <Loader />;
+  }
   if (subjectError || topicsError) return <p>Something went wrong...</p>;
 
   return (

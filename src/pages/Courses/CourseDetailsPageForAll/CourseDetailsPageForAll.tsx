@@ -70,7 +70,7 @@ const CourseDetailsPageForAll = () => {
   return (
     <div className="container mx-auto p-6 h-[100%] font-siliguri">
       {/* Course Card */}
-      <Card className="my-6 shadow-lg  bg-opacity-0 text-black border-none">
+      <Card className="max-w-2xl mx-auto border-2 border-red-500 my-6 bg-opacity-0 text-black border-none">
         <CardContent className="grid grid-cols-1 md:grid-cols-2 items-center justify-center">
           <div className="flex items-center justify-center mt-5">
             <img
@@ -80,7 +80,7 @@ const CourseDetailsPageForAll = () => {
             />
           </div>
           <div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 items-center justify-center">
               <div className="flex items-center gap-2 mt-5">
                 <Badge variant="destructive">{courseData.courseType}</Badge>
               </div>
@@ -97,8 +97,10 @@ const CourseDetailsPageForAll = () => {
 
       {/* Course Overview */}
       <div className="w-full mx-auto font-siliguri text-white ">
-        <div className="border-2 p-12 mb-12 rounded-md  text-center mx-auto">
-          <h3 className="text-4xl font-semibold my-2 ">Course Overview</h3>
+        <div className="p-12 mb-12 rounded-md  text-center mx-auto">
+          <h3 className="decoration-blue-500  text-4xl font-semibold underline underline-offset-8  mb-4">
+            Course Overview
+          </h3>
           <p className="max-w-xl mx-auto text-justify">
             {courseData?.description}
           </p>
@@ -107,7 +109,7 @@ const CourseDetailsPageForAll = () => {
 
       {/* 4 Feature Box */}
       {/* TODO: Separate as another component */}
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 my-2 text-white">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 my-2 text-white max-w-2xl mx-auto">
         <div className="p-1 border-2 py-2 text-center rounded-md">
           <p>
             <span className="text-2xl font-semibold ">ইন্ডাস্ট্রি </span>{" "}
@@ -135,8 +137,8 @@ const CourseDetailsPageForAll = () => {
 
       {/* TODO: make a separate component */}
       {/* Course Curriculum Section Start*/}
-      <div className="my-10">
-        <h3 className="text-4xl font-semibold my-8 text-center text-white">
+      <div className="my-20 max-w-3xl mx-auto">
+        <h3 className="underline underline-offset-8 decoration-blue-500 text-4xl font-semibold my-8 text-center text-white">
           Course Curriculum
         </h3>
         {/* All 4 Items */}
@@ -222,7 +224,7 @@ const CourseDetailsPageForAll = () => {
       {/* Course Curriculum Section End*/}
 
       {/* Available Batches */}
-      <div className=" rounded-md p-2 mt-5">
+      <div className="max-w-5xl mx-auto rounded-md p-2 mt-5">
         {activeBatches?.length === 0 ? (
           <Marquee
             speed={100}
@@ -244,7 +246,7 @@ const CourseDetailsPageForAll = () => {
                       <img
                         src={batch.batchImg}
                         alt={batch.batchName}
-                        className="w-[250px] rounded-lg shadow-md"
+                        className="w-[250px] h-[200px] object-center object-cover rounded-lg shadow-md"
                       />
                     </div>
                     <p className="text-lg font-semibold  tracking-wider ">
@@ -268,11 +270,13 @@ const CourseDetailsPageForAll = () => {
                       onClick={() =>
                         handleEnroll(batch, courseData?.coursePrice as number)
                       }
-                      className="w-full bg-blue-500"
+                      className="w-full bg-blue-500 hover:bg-blue-600"
                       variant="default"
                     >
-                      <FaCartArrowDown className="" />
-                      Enroll
+                      <p className="flex gap-2 items-center justify-center ">
+                        <FaCartArrowDown className="animate-bounce" />
+                        Enroll Now
+                      </p>
                     </Button>
                   </CardFooter>
                 </Card>

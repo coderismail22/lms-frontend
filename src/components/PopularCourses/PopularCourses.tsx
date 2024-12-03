@@ -3,6 +3,7 @@ import AppCourseCard from "../AppCourseCard/AppCourseCard";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
 import { TCourse } from "@/pages/Dashboard/Admin/CourseManagement/Course/courseColumns";
+import Loader from "../Loader/Loader";
 
 const fetchCourses = async (): Promise<TCourse[]> => {
   const response = await axiosInstance.get("/courses/get-all-courses");
@@ -19,14 +20,13 @@ const PopularCourses = () => {
     queryFn: fetchCourses,
   });
 
-  console.log("fetchedcourses", courses);
   if (isLoading) {
-    <p>Loading...</p>;
+    <Loader />;
   }
+
   if (error) {
     <p>Something went wrong ...</p>;
   }
-  console.log("fetchedcourses", courses);
 
   return (
     <div className="h-full font-siliguri bg-[#1D232A] my-7">

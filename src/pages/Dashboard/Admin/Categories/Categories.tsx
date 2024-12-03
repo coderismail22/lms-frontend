@@ -6,6 +6,7 @@ import EditCategoryModal from "@/components/EditCategoryModal/EditCategoryModal"
 import Swal from "sweetalert2";
 import CreateCategoryModal from "@/components/CreateCategoryModal/CreateCategoryModal";
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/Loader/Loader";
 
 export default function Categories() {
   // Fetching states
@@ -20,7 +21,7 @@ export default function Categories() {
     null
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  // TODO: Add Loading State Edit, Delete
   // Create Category
   const handleCreate = async (categoryName: string) => {
     setIsSubmitting(true);
@@ -116,7 +117,7 @@ export default function Categories() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   if (error) {
     return <div>Something went wrong...</div>;

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import axiosInstance from "@/api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { subjectColumns } from "./subjectColumns";
+import Loader from "@/components/Loader/Loader";
 
 const fetchSubjects = async () => {
   const response = await axiosInstance.get("/subjects/get-all-subjects");
@@ -53,8 +54,10 @@ const AllSubjects = () => {
     navigate(`/dashboard/admin/subjects/edit/${subjectId}`);
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  console.log("subjects", subjects);
+  if (isLoading) {
+    <Loader />;
+  }
+
   return (
     <div className="container mx-auto py-2">
       <h1 className="text-2xl font-bold mb-6">All Subjects</h1>

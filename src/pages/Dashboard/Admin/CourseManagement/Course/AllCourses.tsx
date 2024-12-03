@@ -8,6 +8,7 @@ import axiosInstance from "@/api/axiosInstance";
 import { AxiosError } from "axios";
 import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
 import { queryClient } from "@/queryClientSetup";
+import Loader from "@/components/Loader/Loader";
 
 const fetchCourses = async (): Promise<TCourse[]> => {
   const response = await axiosInstance.get("/courses/get-all-courses");
@@ -67,7 +68,7 @@ const AllCourses = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {

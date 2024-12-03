@@ -37,7 +37,7 @@ const EditCategoryModal: React.FC<EditCategoryModalProps> = ({
       onSave({ ...category, name }); // Pass the updated category
     }
   };
-
+// TODO: Add loading spinner here
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>

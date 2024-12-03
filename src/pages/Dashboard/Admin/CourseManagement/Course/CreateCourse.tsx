@@ -10,6 +10,7 @@ import axiosInstance from "@/api/axiosInstance";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import ImageUpload from "@/components/ImageUpload/ImageUpload";
+import Loader from "@/components/Loader/Loader";
 
 // Fetch subjects from the database
 const fetchSubjects = async () => {
@@ -87,7 +88,10 @@ const CreateCourse = () => {
     navigate("/dashboard/admin/course-management/all-courses");
   };
 
-  if (isLoadingCategories || isLoadingSubjects) return <p>Loading data...</p>;
+  if (isLoadingCategories || isLoadingSubjects) {
+    <Loader />;
+  }
+
   if (categoryError || subjectsError)
     return <p>Error loading data. Please try again.</p>;
 
@@ -139,9 +143,6 @@ const CreateCourse = () => {
               Upload Cover Image
             </label>
             <ImageUpload setUploadedImageUrl={setImg} />
-            {img === "" && (
-              <p className="text-red-500 text-sm">Image is required</p>
-            )}
           </div>
           {/* Language */}
           <AppSelect

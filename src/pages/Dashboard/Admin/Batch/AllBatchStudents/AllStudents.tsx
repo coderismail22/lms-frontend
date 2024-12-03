@@ -8,6 +8,7 @@ import { queryClient } from "@/queryClientSetup";
 import Swal from "sweetalert2";
 import { AxiosError } from "axios";
 import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
+import Loader from "@/components/Loader/Loader";
 
 const fetchBatch = async (batchId: string): Promise<TBatch> => {
   const { data } = await axiosInstance.get(`/batches/${batchId}`); // Adjusted for orders
@@ -132,7 +133,7 @@ const AllStudents = ({ batchId }: { batchId: string }) => {
     });
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;
   return (
     <div>

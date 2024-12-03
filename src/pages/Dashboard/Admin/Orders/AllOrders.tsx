@@ -8,6 +8,7 @@ import { TOrder } from "./order.type"; // Updated to use TOrder type
 import { orderColumns } from "./orderColumns";
 import { AxiosError } from "axios";
 import { BackendErrorResponse } from "@/types/backendErrorResponse.type";
+import Loader from "@/components/Loader/Loader";
 
 const fetchOrders = async (): Promise<TOrder[]> => {
   const response = await axiosInstance.get("/orders/get-all-orders-for-admin"); // Adjusted for orders
@@ -113,7 +114,9 @@ const AllOrders = () => {
     });
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    <Loader />;
+  }
   if (error) return <p>Error: {error.message}</p>;
   return (
     <div>

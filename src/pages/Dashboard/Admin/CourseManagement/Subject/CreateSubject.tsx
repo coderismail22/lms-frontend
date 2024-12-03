@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import AppSelect from "@/components/CustomForm/AppSelect";
 import { createSubjectSchema } from "@/schemas/subject.schema";
 import { useNavigate } from "react-router-dom";
+import Loader from "@/components/Loader/Loader";
 
 const fetchTopics = async () => {
   const response = await axiosInstance.get("/topics");
@@ -58,12 +59,14 @@ const CreateSubject = () => {
     description: string;
     topics: string[];
   }) => {
-    console.log("create subject data", data);
     mutation.mutate({ ...data });
     navigate("/dashboard/admin/subject-management/all-subjects");
   };
 
-  if (isLoadingTopics) return <p>Loading...</p>;
+  if (isLoadingTopics) {
+    <Loader />;
+  }
+
   if (topicsError) return <p>Something went wrong...</p>;
 
   return (

@@ -7,6 +7,7 @@ import { queryClient } from "@/queryClientSetup";
 import PaymentTable from "./PaymentTable";
 import { paymentColumns } from "./paymentColumns";
 import { TPayment } from "./payment.type";
+import Loader from "@/components/Loader/Loader";
 
 const fetchPayments = async (): Promise<TPayment[]> => {
   const response = await axiosInstance.get("/payments/get-all-payments");
@@ -45,7 +46,9 @@ const AllPayments = () => {
   const handleEdit = (courseId: string) => {
     navigate(`/dashboard/admin/courses/edit/${courseId}`);
   };
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    <Loader />;
+  }
   if (error) return <p>Error: {error.message}</p>;
 
   return (

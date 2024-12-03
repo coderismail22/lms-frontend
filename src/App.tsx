@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/router";
 import { persistQueryClientRestore } from "@tanstack/react-query-persist-client";
 import { queryClient, localStoragePersister } from "./queryClientSetup"; // Move queryClient setup here if required
+import Loader from "./components/Loader/Loader";
 
 const App = () => {
   const [isCacheLoaded, setIsCacheLoaded] = useState(false);
@@ -19,8 +20,13 @@ const App = () => {
   }, []);
 
   // Prevent rendering until the cache is restored
+  // TODO: Fix sudden logout
   if (!isCacheLoaded) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return <RouterProvider router={router} />;

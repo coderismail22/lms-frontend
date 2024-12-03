@@ -5,6 +5,7 @@ import ContentDetails from "@/components/ContentDetails/ContentDetails";
 import ContentViewer from "@/components/ContentViewer/ContentViewer";
 import axiosInstance from "@/api/axiosInstance";
 import { Course, Lesson, Subject, Topic } from "@/types/course.type";
+import Loader from "@/components/Loader/Loader";
 
 const CourseDetailsPage = () => {
   const { studentId, courseId } = useParams<{
@@ -98,7 +99,9 @@ const CourseDetailsPage = () => {
     fetchCourseData();
   }, [studentId, courseId]);
 
-  if (!courseData) return <p>Loading...</p>;
+  if (!courseData) {
+    <Loader />;
+  }
 
   const selectedIndex = lessons.findIndex(
     (lesson) => lesson._id === selectedLesson?._id

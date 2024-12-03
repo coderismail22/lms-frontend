@@ -5,6 +5,7 @@ import AppInput from "@/components/CustomForm/AppInput";
 import Swal from "sweetalert2";
 import axiosInstance from "@/api/axiosInstance";
 import AppSelect from "@/components/CustomForm/AppSelect";
+import Loader from "@/components/Loader/Loader";
 
 // Fetch topic by ID
 const fetchTopicById = async (topicId: string) => {
@@ -80,7 +81,9 @@ const EditTopic = () => {
     mutation.mutate(data);
   };
 
-  if (isLoadingTopic || isLoadingLessons) return <p>Loading...</p>;
+  if (isLoadingTopic || isLoadingLessons) {
+    <Loader />;
+  }
   if (topicError || lessonsError) return <p>Something went wrong...</p>;
 
   return (

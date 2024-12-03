@@ -18,6 +18,7 @@ import LogoutButton from "../LogoutButton/LogoutButton";
 import { useQueryClient } from "@tanstack/react-query";
 import { authKey } from "@/api/authKey";
 import { FaArrowLeft } from "react-icons/fa";
+import Loader from "../Loader/Loader";
 
 const AppDashboard = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const AppDashboard = () => {
     return null; // Prevent further rendering while redirecting
   }
   if (!authData) {
-    return <p>Loading...</p>; // Wait until authKey is set
+    <Loader />; // Wait until authKey is set
   }
 
   return (
