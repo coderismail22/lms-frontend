@@ -21,7 +21,7 @@ const PopularCourses = () => {
   });
 
   if (isLoading) {
-    <Loader />;
+    return <Loader />;
   }
 
   if (error) {

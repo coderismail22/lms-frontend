@@ -8,6 +8,9 @@ import axiosInstance from "@/api/axiosInstance";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { useLogin } from "@/hooks/useLogin";
+import LoaderWithBlurBG from "@/components/Loader/LoaderWithBlurBG";
+import { AxiosError } from "axios";
+import { handleAxiosError } from "@/utils/handleAxiosError";
 
 const Register = () => {
   const loginMutation = useLogin();
@@ -45,13 +48,8 @@ const Register = () => {
         }
       );
     },
-    onError: (error) => {
-      console.error("Registration failed:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Registration Failed",
-        text: "Something went wrong. Please try again.",
-      });
+    onError: (error: AxiosError) => {
+      handleAxiosError(error, "Registration Failed");
     },
   });
 
@@ -61,21 +59,31 @@ const Register = () => {
     registerMutation.mutate(restFormData);
   };
 
+  if (registerMutation.isPending)
+    return <LoaderWithBlurBG loadingText="Getting things ready for you !" />;
+
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-400">
-      <div className="w-full max-w-md p-6 bg-blue-400 shadow-md rounded-lg">
-        <div className="flex flex-col items-center justify-center">
+    <div className="flex items-center justify-center min-h-screen p-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black">
+      <div className="w-full max-w-sm p-6 sm:p-8 bg-gray-800 shadow-lg rounded-lg border border-gray-700">
+        <div className="flex flex-col items-center justify-center mb-2">
           <Link to="/">
-            <img className="w-[100px] " src="/ejobsit-logo.svg" />
+            <img
+              className="w-16 sm:w-20"
+              src="/ejobsit-logo.svg"
+              alt="Ejobsit"
+            />
           </Link>
         </div>
-        <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
+        <h2 className="text-xl font-bold text-center text-gray-100 mb-6">
           Create Your Account
         </h2>
         <AppForm
           schema={registerSchema}
           onSubmit={onSubmit}
-          buttonText="Register"
+          buttonText={
+            registerMutation.isPending ? "Registering..." : "Register"
+          }
+          submitButtonStyles="w-full py-2 mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md"
           defaultValues={{
             name: "",
             email: "",
@@ -83,44 +91,50 @@ const Register = () => {
             confirmPassword: "",
           }}
         >
-          {/* Name */}
-          <AppInput
-            className="w-full"
-            name="name"
-            label="Full Name"
-            placeholder="Enter your full name"
-          />
-          <div className="mt-4">
-            {/* Email */}
+          {/* Full Name */}
+          <div className="mb-4">
             <AppInput
-              className="w-full mb-4"
-              name="email"
-              label="Email"
-              placeholder="Enter your email"
-            />
-          </div>
-          <div className="mt-4">
-            {/* Password */}
-            <AppInputPassword
-              className="w-full mb-4"
-              name="password"
-              label="Password"
-              placeholder="Enter your password"
+              className="w-full bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
+              name="name"
+              label="Full Name"
+              labelStyles="text-white"
+              placeholder="Enter your full name"
             />
           </div>
 
+          {/* Email */}
+          <div className="mb-4">
+            <AppInput
+              className="w-full bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
+              name="email"
+              label="Email"
+              labelStyles="text-white"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          {/* Password */}
+          <AppInputPassword
+            className="w-full mb-4 bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
+            name="password"
+            label="Password"
+            labelStyles="text-white"
+            placeholder="Enter your password"
+          />
+
           {/* Confirm Password */}
           <AppInputPassword
-            className="w-full mb-4"
+            className="w-full mb-4 bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
             name="confirmPassword"
             label="Confirm Password"
+            labelStyles="text-white"
             placeholder="Confirm your password"
           />
         </AppForm>
-        <div className="text-[11px] flex gap-1 mt-2 items-center justify-center">
-          <h1>Already have an account?</h1>
-          <Link to="/auth/login">
-            <span className="underline">Sign in</span>
+        <div className="text-sm flex gap-1 mt-4 items-center justify-center text-gray-400">
+          <p>Already have an account?</p>
+          <Link to="/auth/login" className="text-blue-400 hover:underline">
+            Sign in
           </Link>
         </div>
       </div>

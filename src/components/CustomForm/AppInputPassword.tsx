@@ -12,6 +12,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; // Importing ico
 interface AppInputPasswordProps {
   name: string;
   label: string;
+  labelStyles?: string;
   placeholder?: string;
   className?: string;
   isDisabled?: boolean;
@@ -20,6 +21,7 @@ interface AppInputPasswordProps {
 const AppInputPassword = ({
   name,
   label,
+  labelStyles,
   isDisabled = false,
   placeholder,
   className,
@@ -44,9 +46,9 @@ const AppInputPassword = ({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel className={`${labelStyles}`}>{label}</FormLabel>
           <FormControl>
-            <div className="relative">
+            <div className="relative ">
               <Input
                 type={showPassword ? "text" : "password"}
                 disabled={isDisabled}
@@ -65,9 +67,11 @@ const AppInputPassword = ({
                   <AiFillEyeInvisible size={20} /> // Show eye slash icon
                 )}
               </button>
+              {error && (
+                <FormMessage className="mb-2">{error.message}</FormMessage>
+              )}
             </div>
           </FormControl>
-          {error && <FormMessage>{error.message}</FormMessage>}
         </FormItem>
       )}
     />

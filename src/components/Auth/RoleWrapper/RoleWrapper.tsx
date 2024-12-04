@@ -16,18 +16,14 @@ const RoleWrapper = ({
 }: RoleWrapperProps) => {
   const queryClient = useQueryClient();
   const authData = queryClient.getQueryData<{
-    accessToken: string;
     role: Role;
   }>(authKey);
 
+  console.log("RoleWrapper: AuthData:", authData);
+  console.log("RoleWrapper: Allowed roles:", allowedRoles);
   // Show fallback (e.g., loader) while waiting for auth data
   if (!authData) {
     return fallback || <p>Loading...</p>;
-  }
-
-  // Redirect to login if no valid auth data exists
-  if (!authData.accessToken) {
-    return <Navigate to="/auth/login" replace />;
   }
 
   // Redirect to unauthorized page if role is not allowed

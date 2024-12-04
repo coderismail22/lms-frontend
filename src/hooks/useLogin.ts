@@ -9,6 +9,7 @@ import { jwtDecode } from "jwt-decode";
 import { Role } from "@/components/DashboardAndSidebar/dashboard.type";
 import { useLocation, useNavigate } from "react-router-dom";
 import { queryClient } from "@/queryClientSetup";
+import { handleAxiosError } from "@/utils/handleAxiosError";
 
 type DecodedToken = {
   role: Role;
@@ -73,18 +74,14 @@ export const useLogin = () => {
         const from =
           location.state?.from || `/dashboard/${authState?.role}/home`;
         navigate(from, { replace: true });
-        // Redirect to the intended route
       });
     },
     onError: (error: AxiosError) => {
-      console.log(error);
-      Swal.fire({
-        icon: "error",
-        title: "Login Failed",
-        text:
-          error.message || // Handle general JavaScript errors
-          "An unexpected error occurred. Please try again later.",
-      });
+      console.log("Redirect target:", location.state?.from);
+
+      handleAxiosError(error, "Login Failed");
+      // Ensure the user isn't redirected by resetting location.state
+      navigate(location.pathname, { replace: true });
     },
   });
 };

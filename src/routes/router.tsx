@@ -59,21 +59,23 @@ export const router = createBrowserRouter([
       { path: "/courses", element: <Courses /> },
       { path: "/courses/:courseId", element: <CourseDetailsPageForAll /> },
       { path: "/cart", element: <Cart /> },
+      // Auth
+      {
+        path: "auth/login",
+        element: <Login />,
+      },
+
+      {
+        path: "auth/signup",
+        element: <Register />,
+      },
+      {
+        path: "/unauthorized",
+        element: <Unauthorized />, // Fallback for unauthorized access
+      },
     ],
   },
-  // Auth
-  {
-    path: "auth/login",
-    element: <Login />,
-  },
-  {
-    path: "auth/signup",
-    element: <Register />,
-  },
-  {
-    path: "/unauthorized",
-    element: <Unauthorized />, // Fallback for unauthorized access
-  },
+
   // {
   //   path: "/reset-password",
   //   element: <ResetPassword />,

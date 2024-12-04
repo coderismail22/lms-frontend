@@ -10,7 +10,7 @@ import { MdOutlinePhoneInTalk } from "react-icons/md";
 export const TopBanner = () => {
   return (
     <div className="from-gray-900 via-gray-800 to-gray-900 text-white flex justify-center md:justify-between gap-5  px-5">
-      <div className=" py-2 text-center font-semibold  font-poppins flex gap-5">
+      <div className="py-2 text-center font-semibold  font-poppins flex gap-5">
         <Link to="https://www.facebook.com/sdgfoundation" target="_blank">
           <FaFacebook />
         </Link>

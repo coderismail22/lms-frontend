@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 interface AppInputProps {
   name: string;
   label: string;
+  labelStyles?: string;
   placeholder?: string;
   className?: string;
   isDisabled?: boolean;
@@ -18,6 +19,7 @@ interface AppInputProps {
 const AppInput = ({
   name,
   label,
+  labelStyles,
   isDisabled = false,
   placeholder,
   className,
@@ -37,7 +39,7 @@ const AppInput = ({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel className={`${labelStyles}`}>{label}</FormLabel>
           <FormControl>
             <Input
               disabled={isDisabled}
