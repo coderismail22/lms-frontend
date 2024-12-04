@@ -15,10 +15,10 @@ import AppSidebar from "@/components/DashboardAndSidebar/AppSidebar";
 import { useRole } from "@/hooks/useRole";
 import CustomBreadcrumbLink from "../CustomBreadcrumbLink/CustomBreadcrumbLink";
 import LogoutButton from "../LogoutButton/LogoutButton";
-import { useQueryClient } from "@tanstack/react-query";
 import { authKey } from "@/api/authKey";
 import { FaArrowLeft } from "react-icons/fa";
 import Loader from "../Loader/Loader";
+import { useQueryClient } from "@tanstack/react-query";
 
 const AppDashboard = () => {
   const navigate = useNavigate();

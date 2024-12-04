@@ -31,9 +31,17 @@ const Navbar = () => {
 
   // Add conditional items based on login state
   if (authData?.role == "student") {
-    navitems.push({ title: "Dashboard", path: "/dashboard", isScroll: false });
-  } else if (authData?.role == "admin" || authData?.role == "instructor") {
-    navitems.push({ title: "Dashboard", path: "/dashboard", isScroll: false });
+    navitems.push({
+      title: "Dashboard",
+      path: "/dashboard/student/home",
+      isScroll: false,
+    });
+  } else if (authData?.role == "admin") {
+    navitems.push({
+      title: "Dashboard",
+      path: "/dashboard/admin/home",
+      isScroll: false,
+    });
   } else {
     navitems.push({ title: "Login", path: "/auth/login", isScroll: false });
   }

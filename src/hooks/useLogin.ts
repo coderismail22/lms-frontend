@@ -77,11 +77,8 @@ export const useLogin = () => {
       });
     },
     onError: (error: AxiosError) => {
-      console.log("Redirect target:", location.state?.from);
-
       handleAxiosError(error, "Login Failed");
-      // Ensure the user isn't redirected by resetting location.state
-      navigate(location.pathname, { replace: true });
+      navigate("/");
     },
   });
 };
