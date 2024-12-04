@@ -13,7 +13,6 @@ const ResponsiveVideo: React.FC<ResponsiveVideoProps> = ({ url }) => {
       )
     : url; // If it's already an embed URL, keep it as is.
 
-  console.log(url);
   return (
     <div className="relative w-full pb-[56.25%] h-0 overflow-hidden rounded-md shadow-md">
       <iframe

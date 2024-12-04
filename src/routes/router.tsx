@@ -5,7 +5,6 @@ import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home/Home/Home";
 import Blog from "../pages/Blog/Blog/Blog";
 import BlogPostDetail from "../pages/Blog/BlogPostDetails/BlogPostDetails";
-import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import Dashboard from "@/pages/Dashboard/Dashboard/Dashboard";
 import AdminHome from "@/pages/Dashboard/Admin/AdminHome/AdminHome";
 import InstructorHome from "@/pages/Dashboard/Instructor/InstructorHome/InstructorHome";
@@ -47,6 +46,7 @@ import AllOrders from "@/pages/Dashboard/Admin/Orders/AllOrders";
 import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
 import PendingCourses from "@/pages/Dashboard/Student/Courses/PendingCourses/PendingCourses";
 import AllBatchStudents from "@/pages/Dashboard/Admin/Batch/AllBatchStudents";
+import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 
 export const router = createBrowserRouter([
   {

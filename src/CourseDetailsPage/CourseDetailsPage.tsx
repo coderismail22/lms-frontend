@@ -17,7 +17,8 @@ const CourseDetailsPage = () => {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [courseData, setCourseData] = useState<Course | null>(null);
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
-
+  const [loading, setLoading] = useState<boolean>(true); // Loading state
+  const [error, setError] = useState<string | null>(""); // Error state
   // Fetch and transform the course data for frontend needs
   useEffect(() => {
     const fetchCourseData = async () => {
@@ -88,7 +89,12 @@ const CourseDetailsPage = () => {
             ? allLessons.find((lesson) => lesson._id === lastCompletedLessonId)
             : firstAccessibleLesson) || null
         );
-      } catch (error) {
+        setLoading(false);
+        // TODO: Add a type here
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        setLoading(false);
+        setError(error);
         console.error("Error fetching course data:", error);
       }
     };
@@ -96,13 +102,18 @@ const CourseDetailsPage = () => {
     fetchCourseData();
   }, [studentId, courseId]);
 
-  if (!courseData) {
-    <Loader />;
-  }
-
   const selectedIndex = lessons.findIndex(
     (lesson) => lesson._id === selectedLesson?._id
   );
+
+  console.log("loading", loading);
+  if (loading) {
+    <Loader />;
+  }
+  console.log("error", error);
+  if (error) {
+    <p className="text-center text-red-500 font-bold">Something went wrong</p>;
+  }
 
   return (
     <div className="p-4  shadow-md grid grid-cols-1 md:grid-cols-5 items-center justify-center gap-4 w-[100%]  rounded-md">
