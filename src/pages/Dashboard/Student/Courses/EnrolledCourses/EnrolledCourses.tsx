@@ -22,8 +22,9 @@ const EnrolledCourses = () => {
     queryFn: fetchCourses,
   });
 
+  console.log("isCourseLoading", isCourseLoading)
   if (isCourseLoading) {
-    <Loader />;
+    return <Loader />;
   }
   if (courseError)
     return <p>{courseError ? courseError?.message : "An error occurred"}</p>;

@@ -34,10 +34,10 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
 
   return (
     <div className="shadow-md py-4 px-3 rounded-md w-full overflow-y-auto max-h-[80vh]">
-      <h2 className="text-2xl font-semibold">{course.name}</h2>
+      <h2 className="text-2xl font-semibold">{course?.name}</h2>
       <p className="text-gray-600">
         Total Lessons:{" "}
-        {course.subjects.reduce(
+        {course?.subjects?.reduce(
           (total, subj) =>
             total +
             subj.topics.reduce(
@@ -48,20 +48,20 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
         )}
       </p>
 
-      {course.subjects.map((subject) => (
+      {course?.subjects?.map((subject) => (
         <div
-          key={subject._id}
+          key={subject?._id}
           className="mt-5 p-4 border border-gray-300 rounded-lg  shadow-lg bg-gradient-to-r from-[#cef3f5] via-[#bddff0] to-[#c7f1e4]"
         >
           {/* Subject Card */}
           <div
-            onClick={() => toggleSubject(subject._id)}
+            onClick={() => toggleSubject(subject?._id)}
             className="cursor-pointer p-4 flex justify-between items-center rounded-md bg-[#6fb1d2] hover:bg-[#5a99b7] transition-all duration-300"
           >
             <h3 className="text-xl font-semibold text-gray-800">
               {subject.name}
             </h3>
-            {expandedSubjects.includes(subject._id) ? (
+            {expandedSubjects?.includes(subject?._id) ? (
               <CiSquareMinus className="h-6 w-6 text-gray-600 transition-transform duration-200 transform rotate-180" />
             ) : (
               <CiSquarePlus className="h-6 w-6 text-gray-600 transition-transform duration-200" />
@@ -71,12 +71,12 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
           {/* Nested Topics */}
           <div
             className={`transition-all duration-500 overflow-hidden ${
-              expandedSubjects.includes(subject._id)
+              expandedSubjects.includes(subject?._id)
                 ? "max-h-[500px]"
                 : "max-h-0"
             }`}
           >
-            {expandedSubjects.includes(subject._id) &&
+            {expandedSubjects.includes(subject?._id) &&
               subject.topics.map((topic) => (
                 <div
                   key={topic._id}
@@ -132,7 +132,6 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
           </div>
         </div>
       ))}
-
     </div>
   );
 };

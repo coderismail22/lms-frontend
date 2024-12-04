@@ -21,8 +21,6 @@ const CourseDetailsPage = () => {
   // Fetch and transform the course data for frontend needs
   useEffect(() => {
     const fetchCourseData = async () => {
-      console.log(studentId);
-      console.log(courseId);
       try {
         const response = await axiosInstance.get(
           `/students/${studentId}/courses/${courseId}`
@@ -60,7 +58,6 @@ const CourseDetailsPage = () => {
             };
           }),
         };
-        console.log("transformed data", transformedCourseData);
         setCourseData(transformedCourseData);
 
         // Flatten all lessons into a single array for easier indexing and navigation
@@ -121,10 +118,12 @@ const CourseDetailsPage = () => {
         />
       </div>
       <div className="col-span-1 bg-blue-200 shadow-md md:col-span-2  min-h-full w-full ">
-        <ContentDetails
-          course={courseData}
-          onSelectLesson={setSelectedLesson}
-        />
+        {courseData && (
+          <ContentDetails
+            course={courseData}
+            onSelectLesson={setSelectedLesson}
+          />
+        )}
       </div>
     </div>
   );

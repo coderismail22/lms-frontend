@@ -25,11 +25,11 @@ const PendingOrders = () => {
   if (isOrderLoading) {
     <Loader />;
   }
-  if (courseError)
+  if (courseError) {
     return <p>{courseError ? courseError?.message : "An error occurred"}</p>;
-  console.log(orders);
+  }
   // Filter out approved orders
-  const pendingOrders = orders.filter(
+  const pendingOrders = orders?.filter(
     (order: TFullPopulatedOrder) => order.orderStatus === "Pending"
   );
   return (

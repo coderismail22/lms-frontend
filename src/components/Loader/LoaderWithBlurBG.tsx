@@ -1,6 +1,6 @@
 import { ThreeDots } from "react-loader-spinner";
 
-const LoaderWithBlurBG = ({ loadingText }: { loadingText: string }) => {
+const LoaderWithBlurBG = ({ loadingText }: { loadingText?: string }) => {
   return (
     <div className="relative flex justify-center items-center h-screen bg-gradient-to-b from-gray-800 via-gray-900 to-black">
       {/* Blurred Background */}
