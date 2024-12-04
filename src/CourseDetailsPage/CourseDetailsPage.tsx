@@ -89,7 +89,11 @@ const CourseDetailsPage = () => {
             ? allLessons.find((lesson) => lesson._id === lastCompletedLessonId)
             : firstAccessibleLesson) || null
         );
-        setLoading(false);
+
+        // Simulate a 2-3 second loading time after fetching is done
+        setTimeout(() => {
+          setLoading(false);
+        }, 10000); // Show loader for 2 seconds after data fetch completes
         // TODO: Add a type here
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {

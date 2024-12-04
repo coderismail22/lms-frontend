@@ -2,6 +2,7 @@ import React from "react";
 import { Lesson } from "@/types/course.type";
 import ResponsiveVideo from "../ReponsiveVideo/ResponsiveVideo";
 import axiosInstance from "@/api/axiosInstance";
+import Loader from "../Loader/Loader";
 
 interface ContentViewerProps {
   courseId: string;
@@ -22,7 +23,7 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
   setSelectedLesson,
   setLessons,
 }) => {
-  if (!lesson) return <p>Select a lesson to view content.</p>;
+  if (!lesson) return <Loader />;
 
   const handlePrevious = () => {
     if (selectedIndex > 0) {
