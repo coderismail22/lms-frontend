@@ -8,14 +8,19 @@ import { loginSchema } from "@/schemas/login.schema";
 import { TLoginForm } from "@/types/login.type";
 import { useLogin } from "@/hooks/useLogin";
 import { Link } from "react-router-dom";
+import Loader from "@/components/Loader/Loader";
 
 const Login = () => {
   const loginMutation = useLogin();
 
   const onSubmit = (data: TLoginForm) => {
-    console.log(data);
     loginMutation.mutate(data); // Trigger the mutation
+    console.log(loginMutation.isPending);
   };
+
+  if (loginMutation.isPending) {
+    <Loader />;
+  }
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-400">
@@ -32,7 +37,6 @@ const Login = () => {
           schema={loginSchema}
           onSubmit={onSubmit}
           buttonText={"Login"}
-          // buttonText={`${mutation.isPending ? "Logging in..." : "Login"}`}
           defaultValues={{
             email: "",
             password: "",

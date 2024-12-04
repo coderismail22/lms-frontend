@@ -83,13 +83,12 @@ const CreateCourse = () => {
       softwareList,
     };
 
-    console.log("Form Data:", finalData);
     mutation.mutate(finalData); // Trigger the mutation
     navigate("/dashboard/admin/course-management/all-courses");
   };
 
   if (isLoadingCategories || isLoadingSubjects) {
-    <Loader />;
+    return <Loader />;
   }
 
   if (categoryError || subjectsError)

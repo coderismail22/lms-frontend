@@ -124,7 +124,6 @@ const EditBatch = () => {
       batchImg: batchImg || batch?.data?.batchImg,
       isActive,
     };
-    console.log("hey", finalData);
     mutation.mutate({ batchId: batchId!, data: finalData });
   };
 

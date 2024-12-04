@@ -43,13 +43,11 @@ export const useLogin = () => {
         "/auth/login",
         formData
       );
-      console.log("data", data);
+
       return data;
     },
     // Options
     onSuccess: (data) => {
-      console.log("success data", data?.data);
-
       // Decode the role from the token
       const decodedToken: DecodedToken = jwtDecode(data?.data?.accessToken);
       // console.log(decodedToken);
@@ -65,10 +63,7 @@ export const useLogin = () => {
       queryClient.setQueryData(authKey, authState);
 
       // Fallback: Set the token in localStorage for persistence across sessions
-
       localStorage.setItem("accessToken", data?.data?.accessToken);
-      console.log("Auth State Set:", authState);
-      console.log("Query Cache After Set:", queryClient.getQueryData(authKey));
 
       Swal.fire({
         icon: "success",

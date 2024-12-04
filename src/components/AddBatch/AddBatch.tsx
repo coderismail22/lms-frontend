@@ -116,7 +116,6 @@ const AddBatch = () => {
 
   // Form submission handler
   const onSubmit = (data: TBatchForm) => {
-    console.log("clicked");
     const finalData = {
       ...data,
       courseId: courseMap[data.courseName],
@@ -129,7 +128,6 @@ const AddBatch = () => {
       return;
     }
 
-    console.log(finalData);
     mutation.mutate(finalData);
   };
 
@@ -172,7 +170,6 @@ const AddBatch = () => {
               Upload Cover Image
             </label>
             <ImageUpload setUploadedImageUrl={setBatchImg} />
-
           </div>
 
           {/* Course Name */}

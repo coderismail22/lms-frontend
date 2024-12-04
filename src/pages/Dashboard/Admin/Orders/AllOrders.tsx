@@ -115,7 +115,7 @@ const AllOrders = () => {
   };
 
   if (isLoading) {
-    <Loader />;
+    return <Loader />;
   }
   if (error) return <p>Error: {error.message}</p>;
   return (
