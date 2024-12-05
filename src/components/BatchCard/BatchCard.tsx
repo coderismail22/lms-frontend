@@ -1,10 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { TrashIcon } from "lucide-react";
 
 interface BatchCardProps {
@@ -28,13 +23,7 @@ const BatchCard: React.FC<BatchCardProps> = ({
 }) => {
   return (
     <Card className="w-full max-w-sm rounded-lg shadow-md overflow-hidden">
-      <CardHeader className="p-0">
-        <img
-          src={image}
-          alt={courseName}
-          className="w-full h-36 object-cover"
-        />
-      </CardHeader>
+      <img src={image} alt={courseName} className="w-full h-36 object-cover" />
       <CardContent className="p-4 space-y-2">
         <h2 className="text-lg font-bold text-gray-800">{courseName}</h2>
         <p className="text-sm text-gray-600">
@@ -44,7 +33,7 @@ const BatchCard: React.FC<BatchCardProps> = ({
           <strong>Batch ID:</strong> {batchId}
         </p>
       </CardContent>
-      <CardFooter className="flex items-center justify-between p-4">
+      <div className="flex items-center justify-center gap-2 mb-5">
         <Button
           className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
           variant="default"
@@ -57,7 +46,7 @@ const BatchCard: React.FC<BatchCardProps> = ({
           variant="default"
           onClick={onEdit}
         >
-          Edit Batch
+          Edit
         </Button>
         <Button
           variant="default"
@@ -66,7 +55,7 @@ const BatchCard: React.FC<BatchCardProps> = ({
         >
           <TrashIcon className="h-5 w-5" />
         </Button>
-      </CardFooter>
+      </div>
     </Card>
   );
 };

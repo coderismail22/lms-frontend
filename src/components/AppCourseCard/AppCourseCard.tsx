@@ -1,4 +1,3 @@
-import { BiCategoryAlt } from "react-icons/bi";
 import { IoBookOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { Card } from "../ui/card";
@@ -7,6 +6,7 @@ import { Badge } from "../ui/badge";
 import { Separator } from "@radix-ui/react-separator";
 import { TbCoinTaka } from "react-icons/tb";
 import { Subject } from "@/types/course.type";
+import { FaCartArrowDown } from "react-icons/fa";
 // import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 // import useAuth from "../../../Hooks/useAuth";
 // import useCart from "../../../Hooks/useCart";
@@ -93,9 +93,9 @@ const AppCourseCard = ({ course }: { course: any }) => {
           <Link to={`/courses/${course._id}`}>
             <Button className="text-white bg-gradient-to-r w-full font-semibold text-[16px] from-cyan-500 to-blue-500 hover:from-blue-600 hover:to-blue-600">
               <p className="text-xl">
-                <BiCategoryAlt />
+                <FaCartArrowDown />
               </p>{" "}
-              View Course Details
+              Buy Course
             </Button>
           </Link>
         </div>
