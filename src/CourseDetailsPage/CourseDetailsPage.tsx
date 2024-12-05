@@ -129,7 +129,7 @@ const CourseDetailsPage = () => {
           setLessons={setLessons}
         />
       </div>
-      <div className="col-span-1 bg-blue-200 shadow-md md:col-span-2  min-h-full w-full ">
+      <div className="col-span-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-400 shadow-md md:col-span-2  rounded-md min-h-full w-full ">
         {courseData && (
           <ContentDetails
             course={courseData}

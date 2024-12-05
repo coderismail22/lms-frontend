@@ -69,6 +69,7 @@ const AllLessons = () => {
       <h1 className="text-2xl font-bold mb-6">All Lessons</h1>
       <div className="my-4 flex justify-end">
         <Button
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
           onClick={() =>
             navigate("/dashboard/admin/lesson-management/create-lesson")
           }

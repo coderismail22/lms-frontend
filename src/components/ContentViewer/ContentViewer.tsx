@@ -63,7 +63,7 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
   const isLastLesson = selectedIndex === lessons.length - 1;
 
   return (
-    <div className="w-full bg-blue-200 rounded shadow-md h-full p-4">
+    <div className="w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-400  rounded shadow-md h-full p-4">
       <h3 className="font-semibold text-xl mb-2">{lesson.name}</h3>
       <div className="mb-4">
         {lesson.isAccessible ? (

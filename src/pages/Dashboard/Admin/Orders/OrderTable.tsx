@@ -84,7 +84,10 @@ const OrderTable = <TData, TValue>({
         {/* Show/Hide Columns */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="default" className="ml-auto">
+            <Button
+              variant="default"
+              className="ml-auto bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
+            >
               Columns
             </Button>
           </DropdownMenuTrigger>
@@ -156,6 +159,7 @@ const OrderTable = <TData, TValue>({
       </div>
       <div className="flex items-center justify-end space-x-2 py-4 px-2">
         <Button
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
@@ -164,6 +168,7 @@ const OrderTable = <TData, TValue>({
           Previous
         </Button>
         <Button
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
           variant="outline"
           size="sm"
           onClick={() => table.nextPage()}

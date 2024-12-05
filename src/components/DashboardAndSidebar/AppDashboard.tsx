@@ -63,7 +63,7 @@ const AppDashboard = () => {
         <div
           // className=" bg-[#e2f0f1] min-h-screen"
           style={{
-            backgroundImage: "url('/dashboard-bg-1.png')",
+            // backgroundImage: "url('/dashboard-bg-1.png')",
             backgroundSize: "cover", // Makes the image cover the full container
             backgroundPosition: "center", // Centers the background image
             height: "100%", // Full height of the container

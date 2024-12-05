@@ -45,15 +45,23 @@ const BatchCard: React.FC<BatchCardProps> = ({
         </p>
       </CardContent>
       <CardFooter className="flex items-center justify-between p-4">
-        <Button variant="default" onClick={onViewStudents}>
+        <Button
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
+          variant="default"
+          onClick={onViewStudents}
+        >
           Students
         </Button>
-        <Button variant="secondary" onClick={onEdit}>
+        <Button
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
+          variant="default"
+          onClick={onEdit}
+        >
           Edit Batch
         </Button>
         <Button
-          variant="ghost"
-          className="text-red-500 hover:bg-red-100"
+          variant="default"
+          className="text-white  hover:bg-red-100 bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
           onClick={onDelete}
         >
           <TrashIcon className="h-5 w-5" />

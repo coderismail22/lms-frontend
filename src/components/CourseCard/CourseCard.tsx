@@ -15,17 +15,12 @@ const CourseCard = ({
   studentId: string;
 }) => {
   const { courseId } = course;
-  {
-    console.log("course card", console.log(course));
-    console.log("course card", console.log("studentId", studentId));
-    // console.log("inside course card - populated courseId", console.log(course?.courseId));
-    // console.log("inside course card - full course", JSON.stringify(course));
-  }
+
   const navigate = useNavigate();
   const role = useRole();
 
   return (
-    <Card className="max-w-[250px] bg-[#afc8e2] shadow-xl overflow-hidden flex flex-col justify-between h-full border-none">
+    <Card className="max-w-[250px]  bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-400 shadow-xl overflow-hidden flex flex-col justify-between h-full border-none">
       <div className="flex-grow">
         <figure>
           <img

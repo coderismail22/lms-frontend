@@ -12,7 +12,6 @@ const fetchCourses = async () => {
 };
 
 const EnrolledCourses = () => {
-
   // Fetch enrolled courses
   const {
     data,
@@ -32,7 +31,7 @@ const EnrolledCourses = () => {
   return (
     <div
 
-      // className="bg-[#c6dbf3] h-[100%] p-5"
+    // className="bg-[#c6dbf3] h-[100%] p-5"
     >
       <h1 className="font-bold text-center tracking-wider mb-5 underline underline-offset-8 decoration-blue-500">
         Enrolled Courses

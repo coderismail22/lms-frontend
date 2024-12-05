@@ -50,9 +50,10 @@ const Batch = () => {
       Swal.fire("Deleted!", "Batch has been deleted.", "success");
       queryClient.invalidateQueries({ queryKey: ["batches"] }); // Refetch batches
     },
-    // TODO: Define error type
-    onError: (error: AxiosError<BackendErrorResponse>) => {
-      console.error("Error deleting batch:", error);
+
+    // TODO: Remove used rule
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onError: (_error: AxiosError<BackendErrorResponse>) => {
       Swal.fire("Error!", "Failed to delete batch.", "error");
     },
   });
@@ -76,12 +77,16 @@ const Batch = () => {
     <div>
       <div className="flex justify-end mb-4">
         <Link to="/dashboard/admin/batch/add-batch">
-          <Button>Add Batch</Button>
+          <Button className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]">
+            Add Batch
+          </Button>
         </Link>
       </div>
 
       <div>
-        <h1 className="text-2xl font-bold mb-4">Batch Cards</h1>
+        <h1 className="text-2xl font-bold  text-center underline underline-offset-8 mb-10">
+          Batch Cards
+        </h1>
 
         {/* Loading State */}
         {isLoading && <Loader />}

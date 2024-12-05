@@ -50,7 +50,7 @@ const CreateLesson = () => {
     type: string;
     content: string;
   }) => {
-    console.log("Creating lesson with data:", data);
+    // console.log("Creating lesson with data:", data);
     mutation.mutate(data);
   };
 
