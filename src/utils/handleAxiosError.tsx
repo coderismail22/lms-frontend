@@ -25,5 +25,11 @@ export const handleAxiosError = (
     icon: "error",
     title,
     text: errorMessages,
+    customClass: {
+      title: "custom-title",
+      popup: "custom-popup",
+      icon: "custom-icon",
+      confirmButton: "custom-confirm-btn",
+    },
   });
 };

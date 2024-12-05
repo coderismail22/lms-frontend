@@ -11,7 +11,7 @@ import { useLogin } from "@/hooks/useLogin";
 import LoaderWithBlurBG from "@/components/Loader/LoaderWithBlurBG";
 import { AxiosError } from "axios";
 import { handleAxiosError } from "@/utils/handleAxiosError";
-
+import "../../../styles/swal.css";
 const Register = () => {
   const loginMutation = useLogin();
 
@@ -36,7 +36,12 @@ const Register = () => {
               icon: "success",
               title: "Registration Successful",
               text: "Welcome!",
-              customClass:{}
+              customClass: {
+                title: "custom-title",
+                popup: "custom-popup",
+                icon: "custom-icon",
+                confirmButton: "custom-confirm-btn",
+              },
             });
           },
           onError: () => {
@@ -44,6 +49,12 @@ const Register = () => {
               icon: "error",
               title: "Auto Login Failed",
               text: "Please log in manually.",
+              customClass: {
+                title: "custom-title",
+                popup: "custom-popup",
+                icon: "custom-icon",
+                confirmButton: "custom-confirm-btn",
+              },
             });
           },
         }

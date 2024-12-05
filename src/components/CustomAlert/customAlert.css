@@ -1,9 +1,3 @@
-/* customClass: {
-  title: "custom-title",
-  popup: "custom-popup",
-  icon: "custom-icon",
-  confirmButton: "custom-confirm-btn",
-} */
 .custom-title {
   color: #65e8da; /* Blue title */
   font-size: 25px;
