@@ -12,6 +12,7 @@ const fetchCourses = async () => {
 };
 
 const EnrolledCourses = () => {
+
   // Fetch enrolled courses
   const {
     data,
@@ -22,19 +23,22 @@ const EnrolledCourses = () => {
     queryFn: fetchCourses,
   });
 
-  console.log("isCourseLoading", isCourseLoading)
+  console.log("isCourseLoading", isCourseLoading);
   if (isCourseLoading) {
     return <Loader />;
   }
   if (courseError)
     return <p>{courseError ? courseError?.message : "An error occurred"}</p>;
   return (
-    <div>
+    <div
+
+      // className="bg-[#c6dbf3] h-[100%] p-5"
+    >
       <h1 className="font-bold text-center tracking-wider mb-5 underline underline-offset-8 decoration-blue-500">
         Enrolled Courses
       </h1>
       {data?.courses?.length === 0 && <p>No enrolled courses</p>}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl">
         {data?.courses?.map((course: FullPopulatedCourse, index: string) => (
           <CourseCard key={index} course={course} studentId={data?.studentId} />
         ))}

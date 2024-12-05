@@ -36,6 +36,7 @@ const Register = () => {
               icon: "success",
               title: "Registration Successful",
               text: "Welcome!",
+              customClass:{}
             });
           },
           onError: () => {

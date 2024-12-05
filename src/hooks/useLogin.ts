@@ -10,6 +10,7 @@ import { Role } from "@/components/DashboardAndSidebar/dashboard.type";
 import { useLocation, useNavigate } from "react-router-dom";
 import { queryClient } from "@/queryClientSetup";
 import { handleAxiosError } from "@/utils/handleAxiosError";
+import "../styles/swal.css";
 
 type DecodedToken = {
   role: Role;
@@ -70,7 +71,13 @@ export const useLogin = () => {
       Swal.fire({
         icon: "success",
         title: "Login Successful",
-        text: "You are now logged in!",
+        text: "You are now logged in !",
+        customClass: {
+          title: "custom-title",
+          popup: "custom-popup",
+          icon: "custom-icon",
+          confirmButton: "custom-confirm-btn",
+        },
       }).then(() => {
         const from =
           location.state?.from || `/dashboard/${authState?.role}/home`;

@@ -1,9 +1,10 @@
 import { useRole } from "@/hooks/useRole";
 import { FullPopulatedCourse } from "@/types/fullCourseAndStudent.type";
-import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Link, useNavigate } from "react-router-dom";
+import { Card, CardContent } from "../ui/card";
 import { FaPlay } from "react-icons/fa";
 import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 
 // const CourseCard = (course: FullPopulatedCourse, studentId: string) => {
 const CourseCard = ({
@@ -24,20 +25,34 @@ const CourseCard = ({
   const role = useRole();
 
   return (
-    <Card className="p-2 border border-blue-500 rounded-lg shadow hover:shadow-lg  transition w-full bg-[#DBEBFE] grid flex-col md:flex-row">
-      <CardHeader className="p-1">
-        <img className="rounded-md" src={courseId?.img} alt={courseId?.name} />
-      </CardHeader>
+    <Card className="max-w-[250px] bg-[#afc8e2] shadow-xl overflow-hidden flex flex-col justify-between h-full border-none">
+      <div className="flex-grow">
+        <figure>
+          <img
+            className="w-full h-[200px] object-cover object-center"
+            src={course?.courseId?.img}
+            alt="course"
+          />
+        </figure>
+        <div className="flex flex-col items-center justify-center m-2">
+          <Badge variant="destructive" className="text-white ">
+            <Link to="#">{course?.courseId?.courseType}</Link>
+          </Badge>
+        </div>
+
+        <h2 className="font-bold text-3xl text-white text-center">
+          {courseId?.name}
+        </h2>
+      </div>
       <CardContent className="p-1">
-        <h2 className="font-bold text-lg text-center">{courseId?.name}</h2>
         <Button
           variant="outline"
-          className="w-full flex items-center justify-center hover:bg-blue-200 cursor-pointer"
+          className="w-full flex items-center justify-center  cursor-pointer bg-gradient-to-tr  from-cyan-500 to-blue-500 hover:bg-gradient-tr hover:from-[#c4f2fa] hover:to-blue-500 text-white"
           onClick={() =>
             navigate(`/dashboard/${role}/${studentId}/courses/${courseId._id}`)
           }
         >
-          <FaPlay className="mr-2 text-blue-400" />
+          <FaPlay className="mr-2  " />
           Continue Course
         </Button>
 

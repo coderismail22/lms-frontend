@@ -99,7 +99,6 @@ const CourseDetailsPage = () => {
       } catch (error: any) {
         setLoading(false);
         setError(error);
-        console.error("Error fetching course data:", error);
       }
     };
 
@@ -110,11 +109,9 @@ const CourseDetailsPage = () => {
     (lesson) => lesson._id === selectedLesson?._id
   );
 
-  console.log("loading", loading);
   if (loading) {
     <Loader />;
   }
-  console.log("error", error);
   if (error) {
     <p className="text-center text-red-500 font-bold">Something went wrong</p>;
   }

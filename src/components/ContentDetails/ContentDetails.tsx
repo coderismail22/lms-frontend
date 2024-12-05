@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Course, Lesson } from "@/types/course.type";
 import { LockOpenIcon } from "lucide-react";
 import { LockClosedIcon } from "@radix-ui/react-icons";
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
+import Loader from "../Loader/Loader";
 
 interface ContentDetailsProps {
   course: Course;
@@ -15,7 +16,17 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
 }) => {
   const [expandedSubjects, setExpandedSubjects] = useState<string[]>([]);
   const [expandedTopics, setExpandedTopics] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // Loading state
 
+  // Simulate loading data (or you could fetch data here)
+  useEffect(() => {
+    // Simulate a delay to show the loader
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+  }, []);
   const toggleSubject = (subjectId: string) => {
     setExpandedSubjects((prev) =>
       prev.includes(subjectId)
@@ -32,6 +43,7 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
     );
   };
 
+  if (loading) return <Loader />;
   return (
     <div className="shadow-md py-4 px-3 rounded-md w-full overflow-y-auto max-h-[80vh]">
       <h2 className="text-2xl font-semibold">{course?.name}</h2>

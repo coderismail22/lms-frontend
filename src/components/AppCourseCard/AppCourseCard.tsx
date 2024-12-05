@@ -32,7 +32,7 @@ const AppCourseCard = ({ course }: { course: any }) => {
     : 0;
 
   return (
-    <Card className="bg-base-100 shadow-xl overflow-hidden flex flex-col justify-between h-full border-none bg-[#1D232A]">
+    <Card className="max-w-sm bg-base-100 shadow-xl overflow-hidden flex flex-col justify-between h-full border-none bg-[#1D232A]">
       {/* Card Header */}
       <div className="flex-grow">
         <figure>

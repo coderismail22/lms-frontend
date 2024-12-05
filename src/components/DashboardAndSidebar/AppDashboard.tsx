@@ -40,7 +40,7 @@ const AppDashboard = () => {
       <AppSidebar role={role} />
       <SidebarInset>
         {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 "> */}
-        <header className="flex items-center gap-2 px-4 py-4 bg-gradient-to-r from-blue-500 to-indigo-400 shadow-lg">
+        <header className="flex items-center gap-2 px-4 py-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-400 shadow-lg">
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
           <Breadcrumb className=" w-full">
@@ -60,7 +60,16 @@ const AppDashboard = () => {
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        <div className="p-4 bg-[#EEFAFF] min-h-screen">
+        <div
+          // className=" bg-[#e2f0f1] min-h-screen"
+          style={{
+            backgroundImage: "url('/dashboard-bg-1.png')",
+            backgroundSize: "cover", // Makes the image cover the full container
+            backgroundPosition: "center", // Centers the background image
+            height: "100%", // Full height of the container
+            padding: "20px", // Your custom padding
+          }}
+        >
           <Outlet />
         </div>
       </SidebarInset>

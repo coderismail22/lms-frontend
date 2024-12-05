@@ -15,7 +15,6 @@ const Login = () => {
 
   const onSubmit = (data: TLoginForm) => {
     loginMutation.mutate(data); // Trigger the mutation
-    console.log(loginMutation.status);
   };
 
   if (loginMutation.isPending)

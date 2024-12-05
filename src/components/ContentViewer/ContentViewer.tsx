@@ -32,7 +32,6 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
   };
 
   const handleNext = async () => {
-    console.log("clicked next lesson id", lesson._id);
     if (selectedIndex < lessons.length - 1) {
       // First, mark the current lesson as completed
       await updateLessonProgress(lesson._id);
