@@ -110,7 +110,7 @@ const Navbar = () => {
           </section>
         </div>
 
-        <section className="flex items-center justify-center gap-10 xl:gap-16 2xl:gap-20 text-center ">
+        <section className="flex items-center justify-center gap-10 xl:gap-16 2xl:gap-20 text-center">
           {/* Navbar For Larger Displays */}
           {navitems.map((item, index) =>
             item.isScroll ? (
@@ -125,9 +125,10 @@ const Navbar = () => {
               <Link
                 key={index}
                 to={item.path}
-                className="hover:text-blue-500 hover:cursor-pointer hidden lg:inline-block font-montserrat font-bold text-center text-sm md:text-base "
+                className="relative group hover:text-blue-500 hover:cursor-pointer hidden lg:inline-block font-montserrat font-bold text-center text-sm md:text-base"
               >
                 {item.title}
+                <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-blue-500 transition-all duration-500 group-hover:w-full"></span>
               </Link>
             )
           )}

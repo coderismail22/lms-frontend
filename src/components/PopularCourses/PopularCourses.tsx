@@ -30,7 +30,7 @@ const PopularCourses = () => {
   }
 
   return (
-    <div className="h-full font-siliguri bg-[#1D232A] my-7">
+    <div className="h-full font-siliguri  my-7">
       <SectionTitle
         title={"জনপ্রিয় কোর্স সমূহ"}
         subtitle={
