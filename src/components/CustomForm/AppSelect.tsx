@@ -51,13 +51,13 @@ const AppSelect = ({
                       : (option as Option)?.value // Single value
                   )
                 }
-                // value={
-                //   isMulti
-                //     ? options.filter((opt) =>
-                //         (field.value || []).includes(opt.value)
-                //       ) // Handle array for multi-select
-                //     : options.find((opt) => opt.value === field.value) || null
-                // }
+                /**                value={
+                  isMulti
+                    ? options.filter((opt) =>
+                        (field.value || []).includes(opt.value)
+                      ) // Handle array for multi-select
+                    : options.find((opt) => opt.value === field.value) || null
+                } */
 
                 //For preserving the lesson serial
                 value={

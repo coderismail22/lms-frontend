@@ -7,7 +7,9 @@ const AllBatchStudents = () => {
 
   return (
     <div>
-      <p className="text-center font-bold text-2xl underline underline-offset-8">All Students</p>
+      <p className="text-center font-bold text-2xl underline underline-offset-8">
+        All Students
+      </p>
       <AllStudents batchId={batchId} />
     </div>
   );

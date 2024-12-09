@@ -141,7 +141,7 @@ const CourseDetailsPageForAll = () => {
       </div>
       {/* Course Introduction End */}
 
-      <h1 className="my-5 text-center text-2xl font-semibold underline underline-offset-8 text-[#484b4eaa] decoration-slate-500">
+      <h1 className="my-5 text-center text-2xl md:text-3xl font-semibold underline underline-offset-8 text-[#484b4eaa] decoration-slate-300">
         A Glimpse of The Course
       </h1>
 

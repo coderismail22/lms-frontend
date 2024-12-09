@@ -72,7 +72,7 @@ const Batch = () => {
       }
     });
   };
-
+  console.log(batches);
   return (
     <div>
       <div className="flex justify-end mb-4">

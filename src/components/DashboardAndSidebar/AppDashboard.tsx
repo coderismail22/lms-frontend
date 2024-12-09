@@ -41,7 +41,7 @@ const AppDashboard = () => {
       <SidebarInset>
         {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 "> */}
         <header className="flex items-center gap-2 px-4 py-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-400 shadow-lg">
-          <SidebarTrigger className="-ml-1" />
+          <SidebarTrigger className="-ml-1 text-black bg-[#a8ecf0]" />
           <Separator orientation="vertical" className="mr-2 h-4" />
           <Breadcrumb className=" w-full">
             <BreadcrumbList className=" flex justify-between items-center">
@@ -53,7 +53,6 @@ const AppDashboard = () => {
                   </p>
                 </CustomBreadcrumbLink>
               </BreadcrumbItem>
-              {/* <BreadcrumbSeparator className="hidden md:block" /> */}
               <BreadcrumbItem>
                 <LogoutButton />
               </BreadcrumbItem>

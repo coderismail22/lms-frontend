@@ -171,7 +171,6 @@ const AddBatch = () => {
             </label>
             <ImageUpload setUploadedImageUrl={setBatchImg} />
           </div>
-
           {/* Course Name */}
           <AppSelect
             name="courseName"
