@@ -120,7 +120,7 @@ const AllOrders = () => {
   if (error) return <p>Error: {error.message}</p>;
   return (
     <div>
-      <h1>All Orders</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">All Orders</h1>
       {orders && (
         <OrderTable
           data={orders}

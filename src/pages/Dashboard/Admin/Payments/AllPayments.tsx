@@ -53,7 +53,7 @@ const AllPayments = () => {
 
   return (
     <div>
-      <h1 className="text-center mb-2 text-xl font-semibold">All Payments</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">All Payments</h1>
       {payments && (
         <PaymentTable
           columns={paymentColumns(handleDelete, handleEdit)}
