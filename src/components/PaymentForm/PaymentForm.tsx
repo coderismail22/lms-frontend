@@ -58,8 +58,6 @@ const PaymentForm = ({
 
   // Handle form submission
   const onSubmit = (data: TPaymentForm) => {
-    console.log(data);
-    console.log(batchId);
     makePayment.mutate({ paymentData: data, batchId: batchId });
   };
 
@@ -73,12 +71,12 @@ const PaymentForm = ({
         buttonText="Complete Payment"
         onSubmit={onSubmit}
         defaultValues={{
-          name: "Ismail",
-          payerNumber: "01756434489",
+          name: "",
+          payerNumber: "",
           payeeNumber: "01730481212",
           paymentMethod: "",
           amount: finalPrice,
-          transactionId: "123456789",
+          transactionId: "",
           paymentDate: "",
         }}
       >

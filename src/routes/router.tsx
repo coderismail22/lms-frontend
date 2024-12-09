@@ -3,8 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 import NotFound from "../pages/SharedPages/NotFound/NotFound";
 import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home/Home/Home";
-import Blog from "../pages/Blog/Blog/Blog";
-import BlogPostDetail from "../pages/Blog/BlogPostDetails/BlogPostDetails";
 import Dashboard from "@/pages/Dashboard/Dashboard/Dashboard";
 import AdminHome from "@/pages/Dashboard/Admin/AdminHome/AdminHome";
 import InstructorHome from "@/pages/Dashboard/Instructor/InstructorHome/InstructorHome";
@@ -54,10 +52,11 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/blog", element: <Blog /> },
-      { path: "/blog/:id", element: <BlogPostDetail /> },
       { path: "/courses", element: <Courses /> },
-      { path: "/courses/:courseId", element: <CourseDetailsPageForAll /> },
+      {
+        path: "/courses/:batchId/:courseId",
+        element: <CourseDetailsPageForAll />,
+      },
       { path: "/cart", element: <Cart /> },
       // Auth
       {
@@ -195,14 +194,14 @@ export const router = createBrowserRouter([
           </RoleWrapper>
         ),
       },
-      {
-        path: "/dashboard/student/cart",
-        element: (
-          <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
-            <Cart />
-          </RoleWrapper>
-        ),
-      },
+      // {
+      //   path: "/dashboard/student/cart",
+      //   element: (
+      //     <RoleWrapper allowedRoles={[ROLE.STUDENT]}>
+      //       <Cart />
+      //     </RoleWrapper>
+      //   ),
+      // },
       {
         path: "/dashboard/student/paymentpage",
         element: (

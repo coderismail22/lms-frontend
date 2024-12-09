@@ -1,39 +1,53 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { FaCartArrowDown } from "react-icons/fa";
 import { TBatchForm } from "@/types/batch.type";
 import { queryClient } from "@/queryClientSetup";
 import { IoMdCheckboxOutline } from "react-icons/io";
-import Marquee from "react-fast-marquee";
+// import Marquee from "react-fast-marquee";
+import Loader from "@/components/Loader/Loader";
 
 const fetchCourseDetails = async (courseId: string) => {
-  const { data } = await axiosInstance.get(`/courses/${courseId}/batches`);
+  const { data } = await axiosInstance.get(
+    `/courses/get-single-course/${courseId}`
+  );
+  return data?.data;
+};
+
+const fetchBatchDetails = async (batchId: string) => {
+  const { data } = await axiosInstance.get(`/batches/${batchId}`);
   return data?.data;
 };
 
 const CourseDetailsPageForAll = () => {
-  const { courseId } = useParams();
+  const { batchId, courseId } = useParams();
   const navigate = useNavigate();
-  // Fetch course details using React Query
+  // Fetch course details
   const {
     data: courseData,
-    error,
-    isLoading,
-    isError,
+    error: courseError,
+    isLoading: isLoadingCourse,
+    isError: isErrorCourse,
   } = useQuery({
     queryKey: ["courseDetails", courseId],
     queryFn: () => fetchCourseDetails(courseId as string),
     enabled: !!courseId, // Only fetch if courseId is defined
+  });
+
+  // Fetch batch details
+  const {
+    data: batchData,
+    error: batchError,
+    isLoading: isLoadingBatch,
+    isError: isErrorBatch,
+  } = useQuery({
+    queryKey: ["batchDetails", batchId],
+    queryFn: () => fetchBatchDetails(batchId as string),
+    enabled: !!batchId, // Only fetch if courseId is defined
   });
 
   // enroll Handler
@@ -43,30 +57,19 @@ const CourseDetailsPageForAll = () => {
     navigate("/dashboard/student/paymentpage");
   };
 
-  if (isLoading) {
-    return (
-      <div className="p-6">
-        <Skeleton className="h-6 w-3/4 mb-4" />
-        <Skeleton className="h-4 w-full mb-4" />
-        <Skeleton className="h-4 w-5/6 mb-4" />
-        <Skeleton className="h-72 w-full mb-4" />
-        <Skeleton className="h-6 w-1/3 mb-4" />
-      </div>
-    );
+  if (isLoadingCourse || isLoadingBatch) {
+    return <Loader />;
   }
 
-  if (isError) {
+  if (isErrorCourse || isErrorBatch) {
     return (
       <div className="p-6 text-center text-red-500">
-        Error: {error.message || "Failed to fetch course details"}
+        Error: {courseError?.message || "Failed to fetch course details"}
+        Error: {batchError?.message || "Failed to fetch batch details"}
       </div>
     );
   }
 
-  // Filter only batches that are active
-  const activeBatches = courseData?.batches?.filter(
-    (batch: TBatchForm) => batch.isActive === true
-  );
   return (
     <div className="container mx-auto p-6 h-[100%] font-siliguri">
       {/* Course Card */}
@@ -112,26 +115,26 @@ const CourseDetailsPageForAll = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 my-2 text-white max-w-2xl mx-auto">
         <div className="p-1 border-2 py-2 text-center rounded-md">
           <p>
-            <span className="text-2xl font-semibold ">ইন্ডাস্ট্রি </span>{" "}
+            <span className="text-2xl font-semibold ">ইন্ডাস্ট্রি </span>
             স্ট্যান্ডার্ড কোর্স
-          </p>{" "}
+          </p>
         </div>
         <div className="p-1 border-2 py-2 text-center rounded-md">
           <p>
-            <span className="text-2xl font-semibold">পর্যাপ্ত</span> ক্লাস{" "}
-          </p>{" "}
+            <span className="text-2xl font-semibold">পর্যাপ্ত</span> ক্লাস
+          </p>
         </div>
         <div className="p-1 border-2 py-2 text-center rounded-md">
           <p>
             <span className="text-2xl font-semibold">পর্যাপ্ত</span> লাইভ
             প্রজেক্ট
-          </p>{" "}
+          </p>
         </div>
         <div className="p-1 border-2 py-2 px-3 text-center rounded-md">
           <p>
             <span className="text-2xl font-semibold">প্রতি</span>দিন গুগল মিটের
             মাধ্যমে লাইভ সাপোর্ট
-          </p>{" "}
+          </p>
         </div>
       </div>
 
@@ -223,67 +226,19 @@ const CourseDetailsPageForAll = () => {
       </div>
       {/* Course Curriculum Section End*/}
 
-      {/* Available Batches */}
-      <div className="max-w-5xl mx-auto rounded-md p-2 mt-5">
-        {activeBatches?.length === 0 ? (
-          <Marquee
-            speed={100}
-            className="text-xl font-bold bg-red-500 p-5 rounded-md animate-marquee"
-          >
-            Sorry, currently no batch is running for this course. Stay tuned for
-            the next batch !
-          </Marquee>
-        ) : (
-          <div>
-            <h3 className="text-xl font-medium mb-4 text-center  underline underline-offset-8 text-green-500 tracking-wider">
-              Available Batches ( {activeBatches?.length} )
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-              {activeBatches?.map((batch: TBatchForm) => (
-                <Card key={batch._id} className="shadow-lg border bg-[#DBEBFE]">
-                  <CardHeader>
-                    <div className="flex items-center justify-center mt-5">
-                      <img
-                        src={batch.batchImg}
-                        alt={batch.batchName}
-                        className="w-[250px] h-[200px] object-center object-cover rounded-lg shadow-md"
-                      />
-                    </div>
-                    <p className="text-lg font-semibold  tracking-wider ">
-                      {batch.batchName}
-                    </p>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-col gap-2">
-                      <p className="">Start Date: {batch.startDate}</p>
-                      <p className="">End Date: {batch.endDate}</p>
-                      <p className="">
-                        Price:{" "}
-                        <span className="font-semibold">
-                          {courseData.coursePrice} BDT
-                        </span>{" "}
-                      </p>
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button
-                      onClick={() =>
-                        handleEnroll(batch, courseData?.coursePrice as number)
-                      }
-                      className="w-full bg-blue-500 hover:bg-blue-600"
-                      variant="default"
-                    >
-                      <p className="flex gap-2 items-center justify-center ">
-                        <FaCartArrowDown className="animate-bounce" />
-                        Enroll Now
-                      </p>
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </div>
-        )}
+      <div className="max-w-sm mx-auto rounded-md p-2 mt-5">
+        <Button
+          onClick={() =>
+            handleEnroll(batchData?._id, courseData?.coursePrice as number)
+          }
+          className="w-full bg-blue-500 hover:bg-blue-600"
+          variant="default"
+        >
+          <p className="flex gap-2 items-center justify-center">
+            <FaCartArrowDown className="animate-bounce" />
+            Enroll Now
+          </p>
+        </Button>
       </div>
     </div>
   );

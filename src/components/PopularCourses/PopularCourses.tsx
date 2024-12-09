@@ -2,24 +2,23 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import AppCourseCard from "../AppCourseCard/AppCourseCard";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
-import { TCourse } from "@/pages/Dashboard/Admin/CourseManagement/Course/courseColumns";
 import Loader from "../Loader/Loader";
+import { TBatch } from "@/pages/Dashboard/Admin/Batch/AllBatchStudents/student.type";
 
-const fetchCourses = async (): Promise<TCourse[]> => {
-  // const response = await axiosInstance.get("/courses/get-all-courses");
-  const response = await axiosInstance.get("/courses/get-all-courses");
+const fetchBatches = async (): Promise<TBatch[]> => {
+  const response = await axiosInstance.get("/batches");
   return response.data.data; // Assuming `data` contains the course array
 };
 
 const PopularCourses = () => {
-  // Fetch courses using TanStack Query
+  // Fetch batches
   const {
-    data: courses,
+    data: batches,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["courses"],
-    queryFn: fetchCourses,
+    queryKey: ["batches"],
+    queryFn: fetchBatches,
   });
 
   if (isLoading) {
@@ -39,10 +38,10 @@ const PopularCourses = () => {
         }
       ></SectionTitle>
 
-      <div className="grid gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-3 items-center justify-center w-[90%] mx-auto ">
-        {Array.isArray(courses) ? (
-          courses.map((course: TCourse) => (
-            <AppCourseCard key={course._id} course={course} />
+      <div className="max-w-sm md:max-w-4xl grid items-center justify-center gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-3  w-[90%] mx-auto ">
+        {Array.isArray(batches) ? (
+          batches.map((batch: TBatch) => (
+            <AppCourseCard key={batch._id} batch={batch} />
           ))
         ) : (
           <p>No courses available.</p>
