@@ -5,23 +5,24 @@ import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import Loader from "@/components/Loader/Loader";
 
+// Fetch batches from API
 const fetchBatches = async () => {
   const response = await axiosInstance.get("/batches");
   return response.data.data;
 };
+
 const Courses = () => {
-  // State to track the active tab
-  // TODO: Fix the stupid active status issue with tabs
   const [activeTab, setActiveTab] = useState("all");
-  // console.log("active", activeTab);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const {
-    data: batches, // actually batches
+    data: batches,
     isLoading,
     error,
   } = useQuery({
@@ -33,22 +34,36 @@ const Courses = () => {
     return <Loader />;
   }
 
-  if (error) return <p>Something went wrong...</p>;
+  if (error)
+    return (
+      <p className="text-center text-red-500 font-bold text-xl">
+        Something went wrong...
+      </p>
+    );
 
-  const onlineCourses = batches?.filter(
-    (batch: any) => batch?.courseId?.courseType === "Online"
-  );
+  // Filter batches that are active
+  const activeBatches = batches?.filter((batch: any) => batch.isActive);
 
-  const offlineCourses = batches?.filter(
-    (batch: any) => batch?.courseId?.courseType === "Offline"
-  );
+  // Filter based on course type and active batches
+  const filteredCourses = (type: string) => {
+    if (type === "all") return activeBatches;
+    return activeBatches?.filter(
+      (batch: any) => batch?.courseId?.courseType?.toLowerCase() === type
+    );
+  };
+
+  const courseTabs = [
+    { value: "all", label: "All Courses" },
+    { value: "online", label: "Online Courses" },
+    { value: "offline", label: "Offline Courses" },
+  ];
 
   return (
     <div className="py-8 pb-32 font-siliguri bg-[#DBEBFE]">
       <Helmet>
         <title>EJobsIT | Courses</title>
       </Helmet>
-      {/* <TopTite /> */}
+
       <div className="max-w-xl mx-auto">
         <SectionTitle
           title="আমাদের কোর্স সমূহ"
@@ -62,80 +77,41 @@ const Courses = () => {
         <Tabs
           defaultValue="all"
           className="my-12"
-          onValueChange={(value) => setActiveTab(value)} // Track active tab
+          onValueChange={(value) => setActiveTab(value)}
         >
           {/* Tabs List */}
           <TabsList className="grid grid-cols-1 md:grid-cols-3 justify-center items-center gap-1 shadow-lg p-4 h-30">
-            <TabsTrigger
-              value="all"
-              className={`${
-                activeTab === "online"
-                  ? "bg-gray-700 text-white" // Slightly darker for active tab
-                  : "bg-gray-800 text-white" // Dark background for inactive tabs
-              } px-4 py-2 rounded-md font-semibold transition`}
-            >
-              All Courses
-            </TabsTrigger>
-            <TabsTrigger
-              value="online"
-              className={`${
-                activeTab === "online"
-                  ? "bg-gray-700 text-white" // Slightly darker for active tab
-                  : "bg-gray-800 text-white" // Dark background for inactive tabs
-              } px-4 py-2 rounded-md font-semibold transition`}
-            >
-              Online Courses
-            </TabsTrigger>
-            <TabsTrigger
-              value="offline"
-              className={`${
-                activeTab === "offline"
-                  ? "bg-gray-700 text-white" // Slightly darker for active tab
-                  : "bg-gray-800 text-white" // Dark background for inactive tabs
-              } px-4 py-2 rounded-md font-semibold transition`}
-            >
-              Offline Courses
-            </TabsTrigger>
+            {courseTabs.map((tab) => (
+              <TabsTrigger
+                key={tab.value}
+                value={tab.value}
+                className={`${
+                  activeTab === tab.value
+                    ? "bg-blue-500 text-white border-blue-700"
+                    : "bg-[#60A5FA] text-white hover:bg-gray-400 hover:text-gray-900"
+                } px-4 py-2 rounded-md font-semibold border transition`}
+              >
+                {tab.label}
+              </TabsTrigger>
+            ))}
           </TabsList>
 
           {/* Tabs Content */}
-          <TabsContent value="all">
-            {batches?.length !== undefined && batches?.length > 0 ? (
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                {batches?.map((batch: any) => (
-                  <AppCourseCard key={batch._id} batch={batch} />
-                ))}
-              </div>
-            ) : (
-              <p className="text-center text-white">No courses found.</p>
-            )}
-          </TabsContent>
-          <TabsContent value="online">
-            {onlineCourses?.length !== undefined &&
-            onlineCourses?.length > 0 ? (
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                {onlineCourses?.map((batch: any) => (
-                  <AppCourseCard key={batch._id} batch={batch} />
-                ))}
-              </div>
-            ) : (
-              <p className="text-center text-white">No online courses found.</p>
-            )}
-          </TabsContent>
-          <TabsContent value="offline">
-            {offlineCourses?.length !== undefined &&
-            offlineCourses?.length > 0 ? (
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                {offlineCourses?.map((batch: any) => (
-                  <AppCourseCard key={batch._id} batch={batch} />
-                ))}
-              </div>
-            ) : (
-              <p className="text-center text-white">
-                No offline courses found.
-              </p>
-            )}
-          </TabsContent>
+          {courseTabs.map((tab) => (
+            <TabsContent key={tab.value} value={tab.value}>
+              {filteredCourses(tab.value)?.length > 0 ? (
+                <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                  {filteredCourses(tab.value)?.map((batch: any) => (
+                    <AppCourseCard key={batch._id} batch={batch} />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-center text-white">
+                  No {tab.label.toLowerCase()} found.
+                </p>
+              )}
+            </TabsContent>
+          ))}
         </Tabs>
       </div>
     </div>

@@ -46,8 +46,8 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
   if (loading) return <Loader />;
   return (
     <div className="shadow-md py-4 px-3 rounded-md w-full overflow-y-auto max-h-[80vh]">
-      <h2 className="text-2xl font-semibold">{course?.name}</h2>
-      <p className="text-gray-600">
+      <h2 className="text-2xl font-semibold text-[#b4d4fb] ">{course?.name}</h2>
+      <p className="text-white">
         Total Lessons:{" "}
         {course?.subjects?.reduce(
           (total, subj) =>

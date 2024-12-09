@@ -1,6 +1,7 @@
 import { IoBookOutline } from "react-icons/io5";
 import bookAnimation from "/book-animation.gif";
 import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -33,14 +34,14 @@ const Hero = () => {
           </p>
 
           <div className="flex items-center justify-center lg:justify-start my-4">
-            <div>
+            <Link to="/courses">
               <Button className="m-1 text-white bg-gradient-to-r font-semibold text-[16px] from-blue-500 to-cyan-500">
                 <span className="text-xl">
                   <IoBookOutline />
                 </span>
                 Get Course
               </Button>
-            </div>
+            </Link>
             <Button className="btn btn-outline mx-4 btn-primary text-yellow-600">
               Contact us
             </Button>
