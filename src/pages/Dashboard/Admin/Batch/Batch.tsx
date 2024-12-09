@@ -11,8 +11,8 @@ import Loader from "@/components/Loader/Loader";
 
 // Fetch batches
 const fetchBatches = async () => {
-  const response = await axiosInstance.get("/batches");
-  return response.data;
+  const { data } = await axiosInstance.get("/batches");
+  return data;
 };
 
 // Delete batch function
@@ -40,7 +40,6 @@ const Batch = () => {
   } = useQuery({
     queryKey: ["batches"], // Unique query key
     queryFn: fetchBatches, // Fetch function
-    staleTime: 5 * 60 * 1000, // Cache data for 5 minutes
   });
 
   // Mutation for deleting a batch
@@ -72,7 +71,6 @@ const Batch = () => {
       }
     });
   };
-  console.log(batches);
   return (
     <div>
       <div className="flex justify-end mb-4">
@@ -84,7 +82,7 @@ const Batch = () => {
       </div>
 
       <div>
-        <h1 className="text-2xl font-bold  text-center underline underline-offset-8 mb-10">
+        <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
           Batch Cards
         </h1>
 
