@@ -5,6 +5,7 @@ import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import {Helmet} from "react-helmet";
 import Loader from "@/components/Loader/Loader";
 
 const fetchBatches = async () => {
@@ -44,9 +45,9 @@ const Courses = () => {
 
   return (
     <div className="py-8 pb-32 font-siliguri bg-[#DBEBFE]">
-      {/* <Helmet>
+      <Helmet>
         <title>EJobsIT | Courses</title>
-      </Helmet> */}
+      </Helmet>
       {/* <TopTite /> */}
       <div className="max-w-xl mx-auto">
         <SectionTitle

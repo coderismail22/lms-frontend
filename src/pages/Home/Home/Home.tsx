@@ -3,10 +3,14 @@ import Hero from "@/components/Hero/Hero";
 import Numbers from "@/components/Numbers/Numbers";
 import PopularCourses from "@/components/PopularCourses/PopularCourses";
 import Testimonial from "@/components/Testimonial/Testimonial";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>EJobsIT | Home</title>
+      </Helmet>
       <Hero />
       <Category />
       <Numbers />
