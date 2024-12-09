@@ -20,7 +20,7 @@ import {
   MdOutlinePlayLesson,
 } from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
-import { FaCircleArrowLeft, FaMoneyCheckDollar } from "react-icons/fa6";
+import { FaMoneyCheckDollar } from "react-icons/fa6";
 
 export const sidebarData = {
   superAdmin: [
@@ -138,7 +138,6 @@ export const sidebarData = {
         },
       ],
     },
-    { label: "Go to Homepage", path: "/", icon: FaCircleArrowLeft },
   ],
   admin: [
     // { label: "Home", path: "/dashboard/admin/home", icon: FaHome },
@@ -189,7 +188,6 @@ export const sidebarData = {
               icon: IoMdAddCircleOutline,
               label: "Create Course",
               path: "/dashboard/admin/course-management/create-course",
-              
             },
             {
               icon: FaRegListAlt,
@@ -251,7 +249,6 @@ export const sidebarData = {
         },
       ],
     },
-    { label: "Go to Homepage", path: "/", icon: FaCircleArrowLeft },
   ],
   instructor: [
     { label: "Home", path: "/dashboard/instructor/home", icon: FaHome },
@@ -276,7 +273,6 @@ export const sidebarData = {
         },
       ],
     },
-    { label: "Go to Homepage", path: "/", icon: FaCircleArrowLeft },
   ],
   student: [
     { label: "Home", path: "/dashboard/student/home", icon: FaHome },
@@ -297,6 +293,5 @@ export const sidebarData = {
         },
       ],
     },
-    { label: "Go to Homepage", path: "/", icon: FaCircleArrowLeft },
   ],
 };
