@@ -6,9 +6,11 @@ import { TCourse } from "@/pages/Dashboard/Admin/CourseManagement/Course/courseC
 import Loader from "../Loader/Loader";
 
 const fetchCourses = async (): Promise<TCourse[]> => {
+  // const response = await axiosInstance.get("/courses/get-all-courses");
   const response = await axiosInstance.get("/courses/get-all-courses");
   return response.data.data; // Assuming `data` contains the course array
 };
+
 const PopularCourses = () => {
   // Fetch courses using TanStack Query
   const {
@@ -37,7 +39,7 @@ const PopularCourses = () => {
         }
       ></SectionTitle>
 
-      <div className="grid gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-3 w-[90%] mx-auto ">
+      <div className="grid gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-3 items-center justify-center w-[90%] mx-auto ">
         {Array.isArray(courses) ? (
           courses.map((course: TCourse) => (
             <AppCourseCard key={course._id} course={course} />

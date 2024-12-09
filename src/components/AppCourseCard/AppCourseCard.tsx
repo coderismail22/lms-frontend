@@ -88,25 +88,28 @@ const AppCourseCard = ({ course }: { course: any }) => {
       </div>
 
       {/* Card Footer */}
-      <div className="flex justify-between m-1">
+      <div className="flex justify-between items-center m-1">
         <div className="w-full ">
-          <Link to={`/courses/${course._id}`}>
+          <div
+            // to={`/courses/${course._id}`}
+            onClick={() =>
+              handleEnroll(batch, courseData?.coursePrice as number)
+            }
+          >
             <Button className="text-white bg-gradient-to-r w-full font-semibold text-[16px] from-cyan-500 to-blue-500 hover:from-blue-600 hover:to-blue-600">
-              <p className="text-xl">
-                <FaCartArrowDown />
-              </p>{" "}
-              Buy Course
+              <p className="text-xl"></p> Course Details
             </Button>
-          </Link>
+          </div>
         </div>
-        {/* <div>
+        {/* Enroll Button */}
+        <div>
           <Button
-            onClick={handleAddToCart}
+            // onClick={handleAddToCart}
             className="bg-blue-500 mx-1 text-white hover:bg-blue-600"
           >
-            <FiShoppingCart />
+            <FaCartArrowDown />
           </Button>
-        </div> */}
+        </div>
       </div>
     </Card>
   );

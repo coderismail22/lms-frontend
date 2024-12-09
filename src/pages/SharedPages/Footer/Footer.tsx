@@ -19,19 +19,19 @@ const Footer = () => {
         <div className="flex flex-col items-center">
           <p className="text-right uppercase text-sm font-bold">Follow us</p>
           <div className=" py-2 text-center font-semibold  font-poppins flex gap-5">
-            <Link to="https://www.facebook.com/bdvisapro" target="_blank">
+            <Link to="#" target="_blank">
               <FaFacebook />
             </Link>
-            <Link to="https://www.facebook.com/bdvisapro" target="_blank">
+            <Link to="#" target="_blank">
               <FaSquareXTwitter />
             </Link>
-            <Link to="https://www.facebook.com/bdvisapro" target="_blank">
+            <Link to="#" target="_blank">
               <FaInstagram />
             </Link>
-            <Link to="https://www.facebook.com/bdvisapro" target="_blank">
+            <Link to="#" target="_blank">
               <FaLinkedin />
             </Link>
-            <Link to="https://www.facebook.com/bdvisapro" target="_blank">
+            <Link to="#" target="_blank">
               <FaYoutube />
             </Link>
           </div>
@@ -40,7 +40,7 @@ const Footer = () => {
       <footer className="footer footer-center bg-[#26283b] text-white rounded px-10 py-1">
         <div>
           <p className="text-[12px] uppercase text-center font-semibold">
-            Copyright © {new Date().getFullYear()} Al Falah Web Solutions
+            Copyright © {new Date().getFullYear()} Falah Web Solutions
           </p>
         </div>
       </footer>
