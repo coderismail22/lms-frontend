@@ -2,6 +2,7 @@ export type TBatch = {
   _id?: string; // Optional _id field
   batchName: string;
   courseName: string;
+  courseId?: TCourse;
   isActive?: boolean; // Optional field
   couponCode?: string; // Optional field
   discountPrice?: number; // Optional field

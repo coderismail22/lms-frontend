@@ -70,6 +70,7 @@ const CourseDetailsPageForAll = () => {
     );
   }
 
+  // console.log(first);
   return (
     <div className="container mx-auto p-6 h-[100%] font-siliguri">
       {/* Course Card */}
@@ -85,13 +86,16 @@ const CourseDetailsPageForAll = () => {
           <div>
             <div className="flex flex-col gap-2 items-center justify-center">
               <div className="flex items-center gap-2 mt-5">
-                <Badge variant="destructive">{courseData.courseType}</Badge>
+                <Badge variant="destructive">{courseData?.courseType}</Badge>
               </div>
               <p className="text-2xl font-bold my-1 text-white">
-                {courseData.name}
+                {courseData?.name}
               </p>
               <p className="text-white font-semibold">
-                Course Length: {courseData.courseLength}
+                Course Length: {courseData?.courseLength}
+              </p>
+              <p className="text-white font-semibold">
+                Price: {courseData?.coursePrice} BDT
               </p>
             </div>
           </div>
@@ -229,7 +233,7 @@ const CourseDetailsPageForAll = () => {
       <div className="max-w-sm mx-auto rounded-md p-2 mt-5">
         <Button
           onClick={() =>
-            handleEnroll(batchData?._id, courseData?.coursePrice as number)
+            handleEnroll(batchData, courseData?.coursePrice as number)
           }
           className="w-full bg-blue-500 hover:bg-blue-600"
           variant="default"

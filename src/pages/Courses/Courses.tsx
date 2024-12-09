@@ -1,15 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "@/api/axiosInstance";
 import AppCourseCard from "@/components/AppCourseCard/AppCourseCard";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
-import { TCourse } from "../Dashboard/Admin/CourseManagement/Course/courseColumns";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "@/components/Loader/Loader";
 
-const fetchCourses = async (): Promise<TCourse[]> => {
-  const response = await axiosInstance.get("/courses/get-all-courses");
-  return response.data.data; // Assuming `data` contains the course array
+const fetchBatches = async () => {
+  const response = await axiosInstance.get("/batches");
+  return response.data.data;
 };
 const Courses = () => {
   // State to track the active tab
@@ -20,25 +20,28 @@ const Courses = () => {
     window.scrollTo(0, 0);
   }, []);
   const {
-    data: courses,
+    data: batches, // actually batches
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["courses"],
-    queryFn: fetchCourses,
+    queryKey: ["batches"],
+    queryFn: fetchBatches,
   });
 
   if (isLoading) {
     return <Loader />;
   }
+
   if (error) return <p>Something went wrong...</p>;
 
-  const onlineCourses = courses?.filter(
-    (course) => course?.courseType === "Online"
+  const onlineCourses = batches?.filter(
+    (batch: any) => batch?.courseId?.courseType === "Online"
   );
-  const offlineCourses = courses?.filter(
-    (course) => course?.courseType === "Offline"
+
+  const offlineCourses = batches?.filter(
+    (batch: any) => batch?.courseId?.courseType === "Offline"
   );
+
   return (
     <div className="py-8 pb-32 font-siliguri bg-[#DBEBFE]">
       {/* <Helmet>
@@ -96,10 +99,10 @@ const Courses = () => {
 
           {/* Tabs Content */}
           <TabsContent value="all">
-            {courses?.length !== undefined && courses?.length > 0 ? (
+            {batches?.length !== undefined && batches?.length > 0 ? (
               <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                {courses?.map((course) => (
-                  <AppCourseCard key={course._id} course={course} />
+                {batches?.map((batch: any) => (
+                  <AppCourseCard key={batch._id} batch={batch} />
                 ))}
               </div>
             ) : (
@@ -110,8 +113,8 @@ const Courses = () => {
             {onlineCourses?.length !== undefined &&
             onlineCourses?.length > 0 ? (
               <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                {onlineCourses?.map((course) => (
-                  <AppCourseCard key={course._id} course={course} />
+                {onlineCourses?.map((batch: any) => (
+                  <AppCourseCard key={batch._id} batch={batch} />
                 ))}
               </div>
             ) : (
@@ -122,8 +125,8 @@ const Courses = () => {
             {offlineCourses?.length !== undefined &&
             offlineCourses?.length > 0 ? (
               <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                {offlineCourses?.map((course) => (
-                  <AppCourseCard key={course._id} course={course} />
+                {offlineCourses?.map((batch: any) => (
+                  <AppCourseCard key={batch._id} batch={batch} />
                 ))}
               </div>
             ) : (

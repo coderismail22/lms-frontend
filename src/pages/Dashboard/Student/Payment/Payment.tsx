@@ -20,9 +20,7 @@ const Payment = () => {
 
   const finalPrice =
     paymentData?.actualCoursePrice - paymentData?.batch?.discountPrice;
-  console.log(finalPrice);
-  // Amount to be paid
-  // Batch Name
+  console.log("finalPrice", finalPrice);
 
   return (
     <div className="h-[100%]">

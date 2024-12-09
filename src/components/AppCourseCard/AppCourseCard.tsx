@@ -98,14 +98,16 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
       {/* Card Footer */}
       <div className="flex justify-between items-center m-1">
         <div className="w-full ">
-          <Link to={`/courses/${batch?._id}/${course?._id}`}>
+          <div
+            onClick={() => navigate(`/courses/${batch?._id}/${course?._id}`)}
+          >
             <Button className="text-white bg-gradient-to-r w-full font-semibold text-[16px] from-cyan-500 to-blue-500 hover:from-blue-600 hover:to-blue-600">
               <p className="text-xl">
                 <TbListDetails />
               </p>
               <p>Course Details</p>
             </Button>
-          </Link>
+          </div>
         </div>
         {/* Enroll Button */}
         <div>
