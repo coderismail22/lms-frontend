@@ -183,7 +183,7 @@ function Services() {
                   />
                 </svg>
               </div>
-              <h4 className="text-lg font-bold mb-2">Customer Support</h4>
+              <h4 className="text-lg font-bold mb-2">Student Support</h4>
               <p className="leading-relaxed text-gray-600 dark:text-gray-400">
               {/* Add text */}
               </p>

@@ -29,8 +29,13 @@ const PopularCourses = () => {
     <p>Something went wrong ...</p>;
   }
 
+  // Filter active batches
+  const activeBatches =
+    Array.isArray(batches) &&
+    batches?.filter((batch: TBatch) => batch?.isActive);
+
   return (
-    <div className="h-full font-siliguri  my-7">
+    <div className="h-full font-siliguri my-7">
       <SectionTitle
         title={"জনপ্রিয় কোর্স সমূহ"}
         subtitle={
@@ -39,12 +44,14 @@ const PopularCourses = () => {
       ></SectionTitle>
 
       <div className="max-w-sm md:max-w-4xl grid items-center justify-center gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-3  w-[90%] mx-auto ">
-        {Array.isArray(batches) ? (
-          batches.map((batch: TBatch) => (
-            <AppCourseCard key={batch._id} batch={batch} />
+        {Array.isArray(activeBatches) ? (
+          activeBatches?.map((batch: TBatch) => (
+            <AppCourseCard key={batch?._id} batch={batch} />
           ))
         ) : (
-          <p>No courses available.</p>
+          <p className="text-center font-bold text-lg text-red-500">
+            No courses available.
+          </p>
         )}
       </div>
     </div>

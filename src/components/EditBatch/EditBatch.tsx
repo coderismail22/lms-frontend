@@ -134,13 +134,12 @@ const EditBatch = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Edit Batch</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">Edit Batch</h1>
       {batch && (
         <AppForm
           schema={updateBatchSchema}
           onSubmit={onSubmit}
           defaultValues={batch?.data} // Pass fetched data as default values
-          submitButtonStyles="w-[150px]"
           buttonText={mutation?.isPending ? "Saving..." : "Save Changes"}
         >
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
