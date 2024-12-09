@@ -9,12 +9,10 @@ const Footer = () => {
   return (
     <div>
       <footer className="footer bg-[#0F172A] text-gray-300  p-2 text-[16px] flex flex-col md:flex-row items-center justify-center gap-2 md:gap-10">
-        <div className="flex flex-col items-center justify-center">
-          <img
-            src="/ejobsit-logo.svg"
-            alt="Ismail Codes"
-            className="w-[100px]"
-          />
+        <div className="flex flex-col items-center justify-center cursor-pointer">
+          <Link to="/">
+            <img src="/ejobsit-logo.svg" alt="EjobsIT" className="w-[100px]" />
+          </Link>
         </div>
         <div className="flex flex-col items-center">
           <p className="text-right uppercase text-sm font-bold">Follow us</p>

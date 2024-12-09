@@ -87,14 +87,14 @@ const Navbar = () => {
     <main className="mx-auto h-[50px] flex flex-col justify-between md:justify-center z-[9999] px-10 py-1 text-white bg-[#26283b] ">
       <nav className="flex justify-between items-center px-5 ">
         <div className="flex items-center justify-between lg:justify-center w-full  ">
-          <div className="">
+          <div className="cursor-pointer">
             <Link to="/">
               {/* LOGO */}
               <img
                 src="/ejobsit-logo.svg"
+                alt="EJobsIT"
                 // width={"120px"}
                 className="w-[40%]"
-                alt="lms-logo"
               />
             </Link>
           </div>
