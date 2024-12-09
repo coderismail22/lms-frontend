@@ -86,10 +86,10 @@ const Testimonial = () => {
                     />
                     <div className="ml-4">
                       <p className="text-base font-bold text-gray-900 font-pj">
-                        Leslie Alexander
+                        Muhammad Ismail
                       </p>
                       <p className="mt-0.5 text-sm font-pj text-gray-600">
-                        Freelance React Developer
+                        MERN Stack Developer
                       </p>
                     </div>
                   </div>
@@ -158,10 +158,10 @@ const Testimonial = () => {
                     />
                     <div className="ml-4">
                       <p className="text-base font-bold text-gray-900 font-pj">
-                        Jacob Jones
+                        Sakib Al Hasan
                       </p>
                       <p className="mt-0.5 text-sm font-pj text-gray-600">
-                        Digital Marketer
+                        Full Stack Web Developer
                       </p>
                     </div>
                   </div>
@@ -231,7 +231,7 @@ const Testimonial = () => {
                     />
                     <div className="ml-4">
                       <p className="text-base font-bold text-gray-900 font-pj">
-                        Jenny Wilson
+                        Sathi Aktar
                       </p>
                       <p className="mt-0.5 text-sm font-pj text-gray-600">
                         Graphic Designer

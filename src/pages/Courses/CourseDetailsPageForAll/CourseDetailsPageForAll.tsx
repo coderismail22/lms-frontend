@@ -70,7 +70,6 @@ const CourseDetailsPageForAll = () => {
     );
   }
 
-  // console.log(first);
   return (
     <div className="container mx-auto p-6 h-[100%] font-siliguri">
       {/* Course Card */}
