@@ -37,7 +37,7 @@ const EditCategoryModal: React.FC<EditCategoryModalProps> = ({
       onSave({ ...category, name }); // Pass the updated category
     }
   };
-// TODO: Add loading spinner here
+  // TODO: Add loading spinner here
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -53,13 +53,27 @@ const EditCategoryModal: React.FC<EditCategoryModalProps> = ({
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className={`bg-blue-50 border border-blue-300 focus:ring focus:ring-blue-300 
+              rounded-lg px-4 py-2 shadow-md text-gray-700 
+              placeholder-gray-400 hover:shadow-lg transition-all 
+              duration-300 ease-in-out 
+             
+             `}
           />
         </div>
         <DialogFooter>
-          <Button variant="secondary" onClick={onClose}>
+          <Button
+            variant="secondary"
+            onClick={onClose}
+            className="text-white bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
+          >
             Cancel
           </Button>
-          <Button onClick={handleSubmit} disabled={isLoading}>
+          <Button
+            onClick={handleSubmit}
+            disabled={isLoading}
+            className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
+          >
             {isLoading ? "Saving..." : "Save"}
           </Button>
         </DialogFooter>

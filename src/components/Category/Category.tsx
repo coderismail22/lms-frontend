@@ -20,7 +20,7 @@ const Category = () => {
           </span>
           <h3 className="text-2xl font-semibold">অনলাইন লাইভ কোর্স</h3>
           <div>
-            <Link to="/course">
+            <Link to="/courses">
               {" "}
               <Button className="btn m-1 flex justify-center  bg-gradient-to-r font-semibold text-[16px]">
                 <span className="text-xl ">
@@ -38,7 +38,7 @@ const Category = () => {
           </div>
           <h3 className="text-2xl font-semibold">প্রী-রেকর্ডেড কোর্স</h3>
           <div>
-            <Link to="/course">
+            <Link to="/courses">
               {" "}
               <Button className="btn m-1 flex justify-center  bg-gradient-to-r font-semibold text-[16px]">
                 <span className="text-xl ">

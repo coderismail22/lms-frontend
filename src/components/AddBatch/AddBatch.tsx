@@ -142,7 +142,6 @@ const AddBatch = () => {
       <AppForm
         schema={createBatchSchema}
         onSubmit={onSubmit}
-        submitButtonStyles="w-[150px]"
         buttonText={mutation?.isPending ? "Adding..." : "Add Batch"}
         alignButton="center"
         defaultValues={{
@@ -166,7 +165,7 @@ const AddBatch = () => {
           />
           {/* Image Upload Section */}
           <div className="text-sm truncate">
-            <label className="block font-medium text-white">
+            <label className="block font-medium text-black">
               Upload Cover Image
             </label>
             <ImageUpload setUploadedImageUrl={setBatchImg} />

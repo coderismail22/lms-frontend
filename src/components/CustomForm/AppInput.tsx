@@ -43,7 +43,12 @@ const AppInput = ({
           <FormControl>
             <Input
               disabled={isDisabled}
-              className={`bg-blue-50 ${className}`}
+              className={`bg-blue-50 border border-blue-300 focus:ring focus:ring-blue-300 
+                rounded-lg px-4 py-2 shadow-md text-gray-700 
+                placeholder-gray-400 hover:shadow-lg transition-all 
+                duration-300 ease-in-out 
+                disabled:bg-gray-200 disabled:cursor-not-allowed
+                ${className}`}
               {...field}
               placeholder={placeholder}
             />
