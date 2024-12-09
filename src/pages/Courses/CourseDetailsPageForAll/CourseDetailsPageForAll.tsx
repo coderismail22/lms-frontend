@@ -1,16 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { FaCartArrowDown } from "react-icons/fa";
 import { TBatchForm } from "@/types/batch.type";
 import { queryClient } from "@/queryClientSetup";
-import { IoMdCheckboxOutline } from "react-icons/io";
 // import Marquee from "react-fast-marquee";
 import Loader from "@/components/Loader/Loader";
-
+import { Button } from "@/components/ui/button";
+import { IoMdCheckboxOutline } from "react-icons/io";
+import "./customdetailspage.css";
+import Services from "./Services";
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(
     `/courses/get-single-course/${courseId}`
@@ -70,176 +69,184 @@ const CourseDetailsPageForAll = () => {
     );
   }
 
+  // Calculate the total number of topics (classes)
+  const totalLectures =
+    // TODO: make a type
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    courseData?.subjects?.reduce((sum: number, subject: any) => {
+      return sum + (subject?.topics?.length || 0);
+    }, 0) || 0;
+
   return (
-    <div className="container mx-auto p-6 h-[100%] font-siliguri">
-      {/* Course Card */}
-      <Card className="max-w-2xl mx-auto border-2 border-red-500 my-6 bg-opacity-0 text-black border-none">
-        <CardContent className="grid grid-cols-1 md:grid-cols-2 items-center justify-center">
-          <div className="flex items-center justify-center mt-5">
-            <img
-              src={courseData.img}
-              alt={courseData.name}
-              className="w-[250px] rounded-lg shadow-md"
-            />
-          </div>
+    <div className=" px-10 py-16 h-[100%] font-siliguri bg-[#e6f0fb]">
+      {/* Course Introduction Start */}
+      <div className="grid grid-cols-1 md:grid-cols-7 gap-5 items-center justify-center">
+        {/* 1 */}
+        {/* Titles */}
+        <div className="col-span-3">
           <div>
-            <div className="flex flex-col gap-2 items-center justify-center">
-              <div className="flex items-center gap-2 mt-5">
-                <Badge variant="destructive">{courseData?.courseType}</Badge>
-              </div>
-              <p className="text-2xl font-bold my-1 text-white">
-                {courseData?.name}
-              </p>
-              <p className="text-white font-semibold">
-                Course Length: {courseData?.courseLength}
-              </p>
-              <p className="text-white font-semibold">
-                Price: {courseData?.coursePrice} BDT
+            <h1 className="text-[#FF504D] text-[22px] font-bold text-left">
+              Turn Your Passion into a Profession
+            </h1>
+            <h1 className="text-[45px] font-semibold text-left text-[#1F1E1E] ">
+              With {courseData?.name}
+            </h1>
+          </div>
+          {/* Feature Boxes */}
+          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4 my-4 text-black max-w-2xl mx-auto">
+            <div className="p-1 border-2 border-[#9adcee] py-2 text-center rounded-md">
+              <p>Duration </p>
+              <p className="text-2xl font-semibold ">
+                {courseData?.courseLength}
               </p>
             </div>
+            <div className="p-1 border-2 border-[#9adcee] py-2 text-center rounded-md">
+              <p>Lectures</p>
+              <p className="text-2xl font-semibold ">{totalLectures}</p>
+            </div>
+            <div className="p-1 border-2 border-[#9adcee] py-2 px-3 text-center rounded-md">
+              <p>Projects</p>
+              <p className="text-2xl font-semibold ">5 +</p>
+            </div>
           </div>
-        </CardContent>
-      </Card>
+          {/* Course Description */}
+          <div>
+            <p className="text-[20px] text-[#645F62]">
+              {courseData?.description}
+            </p>
+          </div>
+          {/* Enroll Button */}
+          <div className="flex flex-col justify-center items-center rounded-md p-2 mt-5  ">
+            <Button
+              onClick={() =>
+                handleEnroll(batchData, courseData?.coursePrice as number)
+              }
+              className="h-[40px] bg-blue-500 mx-1 text-white hover:bg-blue-600"
+              variant="default"
+            >
+              <p className="flex gap-2 items-center justify-center">
+                <FaCartArrowDown className="animate-bounce" />
+                <p className="font-semibold text-lg">Enroll Now</p>
+              </p>
+            </Button>
+          </div>
+        </div>
+        {/* 2 */}
+        {/* Cover Image */}
+        <img
+          src={courseData?.img}
+          alt={courseData?.name}
+          className="max-w-[700px] h-[200px] md:h-[300px] mx-auto my-5 rounded-lg col-span-4"
+        />
+      </div>
+      {/* Course Introduction End */}
 
-      {/* Course Overview */}
-      <div className="w-full mx-auto font-siliguri text-white ">
-        <div className="p-12 mb-12 rounded-md  text-center mx-auto">
-          <h3 className="decoration-blue-500  text-4xl font-semibold underline underline-offset-8  mb-4">
-            Course Overview
-          </h3>
-          <p className="max-w-xl mx-auto text-justify">
-            {courseData?.description}
-          </p>
+      <h1 className="my-5 text-center text-2xl font-semibold underline underline-offset-8 text-[#484b4eaa] decoration-slate-500">
+        A Glimpse of The Course
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 max-w-2xl mx-auto gap-4 mt-10">
+        {/* 1. Curriculum */}
+        <div className=" bg-[#DBEBFE]  font-siliguri p-5 rounded-md custom-bg">
+          <h1
+            className="text-center font-bold text-[#fadede] mb-2 text-3xl 
+  "
+          >
+            Course Curriculum
+          </h1>
+          <div className="flex items-center justify-center max-w-md min-w-full rounded-md p-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {courseData?.curriculum?.map((curriculum: string) => (
+                <li className="flex gap-1 items-center text-[#eee4f8]">
+                  <IoMdCheckboxOutline className="text-[#f2eefb]" />
+                  {curriculum}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* 2. Softwares */}
+        <div className=" bg-[#DBEBFE]  font-siliguri p-5 rounded-md custom-bg">
+          <h1
+            className="text-center font-bold text-[#fadede] mb-2 text-3xl 
+  "
+          >
+            Softwares
+          </h1>
+          <div className="flex items-center justify-center max-w-md min-w-full rounded-md p-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {courseData?.softwareList?.map((software: string) => (
+                <li className="flex gap-1 items-center text-[#eee4f8]">
+                  <IoMdCheckboxOutline className="text-[#f2eefb]" />
+                  {software}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* 3. Career Opportunities */}
+        <div className=" bg-[#DBEBFE]  font-siliguri p-5 rounded-md custom-bg">
+          <h1
+            className="text-center font-bold text-[#fadede] mb-2 text-3xl 
+  "
+          >
+            Career
+          </h1>
+          <div className="flex items-center justify-center max-w-md min-w-full rounded-md p-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {courseData?.careerOpportunities?.map(
+                (careerOpportunity: string) => (
+                  <li className="flex gap-1 items-center text-[#eee4f8]">
+                    <IoMdCheckboxOutline className="text-[#f2eefb]" />
+                    {careerOpportunity}
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        </div>
+
+        {/* 4. Job Positions */}
+        <div className=" bg-[#DBEBFE]  font-siliguri p-5 rounded-md custom-bg">
+          <h1
+            className="text-center font-bold text-[#fadede] mb-2 text-3xl 
+  "
+          >
+            Job Positions
+          </h1>
+          <div className="flex items-center justify-center max-w-md min-w-full rounded-md p-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {courseData?.jobPositions?.map((jobPosition: string) => (
+                <li className="flex gap-1 items-center text-[#eee4f8]">
+                  <IoMdCheckboxOutline className="text-[#f2eefb]" />
+                  {jobPosition}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
-      {/* 4 Feature Box */}
-      {/* TODO: Separate as another component */}
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4 my-2 text-white max-w-2xl mx-auto">
-        <div className="p-1 border-2 py-2 text-center rounded-md">
-          <p>
-            <span className="text-2xl font-semibold ">ইন্ডাস্ট্রি </span>
-            স্ট্যান্ডার্ড কোর্স
-          </p>
-        </div>
-        <div className="p-1 border-2 py-2 text-center rounded-md">
-          <p>
-            <span className="text-2xl font-semibold">পর্যাপ্ত</span> ক্লাস
-          </p>
-        </div>
-        <div className="p-1 border-2 py-2 text-center rounded-md">
-          <p>
-            <span className="text-2xl font-semibold">পর্যাপ্ত</span> লাইভ
-            প্রজেক্ট
-          </p>
-        </div>
-        <div className="p-1 border-2 py-2 px-3 text-center rounded-md">
-          <p>
-            <span className="text-2xl font-semibold">প্রতি</span>দিন গুগল মিটের
-            মাধ্যমে লাইভ সাপোর্ট
-          </p>
-        </div>
+      {/* Services */}
+      <div className="my-5">
+        <Services />
       </div>
 
-      {/* TODO: make a separate component */}
-      {/* Course Curriculum Section Start*/}
-      <div className="my-20 max-w-3xl mx-auto">
-        <h3 className="underline underline-offset-8 decoration-blue-500 text-4xl font-semibold my-8 text-center text-white">
-          Course Curriculum
-        </h3>
-        {/* All 4 Items */}
-        <div className="w-full h-full grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* 1. Curriculum */}
-          <div className="border border-blue-500 bg-[#DBEBFE]  font-siliguri p-2 rounded-md">
-            <h1
-              className="text-center font-bold text-blue-600 tracking-wider my-1 text-sm underline hover: underline-offset-4 hover:underline-offset-8 transition-all duration-300
-  "
-            >
-              Curriculum
-            </h1>
-            <div className="w-full  rounded-md p-2">
-              <ul className="flex flex-col gap-1 ">
-                {courseData?.curriculum.map((software: string) => (
-                  <li className="flex gap-1 items-center font-semibold text-[#605F62]">
-                    <IoMdCheckboxOutline className="text-blue-700" />
-                    {software}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          {/* 2.Softwares */}
-          <div className="border border-blue-500 bg-[#DBEBFE]  font-siliguri p-2 rounded-md">
-            <h1
-              className="text-center font-bold text-blue-600 tracking-wider my-1 text-sm underline hover: underline-offset-4 hover:underline-offset-8 transition-all duration-300
-  "
-            >
-              Softwares
-            </h1>
-            <div className="w-full  rounded-md p-2">
-              <ul className="flex flex-col gap-1 ">
-                {courseData?.softwareList.map((software: string) => (
-                  <li className="flex gap-1 items-center font-semibold text-[#605F62]">
-                    <IoMdCheckboxOutline className="text-blue-700" />
-                    {software}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          {/* 3. Career Opportunities */}
-          <div className="border border-blue-500 bg-[#DBEBFE]  font-siliguri p-2 rounded-md">
-            <h1
-              className="text-center font-bold text-blue-600 tracking-wider my-1 text-sm underline hover: underline-offset-4 hover:underline-offset-8 transition-all duration-300
-  "
-            >
-              Career Opportunities
-            </h1>
-            <div className="w-full  rounded-md p-2">
-              <ul className="flex flex-col gap-1 ">
-                {courseData?.careerOpportunities.map((software: string) => (
-                  <li className="flex gap-1 items-center font-semibold text-[#605F62]">
-                    <IoMdCheckboxOutline className="text-blue-700" />
-                    {software}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          {/* 4.Job Positions */}
-          <div className="border border-blue-500 bg-[#DBEBFE]  font-siliguri p-2 rounded-md">
-            <h1
-              className="text-center font-bold text-blue-600 tracking-wider my-1 text-sm underline hover: underline-offset-4 hover:underline-offset-8 transition-all duration-300
-  "
-            >
-              Job Positions
-            </h1>
-            <div className="w-full  rounded-md p-2">
-              <ul className="flex flex-col gap-1 ">
-                {courseData?.jobPositions.map((software: string) => (
-                  <li className="flex gap-1 items-center font-semibold text-[#605F62]">
-                    <IoMdCheckboxOutline className="text-blue-700" />
-                    {software}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Course Curriculum Section End*/}
-
-      <div className="max-w-sm mx-auto rounded-md p-2 mt-5">
+      {/* What are you waiting for ? */}
+      {/* Enroll Button */}
+      <div className="flex flex-col justify-center items-center rounded-md p-2 mt-5  ">
         <Button
           onClick={() =>
             handleEnroll(batchData, courseData?.coursePrice as number)
           }
-          className="w-full bg-blue-500 hover:bg-blue-600"
+          className="h-[40px] bg-blue-500 mx-1 text-white hover:bg-blue-600"
           variant="default"
         >
           <p className="flex gap-2 items-center justify-center">
             <FaCartArrowDown className="animate-bounce" />
-            Enroll Now
+            <p className="font-semibold text-lg">Enroll Now</p>
           </p>
         </Button>
       </div>
