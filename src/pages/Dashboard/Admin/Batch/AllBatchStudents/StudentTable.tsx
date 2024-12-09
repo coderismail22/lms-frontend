@@ -82,7 +82,10 @@ const StudentTable = <TData, TValue>({
         {/* Show/Hide Columns */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="default" className="ml-auto">
+            <Button
+              variant="default"
+              className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb] ml-auto"
+            >
               Columns
             </Button>
           </DropdownMenuTrigger>

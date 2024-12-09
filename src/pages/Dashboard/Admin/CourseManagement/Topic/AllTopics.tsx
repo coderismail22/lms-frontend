@@ -66,12 +66,15 @@ const AllTopics = () => {
 
   return (
     <div className="container mx-auto py-2">
-      <h1 className="text-2xl font-bold mb-6">All Topics</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
+        All Topics
+      </h1>
       <div className="my-4 flex justify-end">
         <Button
           onClick={() =>
             navigate("/dashboard/admin/topic-management/create-topic")
           }
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
         >
           Create Topic
         </Button>

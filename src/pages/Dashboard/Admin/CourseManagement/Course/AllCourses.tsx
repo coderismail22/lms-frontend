@@ -77,7 +77,7 @@ const AllCourses = () => {
 
   return (
     <div className="container mx-auto py-2">
-      <h1 className="text-2xl font-bold mb-6 text-center underline">
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
         All Courses
       </h1>
 
@@ -86,6 +86,7 @@ const AllCourses = () => {
           onClick={() =>
             navigate("/dashboard/admin/course-management/create-course")
           }
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
         >
           Create Course
         </Button>

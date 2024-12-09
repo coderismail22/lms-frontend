@@ -54,13 +54,14 @@ const AddTeacher = () => {
       profileImg,
     };
 
-    console.log("Creating teacher with data:", finalData);
     mutation.mutate(finalData);
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Add Teacher</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
+        Add Teacher
+      </h1>
       <AppForm
         onSubmit={onSubmit}
         defaultValues={{ teacherName: "", salary: 0 }}

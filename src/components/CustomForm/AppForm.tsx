@@ -49,7 +49,14 @@ const AppForm = <TFormValues extends FieldValues>({
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         {children}
         <div className={`${alignmentClass} mt-5`}>
-          <Button className={submitButtonStyles} type="submit">
+          <Button
+            className={`${
+              submitButtonStyles
+                ? submitButtonStyles
+                : "bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
+            }`}
+            type="submit"
+          >
             {buttonText}
           </Button>
         </div>

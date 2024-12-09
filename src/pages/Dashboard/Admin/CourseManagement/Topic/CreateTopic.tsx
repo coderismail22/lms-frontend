@@ -69,7 +69,7 @@ const CreateTopic = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Create Topic</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">Create Topic</h1>
       <AppForm
         // schema={createTopicSchema}
         onSubmit={onSubmit}
