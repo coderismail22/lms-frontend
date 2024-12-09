@@ -33,6 +33,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { FaSearch } from "react-icons/fa";
 
 interface PaymentTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -71,16 +72,43 @@ const PaymentTable = <TData, TValue>({
     <div>
       {/* Filter */}
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter names..."
-          value={
-            (table.getColumn("payerNumber")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("payerNumber")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+        <div className="flex gap-2 p-3 bg-[#88a5c144] rounded-full">
+          {/* Payer Number Search Input */}
+          <div className="relative max-w-sm w-full">
+            <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Input
+              placeholder="Search by Number"
+              value={
+                (table.getColumn("payerNumber")?.getFilterValue() as string) ??
+                ""
+              }
+              onChange={(event) =>
+                table
+                  .getColumn("payerNumber")
+                  ?.setFilterValue(event.target.value)
+              }
+              className="bg-white border border-gray-300 rounded-full shadow-lg pl-10 px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out hover:shadow-xl"
+            />
+          </div>
+          {/* TID Search Input */}
+          <div className="relative max-w-sm w-full">
+            <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Input
+              placeholder="Search by TID"
+              value={
+                (table
+                  .getColumn("transactionId")
+                  ?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table
+                  .getColumn("transactionId")
+                  ?.setFilterValue(event.target.value)
+              }
+              className="bg-white border border-gray-300 rounded-full shadow-lg pl-10 px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out hover:shadow-xl"
+            />
+          </div>
+        </div>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
