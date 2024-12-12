@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Loader from "../Loader/Loader";
+import { ThreeDots } from "react-loader-spinner";
 
 const ImageUpload = ({ setUploadedImageUrl }: any) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -79,7 +79,20 @@ const ImageUpload = ({ setUploadedImageUrl }: any) => {
           onClick={handleUpload}
           disabled={isLoading}
         >
-          {isLoading ? <Loader /> : "Upload Image"}
+          {isLoading ? (
+            <ThreeDots
+              visible={true}
+              height="80"
+              width="80"
+              color="#99f8e5"
+              radius="9"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          ) : (
+            "Upload Image"
+          )}
         </button>
       )}
     </div>

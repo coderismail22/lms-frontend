@@ -35,9 +35,9 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
     navigate("/dashboard/student/paymentpage");
   };
   return (
-    <Card className="bg-base-100 shadow-xl overflow-hidden flex flex-col justify-between h-full border-none bg-[#1D232A]">
+    <Card className="shadow-xl overflow-hidden flex flex-col justify-between h-full border-none bg-[#1D232A] font-siliguri">
       {/* Card Header */}
-      <div className="flex-grow">
+      <div className="flex-grow ">
         <figure>
           <img
             className="w-full h-[200px] object-cover object-center"
@@ -45,29 +45,38 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
             alt="course"
           />
         </figure>
-        <div className="flex flex-col items-center justify-center m-2">
-          <Badge variant="destructive" className="text-white ">
+        <div className="flex flex-col items-start m-2 ">
+          <Badge className="text-[#3267A0] py-1 px-2 text-sm">
             <Link to="#">{course?.courseType || "N/A"}</Link>
           </Badge>
         </div>
 
-        <h2 className="font-bold text-3xl text-slate-400 text-center">
+        <h2 className="font-bold text-3xl text-slate-400 px-2">
           {batchName || "N/A"}
         </h2>
-        <h2 className="font-bold text-md text-slate-400 text-center">
+        <h2 className="font-bold text-md text-slate-400 px-2">
           {course?.name || "N/A"}
         </h2>
       </div>
 
       {/* Card Content */}
-      <div className="mt-2">
-        {/* <div className="flex items-center gap-2 bg-slate-100 p-1 mt-2 rounded-md border " >
+      <div className="mt-2 px-2">
+        <div className="flex items-center gap-2 bg-slate-100 p-1 my-2 rounded-md border ">
           <div className="p1 border-r-2 border-gray-400 pr-4">
-            <img className="w-6" src={trainerImageUrl} alt="" />
+            <img
+              className="w-6"
+              src="https://i.ibb.co/DrqQBFc/240814641-673719677356207-115697542586076674-n.jpg"
+              alt="trainer"
+            />
           </div>
-        </div> */}
-        <div className="mt-1">
-          <div className="flex  items-center justify-center gap-2 w-full text-[15px]">
+          <Link to="#">
+            <p className="text-[#3a67ae] font-semibold text-[16px]">
+              আহসানউল্লাহ শাওন
+            </p>
+          </Link>
+        </div>
+        <div className="flex my-2 ">
+          <div className="flex  items-center justify-center gap-2 w-full text-[18px]">
             <p className=" text-white">
               <IoBookOutline />
             </p>
@@ -75,28 +84,19 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
               ক্লাস সংখ্যা {totalTopics}
             </p>
           </div>
-          <div className="flex  items-center justify-center gap-2 w-full text-[15px]">
-            <p className=" text-white">
-              <IoBookOutline />
-            </p>
-            <p className="font-semibold text-zinc-400">
-              সময়কাল {course?.courseLength || 0}
-            </p>
-          </div>
-          <Separator />
-          <div className="flex justify-center items-center  gap-2  w-full text-[15px]">
+          <div className="flex justify-center items-center  gap-2  w-full text-[18px]">
             <p className=" text-white">
               <TbCoinTaka />
             </p>
-            <p className="font-semibold text-zinc-400">
-              কোর্স ফি {course?.coursePrice || 0} টাকা
+            <p className="font-semibold text-[#EA7171]">
+              ফি {course?.coursePrice || 0} টাকা
             </p>
           </div>
         </div>
       </div>
 
       {/* Card Footer */}
-      <div className="flex justify-between items-center m-1">
+      <div className="flex justify-between items-center mb-2 px-2">
         <div className="w-full ">
           <div
             onClick={() => navigate(`/courses/${batch?._id}/${course?._id}`)}
