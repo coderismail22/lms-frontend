@@ -1,7 +1,6 @@
 import { Box } from "lucide-react";
 
 const CourseCurriculum = ({ curriculum }: { curriculum: string[] }) => {
-  console.log(curriculum);
   return (
     <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg  w-full h-full py-5  px-2">
       <div>

@@ -1,7 +1,6 @@
 import { Circle } from "lucide-react";
 
 const OpenJobPositions = ({ jobPositions }: { jobPositions: string[] }) => {
-  console.log(jobPositions);
   return (
     <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg  py-5 w-full h-full flex flex-col items-center justify-center">
       <div>
