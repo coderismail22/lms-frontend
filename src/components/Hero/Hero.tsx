@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <div className="bg-gradient-to-r from-cyan-50 to-blue-50  hover:bg-gradient-to-l overflow-x-hidden  font-siliguri py-8 pb-24 ">
-      <div className="w-10/12 mx-auto grid grid-cols-1  lg:grid-cols-2 items-center">
+    <div className=" bg-gradient-to-r from-cyan-50 to-blue-50  hover:bg-gradient-to-l overflow-x-hidden  font-siliguri py-8 pb-24 ">
+      <div className="max-w-4xl mx-auto grid grid-cols-1  lg:grid-cols-2 items-center">
         <div className="text-center lg:text-start ">
           <div className="flex justify-center lg:justify-normal items-center">
             <span>
@@ -50,7 +50,7 @@ const Hero = () => {
 
         <div className="mx-auto py-12 z-30 ">
           <iframe
-            className="rounded-xl w-[300px] h-[200px] md:w-[500px] md:h-[350px]"
+            className="rounded-xl w-[300px]  h-[200px] md:w-[500px] md:h-[350px] xl:w-[600px]"
             src="https://www.youtube.com/embed/CuZWHuug1U4"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

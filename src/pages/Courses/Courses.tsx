@@ -106,7 +106,7 @@ const Courses = () => {
                   ))}
                 </div>
               ) : (
-                <p className="text-center text-white">
+                <p className="text-center text-red-500 font-bold text-xl">
                   No {tab.label.toLowerCase()} found.
                 </p>
               )}

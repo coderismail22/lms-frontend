@@ -11,7 +11,6 @@ import { AuthState } from "@/hooks/useLogin";
 
 const NavbarMine = () => {
   const queryClient = useQueryClient();
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Use useQuery to subscribe to authKey changes
   const { data: authData } = useQuery<AuthState>({

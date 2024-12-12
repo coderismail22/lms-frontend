@@ -2,17 +2,28 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../../../public/ejobsit-logo.svg";
 import { GoChevronDown } from "react-icons/go";
 import Swal from "sweetalert2";
-import { IoMdNotificationsOutline } from "react-icons/io";
+import { useLogout } from "@/hooks/useLogout";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { AuthState } from "@/hooks/useLogin";
+import { authKey } from "@/api/authKey";
 
 const Navbar = () => {
-  // Example user and isAdmin values
-  const user = {
-    displayName: "John Doe",
-    photoURL: "https://via.placeholder.com/150",
-  };
-  const isAdmin = true;
+  const queryClient = useQueryClient();
+
+  // Use useQuery to subscribe to authKey changes
+  const { data: authData } = useQuery<AuthState>({
+    queryKey: authKey,
+    // Automatically refresh auth state whenever authKey changes
+    // TODO: Check potential error here
+    initialData: queryClient.getQueryData<AuthState>(authKey),
+  });
+
+  const isLoggedIn = !!authData;
+  const role = authData?.role || null;
+  const logoutMutation = useLogout();
 
   const handleLogOut = () => {
+    logoutMutation.mutate(); // Trigger the logout process
     Swal.fire({
       title: "Logged out successfully",
       text: "See You Again",
@@ -30,7 +41,7 @@ const Navbar = () => {
           <NavLink to="/courses">কোর্স সমূহ</NavLink>
         </li>
         <li>
-          {/* <NavLink to="#">আমাদের সম্পর্কে</NavLink> */}
+          <NavLink to="/about">আমাদের সম্পর্কে</NavLink>
         </li>
       </div>
     </>
@@ -40,6 +51,7 @@ const Navbar = () => {
     <div className="shadow-md sticky bg-gradient-to-r from-cyan-100 to-blue-100 hover:bg-gradient-to-l top-0 z-50 font-siliguri">
       <div className="navbar w-10/12 mx-auto bg-gradient-to-r from-cyan-100 to-blue-100 hover:bg-gradient-to-l">
         <div className="navbar-start">
+          {/* Dropdown For Mobile */}
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -59,111 +71,112 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-64"
             >
               {navlinks}
             </ul>
           </div>
-
+          {/* LOGO */}
           <div>
             <div>
               <div className="flex-1 block">
                 <Link to="/">
-                  <img className="w-[100px]" src={logo} alt="ejobsit" />
+                  <img
+                    className="w-[80px] md:w-[100px]"
+                    src={logo}
+                    alt="ejobsit"
+                  />
                 </Link>
               </div>
             </div>
           </div>
         </div>
+
+        {/*Navbar For Desktop */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navlinks}</ul>
         </div>
+
+        {/* Render User Profile Based on Role Start */}
         <div className="navbar-end z-50">
           <div>
-            {user && isAdmin && (
-              <div className="flex gap-1">
-
-                <div className="dropdown dropdown-end">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="btn btn-ghost border-2 border-gray-300 flex flex-col md:flex-row"
-                  >
-                    <img
-                      className="w-10 h-10 hidden md:block rounded-full"
-                      src={user.photoURL}
-                      alt=""
-                    />
-                    <h1>{user.displayName}</h1>
-                    <p>
-                      <GoChevronDown className="text-xl" />
-                    </p>
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                  >
-                    <li>
-                      <Link to="/profile/adminHome">Profile</Link>
-                    </li>
-                    <li>
-                      <Link>Settings</Link>
-                    </li>
-                    <li>
-                      <button onClick={handleLogOut}>Log Out</button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            )}
-            {user && !isAdmin && (
-              <div className="flex gap-1">
-                <div className="dropdown dropdown-end">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="btn btn-ghost border-2 border-gray-300 flex flex-col md:flex-row"
-                  >
-                    <img
-                      className="w-10 h-10 hidden md:block rounded-full"
-                      src={user.photoURL}
-                      alt=""
-                    />
-                    <h1>{user.displayName}</h1>
-                    <p>
-                      <GoChevronDown className="text-xl" />
-                    </p>
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                  >
-                    <li>
-                      <Link to="/profile/userHome">Profile</Link>
-                    </li>
-                    <li>
-                      <Link>Settings</Link>
-                    </li>
-                    <li>
-                      <button onClick={handleLogOut}>Log Out</button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            )}
-            {!user && (
-              <div className="text-[17px]">
+            {/* If Not Logged In */}
+            {!isLoggedIn && role === null && (
+              <div className="text-[17px] font-montserrat">
                 <Link
-                  to="/login"
-                  className="border-r-2 border-[#FDC449] mr-3 pr-3"
+                  to="/auth/login"
+                  className="border-r-2 border-[#FDC449] mr-3  pr-3"
                 >
                   Login
                 </Link>
-                <Link to="/signup">Register</Link>
+                <Link to="/auth/signup" className="">
+                  Register
+                </Link>
+              </div>
+            )}
+            {/* If Student */}
+            {isLoggedIn && role === "student" && (
+              <div className="flex gap-1">
+                <div className="dropdown dropdown-end">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost border-2 border-gray-300 flex flex-col md:flex-row"
+                  >
+                    <h1>Profile</h1>
+                    <p>
+                      <GoChevronDown className="text-xl" />
+                    </p>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52"
+                  >
+                    <li>
+                      <Link to="/dashboard/student/home">Dashboard</Link>
+                    </li>
+                    <li>
+                      <div onClick={handleLogOut}>Logout</div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
+
+            {/* If Admin */}
+            {isLoggedIn && role === "admin" && (
+              <div className="flex gap-1">
+                <div className="dropdown dropdown-end">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost border-2 border-gray-300 flex flex-col md:flex-row"
+                  >
+                    <h1>Profile</h1>
+                    <p>
+                      <GoChevronDown className="text-xl" />
+                    </p>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52"
+                  >
+                    <li>
+                      <Link to="/dashboard/admin/home">Dashboard</Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/admin/orders">Orders</Link>
+                    </li>
+                    <li>
+                      <button onClick={handleLogOut}>Log Out</button>
+                    </li>
+                  </ul>
+                </div>
               </div>
             )}
           </div>
         </div>
+        {/* Render User Profile Based on Role End */}
       </div>
     </div>
   );

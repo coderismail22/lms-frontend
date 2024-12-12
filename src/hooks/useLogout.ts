@@ -2,6 +2,10 @@ import { queryClient } from "@/queryClientSetup";
 import { authKey } from "../api/authKey";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import { handleAxiosError } from "@/utils/handleAxiosError";
+import { AxiosError } from "axios";
+import "../styles/swal.css";
 
 // Define the custom hook
 export const useLogout = () => {
@@ -22,9 +26,22 @@ export const useLogout = () => {
 
       // Redirect the user
       navigate("/");
+
+      Swal.fire({
+        icon: "success",
+        title: "Logout Successful",
+        text: "See you again !",
+        customClass: {
+          title: "custom-title",
+          popup: "custom-popup",
+          icon: "custom-icon",
+          confirmButton: "custom-confirm-btn",
+        },
+      });
     },
-    onError: (error) => {
-      console.error("Logout failed:", error);
+    onError: (error: AxiosError) => {
+      handleAxiosError(error, "Logout Failed");
+      navigate("/");
     },
   });
 };
