@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { Separator } from "@radix-ui/react-separator";
 import { TbCoinTaka, TbListDetails } from "react-icons/tb";
 import { Subject } from "@/types/course.type";
 import { FaCartArrowDown } from "react-icons/fa";
