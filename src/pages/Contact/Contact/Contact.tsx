@@ -1,6 +1,8 @@
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 import ContactForm from "../ContactForm/ContactForm";
+import ContactCards from "@/components/ContactCards/ContactCards";
+import Map from "@/components/Map/Map";
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -27,12 +29,17 @@ const Contact = () => {
       ref={ref}
     >
       <motion.div
-        className="w-full max-w-2xl"
+        className=""
         variants={animationVariants}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
       >
+        {/* Form */}
         <ContactForm />
+        {/* Cards */}
+        <ContactCards />
+        {/* Map */}
+        <Map />
       </motion.div>
     </div>
   );

@@ -40,9 +40,12 @@ const Navbar = () => {
         <li>
           <NavLink to="/courses">কোর্স সমূহ</NavLink>
         </li>
-        {/* <li>
+        <li>
           <NavLink to="/about">আমাদের সম্পর্কে</NavLink>
-        </li> */}
+        </li>
+        <li>
+          <NavLink to="/contact">যোগাযোগ</NavLink>
+        </li>
       </div>
     </>
   );

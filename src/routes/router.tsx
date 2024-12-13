@@ -36,7 +36,6 @@ import Unauthorized from "@/components/Auth/Unauthorized/Unauthorized";
 import RoleWrapper from "@/components/Auth/RoleWrapper/RoleWrapper";
 import { ROLE } from "@/constants/role";
 import Courses from "@/pages/Courses/Courses";
-import Cart from "@/pages/Dashboard/Student/Cart/Cart";
 import CourseDetailsPageForAll from "@/pages/Courses/CourseDetailsPageForAll/CourseDetailsPageForAll";
 import Payment from "@/pages/Dashboard/Student/Payment/Payment";
 import AllPayments from "@/pages/Dashboard/Admin/Payments/AllPayments";
@@ -45,6 +44,7 @@ import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
 import PendingCourses from "@/pages/Dashboard/Student/Courses/PendingCourses/PendingCourses";
 import AllBatchStudents from "@/pages/Dashboard/Admin/Batch/AllBatchStudents";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
+import Contact from "@/pages/Contact/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
         path: "/courses/:batchId/:courseId",
         element: <CourseDetailsPageForAll />,
       },
-      { path: "/cart", element: <Cart /> },
+      { path: "/contact", element: <Contact /> },
       // Auth
       {
         path: "auth/login",

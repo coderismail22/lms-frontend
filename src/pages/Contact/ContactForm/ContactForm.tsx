@@ -88,13 +88,9 @@ const ContactForm = () => {
       setLoading(true); // Start loading
       try {
         // TODO: Add Server Url
-        await axios.post(
-          "https://ismail-codes-portfolio-backend-24.vercel.app/api/v1/email/send-contact-email-to-ismail",
-          fullFormData,
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        await axios.post("#", fullFormData, {
+          headers: { "Content-Type": "application/json" },
+        });
         Swal.fire("Success!", "Message sent successfully.", "success");
         reset();
       } catch (err) {
@@ -143,7 +139,7 @@ const ContactForm = () => {
             type="text"
             id="name"
             {...register("name", { required: "Full Name is required" })}
-            className="w-full block border border-slate-500 py-2 px-4 text-sm bg-gray-700 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+            className="rounded-md  w-full block border border-slate-500 py-2 px-4 text-sm bg-gray-700 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
           />
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         </div>
@@ -198,7 +194,7 @@ const ContactForm = () => {
                 message: "Invalid email address",
               },
             })}
-            className="w-full block border border-slate-500 py-2 px-4 text-sm bg-gray-700 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+            className="rounded-md w-full block border border-slate-500 py-2 px-4 text-sm bg-gray-700 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
           />
           {errors.email && (
             <p className="text-red-500">{errors.email.message}</p>
@@ -217,7 +213,7 @@ const ContactForm = () => {
             {...register("message", {
               required: "Message is required",
             })}
-            className="w-full block border border-slate-500 py-2 px-4 text-sm bg-gray-700 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+            className="rounded-md w-full block border border-slate-500 py-2 px-4 text-sm bg-gray-700 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
           />
           {errors.message && (
             <p className="text-red-500">{errors.message.message}</p>
