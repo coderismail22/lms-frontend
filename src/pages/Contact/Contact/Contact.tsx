@@ -24,23 +24,37 @@ const Contact = () => {
   };
 
   return (
-    <div
-      className="w-full h-full flex flex-col items-center justify-center py-20"
-      ref={ref}
-    >
-      <motion.div
-        className=""
-        variants={animationVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+    <div>
+      {/* Top Section */}
+      <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-siliguri">
+        {/* Header Section */}
+        <section className="relative overflow-hidden py-16">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">যোগাযোগ</h1>
+          </div>
+          <div className="absolute top-0 left-0 w-96 h-96 bg-blue-700 opacity-30 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 right-0 w-72 h-72 bg-cyan-600 opacity-40 rounded-full translate-x-1/2 translate-y-1/2"></div>
+        </section>
+      </div>
+      {/* Contents */}
+      <div
+        className="w-full h-full flex flex-col items-center justify-center py-20 bg-[#DBEBFE]"
+        ref={ref}
       >
-        {/* Form */}
-        <ContactForm />
-        {/* Cards */}
-        <ContactCards />
-        {/* Map */}
-        <Map />
-      </motion.div>
+        <motion.div
+          className=""
+          variants={animationVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          {/* Form */}
+          <ContactForm />
+          {/* Cards */}
+          <ContactCards />
+          {/* Map */}
+          <Map />
+        </motion.div>
+      </div>
     </div>
   );
 };

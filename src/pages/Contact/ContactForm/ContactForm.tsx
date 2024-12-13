@@ -20,7 +20,7 @@ interface FormValues {
 const customStyles = {
   control: (provided: any) => ({
     ...provided,
-    backgroundColor: "#374151", // Tailwind's gray-700
+    backgroundColor: "rgb(230, 238, 252)", // Tailwind's gray-700
     color: "white",
     borderColor: "#6B7280", // Tailwind's gray-500
     padding: "4px 8px",
@@ -35,13 +35,13 @@ const customStyles = {
   }),
   menu: (provided: any) => ({
     ...provided,
-    backgroundColor: "#374151", // Tailwind's gray-700
+    backgroundColor: "#9eaec9", // Tailwind's gray-700
     color: "white",
   }),
   option: (provided: any, state: any) => ({
     ...provided,
-    backgroundColor: state.isFocused ? "#1E293B" : "#374151", // Focus: gray-800, default: gray-700
-    color: state.isFocused ? "#FFFFFF" : "#FFFFFF",
+    backgroundColor: state.isFocused ? "#b9c7db" : "#c7d6ec", // Focus: gray-800, default: gray-700
+    color: state.isFocused ? "#080808" : "#0f0f0f",
   }),
   placeholder: (provided: any) => ({
     ...provided,
@@ -117,8 +117,8 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="max-w-2xl h-full flex flex-col items-center justify-center mx-auto mb-20  px-6">
-      <h1 className="font-yeseva font-bold text-[28px] text-center uppercase mt-8 text-white">
+    <div className="max-w-2xl h-full flex flex-col items-center justify-center mx-auto mb-20  px-6 ">
+      <h1 className="font-yeseva font-bold text-[28px] text-center uppercase mt-8 text-[#7a7679]">
         Want to have a meeting
       </h1>
       <h1 className="font-yeseva font-bold text-[25px] md:text-[35px] mb-10 text-center uppercase text-blue-500">
@@ -127,7 +127,7 @@ const ContactForm = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="font-lato text-sm w-full  bg-gray-800 p-3 md:p-5 rounded-lg shadow-lg"
+        className="font-lato text-sm w-full  bg-gray-800 p-3 md:p-5 rounded-lg shadow-lg  bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500  "
       >
         {/* Full Name */}
         <div className="mb-6 w-full">
@@ -139,7 +139,7 @@ const ContactForm = () => {
             type="text"
             id="name"
             {...register("name", { required: "Full Name is required" })}
-            className="rounded-md  w-full block border border-slate-500 py-2 px-4 text-sm bg-gray-700 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+            className="rounded-md  w-full block  py-2 px-4 text-sm bg-gray-100 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
           />
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         </div>
@@ -194,7 +194,7 @@ const ContactForm = () => {
                 message: "Invalid email address",
               },
             })}
-            className="rounded-md w-full block border border-slate-500 py-2 px-4 text-sm bg-gray-700 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+            className="rounded-md w-full block  py-2 px-4 text-sm bg-gray-100 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
           />
           {errors.email && (
             <p className="text-red-500">{errors.email.message}</p>
@@ -213,7 +213,7 @@ const ContactForm = () => {
             {...register("message", {
               required: "Message is required",
             })}
-            className="rounded-md w-full block border border-slate-500 py-2 px-4 text-sm bg-gray-700 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+            className="rounded-md w-full block  py-2 px-4 text-sm bg-gray-100 text-white focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
           />
           {errors.message && (
             <p className="text-red-500">{errors.message.message}</p>
@@ -235,7 +235,7 @@ const ContactForm = () => {
                     ${
                       captchaVerified
                         ? "bg-[#FFCD05]"
-                        : "bg-gray-400 cursor-not-allowed"
+                        : "bg-gray-200 cursor-not-allowed"
                     }
                 `}
           disabled={!captchaVerified || loading}

@@ -45,6 +45,7 @@ import PendingCourses from "@/pages/Dashboard/Student/Courses/PendingCourses/Pen
 import AllBatchStudents from "@/pages/Dashboard/Admin/Batch/AllBatchStudents";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import Contact from "@/pages/Contact/Contact/Contact";
+import About from "@/pages/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,7 @@ export const router = createBrowserRouter([
         element: <CourseDetailsPageForAll />,
       },
       { path: "/contact", element: <Contact /> },
+      { path: "/about", element: <About /> },
       // Auth
       {
         path: "auth/login",

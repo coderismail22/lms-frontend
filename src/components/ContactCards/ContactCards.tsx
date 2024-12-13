@@ -3,7 +3,7 @@ import ContactCard from "../ContactCard/ContactCard";
 const ContactCards = () => {
   return (
     <div className="py-5">
-      <h1 className="font-monserrat font-bold text-3xl my-5 text-center text-white">
+      <h1 className="font-monserrat font-bold text-3xl my-5 text-center text-[#767974]">
         Find Us Here
       </h1>
       <div className="grid md:grid-cols-2 gap-5  p-5 max-w-5xl">

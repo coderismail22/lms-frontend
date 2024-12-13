@@ -10,10 +10,10 @@ export const TopBanner = () => {
   return (
     <div className=" text-white flex justify-center md:justify-between gap-5  px-5 max-w-6xl mx-auto">
       <div className="py-2 text-center font-semibold  font-poppins flex gap-5 ">
-        <Link to="https://www.youtube.com/@AhsanullahSHAON">
+        <Link to="https://www.youtube.com/@AhsanullahSHAON" target="_blank">
           <FaYoutube />
         </Link>
-        <Link to="#" target="_blank">
+        <Link to="https://www.facebook.com/@ahsanullahshaon1" target="_blank">
           <FaFacebook />
         </Link>
         <Link to="#">

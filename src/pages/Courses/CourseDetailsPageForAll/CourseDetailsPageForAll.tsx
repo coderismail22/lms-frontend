@@ -84,10 +84,10 @@ const CourseDetailsPageForAll = () => {
   return (
     <div className="w-full px-10 py-16  h-[100%] font-siliguri bg-[#e6f0fb]">
       {/* Course Introduction Start */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center justify-center max-w-5xl mx-auto font-montserrat">
+      <div className="flex lg:flex-row flex-col gap-10 items-center justify-between w-10/12 mx-auto my-12   font-montserrat">
         {/* 1 */}
         {/* Titles */}
-        <div className="col-span-7">
+        <div>
           <div>
             <h1 className="text-[#FF504D] text-[22px] font-bold text-left">
               Turn Your Passion into a Profession
@@ -97,7 +97,7 @@ const CourseDetailsPageForAll = () => {
             </h1>
           </div>
           {/* Feature Boxes */}
-          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4 my-4 text-black max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 items-start justify-start gap-4 my-4 text-black max-w-2xl ">
             <div className="p-1 border-2 border-[#9adcee] py-2 text-center rounded-md">
               <p>Duration </p>
               <p className="text-2xl font-semibold">
@@ -115,7 +115,7 @@ const CourseDetailsPageForAll = () => {
           </div>
           {/* Course Description */}
           <div>
-            <p className="text-[18px] text-[#645F62]">
+            <p className="text-[22px] text-[#645F62] font-siliguri">
               {courseData?.description}
             </p>
           </div>
@@ -135,11 +135,11 @@ const CourseDetailsPageForAll = () => {
         </div>
         {/* 2 */}
         {/* Cover Image */}
-        <div className="col-span-5 ">
+        <div className="max">
           <img
             src={courseData?.img}
             alt={courseData?.name}
-            className="w-full h-[300px] object-cover object-center mx-auto my-5 rounded-lg "
+            className="w-[5000px] h-[400px] object-cover object-center mx-auto my-5 rounded-lg "
           />
         </div>
       </div>
