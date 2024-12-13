@@ -43,7 +43,7 @@ const PopularCourses = () => {
         }
       ></SectionTitle>
 
-      <div className="max-w-sm md:max-w-4xl grid items-center justify-center gap-4 grid-cols-1  md:grid-cols-2 lg:grid-cols-3  w-[90%] mx-auto ">
+      <div className="grid items-center justify-center gap-4 grid-cols-1  lg:grid-cols-2 xl:grid-cols-3  w-10/12 mx-auto">
         {Array.isArray(activeBatches) ? (
           activeBatches?.map((batch: TBatch) => (
             <AppCourseCard key={batch?._id} batch={batch} />

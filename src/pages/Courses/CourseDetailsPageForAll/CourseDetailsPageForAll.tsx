@@ -6,7 +6,6 @@ import { TBatchForm } from "@/types/batch.type";
 import { queryClient } from "@/queryClientSetup";
 // import Marquee from "react-fast-marquee";
 import Loader from "@/components/Loader/Loader";
-import { Button } from "@/components/ui/button";
 import "./customdetailspage.css";
 import TrainerSection from "@/components/TrainerSection/TrainerSection";
 import CourseCurriculum from "@/components/CourseCurriculum/CourseCurriculum";
@@ -121,19 +120,17 @@ const CourseDetailsPageForAll = () => {
             </p>
           </div>
           {/* Enroll Button */}
-          <div className="flex flex-col justify-center items-center rounded-md p-2 mt-5  font-siliguri">
-            <Button
+          <div className="flex flex-col justify-center items-start rounded-md p-2 mt-5  font-siliguri">
+            <div
               onClick={() =>
                 handleEnroll(batchData, courseData?.coursePrice as number)
               }
-              className="h-[40px] bg-blue-500 mx-1 text-white hover:bg-blue-600"
-              variant="default"
             >
-              <p className="flex gap-2 items-center justify-center">
+              <p className="btn text-white bg-gradient-to-r w-full font-semibold text-[16px] from-cyan-500 to-blue-500 border-none">
                 <FaCartArrowDown className="animate-bounce" />
-                <p className="font-semibold text-lg">এনরোল করুন</p>
+                <p className="font-semibold text-xl">এনরোল করুন</p>
               </p>
-            </Button>
+            </div>
           </div>
         </div>
         {/* 2 */}
@@ -148,7 +145,7 @@ const CourseDetailsPageForAll = () => {
       </div>
 
       {/* Trainer */}
-      <div className="max-w-xl mx-auto  my-10">
+      <div className="max-w-6xl mx-auto  my-10">
         <TrainerSection />
       </div>
 
@@ -186,18 +183,17 @@ const CourseDetailsPageForAll = () => {
             তাই, স্মার্ট ক্যারিয়ার গড়তে এখনই ...
           </h3>
         </div>
-        <Button
+        {/* Enroll Button */}
+        <div
           onClick={() =>
             handleEnroll(batchData, courseData?.coursePrice as number)
           }
-          className="h-[40px] bg-blue-500 mx-1 text-white hover:bg-blue-600"
-          variant="default"
         >
-          <p className="flex gap-2 items-center justify-center font-siliguri">
+          <p className="btn text-white bg-gradient-to-r w-full font-semibold text-[16px] from-cyan-500 to-blue-500 border-none">
             <FaCartArrowDown className="animate-bounce" />
-            <p className="font-semibold text-lg">এনরোল করুন</p>
+            <p className="font-semibold text-xl">এনরোল করুন</p>
           </p>
-        </Button>
+        </div>
       </div>
     </div>
   );

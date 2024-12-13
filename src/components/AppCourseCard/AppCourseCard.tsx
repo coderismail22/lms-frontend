@@ -8,9 +8,6 @@ import { Subject } from "@/types/course.type";
 import { FaCartArrowDown } from "react-icons/fa";
 import { TBatchForm } from "@/types/batch.type";
 import { queryClient } from "@/queryClientSetup";
-// import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-// import useAuth from "../../../Hooks/useAuth";
-// import useCart from "../../../Hooks/useCart";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AppCourseCard = ({ batch }: { batch: any }) => {
@@ -39,7 +36,7 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
       <div className="flex-grow ">
         <figure>
           <img
-            className="w-full h-[200px] object-cover object-center"
+            className="h-[200px] md:h-[300px]  w-full  object-cover object-center"
             src={batchImg}
             alt="course"
           />
@@ -59,8 +56,8 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
       </div>
 
       {/* Card Content */}
-      <div className="mt-2 px-2">
-        <div className="flex items-center gap-2 bg-slate-100 p-1 my-2 rounded-md border ">
+      <div className="mt-2 px-2 ">
+        <div className="flex items-center gap-2 bg-slate-100 p-1 my-2 rounded-md  ">
           <div className="p1 border-r-2 border-gray-400 pr-4">
             <img
               className="w-6"
@@ -75,7 +72,7 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
           </Link>
         </div>
         <div className="flex my-2 ">
-          <div className="flex  items-center justify-center gap-2 w-full text-[18px]">
+          <div className="flex    justify-center items-center gap-2 w-full text-[18px] ">
             <p className=" text-white">
               <IoBookOutline />
             </p>
@@ -83,7 +80,7 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
               ক্লাস সংখ্যা {totalTopics}
             </p>
           </div>
-          <div className="flex justify-center items-center  gap-2  w-full text-[18px]">
+          <div className="flex  justify-center items-center  gap-2  w-full text-[18px] ">
             <p className=" text-white">
               <TbCoinTaka />
             </p>
@@ -95,7 +92,7 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
       </div>
 
       {/* Card Footer */}
-      <div className="flex justify-between items-center mb-2 px-2">
+      <div className="flex px-2 justify-between items-center mb-2">
         <div className="w-full ">
           <div
             onClick={() => navigate(`/courses/${batch?._id}/${course?._id}`)}

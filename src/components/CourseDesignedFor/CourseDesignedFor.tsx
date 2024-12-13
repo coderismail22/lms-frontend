@@ -14,7 +14,7 @@ const CourseDesignedFor = () => {
             <img src={img1} alt="image" className="h-full object-contain" />
           </div>
           <h1 className="text-xl mt-5 font-semibold text-center">
-            Anyone interested to learn freelancing
+            For Freelancing
           </h1>
         </div>
         <div className="flex flex-col items-center">

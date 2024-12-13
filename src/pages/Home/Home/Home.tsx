@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 
 const Home = () => {
   return (
-    <div>
+    <div className="w-full">
       <Helmet>
         <title>EJobsIT | Home</title>
       </Helmet>

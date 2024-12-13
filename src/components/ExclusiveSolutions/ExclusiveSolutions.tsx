@@ -1,7 +1,6 @@
 import icon1 from "/icons/icon-7.png";
 import icon2 from "/icons/icon-8.png";
 import icon3 from "/icons/icon-9.png";
-import icon4 from "/icons/icon-10.png";
 import icon5 from "/icons/icon-11.png";
 import icon6 from "/icons/icon-12.png";
 import icon7 from "/icons/icon-13.png";
@@ -27,12 +26,6 @@ const features = [
       "Do you live abroad or prefer a remote learning process? We have launched online batches with all the offline facilities so that you can keep up with the technical advancement of today's world. Now you can enroll in any course from anywhere, at any time.",
   },
   {
-    icon: icon4,
-    title: "Practice Lab Support",
-    description:
-      "We offer our students practice lab support so that they can complete their course-works feasibly at any time. The uninterrupted learning environment that we ensure helps the student gather practical knowledge in an efficient manner.",
-  },
-  {
     icon: icon5,
     title: "Class Videos",
     description:
@@ -53,18 +46,18 @@ const features = [
 ];
 const ExclusiveSolutions = () => {
   return (
-    <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg  py-5  px-2 w-full h-full ">
+    <div className="rounded-lg  py-5  px-2 w-full h-full ">
       <div>
         <h3 className="text-4xl font-semibold my-8 text-center font-siliguri  bg-gradient-to-r from-blue-500 to-cyan-500  text-transparent bg-clip-text ">
           Exclusive Solutions That Set Us Apart
         </h3>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 font-montserrat">
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-4 font-montserrat">
         {/* Feature Cards */}
         {features?.map((feature, index) => (
           <div
             key={index}
-            className="flex flex-col h-full gap-5 w-full bg-[#F9FDEB] p-5"
+            className="flex flex-col h-full gap-5 w-full bg-gradient-to-r from-cyan-50 to-blue-50  p-5"
           >
             {/* Icon */}
             <div className="flex justify-center">
