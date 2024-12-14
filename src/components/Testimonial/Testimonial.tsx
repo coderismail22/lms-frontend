@@ -71,9 +71,9 @@ const Testimonial = () => {
 
                     <blockquote className="flex-1 mt-8">
                       <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                        “You made it so simple. My new site is so much faster
-                        and easier to work with than my old site. I just choose
-                        the page, make the change.”
+                        "eJobsIt transformed my career! The video editing course
+                        was simple yet packed with practical techniques. Highly
+                        recommend!"
                       </p>
                     </blockquote>
                   </div>
@@ -81,7 +81,7 @@ const Testimonial = () => {
                   <div className="flex items-center mt-8">
                     <img
                       className="flex-shrink-0 object-cover rounded-full w-11 h-11"
-                      src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-1.png"
+                      src="/dev_ismail.jpg"
                       alt=""
                     />
                     <div className="ml-4">
@@ -144,8 +144,9 @@ const Testimonial = () => {
 
                     <blockquote className="flex-1 mt-8">
                       <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                        “Simply the best. Better than all the rest. I’d
-                        recommend this product to beginners and advanced users.”
+                        "The graphic design course was a game-changer for me.
+                        Clear lessons, great examples, and super easy to
+                        follow."
                       </p>
                     </blockquote>
                   </div>
@@ -153,7 +154,7 @@ const Testimonial = () => {
                   <div className="flex items-center mt-8">
                     <img
                       className="flex-shrink-0 object-cover rounded-full w-11 h-11"
-                      src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-2.png"
+                      src="/sakib_al_hasan.jpg"
                       alt=""
                     />
                     <div className="ml-4">
@@ -161,7 +162,7 @@ const Testimonial = () => {
                         Sakib Al Hasan
                       </p>
                       <p className="mt-0.5 text-sm font-pj text-gray-600">
-                        Full Stack Web Developer
+                        Graphic Designer
                       </p>
                     </div>
                   </div>
@@ -216,9 +217,9 @@ const Testimonial = () => {
 
                     <blockquote className="flex-1 mt-8">
                       <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                        “I cannot believe that I have got a brand new landing
-                        page after getting Omega. It was super easy to edit and
-                        publish.”
+                        "I landed my first freelance gig thanks to eJobsIt.
+                        Their motion graphics course gave me the skills I
+                        needed!"
                       </p>
                     </blockquote>
                   </div>
@@ -226,15 +227,15 @@ const Testimonial = () => {
                   <div className="flex items-center mt-8">
                     <img
                       className="flex-shrink-0 object-cover rounded-full w-11 h-11"
-                      src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-female.png"
+                      src="/al_mamun.jpg"
                       alt=""
                     />
                     <div className="ml-4">
                       <p className="text-base font-bold text-gray-900 font-pj">
-                        Sathi Aktar
+                        Al Mamun Ahmed
                       </p>
                       <p className="mt-0.5 text-sm font-pj text-gray-600">
-                        Graphic Designer
+                        Graphic Enthusiast
                       </p>
                     </div>
                   </div>

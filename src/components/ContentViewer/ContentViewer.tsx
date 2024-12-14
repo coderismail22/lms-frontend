@@ -3,6 +3,7 @@ import { Lesson } from "@/types/course.type";
 import ResponsiveVideo from "../ReponsiveVideo/ResponsiveVideo";
 import axiosInstance from "@/api/axiosInstance";
 import Loader from "../Loader/Loader";
+import { Button } from "../ui/button";
 
 interface ContentViewerProps {
   courseId: string;
@@ -64,7 +65,6 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
 
   return (
     <div className="w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-400  rounded shadow-md h-full p-4">
-      <h3 className="font-semibold text-xl mb-2">{lesson.name}</h3>
       <div className="mb-4">
         {lesson.isAccessible ? (
           lesson.type === "video" ? (
@@ -75,22 +75,24 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         ) : (
           <p>This lesson is locked.</p>
         )}
+      <h3 className="font-semibold text-xl md:text-2xl my-3 text-white">{lesson.name}</h3>
+
       </div>
       <div className="flex justify-between">
-        <button
+        <Button
           onClick={handlePrevious}
           disabled={selectedIndex === 0}
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
         >
           Previous
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={handleNext}
           disabled={!lesson.isAccessible || isLastLesson}
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"
         >
           {isLastLesson ? "Completed" : "Next"}
-        </button>
+        </Button>
       </div>
     </div>
   );

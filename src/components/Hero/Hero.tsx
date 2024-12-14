@@ -2,6 +2,7 @@ import { IoBookOutline } from "react-icons/io5";
 import bookAnimation from "/book-animation.gif";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
+import { Contact } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -35,16 +36,21 @@ const Hero = () => {
 
           <div className="flex items-center justify-center lg:justify-start my-4">
             <Link to="/courses">
-              <Button className="m-1 text-white bg-gradient-to-r font-semibold text-[16px] from-blue-500 to-cyan-500">
+              <Button className="m-1 text-white  font-semibold text-[16px] bg-gradient-to-r from-blue-500 to-cyan-500">
                 <span className="text-xl">
                   <IoBookOutline />
                 </span>
                 Get Course
               </Button>
             </Link>
-            <Button className="btn btn-outline mx-4 btn-primary text-yellow-600">
-              Contact us
-            </Button>
+            <Link to="/contact">
+              <Button className="m-1 text-white  font-semibold text-[16px] bg-gradient-to-r from-blue-500 to-cyan-500">
+                <span className="text-xl">
+                  <Contact />
+                </span>
+                Contact Us
+              </Button>
+            </Link>
           </div>
         </div>
 
