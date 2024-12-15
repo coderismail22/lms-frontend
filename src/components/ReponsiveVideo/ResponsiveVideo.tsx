@@ -5,12 +5,20 @@ interface ResponsiveVideoProps {
 }
 
 const ResponsiveVideo: React.FC<ResponsiveVideoProps> = ({ url }) => {
+  // Extract video ID from YouTube "watch" URL
+  const extractVideoId = (url: string): string | null => {
+    const match = url.match(
+      /(?:youtube\.com\/(?:[^/]+\/.*\/|(?:v|e(?:mbed)?)\/|\S+?[?&]v=))([A-Za-z0-9_-]{11})/
+    );
+    return match ? match[1] : null;
+  };
+
   // Check if the URL is a YouTube "watch" URL and convert it to an embed URL
-  const embedUrl = url.includes("youtube.com/watch?v=")
-    ? url.replace(
-        "https://www.youtube.com/watch?v=",
-        "https://www.youtube.com/embed/"
-      )
+  const videoId = extractVideoId(url);
+  const embedUrl = videoId
+    ? `https://www.youtube.com/embed/${videoId}${
+        url.includes("?") ? url.substring(url.indexOf("?")) : ""
+      }`
     : url; // If it's already an embed URL, keep it as is.
 
   return (

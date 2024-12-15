@@ -36,7 +36,11 @@ const EnrolledCourses = () => {
       <h1 className="font-bold text-center tracking-wider mb-5 underline underline-offset-8 decoration-blue-500">
         Enrolled Courses
       </h1>
-      {data?.courses?.length === 0 && <p>No enrolled courses</p>}
+      {data?.courses?.length === 0 && (
+        <p className="text-center text-red-500 text-lg font-bold uppercase">
+          No enrolled course found
+        </p>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl">
         {data?.courses?.map((course: FullPopulatedCourse, index: string) => (
           <CourseCard key={index} course={course} studentId={data?.studentId} />

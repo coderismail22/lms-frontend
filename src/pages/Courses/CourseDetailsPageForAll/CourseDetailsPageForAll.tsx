@@ -92,8 +92,8 @@ const CourseDetailsPageForAll = () => {
             <h1 className="text-[#FF504D] text-[22px] font-bold text-left">
               Turn Your Passion into a Profession
             </h1>
-            <h1 className="text-[45px] font-semibold text-left text-[#1F1E1E] ">
-              With {courseData?.name}
+            <h1 className="text-[45px] font-semibold text-left text-[#1F1E1E] font-siliguri ">
+              {courseData?.name}
             </h1>
           </div>
           {/* Feature Boxes */}

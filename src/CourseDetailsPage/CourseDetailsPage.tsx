@@ -116,6 +116,7 @@ const CourseDetailsPage = () => {
     <p className="text-center text-red-500 font-bold">Something went wrong</p>;
   }
 
+  
   return (
     <div className="p-4  shadow-md grid grid-cols-1 md:grid-cols-5 items-center justify-center gap-4 w-[100%]  rounded-md">
       <div className="col-span-1 md:col-span-3  min-h-full w-full">

@@ -4,7 +4,7 @@ import { Card } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { TbCoinTaka, TbListDetails } from "react-icons/tb";
-import { Subject } from "@/types/course.type";
+import { Subject, Topic } from "@/types/course.type";
 import { FaCartArrowDown } from "react-icons/fa";
 import { TBatchForm } from "@/types/batch.type";
 import { queryClient } from "@/queryClientSetup";
@@ -17,10 +17,15 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
     batchName,
   } = batch;
 
-  // Calculate the total number of topics (classes)
-  const totalTopics =
-    course?.subjects?.reduce((sum: number, subject: Subject) => {
-      return sum + (subject?.topics?.length || 0);
+  // Calculate the total number of lessons
+  const totalLessons =
+    course?.subjects?.reduce((lessonSum: number, subject: Subject) => {
+      return (
+        lessonSum +
+        (subject?.topics?.reduce((topicLessonSum: number, topic: Topic) => {
+          return topicLessonSum + (topic?.lessons?.length || 0);
+        }, 0) || 0)
+      );
     }, 0) || 0;
 
   const navigate = useNavigate();
@@ -77,7 +82,7 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
               <IoBookOutline />
             </p>
             <p className="font-semibold text-zinc-400">
-              ক্লাস সংখ্যা {totalTopics}
+              ক্লাস সংখ্যা {totalLessons}
             </p>
           </div>
           <div className="flex  justify-center items-center  gap-2  w-full text-[18px] ">

@@ -35,7 +35,7 @@ const CourseCard = ({
           </Badge>
         </div>
 
-        <h2 className="font-bold text-3xl text-white text-center">
+        <h2 className="font-bold text-3xl text-white text-center font-siliguri">
           {courseId?.name}
         </h2>
       </div>

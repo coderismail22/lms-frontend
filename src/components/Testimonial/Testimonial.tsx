@@ -227,12 +227,12 @@ const Testimonial = () => {
                   <div className="flex items-center mt-8">
                     <img
                       className="flex-shrink-0 object-cover rounded-full w-11 h-11"
-                      src="/al_mamun.jpg"
+                      src="/shihab.jpg"
                       alt=""
                     />
                     <div className="ml-4">
                       <p className="text-base font-bold text-gray-900 font-pj">
-                        Al Mamun Ahmed
+                        Shihab Islam
                       </p>
                       <p className="mt-0.5 text-sm font-pj text-gray-600">
                         Graphic Enthusiast

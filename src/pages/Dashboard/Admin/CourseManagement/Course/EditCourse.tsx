@@ -74,14 +74,14 @@ const EditCourse = () => {
 
   // Fetch categories
   const {
-    data: categories,
+    data: categories = [],
     isLoading: isLoadingCategories,
     error: categoryError,
   } = useQuery({ queryKey: ["categories"], queryFn: fetchCategories });
 
   // Fetch subjects
   const {
-    data: subjects,
+    data: subjects = [],
     isLoading: isLoadingSubjects,
     error: subjectsError,
   } = useQuery({
@@ -126,8 +126,16 @@ const EditCourse = () => {
       jobPositions,
       softwareList,
     };
-    console.log(finalData);
     mutation.mutate(finalData);
+  };
+
+  // Handle undefined default values
+  const defaultValues = {
+    ...course?.data,
+    subjects:
+      course?.data?.subjects?.map((subject) =>
+        typeof subject === "string" ? subject : subject?._id
+      ) || [],
   };
 
   if (isLoadingCourse || isLoadingSubjects || isLoadingCategories) {
@@ -142,14 +150,7 @@ const EditCourse = () => {
       <AppForm
         schema={updateCourseSchema}
         onSubmit={onSubmit}
-        defaultValues={{
-          ...course?.data,
-          // Keep `subjects` as string[] for default values
-          subjects: course?.data?.subjects.map(
-            (subject: string | { _id: string }) =>
-              typeof subject === "string" ? subject : subject._id
-          ),
-        }}
+        defaultValues={defaultValues}
         submitButtonStyles="w-[150px]"
         buttonText="Save Changes"
       >
@@ -255,7 +256,7 @@ const EditCourse = () => {
           <DynamicSelectField
             label="Career Opportunities"
             placeholder="Select career opportunities"
-            options={careerOpportunities.map((item) => ({
+            options={careerOpportunities?.map((item) => ({
               value: item,
               label: item,
             }))}
@@ -269,7 +270,7 @@ const EditCourse = () => {
           <DynamicSelectField
             label="Curriculum"
             placeholder="Select curriculum"
-            options={curriculum.map((item) => ({ value: item, label: item }))}
+            options={curriculum?.map((item) => ({ value: item, label: item }))}
             defaultValue={curriculum} // Pre-filled values
             onChange={(selectedValues) => setCurriculum(selectedValues)}
           />
@@ -278,7 +279,7 @@ const EditCourse = () => {
           <DynamicSelectField
             label="Job Positions"
             placeholder="Select job positions"
-            options={jobPositions.map((item) => ({
+            options={jobPositions?.map((item) => ({
               value: item,
               label: item,
             }))}
@@ -290,7 +291,7 @@ const EditCourse = () => {
           <DynamicSelectField
             label="Software List"
             placeholder="Select software list"
-            options={softwareList.map((item) => ({
+            options={softwareList?.map((item) => ({
               value: item,
               label: item,
             }))}

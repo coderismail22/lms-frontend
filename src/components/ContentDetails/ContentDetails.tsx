@@ -45,8 +45,8 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
 
   if (loading) return <Loader />;
   return (
-    <div className="shadow-md py-4 px-3 rounded-md w-full overflow-y-auto max-h-[80vh]">
-      <h2 className="text-2xl font-semibold text-[#b4d4fb] ">{course?.name}</h2>
+    <div className="shadow-md py-4 px-3 rounded-md w-full overflow-y-auto h-[80vh] font-siliguri">
+      <h2 className="text-2xl font-semibold text-[#b4d4fb]">{course?.name}</h2>
       <p className="text-white">
         Total Lessons:{" "}
         {course?.subjects?.reduce(
@@ -63,7 +63,7 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
       {course?.subjects?.map((subject) => (
         <div
           key={subject?._id}
-          className="mt-5 p-4 border border-gray-300 rounded-lg  shadow-lg bg-gradient-to-r from-[#cef3f5] via-[#bddff0] to-[#c7f1e4]"
+          className="mt-5 p-4 border border-gray-300 rounded-lg shadow-lg bg-gradient-to-r from-[#cef3f5] via-[#bddff0] to-[#c7f1e4]"
         >
           {/* Subject Card */}
           <div
@@ -73,26 +73,20 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
             <h3 className="text-xl font-semibold text-gray-800">
               {subject.name}
             </h3>
-            {expandedSubjects?.includes(subject?._id) ? (
-              <CiSquareMinus className="h-6 w-6 text-gray-600 transition-transform duration-200 transform rotate-180" />
+            {expandedSubjects.includes(subject?._id) ? (
+              <CiSquareMinus className="h-6 w-6 text-gray-600" />
             ) : (
-              <CiSquarePlus className="h-6 w-6 text-gray-600 transition-transform duration-200" />
+              <CiSquarePlus className="h-6 w-6 text-gray-600" />
             )}
           </div>
 
           {/* Nested Topics */}
-          <div
-            className={`transition-all duration-500 overflow-hidden ${
-              expandedSubjects.includes(subject?._id)
-                ? "max-h-[500px]"
-                : "max-h-0"
-            }`}
-          >
-            {expandedSubjects.includes(subject?._id) &&
-              subject.topics.map((topic) => (
+          {expandedSubjects.includes(subject?._id) && (
+            <div className="mt-3">
+              {subject.topics.map((topic) => (
                 <div
                   key={topic._id}
-                  className="mt-3 p-3 border-l-4 border-l-yellow-500 bg-gradient-to-r from-teal-50 via-blue-50 to-teal-100 shadow-md pl-6"
+                  className="mt-3 p-3 border-l-4 border-yellow-500 bg-gradient-to-r from-teal-50 via-blue-50 to-teal-100 shadow-md pl-6"
                 >
                   {/* Topic Card */}
                   <div
@@ -103,45 +97,54 @@ const ContentDetails: React.FC<ContentDetailsProps> = ({
                       {topic.name}
                     </h4>
                     {expandedTopics.includes(topic._id) ? (
-                      <CiSquareMinus className="h-5 w-5 text-gray-600 transition-transform duration-200 transform rotate-180" />
+                      <CiSquareMinus className="h-5 w-5 text-gray-600" />
                     ) : (
-                      <CiSquarePlus className="h-5 w-5 text-gray-600 transition-transform duration-200" />
+                      <CiSquarePlus className="h-5 w-5 text-gray-600" />
                     )}
                   </div>
 
                   {/* Nested Lessons */}
-                  <div
-                    className={`overflow-hidden transition-all duration-500 ${
-                      expandedTopics.includes(topic._id)
-                        ? "max-h-[300px]"
-                        : "max-h-0"
-                    }`}
-                  >
-                    {expandedTopics.includes(topic._id) &&
-                      topic.lessons.map((lesson) => (
+                  {expandedTopics.includes(topic._id) && (
+                    <div className="mt-2 space-y-2">
+                      {topic.lessons.map((lesson) => (
                         <div
                           key={lesson._id}
                           onClick={() =>
                             lesson.isAccessible && onSelectLesson(lesson)
                           }
-                          className={`mt-2 cursor-pointer flex items-center rounded-md p-3 transition-all duration-300 ${
+                          className={`cursor-pointer p-2 flex items-center rounded-md ${
                             lesson.isAccessible
-                              ? "bg-blue-500 text-white hover:bg-blue-600"
-                              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                              ? "bg-blue-100 hover:bg-blue-200"
+                              : "bg-gray-200 cursor-not-allowed"
                           }`}
                         >
-                          {lesson.isAccessible ? (
-                            <LockOpenIcon className="size-7 font-bold text-green-500 mr-2" />
-                          ) : (
-                            <LockClosedIcon className="size-7 text-red-500 mr-2" />
-                          )}
-                          <p>{lesson.name}</p>
+                          {/* Icon and Lesson Name */}
+                          <span className="flex items-center space-x-3">
+                            <span
+                              className={`h-5 w-5 flex-shrink-0 rounded-full flex items-center justify-center ${
+                                lesson.isAccessible
+                                  ? "text-green-600"
+                                  : "text-gray-500"
+                              }`}
+                            >
+                              {lesson.isAccessible ? (
+                                <LockOpenIcon />
+                              ) : (
+                                <LockClosedIcon />
+                              )}
+                            </span>
+                            <span className="text-sm text-gray-800">
+                              {lesson.name}
+                            </span>
+                          </span>
                         </div>
                       ))}
-                  </div>
+                    </div>
+                  )}
                 </div>
               ))}
-          </div>
+            </div>
+          )}
         </div>
       ))}
     </div>
