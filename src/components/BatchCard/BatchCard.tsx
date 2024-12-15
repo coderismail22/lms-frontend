@@ -22,15 +22,15 @@ const BatchCard: React.FC<BatchCardProps> = ({
   onViewStudents,
 }) => {
   return (
-    <Card className="w-full max-w-sm rounded-lg shadow-md overflow-hidden">
+    <Card className="w-full max-w-sm rounded-lg shadow-md overflow-hidden font-siliguri">
       <img src={image} alt={courseName} className="w-full h-36 object-cover" />
       <CardContent className="p-4 space-y-2">
-        <h2 className="text-lg font-bold text-gray-800">{courseName}</h2>
-        <p className="text-sm text-gray-600">
-          <strong>Batch:</strong> {batch}
+        <h2 className="text-2xl font-bold text-gray-800 ">{courseName}</h2>
+        <p className="text-xl text-gray-600">
+          <strong>{batch}</strong>
         </p>
         <p className="text-sm text-gray-600">
-          <strong>Batch ID:</strong> {batchId}
+          <strong>BID:</strong> {batchId}
         </p>
       </CardContent>
       <div className="flex items-center justify-center gap-2 mb-5">

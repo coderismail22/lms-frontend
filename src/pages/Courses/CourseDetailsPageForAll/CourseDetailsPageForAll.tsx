@@ -14,6 +14,7 @@ import CourseDesignedFor from "@/components/CourseDesignedFor/CourseDesignedFor"
 import CareerOpportunities from "@/components/CareerOpportunities/CareerOpportunities";
 import OpenJobPositions from "@/components/OpenJobPositions/OpenJobPositions";
 import ExclusiveSolutions from "@/components/ExclusiveSolutions/ExclusiveSolutions";
+import { Subject, Topic } from "@/types/course.type";
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(
     `/courses/get-single-course/${courseId}`
@@ -74,11 +75,15 @@ const CourseDetailsPageForAll = () => {
   }
 
   // Calculate the total number of topics (classes)
-  const totalLectures =
-    // TODO: make a type
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    courseData?.subjects?.reduce((sum: number, subject: any) => {
-      return sum + (subject?.topics?.length || 0);
+  // Calculate the total number of lessons
+  const totalLessons =
+    courseData?.subjects?.reduce((lessonSum: number, subject: Subject) => {
+      return (
+        lessonSum +
+        (subject?.topics?.reduce((topicLessonSum: number, topic: Topic) => {
+          return topicLessonSum + (topic?.lessons?.length || 0);
+        }, 0) || 0)
+      );
     }, 0) || 0;
 
   return (
@@ -106,7 +111,7 @@ const CourseDetailsPageForAll = () => {
             </div>
             <div className="p-1 border-2 border-[#9adcee] py-2 text-center rounded-md">
               <p>Lectures</p>
-              <p className="text-2xl font-semibold ">{totalLectures}</p>
+              <p className="text-2xl font-semibold ">{totalLessons}</p>
             </div>
             <div className="p-1 border-2 border-[#9adcee] py-2 px-3 text-center rounded-md">
               <p>Projects</p>

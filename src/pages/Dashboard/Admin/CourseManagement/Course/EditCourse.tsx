@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import AppForm from "@/components/CustomForm/AppForm";
@@ -133,7 +134,7 @@ const EditCourse = () => {
   const defaultValues = {
     ...course?.data,
     subjects:
-      course?.data?.subjects?.map((subject) =>
+      course?.data?.subjects?.map((subject: any) =>
         typeof subject === "string" ? subject : subject?._id
       ) || [],
   };
