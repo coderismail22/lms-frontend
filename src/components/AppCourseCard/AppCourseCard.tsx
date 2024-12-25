@@ -53,10 +53,10 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
         </div>
 
         <h2 className="font-bold text-3xl text-slate-400 px-2">
-          {batchName || "N/A"}
+          {course?.name || "N/A"}
         </h2>
         <h2 className="font-bold text-md text-slate-400 px-2">
-          {course?.name || "N/A"}
+          {batchName || "N/A"}
         </h2>
       </div>
 

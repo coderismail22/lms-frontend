@@ -6,7 +6,7 @@ import { Contact } from "lucide-react";
 
 const Hero = () => {
   return (
-    <div className=" bg-gradient-to-r from-cyan-50 to-blue-50  hover:bg-gradient-to-l overflow-x-hidden  font-siliguri py-8 pb-24 w-full border">
+    <div className=" bg-gradient-to-r from-cyan-50 to-blue-50  hover:bg-gradient-to-l overflow-x-hidden  font-siliguri w-full pt-24 pb-32 ">
       <div className="w-10/12 mx-auto grid grid-cols-1  lg:grid-cols-2 items-center ">
         <div className="text-center lg:text-start ">
           <div className="flex justify-center lg:justify-normal items-center">
@@ -27,7 +27,7 @@ const Hero = () => {
               আমাদের দক্ষ কোর্সে
             </span>
           </h1>
-          <p className="lg:w-9/12  ">
+          <p className="lg:w-9/12">
             আমাদের এখানে ক্লাস করুন বাংলাদেশের সব থেকে জনপ্রিয় মোশন গ্রাফিক্স
             ইউটিউবার আহসানুল্লাহ শাওন স্যারের সাথে । সাথে থাকছে প্রতিদিন দুইবেলা
             করে গুগল মিটে স্ক্রিন শেয়ারের মাধ্যমে লাইভ সাপোর্ট, রেকর্ডেড ভিডিও,
@@ -54,9 +54,9 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="mx-auto  z-30 ">
+        <div className="mx-auto z-30 ">
           <iframe
-            className="rounded-xl w-[300px]  h-[200px] md:w-[500px] md:h-[350px] xl:w-[600px] 2xl:w-[700px]"
+            className="rounded-xl w-[300px]  h-[200px] md:w-[500px] md:h-[350px] xl:w-[600px] xl:h-[400px] 2xl:w-[700px] 2xl:h-[400px] "
             src="https://www.youtube.com/embed/CuZWHuug1U4"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

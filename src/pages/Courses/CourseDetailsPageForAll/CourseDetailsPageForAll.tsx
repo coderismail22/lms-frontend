@@ -154,10 +154,15 @@ const CourseDetailsPageForAll = () => {
         <TrainerSection />
       </div>
 
-      {/* Curriculum and Softwares */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-2 items-start justify-center">
+      {/* Curriculum */}
+      <div className="max-w-6xl mx-auto">
         <CourseCurriculum curriculum={courseData?.curriculum} />
+      </div>
+
+      {/* Open Job Positions and Softwares */}
+      <div className="my-5 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5">
         <CourseSoftwares softwares={courseData?.softwareList} />
+        <OpenJobPositions jobPositions={courseData?.jobPositions} />
       </div>
 
       {/* Target Audience */}
@@ -168,11 +173,6 @@ const CourseDetailsPageForAll = () => {
       {/* Career Opportunities */}
       <div className="my-5 ">
         <CareerOpportunities />
-      </div>
-
-      {/* Open Job Positions */}
-      <div className="my-5 max-w-2xl mx-auto">
-        <OpenJobPositions jobPositions={courseData?.jobPositions} />
       </div>
 
       {/* Exclusive Solutions That Set Us Apart*/}
