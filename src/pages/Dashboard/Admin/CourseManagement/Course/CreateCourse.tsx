@@ -96,7 +96,9 @@ const CreateCourse = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">Create Course</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
+        Create Course
+      </h1>
 
       <AppForm
         schema={createCourseSchema}
@@ -106,6 +108,7 @@ const CreateCourse = () => {
         defaultValues={{
           name: "",
           description: "",
+          overview: "",
           img: "",
           category: "",
           language: "",
@@ -118,6 +121,8 @@ const CreateCourse = () => {
           curriculum: [],
           jobPositions: [],
           softwareList: [],
+          classNumber: 0,
+          projectNumber: 0,
         }}
       >
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -135,6 +140,14 @@ const CreateCourse = () => {
             label="Description"
             placeholder="Enter description"
           />
+          {/* Course Overview */}
+          <AppInput
+            className="w-full "
+            name="overview"
+            label="Overview"
+            placeholder="Enter overview"
+          />
+
           {/* Image Upload Section */}
           <div className="text-sm truncate">
             <label className="block font-medium text-white">
@@ -208,7 +221,7 @@ const CreateCourse = () => {
             options={[
               { value: "Online", label: "Online" },
               { value: "Offline", label: "Offline" },
-              { value: "Hybrid", label: "Hybrid" },
+              { value: "Pre-Recorded", label: "Pre-Recorded" },
             ]}
           />
 
@@ -222,6 +235,20 @@ const CreateCourse = () => {
               value: subject._id,
               label: subject.name,
             }))}
+          />
+          {/* Project Qty */}
+          <AppInput
+            className="w-full "
+            name="projectNumber"
+            label="Projects"
+            placeholder="Enter project quantity"
+          />
+          {/* Class Qty */}
+          <AppInput
+            className="w-full "
+            name="classNumber"
+            label="Class Number"
+            placeholder="Enter class numbers"
           />
         </div>
         <div className="grid grid-cols-1 mt-5 md:grid-cols-2 md:gap-6 lg:grid-cols-2">

@@ -156,16 +156,26 @@ const CourseDetailsPageForAll = () => {
         <TrainerSection />
       </div>
 
-      {/* Curriculum */}
-      <div className="max-w-6xl mx-auto">
+      {/* Curriculum & Success Story */}
+      <div className="flex flex-col md:flex-row my-5 gap-2">
         <CourseCurriculum curriculum={courseData?.curriculum} />
+        <div className="max-w-sm  rounded-md mx-2 p-4 bg-gradient-to-r from-cyan-50 to-blue-50">
+          <SuccessStory />
+        </div>
       </div>
 
-      {/* Open Job Positions and Softwares */}
-      <div className="my-5 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5">
-        <CourseSoftwares softwares={courseData?.softwareList} />
-        <OpenJobPositions jobPositions={courseData?.jobPositions} />
+      {/* Softwares and Admission Going On */}
+      <div className="grid grid-cols-1 md:grid-cols-3  my-5 gap-2">
+        <div className="col-span-2">
+          <CourseSoftwares softwares={courseData?.softwareList} />
+        </div>
+        <div className="col-span-1">
+          <AdmissionGoingOn />
+        </div>
       </div>
+
+      {/* Job Positions */}
+      <OpenJobPositions jobPositions={courseData?.jobPositions} />
 
       {/* Target Audience */}
       <div className="my-10 ">
@@ -180,17 +190,6 @@ const CourseDetailsPageForAll = () => {
       {/* Exclusive Solutions That Set Us Apart*/}
       <div className="my-10">
         <ExclusiveSolutions />
-      </div>
-
-      <div className="flex flex-col md:flex-row gap-5 items-center justify-center max-w-5xl mx-auto">
-        {/* SuccessStory */}
-        <div className="w-[300px] bg-slate-50 rounded-md mx-2 p-5">
-          <SuccessStory />
-        </div>
-        {/* Admission Going On */}
-        <div className="max-w-2xl mx-auto">
-          <AdmissionGoingOn />
-        </div>
       </div>
 
       {/* What are you waiting for ? */}

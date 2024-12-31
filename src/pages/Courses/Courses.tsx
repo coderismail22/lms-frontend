@@ -55,7 +55,8 @@ const Courses = () => {
   const courseTabs = [
     { value: "all", label: "All Courses" },
     { value: "online", label: "Online Courses" },
-    { value: "offline", label: "Offline Courses" },
+    // { value: "offline", label: "Offline Courses" },
+    { value: "pre-recorded", label: "Pre-Recorded" },
   ];
 
   return (

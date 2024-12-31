@@ -1,3 +1,4 @@
+import { Box } from "lucide-react";
 
 const CourseCurriculum = ({ curriculum }: { curriculum: string[] }) => {
   return (
@@ -7,11 +8,12 @@ const CourseCurriculum = ({ curriculum }: { curriculum: string[] }) => {
           কোর্স কারিকুলাম
         </h3>
       </div>
-      <div className="flex items-center justify-center  text-[20px] ">
-        <ul className="grid grid-cols-1  gap-5 ">
+      <div className="flex items-center justify-center  text-[16px] font-siliguri">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 items-center justify-center">
           {curriculum?.map((curriculum: string) => (
-            <li className="flex items-center  gap-3 mr-1">
-              <p className="text-[#717172] ">{curriculum}</p>
+            <li className="flex items-center  gap-2 mr-1">
+              <Box className="size-4 text-orange-500 font-bold" />
+              <p className="text-[#717172] font-bold">{curriculum}</p>
             </li>
           ))}
         </ul>

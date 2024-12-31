@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 
 const AdmissionGoingOn = () => {
   return (
-    <div className="rounded-md w-full font-montserrat  bg-gradient-to-r from-cyan-50 to-blue-50  p-5">
+    <div className="rounded-md  font-montserrat  bg-gradient-to-r from-cyan-50 to-blue-50  p-5">
       {/* Title and Description */}
       <div className="mb-5">
         <h1 className="text-2xl font-semibold text-center">
@@ -14,7 +14,7 @@ const AdmissionGoingOn = () => {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-2 justify-center items-center">
+      <div className="flex flex-col  gap-2 justify-center items-center">
         {/* Online Course */}
         <div className="rounded-lg p-5  bg-slate-50 border">
           <h1 className="text-[20px] font-semibold ">Course Fee Online</h1>

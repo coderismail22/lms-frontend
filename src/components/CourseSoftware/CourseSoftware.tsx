@@ -9,7 +9,7 @@ const CourseSoftwares = ({ softwares }: { softwares: string[] }) => {
         </h3>
       </div>
       <div className="flex items-center justify-center  text-[16px] font-montserrat">
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-1 items-center justify-center">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 items-center justify-center">
           {softwares?.map((softwares: string) => (
             <li className="flex items-center  gap-3 mr-1">
               <Box className="size-4 text-orange-500 font-bold" />
