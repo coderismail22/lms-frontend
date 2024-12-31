@@ -16,6 +16,7 @@ import OpenJobPositions from "@/components/OpenJobPositions/OpenJobPositions";
 import ExclusiveSolutions from "@/components/ExclusiveSolutions/ExclusiveSolutions";
 import { Subject, Topic } from "@/types/course.type";
 import SuccessStory from "@/components/SuccessStory/SuccessStory";
+import AdmissionGoingOn from "@/components/AdmissionGoingOn/AdmissionGoingOn";
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(
     `/courses/get-single-course/${courseId}`
@@ -181,9 +182,15 @@ const CourseDetailsPageForAll = () => {
         <ExclusiveSolutions />
       </div>
 
-      {/* SuccessStory */}
-      <div className="w-[200px] bg-slate-50 rounded-md mx-2">
-        <SuccessStory />
+      <div className="flex flex-col md:flex-row gap-5 items-center justify-center max-w-5xl mx-auto">
+        {/* SuccessStory */}
+        <div className="w-[300px] bg-slate-50 rounded-md mx-2 p-5">
+          <SuccessStory />
+        </div>
+        {/* Admission Going On */}
+        <div className="max-w-2xl mx-auto">
+          <AdmissionGoingOn />
+        </div>
       </div>
 
       {/* What are you waiting for ? */}

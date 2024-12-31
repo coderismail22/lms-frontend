@@ -44,8 +44,8 @@ import StudentHome from "@/pages/Dashboard/Student/StudentHome/StudentHome";
 import PendingCourses from "@/pages/Dashboard/Student/Courses/PendingCourses/PendingCourses";
 import AllBatchStudents from "@/pages/Dashboard/Admin/Batch/AllBatchStudents";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
-import Contact from "@/pages/Contact/Contact/Contact";
 import About from "@/pages/About/About";
+import Contact from "@/pages/Contact/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
