@@ -15,7 +15,9 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
     courseId: course, // has all the fields populated
     batchImg,
     batchName,
+    trainers,
   } = batch;
+  console.log(batch);
 
   // Calculate the total number of lessons
   const totalLessons =
@@ -62,17 +64,19 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
 
       {/* Card Content */}
       <div className="mt-2 px-2 ">
+        {/* Instructor */}
         <div className="flex items-center gap-2 bg-slate-100 p-1 my-2 rounded-md  ">
           <div className="p1 border-r-2 border-gray-400 pr-4">
             <img
-              className="w-6"
-              src="https://i.ibb.co/DrqQBFc/240814641-673719677356207-115697542586076674-n.jpg"
+              className="size-6 object-cover object-left rounded-full"
+              src={trainers[0].profileImg}
               alt="trainer"
             />
           </div>
           <Link to="#">
             <p className="text-[#3a67ae] font-semibold text-[16px]">
-              আহসানউল্লাহ শাওন
+              {trainers[0].teacherName || "N/A"}
+              {console.log()}
             </p>
           </Link>
         </div>

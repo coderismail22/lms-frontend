@@ -109,17 +109,17 @@ const CourseDetailsPageForAll = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 items-start justify-start gap-4 my-4 text-black max-w-2xl ">
             <div className="p-1 border-2 border-[#9adcee] py-2 text-center rounded-md">
               <p>Duration </p>
-              <p className="text-2xl font-semibold">
+              <p className="text-xl font-semibold">
                 {courseData?.courseLength}
               </p>
             </div>
             <div className="p-1 border-2 border-[#9adcee] py-2 text-center rounded-md">
               <p>Lectures</p>
-              <p className="text-2xl font-semibold ">{totalLessons}</p>
+              <p className="text-xl font-semibold ">{totalLessons}</p>
             </div>
             <div className="p-1 border-2 border-[#9adcee] py-2 px-3 text-center rounded-md">
               <p>Projects</p>
-              <p className="text-2xl font-semibold ">5 +</p>
+              <p className="text-xl font-semibold ">5 +</p>
             </div>
           </div>
           {/* Course Description */}

@@ -28,7 +28,6 @@ const fetchBatchById = async (batchId: string): Promise<FetchBatchResponse> => {
 // Fetch Teachers
 const fetchTeachers = async () => {
   const response = await axiosInstance.get("/teachers/");
-  console.log("look teachers here", response?.data?.data);
   return response?.data?.data;
 };
 
@@ -134,7 +133,9 @@ const EditBatch = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">Edit Batch</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
+        Edit Batch
+      </h1>
       {batch && (
         <AppForm
           schema={updateBatchSchema}
