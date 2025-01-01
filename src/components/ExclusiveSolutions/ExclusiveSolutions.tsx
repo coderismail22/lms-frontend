@@ -11,53 +11,53 @@ const features = [
     icon: icon1,
     title: "Online Live Batch",
     description:
-      "Do you live abroad or prefer a remote learning process? We have launched online batches with all the offline facilities so that you can keep up with the technical advancement of today's world. Now you can enroll in any course from anywhere, at any time.",
+      "আমরা সমস্ত অফলাইন সুবিধা সহ অনলাইন ব্যাচ চালু করেছি যাতে আপনি আজকের বিশ্বের প্রযুক্তিগত অগ্রগতির সাথে তাল মিলিয়ে চলতে পারেন। এখন আপনি যেকোন কোর্সে যেকোন জায়গা থেকে যেকোন সময় ভর্তি হতে পারবেন।",
   },
   {
     icon: icon2,
     title: "Review Class",
     description:
-      "Do you face difficulty when you review the previous concepts? To ensure the best learning outcome, we arrange review classes that help our students overcome any problem in their skill development process. You will be able to understand the topics that you find complex under the close supervision of our skilled mentors.",
+      "অনেক সময় শিক্ষার্থীরা ক্লাসে কিছু টপিক বুঝতে পারেন না,তাদের জন্য রয়েছে ক্লাস ভিডিও এর সুবিধা। তাই এখন শিক্ষার্থীরা ক্লাস করতে পারেন নিশ্চিন্তে। যেকোন অসুবিধায় ভিডিও দেখে আপনি নিজেই যেকোন সমস্যার সমাধান করতে পারবেন।",
   },
   {
     icon: icon3,
     title: "Lifetime Support",
     description:
-      "Do you live abroad or prefer a remote learning process? We have launched online batches with all the offline facilities so that you can keep up with the technical advancement of today's world. Now you can enroll in any course from anywhere, at any time.",
+      "ট্রেনিং শেষ হলেও আপনার সঙ্গে সম্পর্ক কিন্তু এখানেই শেষ নয়। ক্রিয়েটিভ আইটির শিক্ষার্থী হিসেবে আপনি পাচ্ছেন লাইফ-টাইম সাপোর্ট। অনলাইনে ২৪/৭ সাপোর্ট পাচ্ছেন যেকোনো সময়। আমাদের বিষয় ভিত্তিক অভিজ্ঞ টিম অফলাইন বা অনলাইনে এই সাপোর্ট নিশ্চিত করে থাকেন।",
   },
   {
     icon: icon5,
     title: "Class Videos",
     description:
-      "No need to worry if you miss a topic in the class. We record most of our classes so that students who miss a session can still get the information they need. They can watch the videos again and again until they understand the topic thoroughly. Our motto is to provide you with a flexible learning experience to gradually improve your competence.",
+      "এখন শিক্ষার্থীরা ক্লাস করতে পারেন নিশ্চিন্তে। যেকোন অসুবিধায় ভিডিও দেখে আপনি নিজেই যেকোন সমস্যার সমাধান করতে পারবেন।",
   },
   {
     icon: icon6,
     title: "Career Placement Support",
     description:
-      "Our career placement department is ready to help you find a lucrative job. We ensure your resume gets into the hands of the right hiring manager.",
+      "শিক্ষার্থীদের যোগ্যতা অনুযায়ী সঠিক জায়গায় সিভি পৌঁছাতে কাজ করে থাকে ক্যারিয়ার প্লেসমেন্ট ডিপার্টমেন্ট। এখান থেকে আপনি পাবেন কোর্স পরবর্তী গ্রুমিং এবং ক্যারিয়ার গাইডলাইন বিষয়ক বিভিন্ন সেমিনার। যা ক্যারিয়ার দৌড়ে অন্য যে কারও থেকে আপনাকে এগিয়ে রাখবে অনেকখানি।",
   },
   {
     icon: icon7,
-    title: "Virtual Internship",
+    title: "ভার্চুয়াল ইন্টার্নশিপ",
     description:
-      "The online internships qualify to be as effective as offline work experience. So, you can also complete your internship under us online.",
+      "EJobsIT ইনস্টিটিউটে শিক্ষার্থীদের জন্য রয়েছে ইন্টার্নশিপের সুযোগ। ভার্চুয়াল হলেও এখানে বাস্তব অফিসের অভিজ্ঞতা অর্জনের জায়গা রয়েছে। তাই কোর্স শেষ করে আপনি ঘরে বসে ইন্ডাস্ট্রি এক্সপার্টের সাথে কাজ করার সুযোগ পাবেন ভার্চুয়াল ইন্টার্নশিপের মাধ্যমে। তাছাড়া অফিস ওয়ার্কের সুবিধাও থাকছে।",
   },
 ];
 const ExclusiveSolutions = () => {
   return (
-    <div className="rounded-lg  py-5  px-2 w-full h-full ">
+    <div className="rounded-lg  py-5  px-2 w-full h-full  font-siliguri">
       <div>
-        <h3 className="text-4xl font-semibold my-8 text-center font-siliguri  bg-gradient-to-r from-blue-500 to-cyan-500  text-transparent bg-clip-text ">
+        <h3 className="text-4xl font-semibold my-8 text-center   bg-gradient-to-r from-blue-500 to-cyan-500  text-transparent bg-clip-text ">
           Exclusive Solutions That Set Us Apart
         </h3>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3  gap-4 font-montserrat">
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-4 ">
         {/* Feature Cards */}
         {features?.map((feature, index) => (
           <div
             key={index}
-            className="flex flex-col h-full gap-5 w-full bg-gradient-to-r from-cyan-50 to-blue-50  p-5"
+            className="rounded-md flex flex-col h-full gap-5 w-full bg-gradient-to-r from-cyan-50 to-blue-50  p-5"
           >
             {/* Icon */}
             <div className="flex justify-center">

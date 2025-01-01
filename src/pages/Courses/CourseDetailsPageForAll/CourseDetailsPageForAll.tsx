@@ -7,16 +7,18 @@ import { queryClient } from "@/queryClientSetup";
 // import Marquee from "react-fast-marquee";
 import Loader from "@/components/Loader/Loader";
 import "./customdetailspage.css";
-import TrainerSection from "@/components/TrainerSection/TrainerSection";
+// import TrainerSection from "@/components/TrainerSection/TrainerSection";
 import CourseCurriculum from "@/components/CourseCurriculum/CourseCurriculum";
 import CourseSoftwares from "@/components/CourseSoftware/CourseSoftware";
 import CourseDesignedFor from "@/components/CourseDesignedFor/CourseDesignedFor";
-import CareerOpportunities from "@/components/CareerOpportunities/CareerOpportunities";
+// import CareerOpportunities from "@/components/CareerOpportunities/CareerOpportunities";
 import OpenJobPositions from "@/components/OpenJobPositions/OpenJobPositions";
 import ExclusiveSolutions from "@/components/ExclusiveSolutions/ExclusiveSolutions";
 import { Subject, Topic } from "@/types/course.type";
 import SuccessStory from "@/components/SuccessStory/SuccessStory";
 import AdmissionGoingOn from "@/components/AdmissionGoingOn/AdmissionGoingOn";
+import CourseOverview from "@/components/CourseOverview/CourseOverview";
+import CareerOpportunities from "@/components/CareerOpportunities/CareerOpportunities";
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(
     `/courses/get-single-course/${courseId}`
@@ -152,30 +154,50 @@ const CourseDetailsPageForAll = () => {
       </div>
 
       {/* Trainer */}
-      <div className="max-w-6xl mx-auto  my-10">
+      {/* <div className="max-w-6xl mx-auto  my-10">
         <TrainerSection />
-      </div>
+      </div> */}
+
+      {/* Course Overview */}
+      {/* <CourseOverview overview={courseData?.overview} /> */}
 
       {/* Curriculum & Success Story */}
-      <div className="flex flex-col md:flex-row my-5 gap-2">
+      {/* <div className="flex flex-col md:flex-row my-5 gap-2">
         <CourseCurriculum curriculum={courseData?.curriculum} />
         <div className="max-w-sm  rounded-md mx-2 p-4 bg-gradient-to-r from-cyan-50 to-blue-50">
           <SuccessStory />
         </div>
-      </div>
+      </div> */}
 
       {/* Softwares and Admission Going On */}
-      <div className="grid grid-cols-1 md:grid-cols-3  my-5 gap-2">
-        <div className="col-span-2">
-          <CourseSoftwares softwares={courseData?.softwareList} />
-        </div>
-        <div className="col-span-1">
-          <AdmissionGoingOn />
-        </div>
+      {/* <div className="col-span-2">
+        <CourseSoftwares softwares={courseData?.softwareList} />
       </div>
+      <div className="col-span-1">
+        <AdmissionGoingOn />
+      </div> */}
 
       {/* Job Positions */}
-      <OpenJobPositions jobPositions={courseData?.jobPositions} />
+      {/* <OpenJobPositions jobPositions={courseData?.jobPositions} /> */}
+
+      {/* Responsive Grid */}
+      <div className="w-[73%] mx-auto grid grid-cols-1 lg:grid-cols-[70%_30%] gap-6">
+        {/* Left Column */}
+        <div className="space-y-6">
+          <CourseOverview overview={courseData?.overview} />
+          <CourseCurriculum curriculum={courseData?.curriculum} />
+          <CourseSoftwares softwares={courseData?.softwareList} />
+          <OpenJobPositions jobPositions={courseData?.jobPositions} />
+        </div>
+
+        {/* Right Column */}
+        <div className="space-y-6">
+          <SuccessStory />
+          <div className="sticky top-6">
+            <AdmissionGoingOn />
+          </div>
+        </div>
+      </div>
 
       {/* Target Audience */}
       <div className="my-10 ">
@@ -183,12 +205,10 @@ const CourseDetailsPageForAll = () => {
       </div>
 
       {/* Career Opportunities */}
-      <div className="my-5 ">
-        <CareerOpportunities />
-      </div>
+      <CareerOpportunities />
 
       {/* Exclusive Solutions That Set Us Apart*/}
-      <div className="my-10">
+      <div className="w-10/12 mx-auto my-10">
         <ExclusiveSolutions />
       </div>
 

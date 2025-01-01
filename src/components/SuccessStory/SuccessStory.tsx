@@ -8,28 +8,28 @@ import {
 
 const SuccessStory = () => {
   return (
-    <div className="p-2">
+    <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-md p-5">
       <h1 className="text-xl font-semibold mb-4">Success Stories</h1>
       <Carousel>
         <CarouselContent>
           <CarouselItem>
             <img
               className="rounded-md"
-              src="https://thumbs.dreamstime.com/b/agent-face-happy-business-man-office-manager-leader-smile-startup-company-growth-management-success-corporate-employee-272852323.jpg"
+              src="https://www.shutterstock.com/image-photo/happy-smiling-bangladesh-business-man-600nw-391131271.jpg"
               alt="success-story-img"
             />
           </CarouselItem>
           <CarouselItem>
             <img
               className="rounded-md"
-              src="https://thumbs.dreamstime.com/b/agent-face-happy-business-man-office-manager-leader-smile-startup-company-growth-management-success-corporate-employee-272852323.jpg"
+              src="https://www.shutterstock.com/image-photo/happy-smiling-bangladesh-business-man-600nw-391131271.jpg"
               alt="success-story-img"
             />
           </CarouselItem>
           <CarouselItem>
             <img
               className="rounded-md"
-              src="https://thumbs.dreamstime.com/b/agent-face-happy-business-man-office-manager-leader-smile-startup-company-growth-management-success-corporate-employee-272852323.jpg"
+              src="https://www.shutterstock.com/image-photo/happy-smiling-bangladesh-business-man-600nw-391131271.jpg"
               alt="success-story-img"
             />
           </CarouselItem>
