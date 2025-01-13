@@ -46,6 +46,7 @@ import AllBatchStudents from "@/pages/Dashboard/Admin/Batch/AllBatchStudents";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import About from "@/pages/About/About";
 import Contact from "@/pages/Contact/Contact/Contact";
+import VerifyOTP from "@/pages/Auth/VerifyOTP/VerifyOTP";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
       {
         path: "auth/signup",
         element: <Register />,
+      },
+      {
+        path: "auth/otp",
+        element: <VerifyOTP />,
       },
       {
         path: "/unauthorized",

@@ -6,60 +6,35 @@ import { registerSchema } from "@/schemas/register.schema";
 import { TRegisterForm } from "@/types/register.type";
 import axiosInstance from "@/api/axiosInstance";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
-import { useLogin } from "@/hooks/useLogin";
+import { Link, useNavigate } from "react-router-dom";
 import LoaderWithBlurBG from "@/components/Loader/LoaderWithBlurBG";
 import { AxiosError } from "axios";
 import { handleAxiosError } from "@/utils/handleAxiosError";
 import "../../../styles/swal.css";
 import { Helmet } from "react-helmet";
+
 const Register = () => {
-  const loginMutation = useLogin();
+  const navigate = useNavigate();
 
   const registerMutation = useMutation({
     mutationFn: async (formData: Partial<TRegisterForm>) => {
-      const response = await axiosInstance.post(
-        "/users/create-student",
-        formData
-      );
+      const response = await axiosInstance.post("/users/create-student", formData);
       return response.data;
     },
     onSuccess: (_data, variables) => {
-      // Automatically log in after registration
-      loginMutation.mutate(
-        {
-          email: variables.email as string,
-          password: variables.password as string,
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        text: "A verification code has been sent to your email!",
+        customClass: {
+          title: "custom-title",
+          popup: "custom-popup",
+          icon: "custom-icon",
+          confirmButton: "custom-confirm-btn",
         },
-        {
-          onSuccess: () => {
-            Swal.fire({
-              icon: "success",
-              title: "Registration Successful",
-              text: "Welcome!",
-              customClass: {
-                title: "custom-title",
-                popup: "custom-popup",
-                icon: "custom-icon",
-                confirmButton: "custom-confirm-btn",
-              },
-            });
-          },
-          onError: () => {
-            Swal.fire({
-              icon: "error",
-              title: "Auto Login Failed",
-              text: "Please log in manually.",
-              customClass: {
-                title: "custom-title",
-                popup: "custom-popup",
-                icon: "custom-icon",
-                confirmButton: "custom-confirm-btn",
-              },
-            });
-          },
-        }
-      );
+      });
+      // Redirect to VerifyOTP and pass email as state
+      navigate("/auth/otp", { state: { email: variables.email } });
     },
     onError: (error: AxiosError) => {
       handleAxiosError(error, "Registration Failed");
@@ -67,13 +42,12 @@ const Register = () => {
   });
 
   const onSubmit = (data: TRegisterForm) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { confirmPassword, ...restFormData } = data;
+    const { confirmPassword, ...restFormData } = data; // Remove confirmPassword
     registerMutation.mutate(restFormData);
   };
 
   if (registerMutation.isPending)
-    return <LoaderWithBlurBG loadingText="Getting things ready for you !" />;
+    return <LoaderWithBlurBG loadingText="Getting things ready for you!" />;
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black">
@@ -107,7 +81,6 @@ const Register = () => {
             confirmPassword: "",
           }}
         >
-          {/* Full Name */}
           <div className="mb-4">
             <AppInput
               className="w-full bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
@@ -118,7 +91,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Email */}
           <div className="mb-4">
             <AppInput
               className="w-full bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
@@ -129,7 +101,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Password */}
           <AppInputPassword
             className="w-full mb-4 bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
             name="password"
@@ -138,7 +109,6 @@ const Register = () => {
             placeholder="Enter your password"
           />
 
-          {/* Confirm Password */}
           <AppInputPassword
             className="w-full mb-4 bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
             name="confirmPassword"

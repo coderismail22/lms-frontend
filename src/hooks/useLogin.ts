@@ -27,6 +27,7 @@ export type TLoginResponse = {
   success: boolean;
   message: string;
   data: {
+    isVerified: boolean;
     accessToken: string;
     refreshToken?: string;
   };
@@ -49,7 +50,23 @@ export const useLogin = () => {
       return data;
     },
     // Options
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
+      // Check if the user is verified
+      if (!data.data.isVerified) {
+        Swal.fire({
+          icon: "info",
+          title: "Account Not Verified",
+          text: "An OTP has been sent to your email. Please verify your account.",
+          customClass: {
+            title: "custom-title",
+            popup: "custom-popup",
+            icon: "custom-icon",
+            confirmButton: "custom-confirm-btn",
+          },
+        });
+        navigate("/auth/otp", { state: { email: variables.email } });
+        return;
+      }
       // Decode the role from the token
       const decodedToken: DecodedToken = jwtDecode(data?.data?.accessToken);
       // console.log(decodedToken);
@@ -65,7 +82,7 @@ export const useLogin = () => {
       queryClient.setQueryData(authKey, authState);
 
       // Fallback: Set the token in localStorage for persistence across sessions
-      // TOOD: This one is working not tanstack query neither persist
+      // TODO: This one is working not tanstack query neither persist
       localStorage.setItem("accessToken", data?.data?.accessToken);
 
       Swal.fire({
