@@ -18,7 +18,10 @@ const Register = () => {
 
   const registerMutation = useMutation({
     mutationFn: async (formData: Partial<TRegisterForm>) => {
-      const response = await axiosInstance.post("/users/create-student", formData);
+      const response = await axiosInstance.post(
+        "/users/create-student",
+        formData
+      );
       return response.data;
     },
     onSuccess: (_data, variables) => {
@@ -42,7 +45,7 @@ const Register = () => {
   });
 
   const onSubmit = (data: TRegisterForm) => {
-    const { confirmPassword, ...restFormData } = data; // Remove confirmPassword
+    const { ...restFormData } = data;
     registerMutation.mutate(restFormData);
   };
 

@@ -58,12 +58,18 @@ const Login = () => {
 
           {/* Password Input */}
           <AppInputPassword
-            className="w-full mb-4 bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
+            className="w-full mb-1 bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
             name="password"
             label="Password"
             labelStyles="text-white"
             placeholder="Enter your password"
           />
+          <Link
+            to="/auth/forgot-password"
+            className="flex flex-col items-end text-xs text-blue-400 hover:underline "
+          >
+            Forgot Password?
+          </Link>
         </AppForm>
 
         {/* Signup Link */}

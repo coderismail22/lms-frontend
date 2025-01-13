@@ -24,7 +24,6 @@ const Batch = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const handleAllStudent = (batchId: string) => {
-    console.log("clicked");
     navigate(`/dashboard/admin/batch/all-batch-students/${batchId}`);
   };
   const handleEdit = (batchId: string) => {
