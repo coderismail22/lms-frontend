@@ -89,44 +89,48 @@ const EditSubject = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Edit Subject</h1>
-      <AppForm
-        schema={updateSubjectSchema}
-        onSubmit={onSubmit}
-        defaultValues={{
-          ...subject?.data,
-          // Keep `subjects` as string[] for default values
-          topics: subject?.data?.topics.map(
-            (subject: string | { _id: string }) =>
-              typeof subject === "string" ? subject : subject._id
-          ),
-        }}
-        buttonText="Update Subject"
-      >
-        {/* Name */}
-        <AppInput
-          name="name"
-          label="Subject Name"
-          placeholder="Enter subject name"
-        />
-        {/* Description */}
-        <AppInput
-          name="description"
-          label="Description"
-          placeholder="Enter description"
-        />
-        {/* Topics */}
-        <AppSelect
-          name="topics"
-          label="Topics"
-          placeholder="Select topics"
-          isMulti={true}
-          options={topics?.map((topic: { _id: string; name: string }) => ({
-            value: topic._id,
-            label: topic.name,
-          }))}
-        />
-      </AppForm>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
+        Edit Subject
+      </h1>
+      {subject && (
+        <AppForm
+          schema={updateSubjectSchema}
+          onSubmit={onSubmit}
+          defaultValues={{
+            ...subject?.data,
+            // Keep `subjects` as string[] for default values
+            topics: subject?.data?.topics.map(
+              (subject: string | { _id: string }) =>
+                typeof subject === "string" ? subject : subject._id
+            ),
+          }}
+          buttonText="Update Subject"
+        >
+          {/* Name */}
+          <AppInput
+            name="name"
+            label="Subject Name"
+            placeholder="Enter subject name"
+          />
+          {/* Description */}
+          <AppInput
+            name="description"
+            label="Description"
+            placeholder="Enter description"
+          />
+          {/* Topics */}
+          <AppSelect
+            name="topics"
+            label="Topics"
+            placeholder="Select topics"
+            isMulti={true}
+            options={topics?.map((topic: { _id: string; name: string }) => ({
+              value: topic._id,
+              label: topic.name,
+            }))}
+          />
+        </AppForm>
+      )}
     </div>
   );
 };
