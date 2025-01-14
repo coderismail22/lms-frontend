@@ -88,43 +88,47 @@ const EditTopic = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Edit Topic</h1>
-      <AppForm
-        // Add schema validation for updating topics
-        onSubmit={onSubmit}
-        defaultValues={{
-          ...topic?.data,
-          lessons: topic?.data?.lessons.map(
-            (lesson: string | { _id: string }) =>
-              typeof lesson === "string" ? lesson : lesson._id
-          ),
-        }}
-        buttonText="Update Topic"
-      >
-        {/* Name */}
-        <AppInput
-          name="name"
-          label="Topic Name"
-          placeholder="Enter topic name"
-        />
-        {/* Description */}
-        <AppInput
-          name="description"
-          label="Description"
-          placeholder="Enter description"
-        />
-        {/* Lessons */}
-        <AppSelect
-          name="lessons"
-          label="Lessons"
-          placeholder="Select lessons"
-          isMulti={true}
-          options={lessons?.map((lesson: { _id: string; name: string }) => ({
-            value: lesson._id,
-            label: lesson.name,
-          }))}
-        />
-      </AppForm>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
+        Edit Topic
+      </h1>
+      {topic && (
+        <AppForm
+          // Add schema validation for updating topics
+          onSubmit={onSubmit}
+          defaultValues={{
+            ...topic?.data,
+            lessons: topic?.data?.lessons.map(
+              (lesson: string | { _id: string }) =>
+                typeof lesson === "string" ? lesson : lesson._id
+            ),
+          }}
+          buttonText="Update Topic"
+        >
+          {/* Name */}
+          <AppInput
+            name="name"
+            label="Topic Name"
+            placeholder="Enter topic name"
+          />
+          {/* Description */}
+          <AppInput
+            name="description"
+            label="Description"
+            placeholder="Enter description"
+          />
+          {/* Lessons */}
+          <AppSelect
+            name="lessons"
+            label="Lessons"
+            placeholder="Select lessons"
+            isMulti={true}
+            options={lessons?.map((lesson: { _id: string; name: string }) => ({
+              value: lesson._id,
+              label: lesson.name,
+            }))}
+          />
+        </AppForm>
+      )}
     </div>
   );
 };
