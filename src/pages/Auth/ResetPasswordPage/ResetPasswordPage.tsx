@@ -13,7 +13,7 @@ const ResetPasswordPage = () => {
   const location = useLocation();
   const userId = new URLSearchParams(location.search).get("id"); // Get token from URL query params
   const token = new URLSearchParams(location.search).get("token"); // Get token from URL query params
- 
+
   const resetPasswordMutation = useMutation({
     mutationFn: async (data: { newPassword: string }) => {
       return axiosInstance.post(
@@ -39,7 +39,6 @@ const ResetPasswordPage = () => {
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
-
       handleAxiosError(error, "Password Reset Failed");
     },
   });
@@ -65,13 +64,15 @@ const ResetPasswordPage = () => {
           defaultValues={{ newPassword: "" }}
         >
           {/* New Password Input */}
-          <AppInputPassword
-            labelStyles="text-white"
-            className="text-black"
-            name="newPassword"
-            label="New Password"
-            placeholder="Enter your new password"
-          />
+          <div className="my-2">
+            <AppInputPassword
+              labelStyles="text-white"
+              className="text-black"
+              name="newPassword"
+              label="New Password"
+              placeholder="Enter your new password"
+            />
+          </div>
         </AppForm>
       </div>
     </div>

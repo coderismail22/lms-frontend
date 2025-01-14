@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Lesson } from "@/types/course.type";
 import ResponsiveVideo from "../ReponsiveVideo/ResponsiveVideo";
 import axiosInstance from "@/api/axiosInstance";
 import Loader from "../Loader/Loader";
 import { Button } from "../ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface ContentViewerProps {
   courseId: string;
@@ -62,6 +68,12 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
   };
 
   const isLastLesson = selectedIndex === lessons.length - 1;
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false); // Control modal visibility
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen); // Toggle modal open/close
+  };
 
   return (
     <div className="w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-400  rounded shadow-md h-full p-4">
@@ -75,8 +87,9 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         ) : (
           <p>This lesson is locked.</p>
         )}
-      <h3 className="font-semibold text-xl md:text-2xl my-3 text-white">{lesson.name}</h3>
-
+        <h3 className="font-semibold text-xl md:text-2xl my-3 text-white">
+          {lesson.name}
+        </h3>
       </div>
       <div className="flex justify-between">
         <Button
@@ -93,6 +106,24 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         >
           {isLastLesson ? "Completed" : "Next"}
         </Button>
+        {/* Modal Trigger Button */}
+        <Button
+          onClick={toggleModal} // Toggle modal visibility when clicked
+          disabled={!lesson.description}
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d] hover:from-[#fc5c7d] hover:to-[#6a82fb]"
+        >
+          Materials
+        </Button>
+        {/* Modal Component */}
+        <Dialog open={modalOpen} onOpenChange={toggleModal}>
+          <DialogContent className="font-robotoCondensed flex flex-col items-center justify-center bg-gradient-to-r from-cyan-50 to-blue-50 hover:bg-gradient-to-l h-[200px] w-[80%] rounded-md">
+            <DialogHeader>
+              <DialogTitle className="text-left text-blue-400 font-siliguri">
+                {lesson?.description}
+              </DialogTitle>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

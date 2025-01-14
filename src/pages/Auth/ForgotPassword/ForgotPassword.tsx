@@ -54,7 +54,7 @@ const ForgotPassword = () => {
         >
           <AppInput
             labelStyles="text-white"
-            className="text-black"
+            className="text-black bg-slate-50"
             name="email"
             label="Email"
             placeholder="Enter your registered email"

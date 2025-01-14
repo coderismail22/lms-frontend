@@ -93,7 +93,7 @@ const VerifyOTP = () => {
       await axiosInstance.post("/users/resend-otp", { email });
       Swal.fire({
         icon: "success",
-        title: "Account Verified",
+        title: "OTP Sent Successfully",
         text: "A new OTP has been sent to your email!",
         customClass: {
           title: "custom-title",

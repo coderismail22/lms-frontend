@@ -5,6 +5,7 @@ import { z } from "zod";
 export interface Lesson {
   _id: string;
   name: string;
+  description: string;
   content: string;
   type: string;
   isAccessible: boolean;
