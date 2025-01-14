@@ -74,37 +74,45 @@ const EditTeacher = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Edit Teacher</h1>
-      <AppForm
-        onSubmit={onSubmit}
-        defaultValues={{
-          ...teacher?.data,
-        }}
-        buttonText="Update Teacher"
-      >
-        {/* Name */}
-        <AppInput
-          name="teacherName"
-          label="Teacher Name"
-          placeholder="Enter teacher name"
-        />
-        {/* ProfileImg */}
-        {/* Upload Cover Image */}
-        <div>
-          <label className="block font-medium text-gray-700">
-            Upload Cover Image
-          </label>
-          <ImageUpload setUploadedImageUrl={setProfileImg} />
-        </div>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
+        Edit Teacher
+      </h1>
+      {teacher && (
+        <AppForm
+          onSubmit={onSubmit}
+          defaultValues={{
+            ...teacher?.data,
+          }}
+          buttonText="Update Teacher"
+        >
+          {/* Name */}
+          <AppInput
+            name="teacherName"
+            label="Teacher Name"
+            placeholder="Enter teacher name"
+          />
+          {/* ProfileImg */}
+          {/* Upload Cover Image */}
+          <div>
+            <label className="block font-medium text-gray-700">
+              Upload Cover Image
+            </label>
+            <ImageUpload setUploadedImageUrl={setProfileImg} />
+          </div>
 
-        {/* Email */}
-        <AppInput name="email" label="Email" placeholder="Enter email" />
-        {/* Phone */}
-        <AppInput name="phone" label="Phone" placeholder="Enter phone number" />
+          {/* Email */}
+          <AppInput name="email" label="Email" placeholder="Enter email" />
+          {/* Phone */}
+          <AppInput
+            name="phone"
+            label="Phone"
+            placeholder="Enter phone number"
+          />
 
-        {/* Salary */}
-        <AppInput name="salary" label="Salary" placeholder="Enter salary" />
-      </AppForm>
+          {/* Salary */}
+          <AppInput name="salary" label="Salary" placeholder="Enter salary" />
+        </AppForm>
+      )}
     </div>
   );
 };
