@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { contentTypes } from "./lesson.constant";
 import { createLessonSchema } from "@/schemas/lesson.schema";
 import DynamicMaterialsField from "@/components/CustomForm/DynamicMaterialFields";
+import "../../../../../styles/swal.css"
 
 // Create lesson function
 const createLesson = async (lessonData: {
@@ -32,7 +33,17 @@ const CreateLesson = () => {
   const mutation = useMutation({
     mutationFn: createLesson,
     onSuccess: () => {
-      Swal.fire("Success!", "Lesson created successfully!", "success");
+      Swal.fire({
+        icon: "success",
+        title: "Lesson Created",
+        text: "Lesson created successfully!!",
+        customClass: {
+          title: "custom-title",
+          popup: "custom-popup",
+          icon: "custom-icon",
+          confirmButton: "custom-confirm-btn",
+        },
+      });
       queryClient.invalidateQueries({ queryKey: ["lessons"] });
       navigate("/dashboard/admin/lesson-management/all-lessons");
     },
