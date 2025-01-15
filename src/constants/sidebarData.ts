@@ -20,7 +20,7 @@ import {
   MdOutlinePlayLesson,
 } from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
-import { FaMoneyCheckDollar } from "react-icons/fa6";
+import { FaMoneyCheckDollar, FaPeopleLine } from "react-icons/fa6";
 
 export const sidebarData = {
   superAdmin: [
@@ -248,6 +248,11 @@ export const sidebarData = {
           ],
         },
       ],
+    },
+    {
+      label: "Add Seminars",
+      path: "/dashboard/admin/seminar/all-seminars",
+      icon: FaPeopleLine,
     },
   ],
   instructor: [

@@ -34,7 +34,7 @@ const fetchTeachers = async () => {
 // Fetch Courses
 const fetchCourses = async () => {
   const response = await axiosInstance.get("/courses/get-all-courses");
-  console.log("check course name yeah", response?.data?.data);
+  // console.log("check course name yeah", response?.data?.data);
   return response?.data?.data;
 };
 

@@ -49,6 +49,9 @@ import Contact from "@/pages/Contact/Contact/Contact";
 import VerifyOTP from "@/pages/Auth/VerifyOTP/VerifyOTP";
 import ForgotPassword from "@/pages/Auth/ForgotPassword/ForgotPassword";
 import ResetPasswordPage from "@/pages/Auth/ResetPasswordPage/ResetPasswordPage";
+import AddSeminar from "@/pages/Dashboard/Admin/Seminar/AddSeminar";
+import EditSeminar from "@/pages/Dashboard/Admin/Seminar/EditSeminar";
+import AllSeminars from "@/pages/Dashboard/Admin/Seminar/AllSeminars";
 
 export const router = createBrowserRouter([
   {
@@ -133,6 +136,19 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/admin/teacher-management/all-teachers",
         element: <AllTeachers />,
+      },
+      // Seminar Management
+      {
+        path: "/dashboard/admin/seminar/add-seminar",
+        element: <AddSeminar />,
+      },
+      {
+        path: "/dashboard/admin/seminar/edit-seminar/:seminarId",
+        element: <EditSeminar />,
+      },
+      {
+        path: "/dashboard/admin/seminar/all-seminars",
+        element: <AllSeminars />,
       },
       // Course Management
       // Course
