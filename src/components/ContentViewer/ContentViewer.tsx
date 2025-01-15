@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Lesson } from "@/types/course.type";
 import ResponsiveVideo from "../ReponsiveVideo/ResponsiveVideo";
 import axiosInstance from "@/api/axiosInstance";
 import Loader from "../Loader/Loader";
 import { Button } from "../ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import { Link } from "react-router-dom";
 
 interface ContentViewerProps {
   courseId: string;
@@ -24,6 +32,13 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
   setSelectedLesson,
   setLessons,
 }) => {
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false); // Control modal visibility
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen); // Toggle modal open/close
+  };
+
   if (!lesson) return <Loader />;
 
   const handlePrevious = () => {
@@ -75,8 +90,9 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         ) : (
           <p>This lesson is locked.</p>
         )}
-      <h3 className="font-semibold text-xl md:text-2xl my-3 text-white">{lesson.name}</h3>
-
+        <h3 className="font-semibold text-xl md:text-2xl my-3 text-white">
+          {lesson.name}
+        </h3>
       </div>
       <div className="flex justify-between">
         <Button
@@ -93,6 +109,47 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         >
           {isLastLesson ? "Completed" : "Next"}
         </Button>
+        {/* Modal Trigger Button */}
+        <Button
+          onClick={toggleModal} // Toggle modal visibility when clicked
+          // for example, only disable if there's no materials:
+          disabled={!lesson.materials || lesson.materials.length === 0}
+          className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d] hover:from-[#fc5c7d] hover:to-[#6a82fb]"
+        >
+          Materials
+        </Button>
+        {/* Modal Component */}
+        <Dialog open={modalOpen} onOpenChange={toggleModal}>
+          <DialogContent className="font-robotoCondensed flex flex-col items-center justify-center bg-gradient-to-r from-cyan-50 to-blue-50 hover:bg-gradient-to-l h-[200px] w-[80%] rounded-md">
+            <DialogHeader>
+              <DialogTitle className="text-left text-blue-400 font-siliguri underline underline-offset-8">
+                ক্লাসের সকল ম্যাটেরিয়াল সমূহ
+              </DialogTitle>
+            </DialogHeader>
+            {/* If materials exist, map them; otherwise, fallback */}
+            {lesson?.materials && lesson.materials.length > 0 ? (
+              <div className="flex items-center justify-center text-[16px] font-siliguri">
+                <ul className="grid grid-cols-1 gap-x-10 gap-y-2 items-center justify-center list-none">
+                  {lesson.materials.map((material, idx) => (
+                    <li
+                      key={idx}
+                      className="flex  items-start justify-start gap-2"
+                    >
+                      <p className="text-blue-400 font-bold">{idx + 1}.</p>
+                      <div className="bg-blue-400 hover:bg-blue-500 text-white px-2 py-1 rounded">
+                        <Link to={material.link} target="_blank">
+                          {material.name}
+                        </Link>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <DialogDescription>No materials available.</DialogDescription>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

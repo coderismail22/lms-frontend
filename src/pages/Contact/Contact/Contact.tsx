@@ -7,7 +7,7 @@ import Map from "@/components/Map/Map";
 const Contact = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.2, // Start animation when 20% of the component is in view
+    threshold: 0, // Start animation when 20% of the component is in view
   });
 
   // Animation variants for the container

@@ -46,6 +46,9 @@ import AllBatchStudents from "@/pages/Dashboard/Admin/Batch/AllBatchStudents";
 import CourseDetailsPage from "@/CourseDetailsPage/CourseDetailsPage";
 import About from "@/pages/About/About";
 import Contact from "@/pages/Contact/Contact/Contact";
+import VerifyOTP from "@/pages/Auth/VerifyOTP/VerifyOTP";
+import ForgotPassword from "@/pages/Auth/ForgotPassword/ForgotPassword";
+import ResetPasswordPage from "@/pages/Auth/ResetPasswordPage/ResetPasswordPage";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +72,19 @@ export const router = createBrowserRouter([
       {
         path: "auth/signup",
         element: <Register />,
+      },
+      {
+        path: "auth/otp",
+        element: <VerifyOTP />,
+      },
+      {
+        path: "auth/forgot-password",
+        element: <ForgotPassword />,
+      },
+      // Dynamic (Click mail link to get here)
+      {
+        path: "auth/reset-password",
+        element: <ResetPasswordPage />,
       },
       {
         path: "/unauthorized",

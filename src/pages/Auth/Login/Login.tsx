@@ -1,10 +1,7 @@
-// import { useMutation } from "@tanstack/react-query";
-// import Swal from "sweetalert2";
 import AppForm from "@/components/CustomForm/AppForm";
 import AppInput from "@/components/CustomForm/AppInput";
 import AppInputPassword from "@/components/CustomForm/AppInputPassword";
 import { loginSchema } from "@/schemas/login.schema";
-// import axiosInstance from "@/api/axiosInstance";
 import { TLoginForm } from "@/types/login.type";
 import { useLogin } from "@/hooks/useLogin";
 import { Link } from "react-router-dom";
@@ -15,11 +12,12 @@ const Login = () => {
   const loginMutation = useLogin();
 
   const onSubmit = (data: TLoginForm) => {
-    loginMutation.mutate(data); // Trigger the mutation
+    loginMutation.mutate(data);
   };
 
-  if (loginMutation.isPending)
+  if (loginMutation.isPending) {
     return <LoaderWithBlurBG loadingText={"Getting you in - just a moment!"} />;
+  }
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-800 via-gray-900 to-black">
@@ -35,6 +33,8 @@ const Login = () => {
         <h2 className="text-xl font-bold text-center text-gray-100 mb-8">
           Login to Your Account
         </h2>
+
+        {/* Form Section */}
         <AppForm
           schema={loginSchema}
           onSubmit={onSubmit}
@@ -58,13 +58,21 @@ const Login = () => {
 
           {/* Password Input */}
           <AppInputPassword
-            className="w-full mb-4 bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
+            className="w-full mb-1 bg-gray-700 border border-gray-600 text-gray-300 placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500"
             name="password"
             label="Password"
             labelStyles="text-white"
             placeholder="Enter your password"
           />
+          <Link
+            to="/auth/forgot-password"
+            className="flex flex-col items-end text-xs text-blue-400 hover:underline "
+          >
+            Forgot Password?
+          </Link>
         </AppForm>
+
+        {/* Signup Link */}
         <div className="text-sm flex gap-1 mt-4 items-center justify-center text-gray-400">
           <p>Don't have an account?</p>
           <Link to="/auth/signup" className="text-blue-400 hover:underline">

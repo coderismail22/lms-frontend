@@ -12,7 +12,6 @@ import Loader from "@/components/Loader/Loader";
 
 const fetchBatch = async (batchId: string): Promise<TBatch> => {
   const { data } = await axiosInstance.get(`/batches/${batchId}`); // Adjusted for orders
-  console.log("batch", data?.data);
   return data?.data;
 };
 
@@ -23,18 +22,15 @@ const fetchBatch = async (batchId: string): Promise<TBatch> => {
 // };
 
 const blockStudent = async (studentId: string) => {
-  console.log("studentId", studentId);
   // const response = await axiosInstance.post(`/orders/decline/${studentId}`);
   // return response.data;
 };
 const unblockStudent = async (studentId: string) => {
-  console.log("studentId", studentId);
   // const response = await axiosInstance.post(`/orders/decline/${studentId}`);
   // return response.data;
 };
 
 const deleteStudent = async (studentId: string) => {
-  console.log("studentId", studentId);
   // const response = await axiosInstance.delete(`/orders/delete/${studentId}`);
   // return response.data;
 };

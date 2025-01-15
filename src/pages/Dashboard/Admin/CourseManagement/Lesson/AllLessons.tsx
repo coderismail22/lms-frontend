@@ -6,7 +6,7 @@ import axiosInstance from "@/api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { lessonColumns } from "./lessonColumns"; // Columns for lesson table
 import Loader from "@/components/Loader/Loader";
-
+import "../../../../../styles/swal.css";
 // Fetch lessons from the API
 const fetchLessons = async () => {
   const response = await axiosInstance.get("/lessons");
@@ -33,7 +33,17 @@ const AllLessons = () => {
     mutationFn: deleteLesson,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["lessons"] });
-      Swal.fire("Deleted!", "Lesson deleted successfully!", "success");
+      Swal.fire({
+        icon: "success",
+        title: "Lesson Deleted",
+        text: "Lesson deleted successfully!",
+        customClass: {
+          title: "custom-title",
+          popup: "custom-popup",
+          icon: "custom-icon",
+          confirmButton: "custom-confirm-btn",
+        },
+      });
     },
     onError: () => {
       Swal.fire("Error!", "Failed to delete lesson.", "error");
@@ -46,6 +56,13 @@ const AllLessons = () => {
       title: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
+      customClass: {
+        title: "custom-title",
+        popup: "custom-popup",
+        icon: "custom-icon",
+        confirmButton: "custom-confirm-btn",
+        cancelButton: "custom-confirm-btn",
+      },
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
@@ -66,7 +83,9 @@ const AllLessons = () => {
 
   return (
     <div className="container mx-auto py-2">
-      <h1 className="text-2xl font-bold mb-6">All Lessons</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center underline underline-offset-8 text-blue-500">
+        All Lessons
+      </h1>
       <div className="my-4 flex justify-end">
         <Button
           className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d]  hover:from-[#fc5c7d] hover:to-[#6a82fb]"

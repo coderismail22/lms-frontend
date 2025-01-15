@@ -17,7 +17,6 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
     batchName,
     trainers,
   } = batch;
-  console.log(batch);
 
   // Calculate the total number of lessons
   const totalLessons =
