@@ -10,6 +10,7 @@ export interface Lesson {
   type: string;
   isAccessible: boolean;
   isCompleted: boolean;
+  materials: { name: string; link: string }[];
   completedAt: string | null;
 }
 

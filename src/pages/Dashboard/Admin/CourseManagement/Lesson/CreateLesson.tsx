@@ -7,6 +7,7 @@ import AppSelect from "@/components/CustomForm/AppSelect";
 import { useNavigate } from "react-router-dom";
 import { contentTypes } from "./lesson.constant";
 import { createLessonSchema } from "@/schemas/lesson.schema";
+import DynamicMaterialsField from "@/components/CustomForm/DynamicMaterialFields";
 
 // Create lesson function
 const createLesson = async (lessonData: {
@@ -14,6 +15,7 @@ const createLesson = async (lessonData: {
   description: string;
   type: string;
   content: string;
+  materials?: { name: string; link: string }[];
 }) => {
   const response = await axiosInstance.post(
     "/lessons/create-lesson",
@@ -49,8 +51,8 @@ const CreateLesson = () => {
     description: string;
     type: string;
     content: string;
+    materials: { name: string; link: string }[];
   }) => {
-    // console.log("Creating lesson with data:", data);
     mutation.mutate(data);
   };
 
@@ -62,7 +64,13 @@ const CreateLesson = () => {
       <AppForm
         schema={createLessonSchema}
         onSubmit={onSubmit}
-        defaultValues={{ name: "", description: "", type: "", content: "" }}
+        defaultValues={{
+          name: "",
+          description: "",
+          type: "",
+          content: "",
+          materials: [],
+        }}
         buttonText="Create Lesson"
       >
         {/* Lesson Name */}
@@ -96,6 +104,9 @@ const CreateLesson = () => {
           label="Content URL"
           placeholder="Enter content URL"
         />
+
+        {/* Materials */}
+        <DynamicMaterialsField label="Materials" name="materials" />
       </AppForm>
     </div>
   );

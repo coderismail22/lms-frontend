@@ -7,7 +7,8 @@ import axiosInstance from "@/api/axiosInstance";
 import AppSelect from "@/components/CustomForm/AppSelect";
 import { contentTypes } from "./lesson.constant";
 import Loader from "@/components/Loader/Loader";
-
+import DynamicMaterialsField from "@/components/CustomForm/DynamicMaterialFields";
+import "../../../../../styles/swal.css"
 // Fetch lesson by ID
 const fetchLessonById = async (lessonId: string) => {
   const response = await axiosInstance.get(`/lessons/${lessonId}`);
@@ -17,7 +18,13 @@ const fetchLessonById = async (lessonId: string) => {
 // Update lesson function
 const updateLesson = async (
   lessonId: string,
-  data: { name: string; description: string; type: string; content: string }
+  data: {
+    name: string;
+    description: string;
+    type: string;
+    content: string;
+    materials?: { name: string; link: string }[];
+  }
 ) => {
   const response = await axiosInstance.patch(
     `/lessons/update-lesson/${lessonId}`,
@@ -48,9 +55,20 @@ const EditLesson = () => {
       description: string;
       type: string;
       content: string;
+      materials: { name: string; link: string }[];
     }) => updateLesson(lessonId!, data),
     onSuccess: () => {
-      Swal.fire("Updated!", "Lesson updated successfully!", "success");
+      Swal.fire({
+        icon: "success",
+        title: "Lesson Updated",
+        text: "Lesson updated successfully!",
+        customClass: {
+          title: "custom-title",
+          popup: "custom-popup",
+          icon: "custom-icon",
+          confirmButton: "custom-confirm-btn",
+        },
+      });
       queryClient.invalidateQueries({ queryKey: ["lessons"] });
       navigate("/dashboard/admin/lesson-management/all-lessons");
     },
@@ -64,6 +82,7 @@ const EditLesson = () => {
     description: string;
     type: string;
     content: string;
+    materials: { name: string; link: string }[];
   }) => {
     mutation.mutate(data);
   };
@@ -87,6 +106,7 @@ const EditLesson = () => {
             description: lesson?.description || "",
             type: lesson?.type || "",
             content: lesson?.content || "",
+            materials: lesson?.materials || [], //prefill
           }}
           buttonText="Update Lesson"
         >
@@ -121,6 +141,9 @@ const EditLesson = () => {
             label="Content URL"
             placeholder="Enter content URL"
           />
+
+          {/* Materials */}
+          <DynamicMaterialsField label="Materials" name="materials" />
         </AppForm>
       )}
     </div>

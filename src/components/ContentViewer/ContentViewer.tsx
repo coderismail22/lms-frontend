@@ -10,6 +10,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import { Link } from "react-router-dom";
 
 interface ContentViewerProps {
   courseId: string;
@@ -30,6 +32,13 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
   setSelectedLesson,
   setLessons,
 }) => {
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false); // Control modal visibility
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen); // Toggle modal open/close
+  };
+
   if (!lesson) return <Loader />;
 
   const handlePrevious = () => {
@@ -68,12 +77,6 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
   };
 
   const isLastLesson = selectedIndex === lessons.length - 1;
-  // Modal state
-  const [modalOpen, setModalOpen] = useState(false); // Control modal visibility
-
-  const toggleModal = () => {
-    setModalOpen(!modalOpen); // Toggle modal open/close
-  };
 
   return (
     <div className="w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-400  rounded shadow-md h-full p-4">
@@ -109,7 +112,8 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         {/* Modal Trigger Button */}
         <Button
           onClick={toggleModal} // Toggle modal visibility when clicked
-          disabled={!lesson.description}
+          // for example, only disable if there's no materials:
+          disabled={!lesson.materials || lesson.materials.length === 0}
           className="bg-gradient-to-tr from-[#6a82fb] to-[#fc5c7d] hover:from-[#fc5c7d] hover:to-[#6a82fb]"
         >
           Materials
@@ -118,10 +122,32 @@ const ContentViewer: React.FC<ContentViewerProps> = ({
         <Dialog open={modalOpen} onOpenChange={toggleModal}>
           <DialogContent className="font-robotoCondensed flex flex-col items-center justify-center bg-gradient-to-r from-cyan-50 to-blue-50 hover:bg-gradient-to-l h-[200px] w-[80%] rounded-md">
             <DialogHeader>
-              <DialogTitle className="text-left text-blue-400 font-siliguri">
-                {lesson?.description}
+              <DialogTitle className="text-left text-blue-400 font-siliguri underline underline-offset-8">
+                ক্লাসের সকল ম্যাটেরিয়াল সমূহ
               </DialogTitle>
             </DialogHeader>
+            {/* If materials exist, map them; otherwise, fallback */}
+            {lesson?.materials && lesson.materials.length > 0 ? (
+              <div className="flex items-center justify-center text-[16px] font-siliguri">
+                <ul className="grid grid-cols-1 gap-x-10 gap-y-2 items-center justify-center list-none">
+                  {lesson.materials.map((material, idx) => (
+                    <li
+                      key={idx}
+                      className="flex  items-start justify-start gap-2"
+                    >
+                      <p className="text-blue-400 font-bold">{idx + 1}.</p>
+                      <div className="bg-blue-400 hover:bg-blue-500 text-white px-2 py-1 rounded">
+                        <Link to={material.link} target="_blank">
+                          {material.name}
+                        </Link>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <DialogDescription>No materials available.</DialogDescription>
+            )}
           </DialogContent>
         </Dialog>
       </div>
