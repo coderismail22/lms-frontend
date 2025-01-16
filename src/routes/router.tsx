@@ -54,6 +54,7 @@ import EditSeminar from "@/pages/Dashboard/Admin/Seminar/EditSeminar";
 import AllSeminars from "@/pages/Dashboard/Admin/Seminar/AllSeminars";
 import Workshop from "@/pages/Workshop/Workshop";
 import SeminarDetailsPage from "@/pages/Workshop/SeminarDetailsPage/SeminarDetailsPage";
+import GetYourWebsite from "@/pages/GetYourWebsite/GetYourWebsite";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,7 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "/", element: <Home /> },
+      { path: "/get-your-website", element: <GetYourWebsite /> },
       { path: "/courses", element: <Courses /> },
       {
         path: "/courses/:batchId/:courseId",

@@ -6,6 +6,8 @@ import { useLogout } from "@/hooks/useLogout";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AuthState } from "@/hooks/useLogin";
 import { authKey } from "@/api/authKey";
+import { HiSparkles } from "react-icons/hi2";
+import "../../../styles/eid-button.css";
 
 const Navbar = () => {
   const queryClient = useQueryClient();
@@ -33,7 +35,41 @@ const Navbar = () => {
 
   const navlinks = (
     <>
-      <div className="flex flex-col sm:flex-row text-[16px] ">
+      <div className="flex flex-col lg:flex-row text-[16px] gap-1">
+        <Link to={"/get-your-website"}>
+          <div className="relative font-siliguri">
+            <div
+              id="special-offer"
+              className="relative block w-full px-4 py-2  text-center uppercase whitespace-nowrap overflow-hidden rounded-md font-bold"
+            >
+              <div className="flex lg:flex-row-reverse gap-2 items-center relative z-10 text-green-700">
+                <p>স্পেশাল অফার</p>
+                <p>
+                  <HiSparkles className="" />
+                </p>
+              </div>
+              <div className="absolute inset-0 rounded-md border-animation"></div>
+            </div>
+          </div>
+        </Link>
+
+        {/* <li>
+          <NavLink
+            to="/get-your-website"
+            className={({ isActive }) =>
+              `relative font-semibold ${
+                isActive
+                  ? "text-green-700 "
+                  : "text-blue-500 hover:bg-[#2A323C] underline underline-offset-4"
+              }`
+            }
+          >
+            <div className="flex lg:flex-row-reverse gap-1">
+              <p> বিশেষ অফার</p> 
+              <HiSparkles />
+            </div>
+          </NavLink>
+        </li> */}
         <li>
           <NavLink to="/">হোম </NavLink>
         </li>

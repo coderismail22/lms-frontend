@@ -1,0 +1,51 @@
+/* Button Styling */
+.border-animation {
+  --m-i: linear-gradient(#000, #000);
+  --m-o: content-box, padding-box;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2px; /* Adjust padding to control the border thickness */
+  border-radius: 6px; /* Match the border radius of the button */
+  background-image: conic-gradient(
+    #ffab00,
+    #f04438,
+    #20b486,
+    #ffab00,
+    #f04438,
+    #20b486,
+    #ffab00
+  );
+  -webkit-mask-image: var(--m-i), var(--m-i);
+  mask-image: var(--m-i), var(--m-i);
+  -webkit-mask-origin: var(--m-o);
+  mask-origin: var(--m-o);
+  -webkit-mask-clip: var(--m-o);
+  mask-clip: var(--m-o);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  filter: hue-rotate(0);
+  animation: hue 0.5s linear infinite;
+}
+
+/* Gradient Animation */
+@keyframes hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    filter: hue-rotate(270deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
