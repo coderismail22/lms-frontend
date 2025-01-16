@@ -33,12 +33,15 @@ const Navbar = () => {
 
   const navlinks = (
     <>
-      <div className="flex text-[16px]">
+      <div className="flex flex-col sm:flex-row text-[16px] ">
         <li>
           <NavLink to="/">হোম </NavLink>
         </li>
         <li>
           <NavLink to="/courses">কোর্স সমূহ</NavLink>
+        </li>
+        <li>
+          <NavLink to="/workshop">ওয়ার্কশপ</NavLink>
         </li>
         <li>
           <NavLink to="/about">আমাদের সম্পর্কে</NavLink>
@@ -55,7 +58,7 @@ const Navbar = () => {
       <div className="navbar w-10/12 mx-auto bg-gradient-to-r from-cyan-100 to-blue-100 hover:bg-gradient-to-l">
         <div className="navbar-start">
           {/* Dropdown For Mobile */}
-          <div className="dropdown">
+          <div className="dropdown ">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

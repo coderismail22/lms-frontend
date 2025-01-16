@@ -101,7 +101,7 @@ const Courses = () => {
           {courseTabs.map((tab) => (
             <TabsContent key={tab.value} value={tab.value}>
               {filteredCourses(tab.value)?.length > 0 ? (
-                <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 grid-cols-1  lg:grid-cols-2 xl:grid-cols-3">
                   {filteredCourses(tab.value)?.map((batch: any) => (
                     <AppCourseCard key={batch._id} batch={batch} />
                   ))}

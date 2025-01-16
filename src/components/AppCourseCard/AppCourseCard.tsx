@@ -75,7 +75,6 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
           <Link to="#">
             <p className="text-[#3a67ae] font-semibold text-[16px]">
               {trainers[0].teacherName || "N/A"}
-              {console.log()}
             </p>
           </Link>
         </div>

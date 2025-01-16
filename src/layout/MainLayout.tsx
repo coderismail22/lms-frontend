@@ -6,13 +6,15 @@ import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 
 const MainLayout = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 ">
+    <div className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex flex-col min-h-screen">
       <div className="bg-[#211B52]">
         <TopBanner />
       </div>
       <Navbar />
       <ScrollToTop />
-      <Outlet />
+      <div className="flex-grow">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

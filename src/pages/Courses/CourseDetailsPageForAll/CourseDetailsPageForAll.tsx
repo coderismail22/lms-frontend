@@ -19,6 +19,8 @@ import SuccessStory from "@/components/SuccessStory/SuccessStory";
 import AdmissionGoingOn from "@/components/AdmissionGoingOn/AdmissionGoingOn";
 import CourseOverview from "@/components/CourseOverview/CourseOverview";
 import CareerOpportunities from "@/components/CareerOpportunities/CareerOpportunities";
+import { AxiosError } from "axios";
+import { handleAxiosError } from "@/utils/handleAxiosError";
 const fetchCourseDetails = async (courseId: string) => {
   const { data } = await axiosInstance.get(
     `/courses/get-single-course/${courseId}`
@@ -70,6 +72,18 @@ const CourseDetailsPageForAll = () => {
   }
 
   if (isErrorCourse || isErrorBatch) {
+    if (isErrorCourse) {
+      handleAxiosError(
+        courseError as AxiosError,
+        "Failed to fetch course details"
+      );
+    }
+    if (isErrorBatch) {
+      handleAxiosError(
+        batchError as AxiosError,
+        "Failed to fetch batch details"
+      );
+    }
     return (
       <div className="p-6 text-center text-red-500">
         Error: {courseError?.message || "Failed to fetch course details"}

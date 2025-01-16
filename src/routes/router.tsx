@@ -52,6 +52,8 @@ import ResetPasswordPage from "@/pages/Auth/ResetPasswordPage/ResetPasswordPage"
 import AddSeminar from "@/pages/Dashboard/Admin/Seminar/AddSeminar";
 import EditSeminar from "@/pages/Dashboard/Admin/Seminar/EditSeminar";
 import AllSeminars from "@/pages/Dashboard/Admin/Seminar/AllSeminars";
+import Workshop from "@/pages/Workshop/Workshop";
+import SeminarDetailsPage from "@/pages/Workshop/SeminarDetailsPage/SeminarDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +66,8 @@ export const router = createBrowserRouter([
         path: "/courses/:batchId/:courseId",
         element: <CourseDetailsPageForAll />,
       },
+      { path: "/workshop", element: <Workshop /> },
+      { path: "/seminar/:seminarId", element: <SeminarDetailsPage /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <About /> },
       // Auth

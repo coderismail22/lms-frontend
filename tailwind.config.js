@@ -9,9 +9,18 @@ export default {
           "0%, 70%, 100%": { opacity: "1" },
           "20%, 50%": { opacity: "0" },
         },
+        borderAnimation: {
+          "0%": { borderColor: "rgba(255, 182, 193, 1)" }, // Light Pink
+          "20%": { borderColor: "rgba(255, 223, 186, 1)" }, // Light Orange
+          "40%": { borderColor: "rgba(255, 255, 186, 1)" }, // Light Yellow
+          "60%": { borderColor: "rgba(186, 255, 201, 1)" }, // Mint Green
+          "80%": { borderColor: "rgba(186, 225, 255, 1)" }, // Light Blue
+          "100%": { borderColor: "rgba(224, 186, 255, 1)" }, // Light Purple
+        },
       },
       animation: {
         "caret-blink": "caret-blink 1.2s ease-out infinite",
+        borderGlow: "borderAnimation 3s linear infinite",
       },
       fontFamily: {
         montserrat: ["Montserrat", "serif"],
