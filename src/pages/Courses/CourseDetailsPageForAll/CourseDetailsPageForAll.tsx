@@ -105,7 +105,7 @@ const CourseDetailsPageForAll = () => {
     }, 0) || 0;
 
   return (
-    <div className="w-full px-10 py-16  h-[100%] font-siliguri bg-[#e6f0fb]">
+    <div className="w-full md:px-10 py-5 md:py-16  h-[100%] font-siliguri bg-[#e6f0fb]">
       {/* Course Introduction Start */}
       <div className="flex lg:flex-row flex-col gap-10 items-center justify-between w-10/12 mx-auto my-12   font-montserrat">
         {/* 1 */}
