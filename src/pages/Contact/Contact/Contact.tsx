@@ -42,7 +42,7 @@ const Contact = () => {
         ref={ref}
       >
         <motion.div
-          className=""
+          className="w-[80%] mx-auto"
           variants={animationVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}

@@ -44,9 +44,7 @@ const SeminarDetailsPage = () => {
     );
   }
 
-  {
-    console.log(seminarData);
-  }
+
   return (
     <div>
       <Helmet>
@@ -55,7 +53,7 @@ const SeminarDetailsPage = () => {
 
       <div className="bg-gradient-to-r  from-cyan-50 to-blue-50 py-4">
         {/* Breadcrumbs */}
-        <div className="flex items-center justify-center breadcrumbs w-10/12 mx-auto my-5">
+        <div className="flex items-start justify-start breadcrumbs w-10/12 mx-auto my-5">
           <ul>
             <li>
               <Link to={"/"}>Home</Link>

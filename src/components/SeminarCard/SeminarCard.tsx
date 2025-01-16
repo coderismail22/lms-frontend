@@ -20,14 +20,14 @@ const SeminarCard = ({
     <div className="mx-auto font-siliguri">
       <div className="card card-compact  bg-base-100 shadow-xl h-full">
         <figure>
-          <img src={seminar?.coverImage} alt="seminar" />
+          <img src={seminar?.coverImage} alt="seminar" className="min-h-[200px] object-cover object-center"/>
         </figure>
         <div className="card-body">
           <button className="btn w-40 text-[#3a67ae]  btn-sm">
             <Link to={"/"}>{seminar?.category}</Link>
           </button>
 
-          <h2 className="font-semibold text-[20px] text-white">
+          <h2 className="font-semibold text-[20px] text-white min-h-[50px] font-montserrat leading-snug">
             {seminar?.name}
           </h2>
           {/* Instructor */}
