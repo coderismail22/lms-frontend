@@ -38,14 +38,11 @@ const Navbar = () => {
       <div className="flex flex-col lg:flex-row text-[16px] gap-1">
         <Link to={"/get-your-website"}>
           <div className="relative font-siliguri">
-            <div
-              id="special-offer"
-              className="relative block w-full px-4 py-2  text-center uppercase whitespace-nowrap overflow-hidden rounded-md font-bold"
-            >
+            <div className="relative block w-full px-4 py-2  text-center uppercase whitespace-nowrap overflow-hidden rounded-md font-bold">
               <div className="flex lg:flex-row-reverse gap-2 items-center relative z-10 text-green-700">
                 <p>স্পেশাল অফার</p>
                 <p>
-                  <HiSparkles className="" />
+                  <HiSparkles />
                 </p>
               </div>
               <div className="absolute inset-0 rounded-md border-animation"></div>

@@ -9,7 +9,7 @@
   width: 100%;
   height: 100%;
   padding: 2px; /* Adjust padding to control the border thickness */
-  border-radius: 6px; /* Match the border radius of the button */
+  border-radius: 9999px; /* Match the border radius of the button */
   background-image: conic-gradient(
     #ffab00,
     #f04438,
