@@ -53,14 +53,14 @@ const Seminars = () => {
   return (
     <div className="py-8 pb-32 font-siliguri bg-[#DBEBFE]">
       <Helmet>
-        <title>EJobsIT | Seminars</title>
+        <title>eJobsIT | Seminars</title>
       </Helmet>
 
       <div className="max-w-xl mx-auto">
         <SectionTitle
-          title="আমাদের সেমিনার সমূহ"
+          title="আমাদের ওয়ার্কশপ সমূহ"
           titleStyles="text-blue-400"
-          subtitle="সেমিনারে অংশগ্রহণ করে নতুন দক্ষতা অর্জন করুন এবং আপনার ক্যারিয়ার গড়ুন।"
+          subtitle="ওয়ার্কশপে অংশগ্রহণ করে দক্ষতা অর্জন করুন এবং আপনার ক্যারিয়ারকে এগিয়ে নিয়ে যান ।"
           subTitleStyles="text-black"
         />
       </div>

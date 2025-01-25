@@ -91,7 +91,7 @@ const NavbarMine = () => {
               {/* LOGO */}
               <img
                 src="/ejobsit-logo.svg"
-                alt="EJobsIT"
+                alt="eJobsIT"
                 // width={"120px"}
                 className="w-[40%]"
               />

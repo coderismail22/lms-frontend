@@ -10,23 +10,21 @@ const SectionTitle = ({
   subTitleStyles?: string;
 }) => {
   return (
-    <div>
-      <div className="mb-4">
-        <h1
-          className={`text-5xl font-bold mb-4 text-center ${
-            titleStyles ? titleStyles : `text-slate-400`
-          }`}
-        >
-          {title}{" "}
-        </h1>
-        <p
-          className={` text-center text-xl mt-2 ${
-            subTitleStyles ? subTitleStyles : `text-white`
-          }`}
-        >
-          {subtitle}
-        </p>
-      </div>
+    <div className="mb-4">
+      <h1
+        className={`text-5xl font-bold mb-4 text-center ${
+          titleStyles ? titleStyles : `text-slate-400`
+        }`}
+      >
+        {title}{" "}
+      </h1>
+      <p
+        className={` text-center text-xl mt-2 ${
+          subTitleStyles ? subTitleStyles : `text-white`
+        }`}
+      >
+        {subtitle}
+      </p>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // AllOrders.tsx
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/api/axiosInstance";
@@ -21,16 +22,16 @@ const fetchBatch = async (batchId: string): Promise<TBatch> => {
 // return response.data;
 // };
 
-const blockStudent = async (studentId: string) => {
+const blockStudent = async (_studentId: string) => {
   // const response = await axiosInstance.post(`/orders/decline/${studentId}`);
   // return response.data;
 };
-const unblockStudent = async (studentId: string) => {
+const unblockStudent = async (_studentId: string) => {
   // const response = await axiosInstance.post(`/orders/decline/${studentId}`);
   // return response.data;
 };
 
-const deleteStudent = async (studentId: string) => {
+const deleteStudent = async (_studentId: string) => {
   // const response = await axiosInstance.delete(`/orders/delete/${studentId}`);
   // return response.data;
 };

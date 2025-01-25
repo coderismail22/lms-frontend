@@ -37,7 +37,7 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
     navigate("/dashboard/student/paymentpage");
   };
   return (
-    <Card className="shadow-xl overflow-hidden flex flex-col justify-between h-full border-none bg-[#1D232A] font-siliguri">
+    <Card className="bg-transparent overflow-hidden flex flex-col justify-between h-full  font-siliguri border-none rounded-lg">
       {/* Card Header */}
       <div className="flex-grow ">
         <figure>
@@ -48,12 +48,12 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
           />
         </figure>
         <div className="flex flex-col items-start m-2 ">
-          <Badge className="text-[#3267A0] py-1 px-2 text-sm">
+          <div className="text-white font-bold py-1 px-2 text-sm bg-blue-500 rounded-full">
             <Link to="#">{course?.courseType || "N/A"}</Link>
-          </Badge>
+          </div>
         </div>
 
-        <h2 className="font-bold text-3xl text-slate-400 px-2">
+        <h2 className="font-bold text-2xl text-[#1F1E1E] px-2">
           {course?.name || "N/A"}
         </h2>
         <h2 className="font-bold text-md text-slate-400 px-2">
@@ -78,17 +78,19 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
             </p>
           </Link>
         </div>
-        <div className="flex my-2 ">
-          <div className="flex    justify-center items-center gap-2 w-full text-[18px] ">
-            <p className=" text-white">
+        <div className="flex my-2 px-1">
+          {/* Class */}
+          <div className="flex  justify-items-center  items-center gap-2 w-full text-[18px] ">
+            <p className=" text-gray-400">
               <IoBookOutline />
             </p>
             <p className="font-semibold text-zinc-400">
               ক্লাস সংখ্যা {totalLessons}
             </p>
           </div>
-          <div className="flex  justify-center items-center  gap-2  w-full text-[18px] ">
-            <p className=" text-white">
+          {/* Course Fee */}
+          <div className="flex  justify-items-center items-center  gap-2  w-full text-[18px] ">
+            <p className=" text-gray-400">
               <TbCoinTaka />
             </p>
             <p className="font-semibold text-[#EA7171]">
@@ -99,7 +101,7 @@ const AppCourseCard = ({ batch }: { batch: any }) => {
       </div>
 
       {/* Card Footer */}
-      <div className="flex px-2 justify-between items-center mb-2">
+      <div className="flex px-2 justify-between items-center mb-2 max-w-xl">
         <div className="w-full ">
           <div
             onClick={() => navigate(`/courses/${batch?._id}/${course?._id}`)}

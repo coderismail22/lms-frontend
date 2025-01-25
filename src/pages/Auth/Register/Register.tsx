@@ -55,7 +55,7 @@ const Register = () => {
   return (
     <div className="flex items-center justify-center min-h-screen p-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black">
       <Helmet>
-        <title>EJobsIT | Register</title>
+        <title>eJobsIT | Register</title>
       </Helmet>
       <div className="w-full max-w-sm p-6 sm:p-8 bg-gray-800 shadow-lg rounded-lg border border-gray-700">
         <div className="flex flex-col items-center justify-center mb-2">

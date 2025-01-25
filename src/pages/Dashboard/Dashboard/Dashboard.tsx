@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <div className="h-100vh overflow-auto ">
       <Helmet>
-        <title>EJobsIT | Dashboard</title>
+        <title>eJobsIT | Dashboard</title>
       </Helmet>
       <AppDashboard />
     </div>

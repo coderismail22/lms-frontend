@@ -8,7 +8,7 @@ const Testimonial = () => {
           <SectionTitle
             title={"আমাদের কিছু খুশি ক্লায়েন্টের কথা"}
             subtitle={"আমাদের সাথে সুন্দর হবে আপনার পথ চলা"}
-            titleStyles="text-blue-400"
+            titleStyles="bg-gradient-to-r from-blue-500 to-cyan-500  text-transparent bg-clip-text py-2"
             subTitleStyles="text-slate-600 font-bold"
           ></SectionTitle>
           <div className="mt-4 text-center md:mt-6 md:order-3">

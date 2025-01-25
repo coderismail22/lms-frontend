@@ -55,6 +55,7 @@ import AllSeminars from "@/pages/Dashboard/Admin/Seminar/AllSeminars";
 import Workshop from "@/pages/Workshop/Workshop";
 import SeminarDetailsPage from "@/pages/Workshop/SeminarDetailsPage/SeminarDetailsPage";
 import GetYourWebsite from "@/pages/GetYourWebsite/GetYourWebsite";
+import Internship from "@/pages/Internship/Internship";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,7 @@ export const router = createBrowserRouter([
         element: <CourseDetailsPageForAll />,
       },
       { path: "/workshop", element: <Workshop /> },
+      { path: "/internship", element: <Internship /> },
       { path: "/seminar/:seminarId", element: <SeminarDetailsPage /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <About /> },

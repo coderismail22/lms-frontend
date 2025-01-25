@@ -9,12 +9,14 @@ const Home = () => {
   return (
     <div className="w-full">
       <Helmet>
-        <title>EJobsIT | Home</title>
+        <title>eJobsIT | Home</title>
       </Helmet>
       <Hero />
-      <Category />
-      <Numbers />
+      <div className="bg-[#211B52">
+        <Category />
+      </div>
       <PopularCourses />
+      <Numbers />
       <Testimonial />
     </div>
   );

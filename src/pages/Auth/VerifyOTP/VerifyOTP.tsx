@@ -125,7 +125,7 @@ const VerifyOTP = () => {
       {email ? (
         <>
           <Helmet>
-            <title>EJobsIT | OTP</title>
+            <title>eJobsIT | OTP</title>
           </Helmet>
           <div className="w-full max-w-sm p-6 sm:p-8 bg-gray-800 shadow-lg rounded-lg border border-gray-700">
             <div className="flex flex-col items-center justify-center">

@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-800 via-gray-900 to-black">
       <Helmet>
-        <title>EJobsIT | Login</title>
+        <title>eJobsIT | Login</title>
       </Helmet>
       <div className="w-full max-w-sm p-8 bg-gray-800 shadow-lg rounded-lg border border-gray-700">
         <div className="flex flex-col items-center justify-center mb-2">

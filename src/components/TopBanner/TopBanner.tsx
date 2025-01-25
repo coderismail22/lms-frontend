@@ -8,7 +8,7 @@ import { MdOutlinePhoneInTalk } from "react-icons/md";
 
 export const TopBanner = () => {
   return (
-    <div className=" text-white flex justify-center md:justify-between gap-5  px-5 max-w-6xl mx-auto">
+    <div className=" text-white flex justify-center md:justify-between gap-5  px-5 ">
       <div className="py-2 text-center font-semibold  font-poppins flex gap-5 ">
         <Link to="https://www.youtube.com/@AhsanullahSHAON" target="_blank">
           <FaYoutube />

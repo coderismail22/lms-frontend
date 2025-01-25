@@ -36,6 +36,25 @@ const Navbar = () => {
   const navlinks = (
     <>
       <div className="flex flex-col lg:flex-row text-[16px] gap-1">
+     
+        <li>
+          <NavLink to="/">হোম </NavLink>
+        </li>
+        <li>
+          <NavLink to="/courses">কোর্স সমূহ</NavLink>
+        </li>
+        <li>
+          <NavLink to="/workshop">ওয়ার্কশপ</NavLink>
+        </li>
+        <li>
+          <NavLink to="/internship">ইন্টার্নশিপ</NavLink>
+        </li>
+        <li>
+          <NavLink to="/about">আমাদের সম্পর্কে</NavLink>
+        </li>
+        {/* <li>
+          <NavLink to="/contact">যোগাযোগ</NavLink>
+        </li> */}
         <Link to={"/get-your-website"}>
           <div className="relative font-siliguri">
             <div className="relative block w-full px-4 py-2  text-center uppercase whitespace-nowrap overflow-hidden rounded-md font-bold">
@@ -49,46 +68,13 @@ const Navbar = () => {
             </div>
           </div>
         </Link>
-
-        {/* <li>
-          <NavLink
-            to="/get-your-website"
-            className={({ isActive }) =>
-              `relative font-semibold ${
-                isActive
-                  ? "text-green-700 "
-                  : "text-blue-500 hover:bg-[#2A323C] underline underline-offset-4"
-              }`
-            }
-          >
-            <div className="flex lg:flex-row-reverse gap-1">
-              <p> বিশেষ অফার</p> 
-              <HiSparkles />
-            </div>
-          </NavLink>
-        </li> */}
-        <li>
-          <NavLink to="/">হোম </NavLink>
-        </li>
-        <li>
-          <NavLink to="/courses">কোর্স সমূহ</NavLink>
-        </li>
-        <li>
-          <NavLink to="/workshop">ওয়ার্কশপ</NavLink>
-        </li>
-        <li>
-          <NavLink to="/about">আমাদের সম্পর্কে</NavLink>
-        </li>
-        <li>
-          <NavLink to="/contact">যোগাযোগ</NavLink>
-        </li>
       </div>
     </>
   );
 
   return (
     <div className="shadow-md sticky bg-gradient-to-r from-cyan-100 to-blue-100 hover:bg-gradient-to-l top-0 z-50 font-siliguri">
-      <div className="navbar w-10/12 mx-auto bg-gradient-to-r from-cyan-100 to-blue-100 hover:bg-gradient-to-l">
+      <div className="navbar w-[80%] mx-auto bg-gradient-to-r from-cyan-100 to-blue-100 hover:bg-gradient-to-l">
         <div className="navbar-start">
           {/* Dropdown For Mobile */}
           <div className="dropdown ">
@@ -137,7 +123,7 @@ const Navbar = () => {
         </div>
 
         {/* Render User Profile Based on Role Start */}
-        <div className="navbar-end z-50">
+        <div className="navbar-end z-50 ">
           <div>
             {/* If Not Logged In */}
             {!isLoggedIn && role === null && (
